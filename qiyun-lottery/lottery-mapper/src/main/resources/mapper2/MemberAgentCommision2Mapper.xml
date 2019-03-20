@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.MemberAgentCommision2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.MemberAgentCommision2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="MEMBER_AGENT_ID" property="memberAgentId" jdbcType="INTEGER" />
+    <result column="MEMBER_LOWER_ID" property="memberLowerId" jdbcType="INTEGER" />
+    <result column="AGENT_COMMISION" property="agentCommision" jdbcType="DOUBLE" />
+    <result column="LOWER_COMMISION" property="lowerCommision" jdbcType="DOUBLE" />
+    <result column="PLAN_ID" property="planId" jdbcType="INTEGER" />
+    <result column="AGENT_RATE" property="agentRate" jdbcType="DOUBLE" />
+    <result column="LOWER_RATE" property="lowerRate" jdbcType="DOUBLE" />
+    <result column="CREATE_DATE_TIME" property="createDateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.MemberAgentCommision2" extends="BaseResultMap" >
+    <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, MEMBER_AGENT_ID, MEMBER_LOWER_ID, AGENT_COMMISION, LOWER_COMMISION, PLAN_ID, 
+    AGENT_RATE, LOWER_RATE, CREATE_DATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    REMARK
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.MemberAgentCommision2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_agent_commision
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.MemberAgentCommision2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_agent_commision
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_agent_commision
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_agent_commision
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.MemberAgentCommision2Query" >
+    delete from member_agent_commision
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.MemberAgentCommision2" >
+    insert into member_agent_commision (id, MEMBER_AGENT_ID, MEMBER_LOWER_ID, 
+      AGENT_COMMISION, LOWER_COMMISION, PLAN_ID, 
+      AGENT_RATE, LOWER_RATE, CREATE_DATE_TIME, 
+      REMARK)
+    values (#{id,jdbcType=INTEGER}, #{memberAgentId,jdbcType=INTEGER}, #{memberLowerId,jdbcType=INTEGER}, 
+      #{agentCommision,jdbcType=DOUBLE}, #{lowerCommision,jdbcType=DOUBLE}, #{planId,jdbcType=INTEGER}, 
+      #{agentRate,jdbcType=DOUBLE}, #{lowerRate,jdbcType=DOUBLE}, #{createDateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.MemberAgentCommision2" >
+    insert into member_agent_commision
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberAgentId != null" >
+        MEMBER_AGENT_ID,
+      </if>
+      <if test="memberLowerId != null" >
+        MEMBER_LOWER_ID,
+      </if>
+      <if test="agentCommision != null" >
+        AGENT_COMMISION,
+      </if>
+      <if test="lowerCommision != null" >
+        LOWER_COMMISION,
+      </if>
+      <if test="planId != null" >
+        PLAN_ID,
+      </if>
+      <if test="agentRate != null" >
+        AGENT_RATE,
+      </if>
+      <if test="lowerRate != null" >
+        LOWER_RATE,
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberAgentId != null" >
+        #{memberAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="memberLowerId != null" >
+        #{memberLowerId,jdbcType=INTEGER},
+      </if>
+      <if test="agentCommision != null" >
+        #{agentCommision,jdbcType=DOUBLE},
+      </if>
+      <if test="lowerCommision != null" >
+        #{lowerCommision,jdbcType=DOUBLE},
+      </if>
+      <if test="planId != null" >
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="agentRate != null" >
+        #{agentRate,jdbcType=DOUBLE},
+      </if>
+      <if test="lowerRate != null" >
+        #{lowerRate,jdbcType=DOUBLE},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.MemberAgentCommision2Query" resultType="java.lang.Integer" >
+    select count(*) from member_agent_commision
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member_agent_commision
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberAgentId != null" >
+        MEMBER_AGENT_ID = #{record.memberAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberLowerId != null" >
+        MEMBER_LOWER_ID = #{record.memberLowerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentCommision != null" >
+        AGENT_COMMISION = #{record.agentCommision,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lowerCommision != null" >
+        LOWER_COMMISION = #{record.lowerCommision,jdbcType=DOUBLE},
+      </if>
+      <if test="record.planId != null" >
+        PLAN_ID = #{record.planId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentRate != null" >
+        AGENT_RATE = #{record.agentRate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lowerRate != null" >
+        LOWER_RATE = #{record.lowerRate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.createDateTime != null" >
+        CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update member_agent_commision
+    set id = #{record.id,jdbcType=INTEGER},
+      MEMBER_AGENT_ID = #{record.memberAgentId,jdbcType=INTEGER},
+      MEMBER_LOWER_ID = #{record.memberLowerId,jdbcType=INTEGER},
+      AGENT_COMMISION = #{record.agentCommision,jdbcType=DOUBLE},
+      LOWER_COMMISION = #{record.lowerCommision,jdbcType=DOUBLE},
+      PLAN_ID = #{record.planId,jdbcType=INTEGER},
+      AGENT_RATE = #{record.agentRate,jdbcType=DOUBLE},
+      LOWER_RATE = #{record.lowerRate,jdbcType=DOUBLE},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member_agent_commision
+    set id = #{record.id,jdbcType=INTEGER},
+      MEMBER_AGENT_ID = #{record.memberAgentId,jdbcType=INTEGER},
+      MEMBER_LOWER_ID = #{record.memberLowerId,jdbcType=INTEGER},
+      AGENT_COMMISION = #{record.agentCommision,jdbcType=DOUBLE},
+      LOWER_COMMISION = #{record.lowerCommision,jdbcType=DOUBLE},
+      PLAN_ID = #{record.planId,jdbcType=INTEGER},
+      AGENT_RATE = #{record.agentRate,jdbcType=DOUBLE},
+      LOWER_RATE = #{record.lowerRate,jdbcType=DOUBLE},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MemberAgentCommision2" >
+    update member_agent_commision
+    <set >
+      <if test="memberAgentId != null" >
+        MEMBER_AGENT_ID = #{memberAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="memberLowerId != null" >
+        MEMBER_LOWER_ID = #{memberLowerId,jdbcType=INTEGER},
+      </if>
+      <if test="agentCommision != null" >
+        AGENT_COMMISION = #{agentCommision,jdbcType=DOUBLE},
+      </if>
+      <if test="lowerCommision != null" >
+        LOWER_COMMISION = #{lowerCommision,jdbcType=DOUBLE},
+      </if>
+      <if test="planId != null" >
+        PLAN_ID = #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="agentRate != null" >
+        AGENT_RATE = #{agentRate,jdbcType=DOUBLE},
+      </if>
+      <if test="lowerRate != null" >
+        LOWER_RATE = #{lowerRate,jdbcType=DOUBLE},
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.MemberAgentCommision2" >
+    update member_agent_commision
+    set MEMBER_AGENT_ID = #{memberAgentId,jdbcType=INTEGER},
+      MEMBER_LOWER_ID = #{memberLowerId,jdbcType=INTEGER},
+      AGENT_COMMISION = #{agentCommision,jdbcType=DOUBLE},
+      LOWER_COMMISION = #{lowerCommision,jdbcType=DOUBLE},
+      PLAN_ID = #{planId,jdbcType=INTEGER},
+      AGENT_RATE = #{agentRate,jdbcType=DOUBLE},
+      LOWER_RATE = #{lowerRate,jdbcType=DOUBLE},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MemberAgentCommision2" >
+    update member_agent_commision
+    set MEMBER_AGENT_ID = #{memberAgentId,jdbcType=INTEGER},
+      MEMBER_LOWER_ID = #{memberLowerId,jdbcType=INTEGER},
+      AGENT_COMMISION = #{agentCommision,jdbcType=DOUBLE},
+      LOWER_COMMISION = #{lowerCommision,jdbcType=DOUBLE},
+      PLAN_ID = #{planId,jdbcType=INTEGER},
+      AGENT_RATE = #{agentRate,jdbcType=DOUBLE},
+      LOWER_RATE = #{lowerRate,jdbcType=DOUBLE},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

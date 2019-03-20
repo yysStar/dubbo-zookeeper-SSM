@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.RecommendPlanMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.RecommendPlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="examine_status" jdbcType="INTEGER" property="examineStatus" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="play_type" jdbcType="INTEGER" property="playType" />
+    <result column="read_num" jdbcType="INTEGER" property="readNum" />
+    <result column="bingo_status" jdbcType="INTEGER" property="bingoStatus" />
+    <result column="task_id" jdbcType="INTEGER" property="taskId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, content, create_time, fee, type, examine_status, account, play_type, read_num, 
+    bingo_status, task_id
+  </sql>
+  <select id="selectByExample" parameterType="com.qiyun.model2.RecommendPlanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from recommend_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recommend_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recommend_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.RecommendPlan"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into recommend_plan (id, content, create_time, 
+      fee, type, examine_status, 
+      account, play_type, read_num, 
+      bingo_status, task_id)
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{fee,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, #{examineStatus,jdbcType=INTEGER}, 
+      #{account,jdbcType=VARCHAR}, #{playType,jdbcType=INTEGER}, #{readNum,jdbcType=INTEGER}, 
+      #{bingoStatus,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.RecommendPlan"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into recommend_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="examineStatus != null">
+        examine_status,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="playType != null">
+        play_type,
+      </if>
+      <if test="readNum != null">
+        read_num,
+      </if>
+      <if test="bingoStatus != null">
+        bingo_status,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="examineStatus != null">
+        #{examineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null">
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="readNum != null">
+        #{readNum,jdbcType=INTEGER},
+      </if>
+      <if test="bingoStatus != null">
+        #{bingoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.RecommendPlan">
+    update recommend_plan
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="examineStatus != null">
+        examine_status = #{examineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null">
+        play_type = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="readNum != null">
+        read_num = #{readNum,jdbcType=INTEGER},
+      </if>
+      <if test="bingoStatus != null">
+        bingo_status = #{bingoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.RecommendPlan">
+    update recommend_plan
+    set content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      fee = #{fee,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER},
+      examine_status = #{examineStatus,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      play_type = #{playType,jdbcType=INTEGER},
+      read_num = #{readNum,jdbcType=INTEGER},
+      bingo_status = #{bingoStatus,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="recommendPlanDTO" type="com.qiyun.dto.RecommendPlanDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="examine_status" jdbcType="INTEGER" property="examineStatus" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="play_type" jdbcType="INTEGER" property="playType" />
+    <result column="read_num" jdbcType="INTEGER" property="readNum" />
+    <result column="PICTURE" jdbcType="INTEGER" property="picture" />
+    <result column="username" jdbcType="INTEGER" property="userName" />
+    <result column="time" jdbcType="INTEGER" property="endTime" />
+    <result column="bingo_status" jdbcType="INTEGER" property="bingoStatus" />
+    <result column="task_id" jdbcType="INTEGER" property="taskId" />
+    <collection column="id" ofType="com.qiyun.dto.RecommendMatchMappingDTO" property="matchList" select="com.qiyun.mapper2.RecommendMatchMappingMapper.selectMatchList" />
+  </resultMap>
+  <select id="selectRecommendationList" resultMap="recommendPlanDTO">
+    SELECT
+        RP.*, M.PICTURE,
+        M.username,RM.time
+    FROM
+        recommend_plan RP
+    LEFT JOIN member M ON RP.account = M.ACCOUNT
+    LEFT JOIN (
+	SELECT
+		MIN(match_time) AS time,
+		recom_plan_id
+	FROM
+		recommend_match_mapping
+	WHERE
+		1 = 1
+	GROUP BY
+		recom_plan_id
+    ) RM ON RP.id = RM.recom_plan_id
+    WHERE
+        1 = 1
+    AND RP.examine_status = 1
+    AND RM.time &gt; SYSDATE()
+    ORDER BY
+        RP.create_time DESC
+  </select>
+  <select id="selectExamineList" resultMap="recommendPlanDTO">
+    SELECT
+    RP.*, M.PICTURE,
+    M.username,RM.time
+    FROM
+    recommend_plan RP
+    LEFT JOIN member M ON RP.account = M.ACCOUNT
+    LEFT JOIN (
+	SELECT
+		MIN(match_time) AS time,
+		recom_plan_id
+	FROM
+		recommend_match_mapping
+	WHERE
+		1 = 1
+	GROUP BY
+		recom_plan_id
+    ) RM ON RP.id = RM.recom_plan_id
+    WHERE
+        1 = 1
+    AND RP.examine_status = 0
+    AND RM.time &gt; SYSDATE()
+    ORDER BY
+    RP.create_time DESC
+  </select>
+  <select id="selectRecommendationListByAccount" resultMap="recommendPlanDTO">
+    SELECT
+        RP.*, M.PICTURE,
+        M.username,RM.time
+    FROM
+        recommend_plan RP
+    LEFT JOIN member M ON RP.account = M.ACCOUNT
+    LEFT JOIN (
+	SELECT
+		MIN(match_time) AS time,
+		recom_plan_id
+	FROM
+		recommend_match_mapping
+	WHERE
+		1 = 1
+	GROUP BY
+		recom_plan_id
+    ) RM ON RP.id = RM.recom_plan_id
+    WHERE
+        1 = 1
+    AND RP.account = #{account,jdbcType=VARCHAR}
+    AND RP.examine_status = 1
+    ORDER BY
+        RP.create_time DESC
+  </select>
+  <select id="selectRecommendationById" resultMap="recommendPlanDTO">
+    SELECT
+        RP.*, M.PICTURE,
+        M.username,RM.time
+    FROM
+        recommend_plan RP
+    LEFT JOIN member M ON RP.account = M.ACCOUNT
+    LEFT JOIN (
+	SELECT
+		MIN(match_time) AS time,
+		recom_plan_id
+	FROM
+		recommend_match_mapping
+	WHERE
+		1 = 1
+	GROUP BY
+		recom_plan_id
+    ) RM ON RP.id = RM.recom_plan_id
+    WHERE
+        1 = 1
+    AND RP.id = #{id,jdbcType=INTEGER}
+    ORDER BY
+        RP.create_time DESC
+  </select>
+  <select id="selectRecommendationByTaskId" resultMap="recommendPlanDTO">
+    SELECT
+    RP.*, M.PICTURE,
+    M.username,RM.time
+    FROM
+    recommend_plan RP
+    LEFT JOIN member M ON RP.account = M.ACCOUNT
+    LEFT JOIN (
+    SELECT
+    MIN(match_time) AS time,
+    recom_plan_id
+    FROM
+    recommend_match_mapping
+    WHERE
+    1 = 1
+    GROUP BY
+    recom_plan_id
+    ) RM ON RP.id = RM.recom_plan_id
+    WHERE
+        RP.examine_status != 2
+    AND RP.task_id = #{taskId,jdbcType=INTEGER}
+    ORDER BY
+    RP.create_time DESC
+  </select>
+  <select id="getRecomList" resultMap="recommendPlanDTO">
+    SELECT
+        RP.*, M.PICTURE,
+        M.username,
+        RM.time
+    FROM
+        recommend_plan RP
+    LEFT JOIN member M ON RP.account = M.ACCOUNT
+    LEFT JOIN (
+        SELECT
+            MIN(match_time) AS time,
+            recom_plan_id
+        FROM
+            recommend_match_mapping
+        WHERE
+            1 = 1
+        GROUP BY
+            recom_plan_id
+    ) RM ON RP.id = RM.recom_plan_id
+    WHERE
+        RP.examine_status = 1
+    AND RP.create_time > DATE_SUB(CURDATE(), INTERVAL 15 DAY)
+    AND RP.account = #{account,jdbcType=VARCHAR}
+    ORDER BY
+        RP.create_time DESC
+  </select>
+</mapper>

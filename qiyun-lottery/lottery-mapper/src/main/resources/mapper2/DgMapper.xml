@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.DgMapper" >
+
+  <resultMap id="PropsResultMap" type="com.qiyun.model.LotteryTypeProps" >
+    <id column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER" />
+    <result column="COUNT_IN_BATCH" property="countInBatch" jdbcType="INTEGER" />
+    <result column="MAX_WAIT_TIME" property="maxWaitTime" jdbcType="INTEGER" />
+    <result column="DS_AHEAD_TIME" property="dsAheadTime" jdbcType="INTEGER" />
+    <result column="FS_AHEAD_TIME" property="fsAheadTime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Props_Column_List" >
+    LOTTERY_TYPE, COUNT_IN_BATCH, MAX_WAIT_TIME, DS_AHEAD_TIME, FS_AHEAD_TIME, PRICE
+  </sql>
+  <select id="findByLotteryTypeAndTerm" resultType="map"  >
+    select
+    is_able,status,lottery_type,lot_mgr_is_able,end_date_time
+    FROM
+    lottery_term where term = #{1}
+    AND LOTTERY_TYPE = #{0}
+    ORDER BY
+    term DESC
+  </select>
+
+  <select id="findPropsById" resultMap="PropsResultMap"  >
+    select
+    <include refid="Props_Column_List" />
+    from lottery_type_props
+    where LOTTERY_TYPE = #{0}
+  </select>
+  <select id="getLotteryTerm" resultType="Integer"  >
+    select term from lottery_term where LOTTERY_TYPE = #{0} ORDER BY id desc
+  </select>
+  <select id="getDealTime" resultType="Integer"  >
+    select match_deal_time from config where id = 1
+  </select>
+  <update id="updateDealTime">
+      update config SET match_deal_time = #{0} where id = 1
+  </update>
+  <select id="getMaxAddPrize" resultType="Double"  >
+    select max_add_prize from config where id = 1
+  </select>
+  <update id="updateMaxAddPrize" >
+    update config SET max_add_prize = #{0} where id = 1
+  </update>
+  <update id="updateDG" >
+    update config SET is_dg = #{0}
+  </update>
+  <select id="getDGStatus" resultType="Integer"  >
+    select is_dg from config where id = 1
+  </select>
+  <select id="getAutoCopyPlanStatusForLess5" resultType="Integer"  >
+    select auto_copy_for_less5 from config where id = 1
+  </select>
+  <select id="getAutoCopyPlanStatusForMore5" resultType="Integer"  >
+    select auto_copy_for_more5 from config where id = 1
+  </select>
+  <update id="setAutoCopyPlanStatus" >
+    update config SET #{search2} = #{status2}
+  </update>
+  <update id="setAutoCopyPlanStatusForLess5" >
+    update config SET auto_copy_for_less5 = #{0}
+  </update>
+  <update id="setAutoCopyPlanStatusForMore5" >
+    update config SET auto_copy_for_more5 = #{0}
+  </update>
+  <select id="getChaiPiaoCount" resultType="Integer"  >
+    select chai_piao_count from config where id = 1
+  </select>
+  <update id="updateLastCheckBingoTime" >
+    update config SET last_checkBingo_time = #{0}
+  </update>
+  <update id="updateLastReturnPrizeTime" >
+    update config SET last_return_prize_time = #{0}
+  </update>
+</mapper>

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.BasketballLineupMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.BasketballLineup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="home_lineup" property="homeLineup" jdbcType="VARCHAR" />
+    <result column="home_backup" property="homeBackup" jdbcType="VARCHAR" />
+    <result column="away_lineup" property="awayLineup" jdbcType="VARCHAR" />
+    <result column="away_backup" property="awayBackup" jdbcType="VARCHAR" />
+    <result column="analyzes" property="analyzes" jdbcType="VARCHAR" />
+    <result column="injury" property="injury" jdbcType="VARCHAR" />
+    <result column="home_Near6" property="homeNear6" jdbcType="VARCHAR" />
+    <result column="home_odds" property="homeOdds" jdbcType="VARCHAR" />
+    <result column="home_ou" property="homeOu" jdbcType="VARCHAR" />
+    <result column="away_near6" property="awayNear6" jdbcType="VARCHAR" />
+    <result column="away_odds" property="awayOdds" jdbcType="VARCHAR" />
+    <result column="away_ou" property="awayOu" jdbcType="VARCHAR" />
+    <result column="confidence" property="confidence" jdbcType="VARCHAR" />
+    <result column="vs" property="vs" jdbcType="VARCHAR" />
+    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="home_lineup_gb" property="homeLineupGb" jdbcType="VARCHAR" />
+    <result column="home_backup_gb" property="homeBackupGb" jdbcType="VARCHAR" />
+    <result column="away_lineup_gb" property="awayLineupGb" jdbcType="VARCHAR" />
+    <result column="away_backup_gb" property="awayBackupGb" jdbcType="VARCHAR" />
+    <result column="analyzes_gb" property="analyzesGb" jdbcType="VARCHAR" />
+    <result column="injury_gb" property="injuryGb" jdbcType="VARCHAR" />
+    <result column="confidence_gb" property="confidenceGb" jdbcType="VARCHAR" />
+    <result column="vs_gb" property="vsGb" jdbcType="VARCHAR" />
+    <result column="explain_gb" property="explainGb" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, home_lineup, home_backup, away_lineup, away_backup, analyzes, injury, home_Near6, 
+    home_odds, home_ou, away_near6, away_odds, away_ou, confidence, vs, `explain`, home_lineup_gb,
+    home_backup_gb, away_lineup_gb, away_backup_gb, analyzes_gb, injury_gb, confidence_gb, 
+    vs_gb, explain_gb
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.BasketballLineupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from basketball_lineup
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from basketball_lineup
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from basketball_lineup
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.BasketballLineup" >
+    insert into basketball_lineup (id, home_lineup, home_backup, 
+      away_lineup, away_backup, analyzes, 
+      injury, home_Near6, home_odds, 
+      home_ou, away_near6, away_odds, 
+      away_ou, confidence, vs, 
+      `explain`, home_lineup_gb, home_backup_gb,
+      away_lineup_gb, away_backup_gb, analyzes_gb, 
+      injury_gb, confidence_gb, vs_gb, 
+      explain_gb)
+    values (#{id,jdbcType=INTEGER}, #{homeLineup,jdbcType=VARCHAR}, #{homeBackup,jdbcType=VARCHAR}, 
+      #{awayLineup,jdbcType=VARCHAR}, #{awayBackup,jdbcType=VARCHAR}, #{analyzes,jdbcType=VARCHAR}, 
+      #{injury,jdbcType=VARCHAR}, #{homeNear6,jdbcType=VARCHAR}, #{homeOdds,jdbcType=VARCHAR}, 
+      #{homeOu,jdbcType=VARCHAR}, #{awayNear6,jdbcType=VARCHAR}, #{awayOdds,jdbcType=VARCHAR}, 
+      #{awayOu,jdbcType=VARCHAR}, #{confidence,jdbcType=VARCHAR}, #{vs,jdbcType=VARCHAR}, 
+      #{explain,jdbcType=VARCHAR}, #{homeLineupGb,jdbcType=VARCHAR}, #{homeBackupGb,jdbcType=VARCHAR}, 
+      #{awayLineupGb,jdbcType=VARCHAR}, #{awayBackupGb,jdbcType=VARCHAR}, #{analyzesGb,jdbcType=VARCHAR}, 
+      #{injuryGb,jdbcType=VARCHAR}, #{confidenceGb,jdbcType=VARCHAR}, #{vsGb,jdbcType=VARCHAR}, 
+      #{explainGb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.BasketballLineup" >
+    insert into basketball_lineup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="homeLineup != null" >
+        home_lineup,
+      </if>
+      <if test="homeBackup != null" >
+        home_backup,
+      </if>
+      <if test="awayLineup != null" >
+        away_lineup,
+      </if>
+      <if test="awayBackup != null" >
+        away_backup,
+      </if>
+      <if test="analyzes != null" >
+        analyzes,
+      </if>
+      <if test="injury != null" >
+        injury,
+      </if>
+      <if test="homeNear6 != null" >
+        home_Near6,
+      </if>
+      <if test="homeOdds != null" >
+        home_odds,
+      </if>
+      <if test="homeOu != null" >
+        home_ou,
+      </if>
+      <if test="awayNear6 != null" >
+        away_near6,
+      </if>
+      <if test="awayOdds != null" >
+        away_odds,
+      </if>
+      <if test="awayOu != null" >
+        away_ou,
+      </if>
+      <if test="confidence != null" >
+        confidence,
+      </if>
+      <if test="vs != null" >
+        vs,
+      </if>
+      <if test="explain != null" >
+        `explain`,
+      </if>
+      <if test="homeLineupGb != null" >
+        home_lineup_gb,
+      </if>
+      <if test="homeBackupGb != null" >
+        home_backup_gb,
+      </if>
+      <if test="awayLineupGb != null" >
+        away_lineup_gb,
+      </if>
+      <if test="awayBackupGb != null" >
+        away_backup_gb,
+      </if>
+      <if test="analyzesGb != null" >
+        analyzes_gb,
+      </if>
+      <if test="injuryGb != null" >
+        injury_gb,
+      </if>
+      <if test="confidenceGb != null" >
+        confidence_gb,
+      </if>
+      <if test="vsGb != null" >
+        vs_gb,
+      </if>
+      <if test="explainGb != null" >
+        explain_gb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="homeLineup != null" >
+        #{homeLineup,jdbcType=VARCHAR},
+      </if>
+      <if test="homeBackup != null" >
+        #{homeBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLineup != null" >
+        #{awayLineup,jdbcType=VARCHAR},
+      </if>
+      <if test="awayBackup != null" >
+        #{awayBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="analyzes != null" >
+        #{analyzes,jdbcType=VARCHAR},
+      </if>
+      <if test="injury != null" >
+        #{injury,jdbcType=VARCHAR},
+      </if>
+      <if test="homeNear6 != null" >
+        #{homeNear6,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOdds != null" >
+        #{homeOdds,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOu != null" >
+        #{homeOu,jdbcType=VARCHAR},
+      </if>
+      <if test="awayNear6 != null" >
+        #{awayNear6,jdbcType=VARCHAR},
+      </if>
+      <if test="awayOdds != null" >
+        #{awayOdds,jdbcType=VARCHAR},
+      </if>
+      <if test="awayOu != null" >
+        #{awayOu,jdbcType=VARCHAR},
+      </if>
+      <if test="confidence != null" >
+        #{confidence,jdbcType=VARCHAR},
+      </if>
+      <if test="vs != null" >
+        #{vs,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="homeLineupGb != null" >
+        #{homeLineupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="homeBackupGb != null" >
+        #{homeBackupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLineupGb != null" >
+        #{awayLineupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="awayBackupGb != null" >
+        #{awayBackupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="analyzesGb != null" >
+        #{analyzesGb,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryGb != null" >
+        #{injuryGb,jdbcType=VARCHAR},
+      </if>
+      <if test="confidenceGb != null" >
+        #{confidenceGb,jdbcType=VARCHAR},
+      </if>
+      <if test="vsGb != null" >
+        #{vsGb,jdbcType=VARCHAR},
+      </if>
+      <if test="explainGb != null" >
+        #{explainGb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.BasketballLineup" >
+    update basketball_lineup
+    <set >
+      <if test="homeLineup != null" >
+        home_lineup = #{homeLineup,jdbcType=VARCHAR},
+      </if>
+      <if test="homeBackup != null" >
+        home_backup = #{homeBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLineup != null" >
+        away_lineup = #{awayLineup,jdbcType=VARCHAR},
+      </if>
+      <if test="awayBackup != null" >
+        away_backup = #{awayBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="analyzes != null" >
+        analyzes = #{analyzes,jdbcType=VARCHAR},
+      </if>
+      <if test="injury != null" >
+        injury = #{injury,jdbcType=VARCHAR},
+      </if>
+      <if test="homeNear6 != null" >
+        home_Near6 = #{homeNear6,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOdds != null" >
+        home_odds = #{homeOdds,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOu != null" >
+        home_ou = #{homeOu,jdbcType=VARCHAR},
+      </if>
+      <if test="awayNear6 != null" >
+        away_near6 = #{awayNear6,jdbcType=VARCHAR},
+      </if>
+      <if test="awayOdds != null" >
+        away_odds = #{awayOdds,jdbcType=VARCHAR},
+      </if>
+      <if test="awayOu != null" >
+        away_ou = #{awayOu,jdbcType=VARCHAR},
+      </if>
+      <if test="confidence != null" >
+        confidence = #{confidence,jdbcType=VARCHAR},
+      </if>
+      <if test="vs != null" >
+        vs = #{vs,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        `explain` = #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="homeLineupGb != null" >
+        home_lineup_gb = #{homeLineupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="homeBackupGb != null" >
+        home_backup_gb = #{homeBackupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLineupGb != null" >
+        away_lineup_gb = #{awayLineupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="awayBackupGb != null" >
+        away_backup_gb = #{awayBackupGb,jdbcType=VARCHAR},
+      </if>
+      <if test="analyzesGb != null" >
+        analyzes_gb = #{analyzesGb,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryGb != null" >
+        injury_gb = #{injuryGb,jdbcType=VARCHAR},
+      </if>
+      <if test="confidenceGb != null" >
+        confidence_gb = #{confidenceGb,jdbcType=VARCHAR},
+      </if>
+      <if test="vsGb != null" >
+        vs_gb = #{vsGb,jdbcType=VARCHAR},
+      </if>
+      <if test="explainGb != null" >
+        explain_gb = #{explainGb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.BasketballLineup" >
+    update basketball_lineup
+    set home_lineup = #{homeLineup,jdbcType=VARCHAR},
+      home_backup = #{homeBackup,jdbcType=VARCHAR},
+      away_lineup = #{awayLineup,jdbcType=VARCHAR},
+      away_backup = #{awayBackup,jdbcType=VARCHAR},
+      analyzes = #{analyzes,jdbcType=VARCHAR},
+      injury = #{injury,jdbcType=VARCHAR},
+      home_Near6 = #{homeNear6,jdbcType=VARCHAR},
+      home_odds = #{homeOdds,jdbcType=VARCHAR},
+      home_ou = #{homeOu,jdbcType=VARCHAR},
+      away_near6 = #{awayNear6,jdbcType=VARCHAR},
+      away_odds = #{awayOdds,jdbcType=VARCHAR},
+      away_ou = #{awayOu,jdbcType=VARCHAR},
+      confidence = #{confidence,jdbcType=VARCHAR},
+      vs = #{vs,jdbcType=VARCHAR},
+      `explain` = #{explain,jdbcType=VARCHAR},
+      home_lineup_gb = #{homeLineupGb,jdbcType=VARCHAR},
+      home_backup_gb = #{homeBackupGb,jdbcType=VARCHAR},
+      away_lineup_gb = #{awayLineupGb,jdbcType=VARCHAR},
+      away_backup_gb = #{awayBackupGb,jdbcType=VARCHAR},
+      analyzes_gb = #{analyzesGb,jdbcType=VARCHAR},
+      injury_gb = #{injuryGb,jdbcType=VARCHAR},
+      confidence_gb = #{confidenceGb,jdbcType=VARCHAR},
+      vs_gb = #{vsGb,jdbcType=VARCHAR},
+      explain_gb = #{explainGb,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

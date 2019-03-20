@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SZ2C12Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.SZ2C12" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="match_id1" property="matchId1" jdbcType="VARCHAR" />
+    <result column="match_id2" property="matchId2" jdbcType="VARCHAR" />
+    <result column="home_team1" property="homeTeam1" jdbcType="VARCHAR" />
+    <result column="guest_team1" property="guestTeam1" jdbcType="VARCHAR" />
+    <result column="recommend1" property="recommend1" jdbcType="VARCHAR" />
+    <result column="home_team2" property="homeTeam2" jdbcType="VARCHAR" />
+    <result column="guest_team2" property="guestTeam2" jdbcType="VARCHAR" />
+    <result column="recommend2" property="recommend2" jdbcType="VARCHAR" />
+    <result column="multiple" property="multiple" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="bonus" property="bonus" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, match_id1, match_id2, home_team1, guest_team1, recommend1, home_team2, guest_team2, 
+    recommend2, multiple, amount, bonus, result, author, number, create_date, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.SZ2C12Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sz_2c1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sz_2c1
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sz_2c1
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.SZ2C12Query" >
+    delete from sz_2c1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.SZ2C12" >
+    insert into sz_2c1 (id, match_id1, match_id2, 
+      home_team1, guest_team1, recommend1, 
+      home_team2, guest_team2, recommend2, 
+      multiple, amount, bonus, 
+      result, author, number, 
+      create_date, status)
+    values (#{id,jdbcType=INTEGER}, #{matchId1,jdbcType=VARCHAR}, #{matchId2,jdbcType=VARCHAR}, 
+      #{homeTeam1,jdbcType=VARCHAR}, #{guestTeam1,jdbcType=VARCHAR}, #{recommend1,jdbcType=VARCHAR}, 
+      #{homeTeam2,jdbcType=VARCHAR}, #{guestTeam2,jdbcType=VARCHAR}, #{recommend2,jdbcType=VARCHAR}, 
+      #{multiple,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, #{bonus,jdbcType=VARCHAR}, 
+      #{result,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.SZ2C12" >
+    insert into sz_2c1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="matchId1 != null" >
+        match_id1,
+      </if>
+      <if test="matchId2 != null" >
+        match_id2,
+      </if>
+      <if test="homeTeam1 != null" >
+        home_team1,
+      </if>
+      <if test="guestTeam1 != null" >
+        guest_team1,
+      </if>
+      <if test="recommend1 != null" >
+        recommend1,
+      </if>
+      <if test="homeTeam2 != null" >
+        home_team2,
+      </if>
+      <if test="guestTeam2 != null" >
+        guest_team2,
+      </if>
+      <if test="recommend2 != null" >
+        recommend2,
+      </if>
+      <if test="multiple != null" >
+        multiple,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="bonus != null" >
+        bonus,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchId1 != null" >
+        #{matchId1,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId2 != null" >
+        #{matchId2,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTeam1 != null" >
+        #{homeTeam1,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeam1 != null" >
+        #{guestTeam1,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend1 != null" >
+        #{recommend1,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTeam2 != null" >
+        #{homeTeam2,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeam2 != null" >
+        #{guestTeam2,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend2 != null" >
+        #{recommend2,jdbcType=VARCHAR},
+      </if>
+      <if test="multiple != null" >
+        #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null" >
+        #{bonus,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.SZ2C12Query" resultType="java.lang.Integer" >
+    select count(*) from sz_2c1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sz_2c1
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.matchId1 != null" >
+        match_id1 = #{record.matchId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchId2 != null" >
+        match_id2 = #{record.matchId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeTeam1 != null" >
+        home_team1 = #{record.homeTeam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guestTeam1 != null" >
+        guest_team1 = #{record.guestTeam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommend1 != null" >
+        recommend1 = #{record.recommend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeTeam2 != null" >
+        home_team2 = #{record.homeTeam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guestTeam2 != null" >
+        guest_team2 = #{record.guestTeam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommend2 != null" >
+        recommend2 = #{record.recommend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.multiple != null" >
+        multiple = #{record.multiple,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bonus != null" >
+        bonus = #{record.bonus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=INTEGER},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sz_2c1
+    set id = #{record.id,jdbcType=INTEGER},
+      match_id1 = #{record.matchId1,jdbcType=VARCHAR},
+      match_id2 = #{record.matchId2,jdbcType=VARCHAR},
+      home_team1 = #{record.homeTeam1,jdbcType=VARCHAR},
+      guest_team1 = #{record.guestTeam1,jdbcType=VARCHAR},
+      recommend1 = #{record.recommend1,jdbcType=VARCHAR},
+      home_team2 = #{record.homeTeam2,jdbcType=VARCHAR},
+      guest_team2 = #{record.guestTeam2,jdbcType=VARCHAR},
+      recommend2 = #{record.recommend2,jdbcType=VARCHAR},
+      multiple = #{record.multiple,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      bonus = #{record.bonus,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SZ2C12" >
+    update sz_2c1
+    <set >
+      <if test="matchId1 != null" >
+        match_id1 = #{matchId1,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId2 != null" >
+        match_id2 = #{matchId2,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTeam1 != null" >
+        home_team1 = #{homeTeam1,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeam1 != null" >
+        guest_team1 = #{guestTeam1,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend1 != null" >
+        recommend1 = #{recommend1,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTeam2 != null" >
+        home_team2 = #{homeTeam2,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeam2 != null" >
+        guest_team2 = #{guestTeam2,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend2 != null" >
+        recommend2 = #{recommend2,jdbcType=VARCHAR},
+      </if>
+      <if test="multiple != null" >
+        multiple = #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null" >
+        bonus = #{bonus,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SZ2C12" >
+    update sz_2c1
+    set match_id1 = #{matchId1,jdbcType=VARCHAR},
+      match_id2 = #{matchId2,jdbcType=VARCHAR},
+      home_team1 = #{homeTeam1,jdbcType=VARCHAR},
+      guest_team1 = #{guestTeam1,jdbcType=VARCHAR},
+      recommend1 = #{recommend1,jdbcType=VARCHAR},
+      home_team2 = #{homeTeam2,jdbcType=VARCHAR},
+      guest_team2 = #{guestTeam2,jdbcType=VARCHAR},
+      recommend2 = #{recommend2,jdbcType=VARCHAR},
+      multiple = #{multiple,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      bonus = #{bonus,jdbcType=VARCHAR},
+      result = #{result,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

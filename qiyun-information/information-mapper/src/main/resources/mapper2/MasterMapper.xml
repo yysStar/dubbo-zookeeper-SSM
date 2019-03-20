@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.MasterMapper" >
+<!--查找云朵数量-->
+<select id="findClouds" parameterType="com.qiyun.dto.Member2DTO" resultType="string">
+    select CLOUDS_ABLE_BALANCE from member_clouds WHERE ACCOUNT=#{account}
+</select>
+<!-- 查看是否优质客户-->
+    <select id="findIsCelebrity" resultType="map" parameterType="com.qiyun.dto.Member2DTO">
+        select * from member_master_mapping where account=#{account};
+    </select>
+<!--查询上一期发布期数-->
+    <select id="getPeriodsNnum" parameterType="map" resultType="int">
+        select ifnull(max(periods_num),0) from member_task_begin where  account=#{account}
+    </select>
+    <!--celebrityBeginTask 发布任务-->
+    <insert id="celebrityBeginTask" parameterType="map">
+        insert into member_task_begin(periods_num, task_num, account, start_date, end_date, create_time) values (#{periods_num},0,#{account},#{start_time},#{end_time},#{create_date})
+    </insert>
+    <!--获取任务最大发布时间-->
+    <select id="getMaxTime" parameterType="com.qiyun.dto.Member2DTO" resultType="java.util.Date">
+        select max(end_date) from member_task_begin where account=#{account} and is_finish=1
+    </select>
+</mapper>

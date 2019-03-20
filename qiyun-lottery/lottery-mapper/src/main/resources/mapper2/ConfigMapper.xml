@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.ConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.Config" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="max_add_prize" property="maxAddPrize" jdbcType="DOUBLE" />
+    <result column="match_deal_time" property="matchDealTime" jdbcType="INTEGER" />
+    <result column="auto_copy_for_less5" property="autoCopyForLess5" jdbcType="INTEGER" />
+    <result column="auto_copy_for_more5" property="autoCopyForMore5" jdbcType="INTEGER" />
+    <result column="is_dg" property="isDg" jdbcType="INTEGER" />
+    <result column="chai_piao_count" property="chaiPiaoCount" jdbcType="INTEGER" />
+    <result column="sp_source" property="spSource" jdbcType="INTEGER" />
+    <result column="last_checkBingo_time" property="lastCheckbingoTime" jdbcType="TIMESTAMP" />
+    <result column="last_return_prize_time" property="lastReturnPrizeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, max_add_prize, match_deal_time, auto_copy_for_less5, auto_copy_for_more5, is_dg, 
+    chai_piao_count, sp_source, last_checkBingo_time, last_return_prize_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.ConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.Config" >
+    insert into config (id, max_add_prize, match_deal_time, 
+      auto_copy_for_less5, auto_copy_for_more5, is_dg, 
+      chai_piao_count, sp_source, last_checkBingo_time, 
+      last_return_prize_time)
+    values (#{id,jdbcType=INTEGER}, #{maxAddPrize,jdbcType=DOUBLE}, #{matchDealTime,jdbcType=INTEGER}, 
+      #{autoCopyForLess5,jdbcType=INTEGER}, #{autoCopyForMore5,jdbcType=INTEGER}, #{isDg,jdbcType=INTEGER}, 
+      #{chaiPiaoCount,jdbcType=INTEGER}, #{spSource,jdbcType=INTEGER}, #{lastCheckbingoTime,jdbcType=TIMESTAMP}, 
+      #{lastReturnPrizeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.Config" >
+    insert into config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="maxAddPrize != null" >
+        max_add_prize,
+      </if>
+      <if test="matchDealTime != null" >
+        match_deal_time,
+      </if>
+      <if test="autoCopyForLess5 != null" >
+        auto_copy_for_less5,
+      </if>
+      <if test="autoCopyForMore5 != null" >
+        auto_copy_for_more5,
+      </if>
+      <if test="isDg != null" >
+        is_dg,
+      </if>
+      <if test="chaiPiaoCount != null" >
+        chai_piao_count,
+      </if>
+      <if test="spSource != null" >
+        sp_source,
+      </if>
+      <if test="lastCheckbingoTime != null" >
+        last_checkBingo_time,
+      </if>
+      <if test="lastReturnPrizeTime != null" >
+        last_return_prize_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="maxAddPrize != null" >
+        #{maxAddPrize,jdbcType=DOUBLE},
+      </if>
+      <if test="matchDealTime != null" >
+        #{matchDealTime,jdbcType=INTEGER},
+      </if>
+      <if test="autoCopyForLess5 != null" >
+        #{autoCopyForLess5,jdbcType=INTEGER},
+      </if>
+      <if test="autoCopyForMore5 != null" >
+        #{autoCopyForMore5,jdbcType=INTEGER},
+      </if>
+      <if test="isDg != null" >
+        #{isDg,jdbcType=INTEGER},
+      </if>
+      <if test="chaiPiaoCount != null" >
+        #{chaiPiaoCount,jdbcType=INTEGER},
+      </if>
+      <if test="spSource != null" >
+        #{spSource,jdbcType=INTEGER},
+      </if>
+      <if test="lastCheckbingoTime != null" >
+        #{lastCheckbingoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastReturnPrizeTime != null" >
+        #{lastReturnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.Config" >
+    update config
+    <set >
+      <if test="maxAddPrize != null" >
+        max_add_prize = #{maxAddPrize,jdbcType=DOUBLE},
+      </if>
+      <if test="matchDealTime != null" >
+        match_deal_time = #{matchDealTime,jdbcType=INTEGER},
+      </if>
+      <if test="autoCopyForLess5 != null" >
+        auto_copy_for_less5 = #{autoCopyForLess5,jdbcType=INTEGER},
+      </if>
+      <if test="autoCopyForMore5 != null" >
+        auto_copy_for_more5 = #{autoCopyForMore5,jdbcType=INTEGER},
+      </if>
+      <if test="isDg != null" >
+        is_dg = #{isDg,jdbcType=INTEGER},
+      </if>
+      <if test="chaiPiaoCount != null" >
+        chai_piao_count = #{chaiPiaoCount,jdbcType=INTEGER},
+      </if>
+      <if test="spSource != null" >
+        sp_source = #{spSource,jdbcType=INTEGER},
+      </if>
+      <if test="lastCheckbingoTime != null" >
+        last_checkBingo_time = #{lastCheckbingoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastReturnPrizeTime != null" >
+        last_return_prize_time = #{lastReturnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.Config" >
+    update config
+    set max_add_prize = #{maxAddPrize,jdbcType=DOUBLE},
+      match_deal_time = #{matchDealTime,jdbcType=INTEGER},
+      auto_copy_for_less5 = #{autoCopyForLess5,jdbcType=INTEGER},
+      auto_copy_for_more5 = #{autoCopyForMore5,jdbcType=INTEGER},
+      is_dg = #{isDg,jdbcType=INTEGER},
+      chai_piao_count = #{chaiPiaoCount,jdbcType=INTEGER},
+      sp_source = #{spSource,jdbcType=INTEGER},
+      last_checkBingo_time = #{lastCheckbingoTime,jdbcType=TIMESTAMP},
+      last_return_prize_time = #{lastReturnPrizeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.FootballScheduleResultMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.FootballScheduleResult" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="league" property="league" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="sub_league" property="subLeague" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="home" property="home" jdbcType="VARCHAR" />
+    <result column="away" property="away" jdbcType="VARCHAR" />
+    <result column="home_score" property="homeScore" jdbcType="VARCHAR" />
+    <result column="away_score" property="awayScore" jdbcType="VARCHAR" />
+    <result column="bc1" property="bc1" jdbcType="VARCHAR" />
+    <result column="bc2" property="bc2" jdbcType="VARCHAR" />
+    <result column="red1" property="red1" jdbcType="VARCHAR" />
+    <result column="red2" property="red2" jdbcType="VARCHAR" />
+    <result column="order1" property="order1" jdbcType="VARCHAR" />
+    <result column="order2" property="order2" jdbcType="VARCHAR" />
+    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="weather_ico" property="weatherIco" jdbcType="VARCHAR" />
+    <result column="weather" property="weather" jdbcType="VARCHAR" />
+    <result column="temperature" property="temperature" jdbcType="VARCHAR" />
+    <result column="season" property="season" jdbcType="VARCHAR" />
+    <result column="group" property="group" jdbcType="VARCHAR" />
+    <result column="zl" property="zl" jdbcType="VARCHAR" />
+    <result column="sub_league_id" property="subLeagueId" jdbcType="VARCHAR" />
+    <result column="yellow" property="yellow" jdbcType="VARCHAR" />
+    <result column="explain2" property="explain2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, color, league, time, sub_league, state, home, away, home_score, away_score, bc1,
+    bc2, red1, red2, order1, order2, `explain`, group_name, area, weather_ico, weather,
+    temperature, season, `group`, zl, sub_league_id, yellow, `explain2`
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.FootballScheduleResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from football_schedule_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from football_schedule_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from football_schedule_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.FootballScheduleResult" >
+    insert into football_schedule_result (id, color, league,
+      time, sub_league, state,
+      home, away, home_score,
+      away_score, bc1, bc2,
+      red1, red2, order1,
+      order2, `explain`, group_name,
+      area, weather_ico, weather,
+      temperature, season, `group`,
+      zl, sub_league_id, yellow,
+      `explain2`)
+    values (#{id,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, #{league,jdbcType=VARCHAR},
+      #{time,jdbcType=VARCHAR}, #{subLeague,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},
+      #{home,jdbcType=VARCHAR}, #{away,jdbcType=VARCHAR}, #{homeScore,jdbcType=VARCHAR},
+      #{awayScore,jdbcType=VARCHAR}, #{bc1,jdbcType=VARCHAR}, #{bc2,jdbcType=VARCHAR},
+      #{red1,jdbcType=VARCHAR}, #{red2,jdbcType=VARCHAR}, #{order1,jdbcType=VARCHAR},
+      #{order2,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR},
+      #{area,jdbcType=VARCHAR}, #{weatherIco,jdbcType=VARCHAR}, #{weather,jdbcType=VARCHAR},
+      #{temperature,jdbcType=VARCHAR}, #{season,jdbcType=VARCHAR}, #{group,jdbcType=VARCHAR},
+      #{zl,jdbcType=VARCHAR}, #{subLeagueId,jdbcType=VARCHAR}, #{yellow,jdbcType=VARCHAR},
+      #{explain2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.FootballScheduleResult" >
+    insert into football_schedule_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="league != null" >
+        league,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="subLeague != null" >
+        sub_league,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="home != null" >
+        home,
+      </if>
+      <if test="away != null" >
+        away,
+      </if>
+      <if test="homeScore != null" >
+        home_score,
+      </if>
+      <if test="awayScore != null" >
+        away_score,
+      </if>
+      <if test="bc1 != null" >
+        bc1,
+      </if>
+      <if test="bc2 != null" >
+        bc2,
+      </if>
+      <if test="red1 != null" >
+        red1,
+      </if>
+      <if test="red2 != null" >
+        red2,
+      </if>
+      <if test="order1 != null" >
+        order1,
+      </if>
+      <if test="order2 != null" >
+        order2,
+      </if>
+      <if test="explain != null" >
+        `explain`,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="weatherIco != null" >
+        weather_ico,
+      </if>
+      <if test="weather != null" >
+        weather,
+      </if>
+      <if test="temperature != null" >
+        temperature,
+      </if>
+      <if test="season != null" >
+        season,
+      </if>
+      <if test="group != null" >
+        `group`,
+      </if>
+      <if test="zl != null" >
+        zl,
+      </if>
+      <if test="subLeagueId != null" >
+        sub_league_id,
+      </if>
+      <if test="yellow != null" >
+        yellow,
+      </if>
+      <if test="explain2 != null" >
+        `explain2`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeague != null" >
+        #{subLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="bc1 != null" >
+        #{bc1,jdbcType=VARCHAR},
+      </if>
+      <if test="bc2 != null" >
+        #{bc2,jdbcType=VARCHAR},
+      </if>
+      <if test="red1 != null" >
+        #{red1,jdbcType=VARCHAR},
+      </if>
+      <if test="red2 != null" >
+        #{red2,jdbcType=VARCHAR},
+      </if>
+      <if test="order1 != null" >
+        #{order1,jdbcType=VARCHAR},
+      </if>
+      <if test="order2 != null" >
+        #{order2,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="weatherIco != null" >
+        #{weatherIco,jdbcType=VARCHAR},
+      </if>
+      <if test="weather != null" >
+        #{weather,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null" >
+        #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null" >
+        #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="zl != null" >
+        #{zl,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeagueId != null" >
+        #{subLeagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="yellow != null" >
+        #{yellow,jdbcType=VARCHAR},
+      </if>
+      <if test="explain2 != null" >
+        #{explain2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.FootballScheduleResult" >
+    update football_schedule_result
+    <set >
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        league = #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeague != null" >
+        sub_league = #{subLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        home = #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        away = #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        home_score = #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        away_score = #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="bc1 != null" >
+        bc1 = #{bc1,jdbcType=VARCHAR},
+      </if>
+      <if test="bc2 != null" >
+        bc2 = #{bc2,jdbcType=VARCHAR},
+      </if>
+      <if test="red1 != null" >
+        red1 = #{red1,jdbcType=VARCHAR},
+      </if>
+      <if test="red2 != null" >
+        red2 = #{red2,jdbcType=VARCHAR},
+      </if>
+      <if test="order1 != null" >
+        order1 = #{order1,jdbcType=VARCHAR},
+      </if>
+      <if test="order2 != null" >
+        order2 = #{order2,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        `explain` = #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="weatherIco != null" >
+        weather_ico = #{weatherIco,jdbcType=VARCHAR},
+      </if>
+      <if test="weather != null" >
+        weather = #{weather,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null" >
+        temperature = #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null" >
+        season = #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        `group` = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="zl != null" >
+        zl = #{zl,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeagueId != null" >
+        sub_league_id = #{subLeagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="yellow != null" >
+        yellow = #{yellow,jdbcType=VARCHAR},
+      </if>
+      <if test="explain2 != null" >
+        `explain2` = #{explain2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.FootballScheduleResult" >
+    update football_schedule_result
+    set color = #{color,jdbcType=VARCHAR},
+      league = #{league,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      sub_league = #{subLeague,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      home = #{home,jdbcType=VARCHAR},
+      away = #{away,jdbcType=VARCHAR},
+      home_score = #{homeScore,jdbcType=VARCHAR},
+      away_score = #{awayScore,jdbcType=VARCHAR},
+      bc1 = #{bc1,jdbcType=VARCHAR},
+      bc2 = #{bc2,jdbcType=VARCHAR},
+      red1 = #{red1,jdbcType=VARCHAR},
+      red2 = #{red2,jdbcType=VARCHAR},
+      order1 = #{order1,jdbcType=VARCHAR},
+      order2 = #{order2,jdbcType=VARCHAR},
+      `explain` = #{explain,jdbcType=VARCHAR},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      weather_ico = #{weatherIco,jdbcType=VARCHAR},
+      weather = #{weather,jdbcType=VARCHAR},
+      temperature = #{temperature,jdbcType=VARCHAR},
+      season = #{season,jdbcType=VARCHAR},
+      `group` = #{group,jdbcType=VARCHAR},
+      zl = #{zl,jdbcType=VARCHAR},
+      sub_league_id = #{subLeagueId,jdbcType=VARCHAR},
+      yellow = #{yellow,jdbcType=VARCHAR},
+      `explain2` = #{explain2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getScheduleResultByDate" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from football_schedule_result
+    where time LIKE CONCAT('%',#{date,jdbcType=VARCHAR},'%')
+  </select>
+
+</mapper>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SportteryFootballBqcawardMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.SportteryFootballBqcaward" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="matchId" property="matchid" jdbcType="INTEGER" />
+    <result column="intTime" property="inttime" jdbcType="INTEGER" />
+    <result column="lineId" property="lineid" jdbcType="INTEGER" />
+    <result column="matchTime" property="matchtime" jdbcType="TIMESTAMP" />
+    <result column="passMode" property="passmode" jdbcType="INTEGER" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="win_win_award" property="winWinAward" jdbcType="DOUBLE" />
+    <result column="win_draw_award" property="winDrawAward" jdbcType="DOUBLE" />
+    <result column="win_lose_award" property="winLoseAward" jdbcType="DOUBLE" />
+    <result column="draw_win_award" property="drawWinAward" jdbcType="DOUBLE" />
+    <result column="draw_draw_award" property="drawDrawAward" jdbcType="DOUBLE" />
+    <result column="draw_lose_award" property="drawLoseAward" jdbcType="DOUBLE" />
+    <result column="lose_win_award" property="loseWinAward" jdbcType="DOUBLE" />
+    <result column="lose_draw_award" property="loseDrawAward" jdbcType="DOUBLE" />
+    <result column="lose_lose_award" property="loseLoseAward" jdbcType="DOUBLE" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, matchId, intTime, lineId, matchTime, passMode, lastUpdateTime, win_win_award, 
+    win_draw_award, win_lose_award, draw_win_award, draw_draw_award, draw_lose_award, 
+    lose_win_award, lose_draw_award, lose_lose_award, CREATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.SportteryFootballBqcawardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sporttery_football_bqcaward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sporttery_football_bqcaward
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sporttery_football_bqcaward
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.SportteryFootballBqcaward" >
+    insert into sporttery_football_bqcaward (id, matchId, intTime, 
+      lineId, matchTime, passMode, 
+      lastUpdateTime, win_win_award, win_draw_award, 
+      win_lose_award, draw_win_award, draw_draw_award, 
+      draw_lose_award, lose_win_award, lose_draw_award, 
+      lose_lose_award, CREATE_DATE)
+    values (#{id,jdbcType=INTEGER}, #{matchid,jdbcType=INTEGER}, #{inttime,jdbcType=INTEGER}, 
+      #{lineid,jdbcType=INTEGER}, #{matchtime,jdbcType=TIMESTAMP}, #{passmode,jdbcType=INTEGER}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{winWinAward,jdbcType=DOUBLE}, #{winDrawAward,jdbcType=DOUBLE}, 
+      #{winLoseAward,jdbcType=DOUBLE}, #{drawWinAward,jdbcType=DOUBLE}, #{drawDrawAward,jdbcType=DOUBLE}, 
+      #{drawLoseAward,jdbcType=DOUBLE}, #{loseWinAward,jdbcType=DOUBLE}, #{loseDrawAward,jdbcType=DOUBLE}, 
+      #{loseLoseAward,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.SportteryFootballBqcaward" >
+    insert into sporttery_football_bqcaward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="matchid != null" >
+        matchId,
+      </if>
+      <if test="inttime != null" >
+        intTime,
+      </if>
+      <if test="lineid != null" >
+        lineId,
+      </if>
+      <if test="matchtime != null" >
+        matchTime,
+      </if>
+      <if test="passmode != null" >
+        passMode,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="winWinAward != null" >
+        win_win_award,
+      </if>
+      <if test="winDrawAward != null" >
+        win_draw_award,
+      </if>
+      <if test="winLoseAward != null" >
+        win_lose_award,
+      </if>
+      <if test="drawWinAward != null" >
+        draw_win_award,
+      </if>
+      <if test="drawDrawAward != null" >
+        draw_draw_award,
+      </if>
+      <if test="drawLoseAward != null" >
+        draw_lose_award,
+      </if>
+      <if test="loseWinAward != null" >
+        lose_win_award,
+      </if>
+      <if test="loseDrawAward != null" >
+        lose_draw_award,
+      </if>
+      <if test="loseLoseAward != null" >
+        lose_lose_award,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchid != null" >
+        #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="matchtime != null" >
+        #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passmode != null" >
+        #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="winWinAward != null" >
+        #{winWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="winDrawAward != null" >
+        #{winDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="winLoseAward != null" >
+        #{winLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="drawWinAward != null" >
+        #{drawWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="drawDrawAward != null" >
+        #{drawDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="drawLoseAward != null" >
+        #{drawLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="loseWinAward != null" >
+        #{loseWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="loseDrawAward != null" >
+        #{loseDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="loseLoseAward != null" >
+        #{loseLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SportteryFootballBqcaward" >
+    update sporttery_football_bqcaward
+    <set >
+      <if test="matchid != null" >
+        matchId = #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        intTime = #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        lineId = #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="matchtime != null" >
+        matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passmode != null" >
+        passMode = #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="winWinAward != null" >
+        win_win_award = #{winWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="winDrawAward != null" >
+        win_draw_award = #{winDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="winLoseAward != null" >
+        win_lose_award = #{winLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="drawWinAward != null" >
+        draw_win_award = #{drawWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="drawDrawAward != null" >
+        draw_draw_award = #{drawDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="drawLoseAward != null" >
+        draw_lose_award = #{drawLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="loseWinAward != null" >
+        lose_win_award = #{loseWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="loseDrawAward != null" >
+        lose_draw_award = #{loseDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="loseLoseAward != null" >
+        lose_lose_award = #{loseLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SportteryFootballBqcaward" >
+    update sporttery_football_bqcaward
+    set matchId = #{matchid,jdbcType=INTEGER},
+      intTime = #{inttime,jdbcType=INTEGER},
+      lineId = #{lineid,jdbcType=INTEGER},
+      matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      passMode = #{passmode,jdbcType=INTEGER},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      win_win_award = #{winWinAward,jdbcType=DOUBLE},
+      win_draw_award = #{winDrawAward,jdbcType=DOUBLE},
+      win_lose_award = #{winLoseAward,jdbcType=DOUBLE},
+      draw_win_award = #{drawWinAward,jdbcType=DOUBLE},
+      draw_draw_award = #{drawDrawAward,jdbcType=DOUBLE},
+      draw_lose_award = #{drawLoseAward,jdbcType=DOUBLE},
+      lose_win_award = #{loseWinAward,jdbcType=DOUBLE},
+      lose_draw_award = #{loseDrawAward,jdbcType=DOUBLE},
+      lose_lose_award = #{loseLoseAward,jdbcType=DOUBLE},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByMatchId" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from sporttery_football_bqcaward
+    where matchId = #{matchId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByLastUpdate" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from sporttery_football_bqcaward
+    where matchId = #{matchId,jdbcType=INTEGER}
+    Order By lastUpdateTime DESC
+    LIMIT 1
+  </select>
+</mapper>

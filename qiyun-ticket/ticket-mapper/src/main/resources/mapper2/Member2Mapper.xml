@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.Member2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.Member2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CERT_TYPE" property="certType" jdbcType="INTEGER" />
+    <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="RANK" property="rank" jdbcType="INTEGER" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="REGISTER_DATE_TIME" property="registerDateTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_LOGIN_DATE_TIME" property="lastLoginDateTime" jdbcType="TIMESTAMP" />
+    <result column="EXPRERIENCE" property="exprerience" jdbcType="INTEGER" />
+    <result column="SOURCE_ID" property="sourceId" jdbcType="INTEGER" />
+    <result column="RECOMMENDER" property="recommender" jdbcType="INTEGER" />
+    <result column="SIGN" property="sign" jdbcType="VARCHAR" />
+    <result column="PROVIDER" property="provider" jdbcType="VARCHAR" />
+    <result column="PICTURE" property="picture" jdbcType="VARCHAR" />
+    <result column="CARD" property="card" jdbcType="INTEGER" />
+    <result column="IS_MOBILE_AUTHED" property="isMobileAuthed" jdbcType="INTEGER" />
+    <result column="IS_EMAIL_AUTHED" property="isEmailAuthed" jdbcType="INTEGER" />
+    <result column="CERATE_PLAY_DATE" property="ceratePlayDate" jdbcType="TIMESTAMP" />
+    <result column="PLAY_STATUS" property="playStatus" jdbcType="INTEGER" />
+    <result column="USER_GRADE_TYPE" property="userGradeType" jdbcType="INTEGER" />
+    <result column="ERROR_COUNT" property="errorCount" jdbcType="INTEGER" />
+    <result column="ERROR_DATE" property="errorDate" jdbcType="TIMESTAMP" />
+    <result column="IS_CHARGE" property="isCharge" jdbcType="INTEGER" />
+    <result column="DIGEST" property="digest" jdbcType="VARCHAR" />
+    <result column="IS_WHITELIST" property="isWhitelist" jdbcType="INTEGER" />
+    <result column="PAY_WAYS" property="payWays" jdbcType="VARCHAR" />
+    <result column="zfb_account" property="zfbAccount" jdbcType="VARCHAR" />
+    <result column="wx_account" property="wxAccount" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ACCOUNT, NAME, CERT_TYPE, CERT_NO, PASSWORD, RANK, EMAIL, MOBILE, STATUS, REGISTER_DATE_TIME,
+    LAST_LOGIN_DATE_TIME, EXPRERIENCE, SOURCE_ID, RECOMMENDER, SIGN, PROVIDER, PICTURE,
+    CARD, IS_MOBILE_AUTHED, IS_EMAIL_AUTHED, CERATE_PLAY_DATE, PLAY_STATUS, USER_GRADE_TYPE,
+    ERROR_COUNT, ERROR_DATE, IS_CHARGE, DIGEST, IS_WHITELIST, PAY_WAYS, zfb_account,
+    wx_account, username, type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.Member2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.Member2Query" >
+    delete from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.Member2" useGeneratedKeys="true" keyProperty="id">
+    insert into member (id, ACCOUNT, NAME,
+    CERT_TYPE, CERT_NO, PASSWORD,
+    RANK, EMAIL, MOBILE,
+    STATUS, REGISTER_DATE_TIME, LAST_LOGIN_DATE_TIME,
+    EXPRERIENCE, SOURCE_ID, RECOMMENDER,
+    SIGN, PROVIDER, PICTURE,
+    CARD, IS_MOBILE_AUTHED, IS_EMAIL_AUTHED,
+    CERATE_PLAY_DATE, PLAY_STATUS, USER_GRADE_TYPE,
+    ERROR_COUNT, ERROR_DATE, IS_CHARGE,
+    DIGEST, IS_WHITELIST, PAY_WAYS,
+    zfb_account, wx_account, username
+    )
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{certType,jdbcType=INTEGER}, #{certNo,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{rank,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+    #{status,jdbcType=INTEGER}, #{registerDateTime,jdbcType=TIMESTAMP}, #{lastLoginDateTime,jdbcType=TIMESTAMP},
+    #{exprerience,jdbcType=INTEGER}, #{sourceId,jdbcType=INTEGER}, #{recommender,jdbcType=INTEGER},
+    #{sign,jdbcType=VARCHAR}, #{provider,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR},
+    #{card,jdbcType=INTEGER}, #{isMobileAuthed,jdbcType=INTEGER}, #{isEmailAuthed,jdbcType=INTEGER},
+    #{ceratePlayDate,jdbcType=TIMESTAMP}, #{playStatus,jdbcType=INTEGER}, #{userGradeType,jdbcType=INTEGER},
+    #{errorCount,jdbcType=INTEGER}, #{errorDate,jdbcType=TIMESTAMP}, #{isCharge,jdbcType=INTEGER},
+    #{digest,jdbcType=VARCHAR}, #{isWhitelist,jdbcType=INTEGER}, #{payWays,jdbcType=VARCHAR},
+    #{zfbAccount,jdbcType=VARCHAR}, #{wxAccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.Member2" useGeneratedKeys="true" keyProperty="id">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="certType != null" >
+        CERT_TYPE,
+      </if>
+      <if test="certNo != null" >
+        CERT_NO,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="rank != null" >
+        RANK,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="registerDateTime != null" >
+        REGISTER_DATE_TIME,
+      </if>
+      <if test="lastLoginDateTime != null" >
+        LAST_LOGIN_DATE_TIME,
+      </if>
+      <if test="exprerience != null" >
+        EXPRERIENCE,
+      </if>
+      <if test="sourceId != null" >
+        SOURCE_ID,
+      </if>
+      <if test="recommender != null" >
+        RECOMMENDER,
+      </if>
+      <if test="sign != null" >
+        SIGN,
+      </if>
+      <if test="provider != null" >
+        PROVIDER,
+      </if>
+      <if test="picture != null" >
+        PICTURE,
+      </if>
+      <if test="card != null" >
+        CARD,
+      </if>
+      <if test="isMobileAuthed != null" >
+        IS_MOBILE_AUTHED,
+      </if>
+      <if test="isEmailAuthed != null" >
+        IS_EMAIL_AUTHED,
+      </if>
+      <if test="ceratePlayDate != null" >
+        CERATE_PLAY_DATE,
+      </if>
+      <if test="playStatus != null" >
+        PLAY_STATUS,
+      </if>
+      <if test="userGradeType != null" >
+        USER_GRADE_TYPE,
+      </if>
+      <if test="errorCount != null" >
+        ERROR_COUNT,
+      </if>
+      <if test="errorDate != null" >
+        ERROR_DATE,
+      </if>
+      <if test="isCharge != null" >
+        IS_CHARGE,
+      </if>
+      <if test="digest != null" >
+        DIGEST,
+      </if>
+      <if test="isWhitelist != null" >
+        IS_WHITELIST,
+      </if>
+      <if test="payWays != null" >
+        PAY_WAYS,
+      </if>
+      <if test="zfbAccount != null" >
+        zfb_account,
+      </if>
+      <if test="wxAccount != null" >
+        wx_account,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=INTEGER},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="registerDateTime != null" >
+        #{registerDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginDateTime != null" >
+        #{lastLoginDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exprerience != null" >
+        #{exprerience,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="recommender != null" >
+        #{recommender,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null" >
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=INTEGER},
+      </if>
+      <if test="isMobileAuthed != null" >
+        #{isMobileAuthed,jdbcType=INTEGER},
+      </if>
+      <if test="isEmailAuthed != null" >
+        #{isEmailAuthed,jdbcType=INTEGER},
+      </if>
+      <if test="ceratePlayDate != null" >
+        #{ceratePlayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playStatus != null" >
+        #{playStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userGradeType != null" >
+        #{userGradeType,jdbcType=INTEGER},
+      </if>
+      <if test="errorCount != null" >
+        #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="errorDate != null" >
+        #{errorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCharge != null" >
+        #{isCharge,jdbcType=INTEGER},
+      </if>
+      <if test="digest != null" >
+        #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="isWhitelist != null" >
+        #{isWhitelist,jdbcType=INTEGER},
+      </if>
+      <if test="payWays != null" >
+        #{payWays,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAccount != null" >
+        #{zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAccount != null" >
+        #{wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.Member2Query" resultType="java.lang.Integer" >
+    select count(*) from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null" >
+        CERT_TYPE = #{record.certType,jdbcType=INTEGER},
+      </if>
+      <if test="record.certNo != null" >
+        CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null" >
+        RANK = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerDateTime != null" >
+        REGISTER_DATE_TIME = #{record.registerDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastLoginDateTime != null" >
+        LAST_LOGIN_DATE_TIME = #{record.lastLoginDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exprerience != null" >
+        EXPRERIENCE = #{record.exprerience,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceId != null" >
+        SOURCE_ID = #{record.sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommender != null" >
+        RECOMMENDER = #{record.recommender,jdbcType=INTEGER},
+      </if>
+      <if test="record.sign != null" >
+        SIGN = #{record.sign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provider != null" >
+        PROVIDER = #{record.provider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        PICTURE = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.card != null" >
+        CARD = #{record.card,jdbcType=INTEGER},
+      </if>
+      <if test="record.isMobileAuthed != null" >
+        IS_MOBILE_AUTHED = #{record.isMobileAuthed,jdbcType=INTEGER},
+      </if>
+      <if test="record.isEmailAuthed != null" >
+        IS_EMAIL_AUTHED = #{record.isEmailAuthed,jdbcType=INTEGER},
+      </if>
+      <if test="record.ceratePlayDate != null" >
+        CERATE_PLAY_DATE = #{record.ceratePlayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.playStatus != null" >
+        PLAY_STATUS = #{record.playStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userGradeType != null" >
+        USER_GRADE_TYPE = #{record.userGradeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorCount != null" >
+        ERROR_COUNT = #{record.errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorDate != null" >
+        ERROR_DATE = #{record.errorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isCharge != null" >
+        IS_CHARGE = #{record.isCharge,jdbcType=INTEGER},
+      </if>
+      <if test="record.digest != null" >
+        DIGEST = #{record.digest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isWhitelist != null" >
+        IS_WHITELIST = #{record.isWhitelist,jdbcType=INTEGER},
+      </if>
+      <if test="record.payWays != null" >
+        PAY_WAYS = #{record.payWays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zfbAccount != null" >
+        zfb_account = #{record.zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxAccount != null" >
+        wx_account = #{record.wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member
+    set id = #{record.id,jdbcType=INTEGER},
+    ACCOUNT = #{record.account,jdbcType=VARCHAR},
+    NAME = #{record.name,jdbcType=VARCHAR},
+    CERT_TYPE = #{record.certType,jdbcType=INTEGER},
+    CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+    PASSWORD = #{record.password,jdbcType=VARCHAR},
+    RANK = #{record.rank,jdbcType=INTEGER},
+    EMAIL = #{record.email,jdbcType=VARCHAR},
+    MOBILE = #{record.mobile,jdbcType=VARCHAR},
+    STATUS = #{record.status,jdbcType=INTEGER},
+    REGISTER_DATE_TIME = #{record.registerDateTime,jdbcType=TIMESTAMP},
+    LAST_LOGIN_DATE_TIME = #{record.lastLoginDateTime,jdbcType=TIMESTAMP},
+    EXPRERIENCE = #{record.exprerience,jdbcType=INTEGER},
+    SOURCE_ID = #{record.sourceId,jdbcType=INTEGER},
+    RECOMMENDER = #{record.recommender,jdbcType=INTEGER},
+    SIGN = #{record.sign,jdbcType=VARCHAR},
+    PROVIDER = #{record.provider,jdbcType=VARCHAR},
+    PICTURE = #{record.picture,jdbcType=VARCHAR},
+    CARD = #{record.card,jdbcType=INTEGER},
+    IS_MOBILE_AUTHED = #{record.isMobileAuthed,jdbcType=INTEGER},
+    IS_EMAIL_AUTHED = #{record.isEmailAuthed,jdbcType=INTEGER},
+    CERATE_PLAY_DATE = #{record.ceratePlayDate,jdbcType=TIMESTAMP},
+    PLAY_STATUS = #{record.playStatus,jdbcType=INTEGER},
+    USER_GRADE_TYPE = #{record.userGradeType,jdbcType=INTEGER},
+    ERROR_COUNT = #{record.errorCount,jdbcType=INTEGER},
+    ERROR_DATE = #{record.errorDate,jdbcType=TIMESTAMP},
+    IS_CHARGE = #{record.isCharge,jdbcType=INTEGER},
+    DIGEST = #{record.digest,jdbcType=VARCHAR},
+    IS_WHITELIST = #{record.isWhitelist,jdbcType=INTEGER},
+    PAY_WAYS = #{record.payWays,jdbcType=VARCHAR},
+    zfb_account = #{record.zfbAccount,jdbcType=VARCHAR},
+    wx_account = #{record.wxAccount,jdbcType=VARCHAR},
+    username = #{record.username,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.Member2" >
+    update member
+    <set >
+      <if test="account != null" >
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        CERT_TYPE = #{certType,jdbcType=INTEGER},
+      </if>
+      <if test="certNo != null" >
+        CERT_NO = #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        RANK = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="registerDateTime != null" >
+        REGISTER_DATE_TIME = #{registerDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginDateTime != null" >
+        LAST_LOGIN_DATE_TIME = #{lastLoginDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exprerience != null" >
+        EXPRERIENCE = #{exprerience,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null" >
+        SOURCE_ID = #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="recommender != null" >
+        RECOMMENDER = #{recommender,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null" >
+        SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null" >
+        PROVIDER = #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        CARD = #{card,jdbcType=INTEGER},
+      </if>
+      <if test="isMobileAuthed != null" >
+        IS_MOBILE_AUTHED = #{isMobileAuthed,jdbcType=INTEGER},
+      </if>
+      <if test="isEmailAuthed != null" >
+        IS_EMAIL_AUTHED = #{isEmailAuthed,jdbcType=INTEGER},
+      </if>
+      <if test="ceratePlayDate != null" >
+        CERATE_PLAY_DATE = #{ceratePlayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playStatus != null" >
+        PLAY_STATUS = #{playStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userGradeType != null" >
+        USER_GRADE_TYPE = #{userGradeType,jdbcType=INTEGER},
+      </if>
+      <if test="errorCount != null" >
+        ERROR_COUNT = #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="errorDate != null" >
+        ERROR_DATE = #{errorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCharge != null" >
+        IS_CHARGE = #{isCharge,jdbcType=INTEGER},
+      </if>
+      <if test="digest != null" >
+        DIGEST = #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="isWhitelist != null" >
+        IS_WHITELIST = #{isWhitelist,jdbcType=INTEGER},
+      </if>
+      <if test="payWays != null" >
+        PAY_WAYS = #{payWays,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAccount != null" >
+        zfb_account = #{zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAccount != null" >
+        wx_account = #{wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.Member2" >
+    update member
+    set ACCOUNT = #{account,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      CERT_TYPE = #{certType,jdbcType=INTEGER},
+      CERT_NO = #{certNo,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      RANK = #{rank,jdbcType=INTEGER},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      REGISTER_DATE_TIME = #{registerDateTime,jdbcType=TIMESTAMP},
+      LAST_LOGIN_DATE_TIME = #{lastLoginDateTime,jdbcType=TIMESTAMP},
+      EXPRERIENCE = #{exprerience,jdbcType=INTEGER},
+      SOURCE_ID = #{sourceId,jdbcType=INTEGER},
+      RECOMMENDER = #{recommender,jdbcType=INTEGER},
+      SIGN = #{sign,jdbcType=VARCHAR},
+      PROVIDER = #{provider,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      CARD = #{card,jdbcType=INTEGER},
+      IS_MOBILE_AUTHED = #{isMobileAuthed,jdbcType=INTEGER},
+      IS_EMAIL_AUTHED = #{isEmailAuthed,jdbcType=INTEGER},
+      CERATE_PLAY_DATE = #{ceratePlayDate,jdbcType=TIMESTAMP},
+      PLAY_STATUS = #{playStatus,jdbcType=INTEGER},
+      USER_GRADE_TYPE = #{userGradeType,jdbcType=INTEGER},
+      ERROR_COUNT = #{errorCount,jdbcType=INTEGER},
+      ERROR_DATE = #{errorDate,jdbcType=TIMESTAMP},
+      IS_CHARGE = #{isCharge,jdbcType=INTEGER},
+      DIGEST = #{digest,jdbcType=VARCHAR},
+      IS_WHITELIST = #{isWhitelist,jdbcType=INTEGER},
+      PAY_WAYS = #{payWays,jdbcType=VARCHAR},
+      zfb_account = #{zfbAccount,jdbcType=VARCHAR},
+      wx_account = #{wxAccount,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByAccount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByMobileOrAccount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where mobile = #{mobile,jdbcType=VARCHAR} or account = #{account,jdbcType=VARCHAR}
+  </select>
+  <insert id="insertMemberAgentCommision" parameterType="com.qiyun.model.MemberAgentCommision">
+    insert into member_agent_commision(MEMBER_AGENT_ID, MEMBER_LOWER_ID, AGENT_COMMISION, LOWER_COMMISION, PLAN_ID, AGENT_RATE, LOWER_RATE, CREATE_DATE_TIME, REMARK)
+    values (#{memberAgentId},#{memberLowerId},#{agentCommision},#{lowerCommision},#{planId},#{agentRate},#{lowerRate},#{createDateTime},#{remark})
+  </insert>
+</mapper>

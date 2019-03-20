@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- 开启aspectj自动注解 -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <context:component-scan base-package="com.qiyun" />
+    <context:annotation-config />
+
+    <!-- 配置文件加载 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1" />
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:config/jdbc.properties</value>
+                <!-- 生产者 -->
+                <value>classpath:config/dubbo-producer.properties</value>
+                <!--<value>classpath:config/log4j.properties</value>-->
+                <!-- 第一信息短信平台 -->
+                <value>classpath:config/sms-notify.properties</value>
+                <value>classpath:config/ticketUtil.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <import resource="classpath:spring-mybatis.xml" />
+    <!-- 提供者 -->
+    <import resource="classpath:dubbo-provider.xml" />
+    <import resource="classpath:spring-service.xml" />
+</beans>

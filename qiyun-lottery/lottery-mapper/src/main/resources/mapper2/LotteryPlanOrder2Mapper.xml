@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.LotteryPlanOrder2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.LotteryPlanOrder2" >
+    <id column="ORDER_NO" property="orderNo" jdbcType="INTEGER" />
+    <result column="PLAN_NO" property="planNo" jdbcType="INTEGER" />
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="BUY_TYPE" property="buyType" jdbcType="INTEGER" />
+    <result column="CREATE_DATE_TIME" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="PART" property="part" jdbcType="INTEGER" />
+    <result column="AMOUNT" property="amount" jdbcType="INTEGER" />
+    <result column="POSTTAX_PRIZE" property="posttaxPrize" jdbcType="DOUBLE" />
+    <result column="PRIZE_SETTLE_STATUS" property="prizeSettleStatus" jdbcType="INTEGER" />
+    <result column="PRIZE_SETTLE_DATE_TIME" property="prizeSettleDateTime" jdbcType="TIMESTAMP" />
+    <result column="SCORE" property="score" jdbcType="INTEGER" />
+    <result column="EXPERIENCE" property="experience" jdbcType="INTEGER" />
+    <result column="VERIFY_MD5" property="verifyMd5" jdbcType="VARCHAR" />
+    <result column="RETURN_AMOUNT_DATE_TIME" property="returnAmountDateTime" jdbcType="TIMESTAMP" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="INTEGER" />
+    <result column="WALLET_TYPE" property="walletType" jdbcType="INTEGER" />
+    <result column="following_type" property="followingType" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+    <result column="gold" property="gold" jdbcType="DOUBLE" />
+    <result column="sum_gold" property="sumGold" jdbcType="DOUBLE" />
+    <result column="web_site_gold" property="webSiteGold" jdbcType="DOUBLE" />
+  </resultMap>
+  <resultMap id="EvenTheRedMember" type="com.qiyun.dto.EvenTheRedMemberDTO" >
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="MemberForRed" type="com.qiyun.dto.MemberForRedDTO" >
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="returnRate" property="returnRate" jdbcType="VARCHAR" />
+    <result column="plan_no" property="planNo" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ORDER_NO, PLAN_NO, ACCOUNT, BUY_TYPE, CREATE_DATE_TIME, STATUS, PART, AMOUNT, POSTTAX_PRIZE, 
+    PRIZE_SETTLE_STATUS, PRIZE_SETTLE_DATE_TIME, SCORE, EXPERIENCE, VERIFY_MD5, RETURN_AMOUNT_DATE_TIME, 
+    MEMBER_ID, WALLET_TYPE, following_type, platform, gold, sum_gold, web_site_gold
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.LotteryPlanOrder2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lottery_plan_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lottery_plan_order
+    where ORDER_NO = #{orderNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lottery_plan_order
+    where ORDER_NO = #{orderNo,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.LotteryPlanOrder2Query" >
+    delete from lottery_plan_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.LotteryPlanOrder2" useGeneratedKeys="true" keyProperty="orderNo">
+    insert into lottery_plan_order (ORDER_NO, PLAN_NO, ACCOUNT, 
+      BUY_TYPE, CREATE_DATE_TIME, STATUS, 
+      PART, AMOUNT, POSTTAX_PRIZE, 
+      PRIZE_SETTLE_STATUS, PRIZE_SETTLE_DATE_TIME, 
+      SCORE, EXPERIENCE, VERIFY_MD5, 
+      RETURN_AMOUNT_DATE_TIME, MEMBER_ID, WALLET_TYPE, 
+      following_type, platform, gold, 
+      sum_gold, web_site_gold)
+    values (#{orderNo,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
+      #{buyType,jdbcType=INTEGER}, #{createDateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{part,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{posttaxPrize,jdbcType=DOUBLE}, 
+      #{prizeSettleStatus,jdbcType=INTEGER}, #{prizeSettleDateTime,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=INTEGER}, #{experience,jdbcType=INTEGER}, #{verifyMd5,jdbcType=VARCHAR}, 
+      #{returnAmountDateTime,jdbcType=TIMESTAMP}, #{memberId,jdbcType=INTEGER}, #{walletType,jdbcType=INTEGER}, 
+      #{followingType,jdbcType=INTEGER}, #{platform,jdbcType=INTEGER}, #{gold,jdbcType=DOUBLE}, 
+      #{sumGold,jdbcType=DOUBLE}, #{webSiteGold,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.LotteryPlanOrder2" useGeneratedKeys="true" keyProperty="orderNo">
+    insert into lottery_plan_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="planNo != null" >
+        PLAN_NO,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="buyType != null" >
+        BUY_TYPE,
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="part != null" >
+        PART,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="posttaxPrize != null" >
+        POSTTAX_PRIZE,
+      </if>
+      <if test="prizeSettleStatus != null" >
+        PRIZE_SETTLE_STATUS,
+      </if>
+      <if test="prizeSettleDateTime != null" >
+        PRIZE_SETTLE_DATE_TIME,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="experience != null" >
+        EXPERIENCE,
+      </if>
+      <if test="verifyMd5 != null" >
+        VERIFY_MD5,
+      </if>
+      <if test="returnAmountDateTime != null" >
+        RETURN_AMOUNT_DATE_TIME,
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="walletType != null" >
+        WALLET_TYPE,
+      </if>
+      <if test="followingType != null" >
+        following_type,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="gold != null" >
+        gold,
+      </if>
+      <if test="sumGold != null" >
+        sum_gold,
+      </if>
+      <if test="webSiteGold != null" >
+        web_site_gold,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null" >
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="buyType != null" >
+        #{buyType,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="part != null" >
+        #{part,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="posttaxPrize != null" >
+        #{posttaxPrize,jdbcType=DOUBLE},
+      </if>
+      <if test="prizeSettleStatus != null" >
+        #{prizeSettleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="prizeSettleDateTime != null" >
+        #{prizeSettleDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="verifyMd5 != null" >
+        #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="returnAmountDateTime != null" >
+        #{returnAmountDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="walletType != null" >
+        #{walletType,jdbcType=INTEGER},
+      </if>
+      <if test="followingType != null" >
+        #{followingType,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="gold != null" >
+        #{gold,jdbcType=DOUBLE},
+      </if>
+      <if test="sumGold != null" >
+        #{sumGold,jdbcType=DOUBLE},
+      </if>
+      <if test="webSiteGold != null" >
+        #{webSiteGold,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.LotteryPlanOrder2Query" resultType="java.lang.Integer" >
+    select count(*) from lottery_plan_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lottery_plan_order
+    <set >
+      <if test="record.orderNo != null" >
+        ORDER_NO = #{record.orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.planNo != null" >
+        PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyType != null" >
+        BUY_TYPE = #{record.buyType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDateTime != null" >
+        CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.part != null" >
+        PART = #{record.part,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.posttaxPrize != null" >
+        POSTTAX_PRIZE = #{record.posttaxPrize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.prizeSettleStatus != null" >
+        PRIZE_SETTLE_STATUS = #{record.prizeSettleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.prizeSettleDateTime != null" >
+        PRIZE_SETTLE_DATE_TIME = #{record.prizeSettleDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null" >
+        SCORE = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.experience != null" >
+        EXPERIENCE = #{record.experience,jdbcType=INTEGER},
+      </if>
+      <if test="record.verifyMd5 != null" >
+        VERIFY_MD5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnAmountDateTime != null" >
+        RETURN_AMOUNT_DATE_TIME = #{record.returnAmountDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.walletType != null" >
+        WALLET_TYPE = #{record.walletType,jdbcType=INTEGER},
+      </if>
+      <if test="record.followingType != null" >
+        following_type = #{record.followingType,jdbcType=INTEGER},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=INTEGER},
+      </if>
+      <if test="record.gold != null" >
+        gold = #{record.gold,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sumGold != null" >
+        sum_gold = #{record.sumGold,jdbcType=DOUBLE},
+      </if>
+      <if test="record.webSiteGold != null" >
+        web_site_gold = #{record.webSiteGold,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lottery_plan_order
+    set ORDER_NO = #{record.orderNo,jdbcType=INTEGER},
+      PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      BUY_TYPE = #{record.buyType,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      PART = #{record.part,jdbcType=INTEGER},
+      AMOUNT = #{record.amount,jdbcType=INTEGER},
+      POSTTAX_PRIZE = #{record.posttaxPrize,jdbcType=DOUBLE},
+      PRIZE_SETTLE_STATUS = #{record.prizeSettleStatus,jdbcType=INTEGER},
+      PRIZE_SETTLE_DATE_TIME = #{record.prizeSettleDateTime,jdbcType=TIMESTAMP},
+      SCORE = #{record.score,jdbcType=INTEGER},
+      EXPERIENCE = #{record.experience,jdbcType=INTEGER},
+      VERIFY_MD5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      RETURN_AMOUNT_DATE_TIME = #{record.returnAmountDateTime,jdbcType=TIMESTAMP},
+      MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+      WALLET_TYPE = #{record.walletType,jdbcType=INTEGER},
+      following_type = #{record.followingType,jdbcType=INTEGER},
+      platform = #{record.platform,jdbcType=INTEGER},
+      gold = #{record.gold,jdbcType=DOUBLE},
+      sum_gold = #{record.sumGold,jdbcType=DOUBLE},
+      web_site_gold = #{record.webSiteGold,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.LotteryPlanOrder2" >
+    update lottery_plan_order
+    <set >
+      <if test="planNo != null" >
+        PLAN_NO = #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="buyType != null" >
+        BUY_TYPE = #{buyType,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="part != null" >
+        PART = #{part,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="posttaxPrize != null" >
+        POSTTAX_PRIZE = #{posttaxPrize,jdbcType=DOUBLE},
+      </if>
+      <if test="prizeSettleStatus != null" >
+        PRIZE_SETTLE_STATUS = #{prizeSettleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="prizeSettleDateTime != null" >
+        PRIZE_SETTLE_DATE_TIME = #{prizeSettleDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null" >
+        EXPERIENCE = #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="verifyMd5 != null" >
+        VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="returnAmountDateTime != null" >
+        RETURN_AMOUNT_DATE_TIME = #{returnAmountDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="walletType != null" >
+        WALLET_TYPE = #{walletType,jdbcType=INTEGER},
+      </if>
+      <if test="followingType != null" >
+        following_type = #{followingType,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="gold != null" >
+        gold = #{gold,jdbcType=DOUBLE},
+      </if>
+      <if test="sumGold != null" >
+        sum_gold = #{sumGold,jdbcType=DOUBLE},
+      </if>
+      <if test="webSiteGold != null" >
+        web_site_gold = #{webSiteGold,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ORDER_NO = #{orderNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.LotteryPlanOrder2" >
+    update lottery_plan_order
+    set PLAN_NO = #{planNo,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      BUY_TYPE = #{buyType,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=INTEGER},
+      PART = #{part,jdbcType=INTEGER},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      POSTTAX_PRIZE = #{posttaxPrize,jdbcType=DOUBLE},
+      PRIZE_SETTLE_STATUS = #{prizeSettleStatus,jdbcType=INTEGER},
+      PRIZE_SETTLE_DATE_TIME = #{prizeSettleDateTime,jdbcType=TIMESTAMP},
+      SCORE = #{score,jdbcType=INTEGER},
+      EXPERIENCE = #{experience,jdbcType=INTEGER},
+      VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      RETURN_AMOUNT_DATE_TIME = #{returnAmountDateTime,jdbcType=TIMESTAMP},
+      MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      WALLET_TYPE = #{walletType,jdbcType=INTEGER},
+      following_type = #{followingType,jdbcType=INTEGER},
+      platform = #{platform,jdbcType=INTEGER},
+      gold = #{gold,jdbcType=DOUBLE},
+      sum_gold = #{sumGold,jdbcType=DOUBLE},
+      web_site_gold = #{webSiteGold,jdbcType=DOUBLE}
+    where ORDER_NO = #{orderNo,jdbcType=INTEGER}
+  </update>
+  <select id="getPlanForUserCenter" resultType="map" parameterType="Map">
+    select lp.plan_no plan_no ,lp.lottery_type lottery_type,lp.term term,lp.amount amount,lp.plan_type plan_type,lp.account account,
+    lp.create_date_time create_date_time,lp.plan_status plan_status,lp.posttax_prize lp_posttax_prize,lp.win_status win_status,
+    lp.sold_part sold_part,lp.is_upload_content is_upload_content,lpo.posttax_prize lpo_posttax_prize
+    from lottery_plan lp, lottery_plan_order lpo
+    where lp.plan_no = lpo.plan_no
+    and lp.account = #{account,jdbcType=VARCHAR}
+    <if test="_parameter.containsKey('planType')">
+      AND lp.plan_type = #{planType,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('lotteryType')">
+      AND lp.lottery_type = #{lotteryType,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('planStatus')">
+      AND lp.plan_status = #{planStatus,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('winStatus')">
+      AND lp.win_status = #{winStatus,jdbcType=INTEGER}
+    </if>
+    order BY  lp.CREATE_DATE_TIME desc
+    limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+  <select id="countPlanForUserCenter" resultType="Integer" parameterType="Map">
+    select count(0)
+    from lottery_plan lp, lottery_plan_order lpo
+    where lp.plan_no = lpo.plan_no
+    and lp.account = #{account,jdbcType=VARCHAR}
+    <if test="_parameter.containsKey('planType')">
+      AND lp.plan_type = #{planType,jdbcType=INTEGER} and (lp.gen_type not in(2,6,7) or lp.gen_type is null)
+    </if>
+    <if test="_parameter.containsKey('lotteryType')">
+      AND lp.lottery_type = #{lotteryType,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('planStatus')">
+      AND lp.plan_status = #{planStatus,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('winStatus')">
+      AND lp.win_status = #{winStatus,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="getTRAmount" resultType="Integer" parameterType="Map">
+    select sum(lpo.amount)
+    from lottery_plan lp, lottery_plan_order lpo
+    where lp.plan_no = lpo.plan_no
+    and lpo.account = #{account,jdbcType=VARCHAR} and lpo.status = 2
+    <if test="_parameter.containsKey('planType')">
+      AND lp.plan_type = #{planType,jdbcType=INTEGER} and (lp.gen_type not in(2,6,7) or lp.gen_type is null)
+    </if>
+    <if test="_parameter.containsKey('lotteryType')">
+      AND lp.lottery_type = #{lotteryType,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('planStatus')">
+      AND lp.plan_status = #{planStatus,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('winStatus')">
+      AND lp.win_status = #{winStatus,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="getZJAmount" resultType="Double" parameterType="Map">
+    select sum(lpo.posttax_prize)
+    from lottery_plan lp, lottery_plan_order lpo
+    where lp.plan_no = lpo.plan_no
+    and lpo.account = #{account,jdbcType=VARCHAR} and lpo.status = 2
+    <if test="_parameter.containsKey('planType')">
+      AND lp.plan_type = #{planType,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('lotteryType')">
+      AND lp.lottery_type = #{lotteryType,jdbcType=INTEGER} and (lp.gen_type not in(2,6,7) or lp.gen_type is null)
+    </if>
+    <if test="_parameter.containsKey('planStatus')">
+      AND lp.plan_status = #{planStatus,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter.containsKey('winStatus')">
+      AND lp.win_status = #{winStatus,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="getByPlanNo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lottery_plan_order
+    where PLAN_NO = #{planNo,jdbcType=INTEGER}
+  </select>
+  <select id="getWinAmount" resultType="Double" parameterType="java.lang.String" >
+    select
+    count(posttax_prize)
+    from lottery_plan_order
+    where account = #{0}
+  </select>
+  <select id="getTZCountByAccount" resultType="Integer" parameterType="java.lang.String" >
+    SELECT
+	count(0)
+    FROM
+	(
+		SELECT
+			lp.plan_no
+		FROM
+			lottery_plan lp
+		WHERE
+			lp.plan_status = 4
+		AND lp.public_status != 1
+        AND lp.WIN_STATUS != 1
+		AND lp.account = #{0}
+		ORDER BY
+			lp.CREATE_DATE_TIME DESC
+		LIMIT 0,
+		10
+	) AS a
+  </select>
+  <select id="getZJCountByAccount" resultType="Integer" parameterType="java.lang.String" >
+   select count(0) from (SELECT
+			plan_no,WIN_STATUS,POSTTAX_PRIZE
+		FROM
+			lottery_plan
+		WHERE
+			plan_status = 4
+			and WIN_STATUS != 1
+		AND account = #{0}
+		AND public_status != 1
+		ORDER BY
+			CREATE_DATE_TIME DESC
+		LIMIT 0,
+		10) lp where lp.WIN_STATUS = 4
+  </select>
+  <select id="getEvenTheRedList" resultMap="EvenTheRedMember" >
+    select a.account ACCOUNT ,m.username,m.picture, MAX((select count(*) from lottery_plan_order where account = m.account and  plan_no between a.PLAN_NO and b.PLAN_NO and `STATUS`=2)) count
+    from lottery_plan_order a , lottery_plan_order b ,member m
+    where a.PLAN_NO &lt; b.PLAN_NO
+    and a.ACCOUNT=m.ACCOUNT
+    and a.POSTTAX_PRIZE>0 and a.`STATUS`=2
+    and b.POSTTAX_PRIZE>0 and b.`STATUS`=2
+    and a.PRIZE_SETTLE_DATE_TIME > #{0}
+    and not exists (select 1 from lottery_plan_order where account = a.account and PLAN_NO between a.PLAN_NO and b.PLAN_NO and POSTTAX_PRIZE &lt;= 0 and `STATUS`=2)
+    GROUP BY ACCOUNT
+    ORDER BY count desc
+  </select>
+  <select id="getBetList" resultMap="EvenTheRedMember" >
+    SELECT
+        lpo.account account,
+        count(1) count,
+        m.username username,
+        m.picture picture
+    FROM
+        lottery_plan lpo,
+        member m
+    WHERE
+      	lpo.PLAN_STATUS = 4
+    AND lpo.PUBLIC_STATUS != 1
+    AND lpo.create_date_time > #{0}
+    AND lpo.account = m.account
+    AND lpo.account != 'sj878466008'
+    GROUP BY
+        account
+    ORDER BY
+        count DESC
+  </select>
+  <select id="getAShortRed" resultMap="MemberForRed" >
+    SELECT
+        round((
+            lpo.POSTTAX_PRIZE + IFNULL(lpo.sum_gold, 0) + IFNULL(lp.add_prize, 0)
+        ) / lp.AMOUNT * 100) returnRate,
+        m.username username,
+        m.account account,
+        lpo.plan_no plan_no,
+        m.picture picture
+    FROM
+        lottery_plan_order lpo,
+        lottery_plan lp,
+        member m
+    WHERE
+        lpo.`STATUS` = 2
+    AND lp.public_status != 1
+    AND lp.account = m.account
+    AND lp.account != 'sj878466008'
+    AND lpo.PLAN_NO = lp.PLAN_NO
+    AND lpo.PRIZE_SETTLE_STATUS = 0
+    AND lp.plan_status = 4
+    AND lp.CREATE_DATE_TIME > #{0}
+    ORDER BY
+        returnRate DESC
+  </select>
+  <select id="getGroupByAccount" resultType="STRING" >
+   select account from lottery_plan_order where `STATUS`=2 and account != 'sj878466008' and CREATE_DATE_TIME > #{0}  GROUP BY ACCOUNT
+  </select>
+  <select id="getTotalAddPrizeByDay" resultType="Double">
+   SELECT
+        sum(lp.add_prize)
+    FROM
+        lottery_plan_add_prize lpap,
+        lottery_plan lp
+    WHERE
+        lpap.plan_no = lp.PLAN_NO
+    AND lp.ACCOUNT = #{0}
+    AND to_days(lpap.add_prize_time) = to_days(now())
+  </select>
+</mapper>

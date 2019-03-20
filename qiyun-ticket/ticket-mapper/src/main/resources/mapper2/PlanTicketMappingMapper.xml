@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.PlanTicketMappingMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model.PlanTicketMapping">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_no" jdbcType="INTEGER" property="planNo" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="notify_datetime" jdbcType="TIMESTAMP" property="notifyDatetime" />
+    <result column="ticket_status" jdbcType="SMALLINT" property="ticketStatus" />
+    <result column="ticket_id" jdbcType="INTEGER" property="ticketId" />
+    <result column="provider" jdbcType="VARCHAR" property="provider" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, plan_no, order_id, create_datetime, notify_datetime, ticket_status, ticket_id, provider
+  </sql>
+  <select id="selectByExample" parameterType="com.qiyun.model.PlanTicketMappingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from plan_ticket_mapping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from plan_ticket_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from plan_ticket_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.PlanTicketMapping">
+    insert into plan_ticket_mapping (id, plan_no, order_id, 
+      create_datetime, notify_datetime, ticket_status, 
+      ticket_id,provider)
+    values (#{id,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{notifyDatetime,jdbcType=TIMESTAMP}, #{ticketStatus,jdbcType=SMALLINT}, 
+      #{ticketId,jdbcType=INTEGER}), #{provider,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.PlanTicketMapping">
+    insert into plan_ticket_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="planNo != null">
+        plan_no,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="notifyDatetime != null">
+        notify_datetime,
+      </if>
+      <if test="ticketStatus != null">
+        ticket_status,
+      </if>
+      <if test="ticketId != null">
+        ticket_id,
+      </if>
+      <if test="provider != null">
+        provider,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null">
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyDatetime != null">
+        #{notifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketStatus != null">
+        #{ticketStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="ticketId != null">
+        #{ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="provider != null">
+        #{provider,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.PlanTicketMapping">
+    update plan_ticket_mapping
+    <set>
+      <if test="planNo != null">
+        plan_no = #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyDatetime != null">
+        notify_datetime = #{notifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketStatus != null">
+        ticket_status = #{ticketStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="ticketId != null">
+        ticket_id = #{ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="provider != null">
+        provider = #{provider,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.PlanTicketMapping">
+    update plan_ticket_mapping
+    set plan_no = #{planNo,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      notify_datetime = #{notifyDatetime,jdbcType=TIMESTAMP},
+      ticket_status = #{ticketStatus,jdbcType=SMALLINT},
+      ticket_id = #{ticketId,jdbcType=INTEGER},
+      provider = #{provider,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByOrderId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from plan_ticket_mapping
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPlanNo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from plan_ticket_mapping
+    where plan_no = #{planNo,jdbcType=INTEGER}
+  </select>
+  <select id="selectByTicketId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from plan_ticket_mapping
+    where ticket_id = #{ticketId,jdbcType=INTEGER}
+  </select>
+  <update id="updateForStatusByOrderId" >
+    update plan_ticket_mapping
+    set notify_datetime = NOW(),
+    ticket_status = #{1}
+    where order_id = #{0}
+  </update>
+</mapper>

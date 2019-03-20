@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.TicketBusinessMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model.TicketBusiness">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="start_datetime" jdbcType="TIMESTAMP" property="startDatetime" />
+    <result column="end_datetime" jdbcType="TIMESTAMP" property="endDatetime" />
+    <result column="max_quota" jdbcType="DECIMAL" property="maxQuota" />
+    <result column="is_default" jdbcType="BIT" property="isDefault" />
+    <result column="pre_deposit" jdbcType="DECIMAL" property="preDeposit" />
+  </resultMap>
+  <select id="getPreList" resultMap="BaseResultMap">
+    SELECT
+        *
+    FROM
+        ticket_business
+    WHERE
+        pre_deposit > 0
+    ORDER BY
+        pre_deposit DESC
+  </select>
+  <resultMap id="Business" type="com.qiyun.DTO.BusinessDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <select id="selectByLotteryId" resultMap="Business">
+    SELECT
+        B.id,
+        B.`name`
+    FROM
+        ticket_lottrey_mapping M
+    LEFT JOIN ticket_business B ON M.ticket_id = B.id
+    WHERE
+        M.lottery_type_id = #{id,jdbcType=INTEGER}
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, create_datetime, start_datetime, end_datetime, max_quota, is_default, pre_deposit
+  </sql>
+  <select id="selectByExample" parameterType="com.qiyun.model.TicketBusinessExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ticket_business
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_business
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ticket_business
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.TicketBusiness">
+    insert into ticket_business (id, name, create_datetime, 
+      start_datetime, end_datetime, max_quota, 
+      is_default, pre_deposit)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{startDatetime,jdbcType=TIMESTAMP}, #{endDatetime,jdbcType=TIMESTAMP}, #{maxQuota,jdbcType=DECIMAL}, 
+      #{isDefault,jdbcType=BIT}, #{preDeposit,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.TicketBusiness">
+    insert into ticket_business
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="startDatetime != null">
+        start_datetime,
+      </if>
+      <if test="endDatetime != null">
+        end_datetime,
+      </if>
+      <if test="maxQuota != null">
+        max_quota,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="preDeposit != null">
+        pre_deposit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDatetime != null">
+        #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null">
+        #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maxQuota != null">
+        #{maxQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="preDeposit != null">
+        #{preDeposit,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.TicketBusiness">
+    update ticket_business
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDatetime != null">
+        start_datetime = #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null">
+        end_datetime = #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maxQuota != null">
+        max_quota = #{maxQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="preDeposit != null">
+        pre_deposit = #{preDeposit,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.TicketBusiness">
+    update ticket_business
+    set name = #{name,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      start_datetime = #{startDatetime,jdbcType=TIMESTAMP},
+      end_datetime = #{endDatetime,jdbcType=TIMESTAMP},
+      max_quota = #{maxQuota,jdbcType=DECIMAL},
+      is_default = #{isDefault,jdbcType=BIT},
+      pre_deposit = #{preDeposit,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

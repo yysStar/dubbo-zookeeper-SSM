@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 	
+	<dubbo:application name="consumer-ticket" />
+
+	<!--<dubbo:registry address="${student-registry-address}" protocol="zookeeper" />-->
+	<!--<dubbo:registry address="zookeeper://localhost:2181"/>-->
+	<dubbo:registry address="${dubbo.address}"/>
+
+	<dubbo:reference id="ticketApi" interface="com.qiyun.api.TicketApi"
+		group="${group}" version="${version}"
+		check="false" />
+
+	<dubbo:reference id="ticketNotifyApi" interface="com.qiyun.api.TicketNotifyApi"
+		 group="${group}" version="${version}"
+		 check="false" />
+
+	<dubbo:reference id="ticketManageApi" interface="com.qiyun.api.TicketManageApi"
+					 group="${group}" version="${version}"
+					 check="false" />
+					 
+	<dubbo:reference id="copyLotteryApi" interface="com.qiyun.api.CopyLotteryApi"
+					 group="${group}" version="${version}"
+					 check="false" />
+
+	<dubbo:reference id="lotteryPlanApi" interface="com.qiyun.api.LotteryPlanApi"
+					 group="${group}" version="${version}"
+					 check="false" />
+	<dubbo:reference id="ticketSystemApi" interface="com.qiyun.api.TicketSystemApi"
+					 group="${group}" version="${version}"
+					 check="false" />
+
+</beans>

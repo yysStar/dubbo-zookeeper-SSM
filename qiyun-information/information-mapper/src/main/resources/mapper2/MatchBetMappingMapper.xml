@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.MatchBetMappingMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.MatchBetMapping" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="lottery_name" property="lotteryName" jdbcType="VARCHAR" />
+    <result column="is_sue_num" property="isSueNum" jdbcType="VARCHAR" />
+    <result column="id_bet" property="idBet" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="sport" property="sport" jdbcType="VARCHAR" />
+    <result column="home" property="home" jdbcType="VARCHAR" />
+    <result column="away" property="away" jdbcType="VARCHAR" />
+    <result column="home_id" property="homeId" jdbcType="VARCHAR" />
+    <result column="away_id" property="awayId" jdbcType="VARCHAR" />
+    <result column="turn" property="turn" jdbcType="VARCHAR" />
+    <result column="league" property="league" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, lottery_name, is_sue_num, id_bet, time, sport, home, away, home_id, away_id, 
+    turn, league
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.MatchBetMappingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from match_bet_mapping
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from match_bet_mapping
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from match_bet_mapping
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.MatchBetMapping" >
+    insert into match_bet_mapping (id, lottery_name, is_sue_num, 
+      id_bet, time, sport, 
+      home, away, home_id, 
+      away_id, turn, league
+      )
+    values (#{id,jdbcType=VARCHAR}, #{lotteryName,jdbcType=VARCHAR}, #{isSueNum,jdbcType=VARCHAR}, 
+      #{idBet,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{sport,jdbcType=VARCHAR}, 
+      #{home,jdbcType=VARCHAR}, #{away,jdbcType=VARCHAR}, #{homeId,jdbcType=VARCHAR}, 
+      #{awayId,jdbcType=VARCHAR}, #{turn,jdbcType=VARCHAR}, #{league,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.MatchBetMapping" >
+    insert into match_bet_mapping
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lotteryName != null" >
+        lottery_name,
+      </if>
+      <if test="isSueNum != null" >
+        is_sue_num,
+      </if>
+      <if test="idBet != null" >
+        id_bet,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="sport != null" >
+        sport,
+      </if>
+      <if test="home != null" >
+        home,
+      </if>
+      <if test="away != null" >
+        away,
+      </if>
+      <if test="homeId != null" >
+        home_id,
+      </if>
+      <if test="awayId != null" >
+        away_id,
+      </if>
+      <if test="turn != null" >
+        turn,
+      </if>
+      <if test="league != null" >
+        league,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="lotteryName != null" >
+        #{lotteryName,jdbcType=VARCHAR},
+      </if>
+      <if test="isSueNum != null" >
+        #{isSueNum,jdbcType=VARCHAR},
+      </if>
+      <if test="idBet != null" >
+        #{idBet,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sport != null" >
+        #{sport,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="homeId != null" >
+        #{homeId,jdbcType=VARCHAR},
+      </if>
+      <if test="awayId != null" >
+        #{awayId,jdbcType=VARCHAR},
+      </if>
+      <if test="turn != null" >
+        #{turn,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        #{league,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MatchBetMapping" >
+    update match_bet_mapping
+    <set >
+      <if test="lotteryName != null" >
+        lottery_name = #{lotteryName,jdbcType=VARCHAR},
+      </if>
+      <if test="isSueNum != null" >
+        is_sue_num = #{isSueNum,jdbcType=VARCHAR},
+      </if>
+      <if test="idBet != null" >
+        id_bet = #{idBet,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sport != null" >
+        sport = #{sport,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        home = #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        away = #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="homeId != null" >
+        home_id = #{homeId,jdbcType=VARCHAR},
+      </if>
+      <if test="awayId != null" >
+        away_id = #{awayId,jdbcType=VARCHAR},
+      </if>
+      <if test="turn != null" >
+        turn = #{turn,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        league = #{league,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MatchBetMapping" >
+    update match_bet_mapping
+    set lottery_name = #{lotteryName,jdbcType=VARCHAR},
+      is_sue_num = #{isSueNum,jdbcType=VARCHAR},
+      id_bet = #{idBet,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      sport = #{sport,jdbcType=VARCHAR},
+      home = #{home,jdbcType=VARCHAR},
+      away = #{away,jdbcType=VARCHAR},
+      home_id = #{homeId,jdbcType=VARCHAR},
+      away_id = #{awayId,jdbcType=VARCHAR},
+      turn = #{turn,jdbcType=VARCHAR},
+      league = #{league,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getNowDayMacth" resultMap="BaseResultMap" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `match_bet_mapping`
+    WHERE lottery_name ='竞彩足球'
+    AND `time` &gt;= #{startDate,jdbcType=VARCHAR}
+    AND `time` &lt;= #{endDate,jdbcType=VARCHAR}
+    ORDER BY `time`
+    LIMIT #{offset},#{pageSize}
+  </select>
+  <select id="getNowDayMacth1" resultMap="BaseResultMap" >
+    SELECT
+    mbm.*
+    FROM `match_bet_mapping` mbm
+    LEFT JOIN scorelive_football_nowday sfn
+    ON mbm.id_bet = sfn.id
+    WHERE lottery_name ='竞彩足球'
+    AND mbm.`time` &gt;= #{startDate,jdbcType=VARCHAR}
+    AND mbm.`time` &lt;= #{endDate,jdbcType=VARCHAR}
+    AND sfn.state = -1
+    ORDER BY `time`
+    LIMIT #{offset},#{pageSize}
+  </select>
+  <select id="getNowDayMacth2" resultMap="BaseResultMap" >
+    SELECT
+    mbm.*
+    FROM `match_bet_mapping` mbm
+    LEFT JOIN scorelive_football_nowday sfn
+    ON mbm.id_bet = sfn.id
+    WHERE lottery_name ='竞彩足球'
+    AND mbm.`time` &gt;= #{startDate,jdbcType=VARCHAR}
+    AND mbm.`time` &lt;= #{endDate,jdbcType=VARCHAR}
+    AND sfn.state in (1,2,3,4,5)
+    ORDER BY `time`
+    LIMIT #{offset},#{pageSize}
+  </select>
+  <select id="getNowDayMacth3" resultMap="BaseResultMap" >
+    SELECT
+    mbm.*
+    FROM `match_bet_mapping` mbm
+    LEFT JOIN scorelive_football_nowday sfn
+    ON mbm.id_bet = sfn.id
+    WHERE lottery_name ='竞彩足球'
+    AND mbm.`time` &gt;= #{startDate,jdbcType=VARCHAR}
+    AND mbm.`time` &lt;= #{endDate,jdbcType=VARCHAR}
+    AND sfn.state = 0
+    ORDER BY `time`
+    LIMIT #{offset},#{pageSize}
+  </select>
+  <select id="getNowDayCount" resultType="java.lang.Integer" >
+    SELECT count(*) FROM `match_bet_mapping`
+    WHERE lottery_name ='竞彩足球'
+    AND `time` &gt;= #{startDate,jdbcType=VARCHAR}
+    AND `time` &lt;= #{endDate,jdbcType=VARCHAR}
+  </select>
+  <select id="getCcById" resultType="java.lang.String" parameterType="java.lang.Integer">
+    SELECT id FROM `match_bet_mapping`
+    WHERE id_bet =#{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

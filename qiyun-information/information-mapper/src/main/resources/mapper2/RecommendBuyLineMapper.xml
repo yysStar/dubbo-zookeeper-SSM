@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.RecommendBuyLineMapper">
+    <resultMap id="BaseResultMap" type="com.qiyun.model2.RecommendBuyLine">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="recom_plan_id" jdbcType="INTEGER" property="recomPlanId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="clouds" jdbcType="INTEGER" property="clouds"/>
+    </resultMap>
+
+    <resultMap id="recommendPlanDTO" type="com.qiyun.dto.RecommendPlanDTO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="fee" jdbcType="DECIMAL" property="fee"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="examine_status" jdbcType="INTEGER" property="examineStatus"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="play_type" jdbcType="INTEGER" property="playType"/>
+        <result column="read_num" jdbcType="INTEGER" property="readNum"/>
+        <result column="PICTURE" jdbcType="INTEGER" property="picture"/>
+        <result column="username" jdbcType="INTEGER" property="userName"/>
+        <result column="time" jdbcType="INTEGER" property="endTime"/>
+        <result column="bingo_status" jdbcType="INTEGER" property="bingoStatus"/>
+        <result column="task_id" jdbcType="INTEGER" property="taskId"/>
+        <collection column="id" ofType="com.qiyun.dto.RecommendMatchMappingDTO" property="matchList"
+                    select="com.qiyun.mapper2.RecommendMatchMappingMapper.selectMatchList"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, recom_plan_id, account, create_time, clouds
+  </sql>
+
+    <select id="selectByExample" parameterType="com.qiyun.model2.RecommendBuyLineExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'false' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from recommend_buy_line
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from recommend_buy_line
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recommend_buy_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.qiyun.model2.RecommendBuyLine">
+    insert into recommend_buy_line (id, recom_plan_id, account, 
+      create_time, clouds)
+    values (#{id,jdbcType=INTEGER}, #{recomPlanId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{clouds,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.qiyun.model2.RecommendBuyLine">
+        insert into recommend_buy_line
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="recomPlanId != null">
+                recom_plan_id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="clouds != null">
+                clouds,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="recomPlanId != null">
+                #{recomPlanId,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="clouds != null">
+                #{clouds,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.RecommendBuyLine">
+        update recommend_buy_line
+        <set>
+            <if test="recomPlanId != null">
+                recom_plan_id = #{recomPlanId,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="clouds != null">
+                clouds = #{clouds,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.RecommendBuyLine">
+    update recommend_buy_line
+    set recom_plan_id = #{recomPlanId,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      clouds = #{clouds,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getBuyList" resultMap="recommendPlanDTO">
+        SELECT
+        RP.*, M.PICTURE,
+        M.username,RM.match_time
+        FROM
+        recommend_buy_line RBL
+        LEFT JOIN member M ON RBL.account = M.ACCOUNT
+        LEFT JOIN recommend_plan RP ON RP.id =  RBL.recom_plan_id
+        LEFT JOIN recommend_match_mapping RM ON RM.recom_plan_id=RP.id
+        WHERE
+            RBL.ACCOUNT = #{account,jdbcType=VARCHAR}
+        <if test="type != null">
+            AND RM.bingo_status = #{type,jdbcType=INTEGER}
+        </if>
+        AND RP.examine_status = 1
+        ORDER BY
+        RP.create_time DESC
+    </select>
+
+    <select id="selectByAccountAndPlanId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from recommend_buy_line
+        where recom_plan_id = #{planId,jdbcType=INTEGER}
+        AND account = #{account,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPlanId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from recommend_buy_line
+        where recom_plan_id = #{planId,jdbcType=INTEGER}
+    </select>
+</mapper>

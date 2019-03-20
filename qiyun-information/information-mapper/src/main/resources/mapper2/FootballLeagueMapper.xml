@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.FootballLeagueMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.FootballLeague" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="gb_short" property="gbShort" jdbcType="VARCHAR" />
+    <result column="big_short" property="bigShort" jdbcType="VARCHAR" />
+    <result column="en_short" property="enShort" jdbcType="VARCHAR" />
+    <result column="gb" property="gb" jdbcType="VARCHAR" />
+    <result column="big" property="big" jdbcType="VARCHAR" />
+    <result column="en" property="en" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="subSclass" property="subsclass" jdbcType="VARCHAR" />
+    <result column="sum_round" property="sumRound" jdbcType="VARCHAR" />
+    <result column="curr_round" property="currRound" jdbcType="VARCHAR" />
+    <result column="curr_match_season" property="currMatchSeason" jdbcType="VARCHAR" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="country_en" property="countryEn" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="countr_logo" property="countrLogo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, color, gb_short, big_short, en_short, gb, big, en, type, subSclass, sum_round, 
+    curr_round, curr_match_season, country_id, country, area_id, country_en, logo, countr_logo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.FootballLeagueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from football_league
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from football_league
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from football_league
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.FootballLeague" >
+    insert into football_league (id, color, gb_short, 
+      big_short, en_short, gb, 
+      big, en, type, subSclass, 
+      sum_round, curr_round, curr_match_season, 
+      country_id, country, area_id, 
+      country_en, logo, countr_logo
+      )
+    values (#{id,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, #{gbShort,jdbcType=VARCHAR}, 
+      #{bigShort,jdbcType=VARCHAR}, #{enShort,jdbcType=VARCHAR}, #{gb,jdbcType=VARCHAR}, 
+      #{big,jdbcType=VARCHAR}, #{en,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{subsclass,jdbcType=VARCHAR}, 
+      #{sumRound,jdbcType=VARCHAR}, #{currRound,jdbcType=VARCHAR}, #{currMatchSeason,jdbcType=VARCHAR}, 
+      #{countryId,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, 
+      #{countryEn,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{countrLogo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.FootballLeague" >
+    insert into football_league
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="gbShort != null" >
+        gb_short,
+      </if>
+      <if test="bigShort != null" >
+        big_short,
+      </if>
+      <if test="enShort != null" >
+        en_short,
+      </if>
+      <if test="gb != null" >
+        gb,
+      </if>
+      <if test="big != null" >
+        big,
+      </if>
+      <if test="en != null" >
+        en,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="subsclass != null" >
+        subSclass,
+      </if>
+      <if test="sumRound != null" >
+        sum_round,
+      </if>
+      <if test="currRound != null" >
+        curr_round,
+      </if>
+      <if test="currMatchSeason != null" >
+        curr_match_season,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="countryEn != null" >
+        country_en,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="countrLogo != null" >
+        countr_logo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="gbShort != null" >
+        #{gbShort,jdbcType=VARCHAR},
+      </if>
+      <if test="bigShort != null" >
+        #{bigShort,jdbcType=VARCHAR},
+      </if>
+      <if test="enShort != null" >
+        #{enShort,jdbcType=VARCHAR},
+      </if>
+      <if test="gb != null" >
+        #{gb,jdbcType=VARCHAR},
+      </if>
+      <if test="big != null" >
+        #{big,jdbcType=VARCHAR},
+      </if>
+      <if test="en != null" >
+        #{en,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="subsclass != null" >
+        #{subsclass,jdbcType=VARCHAR},
+      </if>
+      <if test="sumRound != null" >
+        #{sumRound,jdbcType=VARCHAR},
+      </if>
+      <if test="currRound != null" >
+        #{currRound,jdbcType=VARCHAR},
+      </if>
+      <if test="currMatchSeason != null" >
+        #{currMatchSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="countryEn != null" >
+        #{countryEn,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="countrLogo != null" >
+        #{countrLogo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.FootballLeague" >
+    update football_league
+    <set >
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="gbShort != null" >
+        gb_short = #{gbShort,jdbcType=VARCHAR},
+      </if>
+      <if test="bigShort != null" >
+        big_short = #{bigShort,jdbcType=VARCHAR},
+      </if>
+      <if test="enShort != null" >
+        en_short = #{enShort,jdbcType=VARCHAR},
+      </if>
+      <if test="gb != null" >
+        gb = #{gb,jdbcType=VARCHAR},
+      </if>
+      <if test="big != null" >
+        big = #{big,jdbcType=VARCHAR},
+      </if>
+      <if test="en != null" >
+        en = #{en,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="subsclass != null" >
+        subSclass = #{subsclass,jdbcType=VARCHAR},
+      </if>
+      <if test="sumRound != null" >
+        sum_round = #{sumRound,jdbcType=VARCHAR},
+      </if>
+      <if test="currRound != null" >
+        curr_round = #{currRound,jdbcType=VARCHAR},
+      </if>
+      <if test="currMatchSeason != null" >
+        curr_match_season = #{currMatchSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="countryEn != null" >
+        country_en = #{countryEn,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="countrLogo != null" >
+        countr_logo = #{countrLogo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.FootballLeague" >
+    update football_league
+    set color = #{color,jdbcType=VARCHAR},
+      gb_short = #{gbShort,jdbcType=VARCHAR},
+      big_short = #{bigShort,jdbcType=VARCHAR},
+      en_short = #{enShort,jdbcType=VARCHAR},
+      gb = #{gb,jdbcType=VARCHAR},
+      big = #{big,jdbcType=VARCHAR},
+      en = #{en,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      subSclass = #{subsclass,jdbcType=VARCHAR},
+      sum_round = #{sumRound,jdbcType=VARCHAR},
+      curr_round = #{currRound,jdbcType=VARCHAR},
+      curr_match_season = #{currMatchSeason,jdbcType=VARCHAR},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      country_en = #{countryEn,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      countr_logo = #{countrLogo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getNowDayLeague" parameterType="java.lang.String" resultType="java.lang.Integer">
+      SELECT id
+      FROM football_league
+      WHERE gb_short in (SELECT gameName
+      FROM `sporttery_football_match`
+      WHERE matchTime LIKE CONCAT(CONCAT('%',#{date},'%'))
+      GROUP BY gameName)
+  </select>
+</mapper>

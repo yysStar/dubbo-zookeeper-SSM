@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springfracmework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!--<bean id="checkBingoService" class="com.qiyun.serviceImpl.CheckBingoServiceImpl">-->
+        <!--<property name="bingoCheckMap">-->
+            <!--<map>-->
+                <!--&lt;!&ndash;<entry key="1" value="com.cailele.lottery.factorys.checkBingo.DltBingoCheck" />&ndash;&gt;-->
+                <!--<entry key="30" value="com.qiyun.checkBingo.BasketBallBingoCheck" />-->
+                <!--<entry key="31" value="com.qiyun.checkBingo.BasketBallBingoCheck" />-->
+                <!--<entry key="32" value="com.qiyun.checkBingo.BasketBallBingoCheck" />-->
+                <!--<entry key="33" value="ccom.qiyun.checkBingo.BasketBallBingoCheck" />-->
+                <!--<entry key="43" value="com.qiyun.checkBingo.BasketBallHtBingoCheck" />-->
+                <!--<entry key="304" value="com.qiyun.checkBingo.BasketBallBingoCheck" />-->
+                <!--<entry key="41" value="com.qiyun.checkBingo.SportteryFootballBinggoCheck" />-->
+                <!--<entry key="34" value="com.qiyun.checkBingo.SportteryFootballBinggoCheck" />-->
+                <!--<entry key="35" value="com.qiyun.checkBingo.SportteryFootballBinggoCheck" />-->
+                <!--<entry key="36" value="com.qiyun.checkBingo.SportteryFootballBinggoCheck" />-->
+                <!--<entry key="37" value="com.qiyun.checkBingo.SportteryFootballBinggoCheck" />-->
+                <!--<entry key="42" value="com.qiyun.checkBingo.SportteryFootballHtBinggoCheck" />-->
+                <!--<entry key="303" value="com.qiyun.checkBingo.SportteryFootballHtBinggoCheck" />-->
+                <!--<entry key="49" value="com.qiyun.checkBingo.SportteryFootballHtBinggoCheck" />-->
+                <!--<entry key="44" value="com.qiyun.checkBingo.SportteryFootballHtBinggoCheck" />-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="checkBingoTask" class="com.qiyun.task.CheckBingoTask">-->
+        <!--<property name="lotteryTypes">-->
+            <!--<list>-->
+                <!--&lt;!&ndash;<value>1</value>&ndash;&gt;-->
+                <!--<value>30</value>-->
+                <!--<value>31</value>-->
+                <!--<value>32</value>-->
+                <!--<value>33</value>-->
+                <!--<value>43</value>-->
+                <!--<value>304</value>-->
+                <!--<value>41</value>-->
+                <!--<value>34</value>-->
+                <!--<value>35</value>-->
+                <!--<value>36</value>-->
+                <!--<value>37</value>-->
+                <!--<value>42</value>-->
+                <!--<value>303</value>-->
+                <!--<value>49</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id = "checkTicket" class = "com.qiyun.task.CheckTicket">-->
+        <!--<property name="lotteryTypeList">-->
+            <!--<list>-->
+               <!--&lt;!&ndash; <value>1</value>&ndash;&gt;-->
+                <!--<value>30</value>-->
+                <!--<value>31</value>-->
+                <!--<value>32</value>-->
+                <!--<value>33</value>-->
+                <!--<value>43</value>-->
+                <!--<value>304</value>-->
+                <!--<value>41</value>-->
+                <!--<value>34</value>-->
+                <!--<value>35</value>-->
+                <!--<value>36</value>-->
+                <!--<value>37</value>-->
+                <!--<value>42</value>-->
+                <!--<value>303</value>-->
+                <!--<value>44</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <bean id = "chaiPiaoTask" class = "com.qiyun.task.ChaiPiaoTask">
+        <property name="sportteryBasketHtChaiPiao" ref="sportteryBasketHtChaiPiao"></property>
+        <property name="sportteryBasketDgtzChaiPiao" ref="sportteryBasketDgtzChaiPiao"></property>
+        <property name="sportteryFootballDgtzChaiPiao" ref="sportteryFootballDgtzChaiPiao"></property>
+        <property name="sportteryFootballHtChaiPiao" ref="sportteryFootballHtChaiPiao"></property>
+        <property name="lotteryTypes">
+            <list>
+                <value>42</value>
+                <value>43</value>
+                <value>303</value>
+                <value>304</value>
+            </list>
+        </property>
+    </bean>
+    <bean id = "sportteryBasketHtChaiPiao" class = "com.qiyun.foctory.SportteryBasketHtChaiPiao">
+    </bean>
+    <bean id = "sportteryBasketDgtzChaiPiao" class = "com.qiyun.foctory.SportteryBasketDgtzChaiPiao">
+    </bean>
+    <bean id = "sportteryFootballDgtzChaiPiao" class = "com.qiyun.foctory.SportteryFootballDgtzChaiPiao">
+    </bean>
+    <bean id = "sportteryFootballHtChaiPiao" class = "com.qiyun.foctory.SportteryFootballHtChaiPiao">
+    </bean>
+
+
+    <bean id = "songPiaoTask" class = "com.qiyun.task.SongPiaoTask">
+        <property name="lotteryTypes">
+            <list>
+                <value>42</value>
+                <value>43</value>
+                <value>303</value>
+                <value>304</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--<bean id="lotteryPlanService" class="com.qiyun.serviceImpl.LotteryPlanServiceImpl">-->
+        <!--<property name="allList">-->
+            <!--<list>-->
+                <!--<value>30</value>-->
+                <!--<value>31</value>-->
+                <!--<value>32</value>-->
+                <!--<value>33</value>-->
+                <!--<value>43</value>-->
+                <!--<value>304</value>-->
+                <!--<value>41</value>-->
+                <!--<value>34</value>-->
+                <!--<value>35</value>-->
+                <!--<value>36</value>-->
+                <!--<value>37</value>-->
+                <!--<value>42</value>-->
+                <!--<value>303</value>-->
+                <!--<value>49</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="footBallList">-->
+            <!--<list>-->
+                <!--<value>41</value>-->
+                <!--<value>34</value>-->
+                <!--<value>35</value>-->
+                <!--<value>36</value>-->
+                <!--<value>37</value>-->
+                <!--<value>42</value>-->
+                <!--<value>303</value>-->
+                <!--<value>49</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="basketBallList">-->
+            <!--<list>-->
+                <!--<value>30</value>-->
+                <!--<value>31</value>-->
+                <!--<value>32</value>-->
+                <!--<value>33</value>-->
+                <!--<value>43</value>-->
+                <!--<value>304</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 期数生成工厂 &ndash;&gt;-->
+    <!--<bean id="lotteryTermBuilderFactory" class=" com.qiyun.buildTerm.LotteryTermBuilderFactory" >-->
+        <!--<property name="builderMap">-->
+            <!--<map>-->
+                <!--<entry key="100" value-ref="ssqTermBuilder"/>-->
+                <!--<entry key="150" value-ref="sscTermBuilder"/>-->
+                <!--<entry key="3" value-ref="pl3TermBuilder"/>-->
+                <!--<entry key="4" value-ref="pl5TermBuilder"/>-->
+                <!--<entry key="5" value-ref="fbSfcTermBuilder"/>-->
+                <!--<entry key="101" value-ref="qlcTermBuilder"/>-->
+                <!--<entry key="102" value-ref="fc3dTermBuilder"/>-->
+                <!--<entry key="1" value-ref="dltTermBuilder"/>-->
+                <!--<entry key="2" value-ref="qxcTermBuilder"/>-->
+                <!--<entry key="7" value-ref="jq4TermBuilder"/>-->
+                <!--<entry key="8" value-ref="bqcTermBuilder"/>-->
+                <!--<entry key="20" value-ref="dcSfcTermBuilder"/>-->
+                <!--<entry key="25" value-ref="dcSfggTermBuilder"/>-->
+                <!--<entry key="151" value-ref="sslTermBuilder"/>-->
+                <!--<entry key="152" value-ref="klsfTermBuilder"/>-->
+                <!--<entry key="50" value-ref="syydjTermBuilder"/>-->
+                <!--<entry key="51" value-ref="kl123TermBuilder"/>-->
+                <!--<entry key="52" value-ref="jxdlcTermBuilder"/>-->
+                <!--<entry key="53" value-ref="gd11x5TermBuilder"/>-->
+                <!--<entry key="155" value-ref="gxklsfTermBuilder"/>-->
+                <!--<entry key="154" value-ref="qyhTermBuilder"/>-->
+                <!--<entry key="153" value-ref="jxsscTermBuilder"/>-->
+                <!--<entry key="156" value-ref="KL8TermBuilder"/>-->
+                <!--<entry key="54" value-ref="cq11x5TermBuilder"/>-->
+                <!--<entry key="157" value-ref="k3TermBuider"/>-->
+                <!--<entry key="158" value-ref="cqKLSFTermBuilder"/>-->
+                <!--<entry key="159" value-ref="jlk3TermBuider"/>-->
+                <!--<entry key="55" value-ref="ln11x5TermBuilder"/>-->
+                <!--<entry key="160" value-ref="hnKLSFTermBuilder"/>-->
+                <!--<entry key="161" value-ref="hbk3TermBuilder"/>-->
+                <!--<entry key="56" value-ref="pokerK3TermBuilder"/>-->
+                <!--<entry key="162" value-ref="qyhNewTermBuilder"/>-->
+                <!--<entry key="163" value-ref="ahk3TermBuider"/>-->
+                <!--<entry key="57" value-ref="sh11x5TermBuilder"/>-->
+                <!--<entry key="58" value-ref="hlj11x5TermBuilder"/>-->
+                <!--<entry key="59" value-ref="js11x5TermBuilder"/>-->
+                <!--<entry key="165" value-ref="gxk3TermBuilder"/>-->
+                <!--<entry key="166" value-ref="hebk3TermBuilder"/>-->
+                <!--<entry key="167" value-ref="fjk3TermBuilder"/>-->
+                <!--<entry key="168" value-ref="shk3TermBuilder"/>-->
+                <!--<entry key="169" value-ref="gsk3TermBuilder"/>-->
+                <!--<entry key="174" value-ref="jxk3TermBuilder"/>-->
+                <!--<entry key="60" value-ref="fj11x5TermBuilder"/>-->
+                <!--<entry key="61" value-ref="zj11x5TermBuilder"/>-->
+                <!--<entry key="62" value-ref="jl11x5TermBuilder"/>-->
+                <!--<entry key="63" value-ref="hb11x5TermBuilder"/>-->
+                <!--<entry key="64" value-ref="gx11x5TermBuilder"/>-->
+                <!--<entry key="65" value-ref="tj11x5TermBuilder"/>-->
+                <!--<entry key="67" value-ref="ah11x5TermBuilder"/>-->
+                <!--<entry key="68" value-ref="sx11x5TermBuilder"/>-->
+                <!--<entry key="69" value-ref="gs11x5TermBuilder"/>-->
+                <!--<entry key="70" value-ref="sc11x5TermBuilder"/>-->
+                <!--<entry key="71" value-ref="shanx11x5TermBuilder"/>-->
+                <!--<entry key="72" value-ref="gz11x5TermBuilder"/>-->
+                <!--<entry key="73" value-ref="hen11x5TermBuilder"/>-->
+                <!--<entry key="74" value-ref="heb11x5TermBuilder"/>-->
+                <!--<entry key="75" value-ref="bj11x5TermBuilder"/>-->
+                <!--<entry key="76" value-ref="yn11x5TermBuilder"/>-->
+                <!--<entry key="77" value-ref="nmg11x5TermBuilder"/>-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!-- 足彩胜负彩期数生成器 -->
+    <bean id="fbSfcTermBuilder" class="com.qiyun.buildTerm.FbSfcTermBuilder"/>
+    <!-- 四场进球彩期数生成器 -->
+    <bean id="jq4TermBuilder" class="com.qiyun.buildTerm.FbJq4TermBuilder"/>
+    <!-- 六场半全场期数生成器 -->
+    <bean id="bqcTermBuilder" class="com.qiyun.buildTerm.FbBqcTermBuilder"/>
+    <!-- 单场胜负彩期数生成器 -->
+    <bean id="dcSfcTermBuilder" class="com.qiyun.buildTerm.DcSfcTermBuilder"/>
+    <!-- 单场胜负彩期数生成器 -->
+    <bean id="dcSfggTermBuilder" class="com.qiyun.buildTerm.DcSfggTermBuilder"/>
+    <!-- 22选5期数生成器 -->
+    <bean id="t22x5TermBuilder" class="com.qiyun.buildTerm.T22x5TermBuilder"/>
+    <!-- 双色球期数生成器 -->
+    <bean id="ssqTermBuilder" class="com.qiyun.buildTerm.SsqTermBuilder"/>
+    <!-- 时时彩期数生成器 -->
+    <bean id="sscTermBuilder" class="com.qiyun.buildTerm.SscTerm120Builder"/>
+    <!-- 排列3期数生成器 -->
+    <bean id="pl3TermBuilder" class="com.qiyun.buildTerm.PL3TermBuilder"/>
+    <!-- 排列5期数生成器 -->
+    <bean id="pl5TermBuilder" class="com.qiyun.buildTerm.PL5TermBuilder"/>
+    <!-- 七乐彩期数生成器 -->
+    <bean id="qlcTermBuilder" class="com.qiyun.buildTerm.QlcTermBuilder"/>
+    <!-- 福彩3D期数生成器 -->
+    <bean id="fc3dTermBuilder" class="com.qiyun.buildTerm.Fc3dTermBuilder"/>
+    <!-- 大乐透期数生成器 -->
+    <bean id="dltTermBuilder" class="com.qiyun.buildTerm.DltTermBuilder"/>
+    <!-- 7星彩期数生成器 -->
+    <bean id="qxcTermBuilder" class="com.qiyun.buildTerm.QxcTermBuilder"/>
+    <!-- 时时乐期数生成器 -->
+    <bean id="sslTermBuilder" class="com.qiyun.buildTerm.SslTermBuilder"/>
+    <!-- 快乐十分期数生成器 -->
+    <bean id="klsfTermBuilder" class="com.qiyun.buildTerm.KlsfTermBuilder"/>
+    <!-- 广西快乐十分期数生成器 -->
+    <bean id="gxklsfTermBuilder" class="com.qiyun.buildTerm.GxklsfTermBuilder"/>
+    <!-- 山东11选5 -->
+    <bean id="syydjTermBuilder" class="com.qiyun.buildTerm.SyydjTermBuilderNew"/>
+    <!-- 江西11选5 -->
+    <bean id="jxdlcTermBuilder" class="com.qiyun.buildTerm.JxdlcTermBuilder"/>
+    <!-- 广东11选5 -->
+    <bean id="gd11x5TermBuilder" class="com.qiyun.buildTerm.Gd11x5TermBuilder"/>
+    <!-- 快乐123 -->
+    <bean id="kl123TermBuilder" class="com.qiyun.buildTerm.Kl123TermBuilder"/>
+    <!-- 山东群英会 -->
+    <bean id="qyhTermBuilder" class="com.qiyun.buildTerm.QyhTermBuilder"/>
+    <!-- 新山东群英会 -->
+    <bean id="qyhNewTermBuilder" class="com.qiyun.buildTerm.QyhNewTermBuilder"/>
+    <!-- 江西时时彩 -->
+    <bean id="jxsscTermBuilder" class="com.qiyun.buildTerm.JxsscTermBuilder"/>
+    <!-- 快乐8 -->
+    <bean id="KL8TermBuilder" class="com.qiyun.buildTerm.KL8TermBuilder"/>
+    <!-- 重庆11选5 -->
+    <bean id="cq11x5TermBuilder" class="com.qiyun.buildTerm.Cq11x5TermBuilder"/>
+    <!-- 快3 -->
+    <bean id="k3TermBuider" class="com.qiyun.buildTerm.K3TermBuider"/>
+    <!-- 湖北快3 -->
+    <bean id="hbk3TermBuilder" class="com.qiyun.buildTerm.HBK3TermBuilder"/>
+    <!-- 重庆快乐十分期数生成器 -->
+    <bean id="cqKLSFTermBuilder" class="com.qiyun.buildTerm.CqKlsfTermBuilder"/>
+    <!-- 吉林快3 -->
+    <bean id="jlk3TermBuider" class="com.qiyun.buildTerm.JLK3TermBuider"/>
+    <!-- 辽宁11选5 -->
+    <bean id="ln11x5TermBuilder" class="com.qiyun.buildTerm.Ln11x5TermBuilder"/>
+    <!-- 湖南快乐十分期数生成器 -->
+    <bean id="hnKLSFTermBuilder" class="com.qiyun.buildTerm.HnKlsfTermBuilder"/>
+    <!-- 快乐扑克3期数生成器 -->
+    <bean id="pokerK3TermBuilder" class="com.qiyun.buildTerm.PokerK3TermBuilder"/>
+    <!-- 安徽快3 -->
+    <bean id="ahk3TermBuider" class="com.qiyun.buildTerm.AHK3TermBuider"/>
+    <!--上海11选5 -->
+    <bean id="sh11x5TermBuilder" class="com.qiyun.buildTerm.Sh11x5TermBuilder"/>
+    <!--黑龙江11选5 -->
+    <bean id="hlj11x5TermBuilder" class="com.qiyun.buildTerm.Hlj11x5TermBuilder"/>
+    <!--江苏11选5 -->
+    <bean id="js11x5TermBuilder" class="com.qiyun.buildTerm.Js11x5TermBuilder"/>
+    <!--广西快3 -->
+    <bean id="gxk3TermBuilder" class="com.qiyun.buildTerm.GXK3TermBuilder"/>
+    <!--河北快3 -->
+    <bean id="hebk3TermBuilder" class="com.qiyun.buildTerm.HEBK3TermBuilder"/>
+    <!--福建快3 -->
+    <bean id="fjk3TermBuilder" class="com.qiyun.buildTerm.FJK3TermBuilder"/>
+    <!--上海快3 -->
+    <bean id="shk3TermBuilder" class="com.qiyun.buildTerm.SHK3TermBuilder"/>
+    <!--甘肃快3 -->
+    <bean id="gsk3TermBuilder" class="com.qiyun.buildTerm.GSK3TermBuilder"/>
+    <!--江西快3 -->
+    <bean id="jxk3TermBuilder" class="com.qiyun.buildTerm.JXK3TermBuilder"/>
+    <!--福建11选5 -->
+    <bean id="fj11x5TermBuilder" class="com.qiyun.buildTerm.FJ11x5TermBuilder"/>
+    <!--浙江11选5  -->
+    <bean id="zj11x5TermBuilder" class="com.qiyun.buildTerm.ZJ11x5TermBuilder"/>
+    <!--吉林11选5  -->
+    <bean id="jl11x5TermBuilder" class="com.qiyun.buildTerm.JL11x5TermBuilder"/>
+    <!--湖北11选5  -->
+    <bean id="hb11x5TermBuilder" class="com.qiyun.buildTerm.HB11x5TermBuilder"/>
+    <!--广西11选5  -->
+    <bean id="gx11x5TermBuilder" class="com.qiyun.buildTerm.GX11x5TermBuilder"/>
+    <!--天津11选5  -->
+    <bean id="tj11x5TermBuilder" class="com.qiyun.buildTerm.TJ11x5TermBuilder"/>
+    <!--安徽11选5  -->
+    <bean id="ah11x5TermBuilder" class="com.qiyun.buildTerm.AH11x5TermBuilder"/>
+    <!--山西11选5  -->
+    <bean id="sx11x5TermBuilder" class="com.qiyun.buildTerm.SX11x5TermBuilder"/>
+    <!--甘肃11选5  -->
+    <bean id="gs11x5TermBuilder" class="com.qiyun.buildTerm.GS11x5TermBuilder"/>
+    <!--四川11选5  -->
+    <bean id="sc11x5TermBuilder" class="com.qiyun.buildTerm.SC11x5TermBuilder"/>
+    <!--陕西11选5  -->
+    <bean id="shanx11x5TermBuilder" class="com.qiyun.buildTerm.SHANX11x5TermBuilder"/>
+    <!--贵州11选5 -->
+    <bean id="gz11x5TermBuilder" class="com.qiyun.buildTerm.GZ11x5TermBuilder"/>
+    <!--河南11选5  -->
+    <bean id="hen11x5TermBuilder" class="com.qiyun.buildTerm.HEN11x5TermBuilder"/>
+    <!--河北11选5  -->
+    <bean id="heb11x5TermBuilder" class="com.qiyun.buildTerm.HEB11x5TermBuilder"/>
+    <!--北京11选5  -->
+    <bean id="bj11x5TermBuilder" class="com.qiyun.buildTerm.BJ11x5TermBuilder"/>
+    <!--云南11选5  -->
+    <bean id="yn11x5TermBuilder" class="com.qiyun.buildTerm.YN11x5TermBuilder"/>
+    <!--内蒙古11选5  -->
+    <bean id="nmg11x5TermBuilder" class="com.qiyun.buildTerm.NMG11x5TermBuilder"/>
+
+    <!--奖金明细工厂-->
+    <bean id="awardDetailYcFactory" class="com.qiyun.factory.AwardDetailYcFactory">
+        <property name="awardYcMap">
+            <map>
+                <entry key="38" value-ref="jczqYc"/>
+                <entry key="39" value-ref="jclqYc"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="jczqYc" class="com.qiyun.bonus.JczqAwardDetailYc" scope="prototype" autowire="byName" />
+    <bean id="jclqYc" class="com.qiyun.bonus.JclqAwardDetailYc" scope="prototype" autowire="byName" />
+</beans>

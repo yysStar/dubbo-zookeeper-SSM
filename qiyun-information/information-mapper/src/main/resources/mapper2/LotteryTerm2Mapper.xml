@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.LotteryTerm2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.LotteryTerm2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER" />
+    <result column="term" property="term" jdbcType="VARCHAR" />
+    <result column="out_term" property="outTerm" jdbcType="VARCHAR" />
+    <result column="open_date_time" property="openDateTime" jdbcType="TIMESTAMP" />
+    <result column="start_date_time" property="startDateTime" jdbcType="TIMESTAMP" />
+    <result column="end_date_time" property="endDateTime" jdbcType="TIMESTAMP" />
+    <result column="terminal_end_date_time" property="terminalEndDateTime" jdbcType="TIMESTAMP" />
+    <result column="is_able" property="isAble" jdbcType="INTEGER" />
+    <result column="lot_mgr_is_able" property="lotMgrIsAble" jdbcType="INTEGER" />
+    <result column="is_current_term" property="isCurrentTerm" jdbcType="INTEGER" />
+    <result column="is_booking" property="isBooking" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="total_amount" property="totalAmount" jdbcType="VARCHAR" />
+    <result column="award_pool" property="awardPool" jdbcType="VARCHAR" />
+    <result column="test_machine_code" property="testMachineCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.LotteryTerm2" extends="BaseResultMap" >
+    <result column="result_detail" property="resultDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, LOTTERY_TYPE, term, out_term, open_date_time, start_date_time, end_date_time, 
+    terminal_end_date_time, is_able, lot_mgr_is_able, is_current_term, is_booking, STATUS, 
+    result, total_amount, award_pool, test_machine_code
+  </sql>
+  <sql id="Blob_Column_List" >
+    result_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.LotteryTerm2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lottery_term
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.LotteryTerm2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lottery_term
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lottery_term
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lottery_term
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.LotteryTerm2Query" >
+    delete from lottery_term
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.LotteryTerm2" >
+    insert into lottery_term (id, LOTTERY_TYPE, term, 
+      out_term, open_date_time, start_date_time, 
+      end_date_time, terminal_end_date_time, is_able, 
+      lot_mgr_is_able, is_current_term, is_booking, 
+      STATUS, result, total_amount, 
+      award_pool, test_machine_code, result_detail
+      )
+    values (#{id,jdbcType=INTEGER}, #{lotteryType,jdbcType=INTEGER}, #{term,jdbcType=VARCHAR}, 
+      #{outTerm,jdbcType=VARCHAR}, #{openDateTime,jdbcType=TIMESTAMP}, #{startDateTime,jdbcType=TIMESTAMP}, 
+      #{endDateTime,jdbcType=TIMESTAMP}, #{terminalEndDateTime,jdbcType=TIMESTAMP}, #{isAble,jdbcType=INTEGER}, 
+      #{lotMgrIsAble,jdbcType=INTEGER}, #{isCurrentTerm,jdbcType=INTEGER}, #{isBooking,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, #{totalAmount,jdbcType=VARCHAR}, 
+      #{awardPool,jdbcType=VARCHAR}, #{testMachineCode,jdbcType=VARCHAR}, #{resultDetail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.LotteryTerm2" >
+    insert into lottery_term
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE,
+      </if>
+      <if test="term != null" >
+        term,
+      </if>
+      <if test="outTerm != null" >
+        out_term,
+      </if>
+      <if test="openDateTime != null" >
+        open_date_time,
+      </if>
+      <if test="startDateTime != null" >
+        start_date_time,
+      </if>
+      <if test="endDateTime != null" >
+        end_date_time,
+      </if>
+      <if test="terminalEndDateTime != null" >
+        terminal_end_date_time,
+      </if>
+      <if test="isAble != null" >
+        is_able,
+      </if>
+      <if test="lotMgrIsAble != null" >
+        lot_mgr_is_able,
+      </if>
+      <if test="isCurrentTerm != null" >
+        is_current_term,
+      </if>
+      <if test="isBooking != null" >
+        is_booking,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="awardPool != null" >
+        award_pool,
+      </if>
+      <if test="testMachineCode != null" >
+        test_machine_code,
+      </if>
+      <if test="resultDetail != null" >
+        result_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryType != null" >
+        #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="outTerm != null" >
+        #{outTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="openDateTime != null" >
+        #{openDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDateTime != null" >
+        #{startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDateTime != null" >
+        #{endDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalEndDateTime != null" >
+        #{terminalEndDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAble != null" >
+        #{isAble,jdbcType=INTEGER},
+      </if>
+      <if test="lotMgrIsAble != null" >
+        #{lotMgrIsAble,jdbcType=INTEGER},
+      </if>
+      <if test="isCurrentTerm != null" >
+        #{isCurrentTerm,jdbcType=INTEGER},
+      </if>
+      <if test="isBooking != null" >
+        #{isBooking,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="awardPool != null" >
+        #{awardPool,jdbcType=VARCHAR},
+      </if>
+      <if test="testMachineCode != null" >
+        #{testMachineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resultDetail != null" >
+        #{resultDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.LotteryTerm2Query" resultType="java.lang.Integer" >
+    select count(*) from lottery_term
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lottery_term
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lotteryType != null" >
+        LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="record.term != null" >
+        term = #{record.term,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outTerm != null" >
+        out_term = #{record.outTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openDateTime != null" >
+        open_date_time = #{record.openDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.startDateTime != null" >
+        start_date_time = #{record.startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDateTime != null" >
+        end_date_time = #{record.endDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.terminalEndDateTime != null" >
+        terminal_end_date_time = #{record.terminalEndDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isAble != null" >
+        is_able = #{record.isAble,jdbcType=INTEGER},
+      </if>
+      <if test="record.lotMgrIsAble != null" >
+        lot_mgr_is_able = #{record.lotMgrIsAble,jdbcType=INTEGER},
+      </if>
+      <if test="record.isCurrentTerm != null" >
+        is_current_term = #{record.isCurrentTerm,jdbcType=INTEGER},
+      </if>
+      <if test="record.isBooking != null" >
+        is_booking = #{record.isBooking,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.awardPool != null" >
+        award_pool = #{record.awardPool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testMachineCode != null" >
+        test_machine_code = #{record.testMachineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultDetail != null" >
+        result_detail = #{record.resultDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update lottery_term
+    set id = #{record.id,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      term = #{record.term,jdbcType=VARCHAR},
+      out_term = #{record.outTerm,jdbcType=VARCHAR},
+      open_date_time = #{record.openDateTime,jdbcType=TIMESTAMP},
+      start_date_time = #{record.startDateTime,jdbcType=TIMESTAMP},
+      end_date_time = #{record.endDateTime,jdbcType=TIMESTAMP},
+      terminal_end_date_time = #{record.terminalEndDateTime,jdbcType=TIMESTAMP},
+      is_able = #{record.isAble,jdbcType=INTEGER},
+      lot_mgr_is_able = #{record.lotMgrIsAble,jdbcType=INTEGER},
+      is_current_term = #{record.isCurrentTerm,jdbcType=INTEGER},
+      is_booking = #{record.isBooking,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      result = #{record.result,jdbcType=VARCHAR},
+      total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+      award_pool = #{record.awardPool,jdbcType=VARCHAR},
+      test_machine_code = #{record.testMachineCode,jdbcType=VARCHAR},
+      result_detail = #{record.resultDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lottery_term
+    set id = #{record.id,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      term = #{record.term,jdbcType=VARCHAR},
+      out_term = #{record.outTerm,jdbcType=VARCHAR},
+      open_date_time = #{record.openDateTime,jdbcType=TIMESTAMP},
+      start_date_time = #{record.startDateTime,jdbcType=TIMESTAMP},
+      end_date_time = #{record.endDateTime,jdbcType=TIMESTAMP},
+      terminal_end_date_time = #{record.terminalEndDateTime,jdbcType=TIMESTAMP},
+      is_able = #{record.isAble,jdbcType=INTEGER},
+      lot_mgr_is_able = #{record.lotMgrIsAble,jdbcType=INTEGER},
+      is_current_term = #{record.isCurrentTerm,jdbcType=INTEGER},
+      is_booking = #{record.isBooking,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      result = #{record.result,jdbcType=VARCHAR},
+      total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+      award_pool = #{record.awardPool,jdbcType=VARCHAR},
+      test_machine_code = #{record.testMachineCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.LotteryTerm2" >
+    update lottery_term
+    <set >
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        term = #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="outTerm != null" >
+        out_term = #{outTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="openDateTime != null" >
+        open_date_time = #{openDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDateTime != null" >
+        start_date_time = #{startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDateTime != null" >
+        end_date_time = #{endDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalEndDateTime != null" >
+        terminal_end_date_time = #{terminalEndDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAble != null" >
+        is_able = #{isAble,jdbcType=INTEGER},
+      </if>
+      <if test="lotMgrIsAble != null" >
+        lot_mgr_is_able = #{lotMgrIsAble,jdbcType=INTEGER},
+      </if>
+      <if test="isCurrentTerm != null" >
+        is_current_term = #{isCurrentTerm,jdbcType=INTEGER},
+      </if>
+      <if test="isBooking != null" >
+        is_booking = #{isBooking,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="awardPool != null" >
+        award_pool = #{awardPool,jdbcType=VARCHAR},
+      </if>
+      <if test="testMachineCode != null" >
+        test_machine_code = #{testMachineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resultDetail != null" >
+        result_detail = #{resultDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.LotteryTerm2" >
+    update lottery_term
+    set LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      term = #{term,jdbcType=VARCHAR},
+      out_term = #{outTerm,jdbcType=VARCHAR},
+      open_date_time = #{openDateTime,jdbcType=TIMESTAMP},
+      start_date_time = #{startDateTime,jdbcType=TIMESTAMP},
+      end_date_time = #{endDateTime,jdbcType=TIMESTAMP},
+      terminal_end_date_time = #{terminalEndDateTime,jdbcType=TIMESTAMP},
+      is_able = #{isAble,jdbcType=INTEGER},
+      lot_mgr_is_able = #{lotMgrIsAble,jdbcType=INTEGER},
+      is_current_term = #{isCurrentTerm,jdbcType=INTEGER},
+      is_booking = #{isBooking,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=VARCHAR},
+      award_pool = #{awardPool,jdbcType=VARCHAR},
+      test_machine_code = #{testMachineCode,jdbcType=VARCHAR},
+      result_detail = #{resultDetail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.LotteryTerm2" >
+    update lottery_term
+    set LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      term = #{term,jdbcType=VARCHAR},
+      out_term = #{outTerm,jdbcType=VARCHAR},
+      open_date_time = #{openDateTime,jdbcType=TIMESTAMP},
+      start_date_time = #{startDateTime,jdbcType=TIMESTAMP},
+      end_date_time = #{endDateTime,jdbcType=TIMESTAMP},
+      terminal_end_date_time = #{terminalEndDateTime,jdbcType=TIMESTAMP},
+      is_able = #{isAble,jdbcType=INTEGER},
+      lot_mgr_is_able = #{lotMgrIsAble,jdbcType=INTEGER},
+      is_current_term = #{isCurrentTerm,jdbcType=INTEGER},
+      is_booking = #{isBooking,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=VARCHAR},
+      award_pool = #{awardPool,jdbcType=VARCHAR},
+      test_machine_code = #{testMachineCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="ALL" >
+    LT.id, LT.LOTTERY_TYPE, LT.term, LT.out_term, LT.open_date_time, LT.start_date_time, LT.end_date_time,
+    LT.terminal_end_date_time, LT.is_able, LT.lot_mgr_is_able, LT.is_current_term, LT.is_booking, LT.STATUS,
+    LT.result, LT.total_amount, LT.result_detail,LT.award_pool, LT.test_machine_code
+  </sql>
+  <select id="getDigitalColor" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="ALL" />
+    FROM `lottery_term` AS LT right join
+    (SELECT LOTTERY_TYPE,max(term) as max_term from lottery_term
+    Where LOTTERY_TYPE in (1,2,3,4) AND STATUS <![CDATA[>=]]> 4 AND <![CDATA[length(result)<=]]>20 group by LOTTERY_TYPE)
+    as L on LT.LOTTERY_TYPE = L.LOTTERY_TYPE
+    AND LT.term = L.max_term
+  </select>
+  <select id="getFrequencyColor" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="ALL" />
+    FROM `lottery_term` AS LT right join
+    (SELECT LOTTERY_TYPE,max(term) as max_term from lottery_term
+    Where LOTTERY_TYPE in (50,53) AND STATUS <![CDATA[>=]]> 4 group by LOTTERY_TYPE)
+    as L on LT.LOTTERY_TYPE = L.LOTTERY_TYPE
+    AND LT.term = L.max_term
+  </select>
+  <select id="getOneDigitalColor" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    SELECT
+    <include refid="ALL" />
+    FROM `lottery_term`
+    AS LT
+    WHERE LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER}
+    AND STATUS <![CDATA[>=]]> 4
+    AND <![CDATA[length(result)<=]]>20
+    ORDER BY term DESC
+    LIMIT 10
+  </select>
+  <select id="getOneDigitalColor2" resultMap="ResultMapWithBLOBs"  parameterType="map">
+    SELECT
+    <include refid="ALL" />
+    FROM `lottery_term`
+    AS LT
+    WHERE LOTTERY_TYPE = #{type,jdbcType=INTEGER}
+    AND STATUS <![CDATA[>=]]> 4
+    AND <![CDATA[length(result)<=]]>20
+    AND term = #{term,jdbcType=INTEGER}
+  </select>
+  <select id="getOneBasketBall" resultType="com.qiyun.model2.SportteryBasketMatch">
+    SELECT id,gameName,gameColor,matchTime,intTime,status,homeName,guestName,
+    lineId,fristSection,SecondSection,thirdSection,fourthSection,resultOfSF,resultOfSFC,
+    resultOfDXF,resultOfRFSF,handicap,baseBigOrSmall,homeScore,guestScore,GAME_SHORT_NAME
+    FROM `sporttery_basket_match`
+    WHERE status = 1
+    ORDER BY matchTime DESC
+	LIMIT 1
+  </select>
+  <select id="getOneFootBall" resultType="com.qiyun.model2.SportteryFootballMatch">
+    SELECT id,homeTeam,gameColor,guestTeam,matchTime,intTime,lineId,gameName,GAME_SHORT_NAME,status,homeScore,guestScore,
+    concede,halfHomeScore,halfGuestScore,resultAwardOfTotoPass,resultRQAwardOfTotoPass,resultAwardOfScorePass,
+    resultAwardOfSingleScore,resultAwardOfHfTotoPass
+    FROM `sporttery_football_match`
+    WHERE status = 1
+    ORDER BY matchTime DESC
+	LIMIT 1
+  </select>
+  <select id="getTenLQ" resultType="java.lang.Integer" >
+    SELECT
+    intTime
+    FROM sporttery_basket_match
+    WHERE intTime <![CDATA[<]]> #{date,jdbcType=INTEGER}
+    GROUP BY intTime
+	ORDER BY intTime DESC
+	LIMIT 10
+  </select>
+  <select id="getTenZQ" resultType="java.lang.Integer">
+    SELECT
+    intTime
+    FROM sporttery_football_match
+    WHERE intTime <![CDATA[<]]> #{date,jdbcType=INTEGER}
+    GROUP BY intTime
+	ORDER BY intTime DESC
+	LIMIT 10
+  </select>
+  <select id="setPL3" resultType="java.lang.Integer">
+  UPDATE lottery_term
+  SET result = #{result,jdbcType=VARCHAR}
+  WHERE term = #{term,jdbcType=VARCHAR}
+  AND LOTTERY_TYPE = 3
+  </select>
+  <select id="setPL5" resultType="java.lang.Integer">
+  UPDATE lottery_term
+  SET result = #{result,jdbcType=VARCHAR}
+  WHERE term = #{term,jdbcType=VARCHAR}
+  AND LOTTERY_TYPE = 5
+  </select>
+
+</mapper>

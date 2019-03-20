@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper.TicketFindMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model.TicketFind">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_no" jdbcType="INTEGER" property="planNo" />
+    <result column="find_time" jdbcType="TIMESTAMP" property="findTime" />
+    <result column="is_find" jdbcType="BIT" property="isFind" />
+  </resultMap>
+  <resultMap id="ticketFindDTO" type="com.qiyun.DTO.TicketFindDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_no" jdbcType="INTEGER" property="planNo" />
+    <result column="find_time" jdbcType="TIMESTAMP" property="findTime" />
+    <result column="is_find" jdbcType="BIT" property="isFind" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, plan_no, find_time, is_find
+  </sql>
+  <select id="selectByExample" parameterType="com.qiyun.model.TicketFindExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ticket_find
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_find
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ticket_find
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.TicketFind">
+    insert into ticket_find (id, plan_no, find_time, 
+      is_find)
+    values (#{id,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{findTime,jdbcType=TIMESTAMP}, 
+      #{isFind,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.TicketFind">
+    insert into ticket_find
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="planNo != null">
+        plan_no,
+      </if>
+      <if test="findTime != null">
+        find_time,
+      </if>
+      <if test="isFind != null">
+        is_find,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null">
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="findTime != null">
+        #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFind != null">
+        #{isFind,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.TicketFind">
+    update ticket_find
+    <set>
+      <if test="planNo != null">
+        plan_no = #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="findTime != null">
+        find_time = #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFind != null">
+        is_find = #{isFind,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.TicketFind">
+    update ticket_find
+    set plan_no = #{planNo,jdbcType=INTEGER},
+      find_time = #{findTime,jdbcType=TIMESTAMP},
+      is_find = #{isFind,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPlanNo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ticket_find
+    where plan_no = #{planNo,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="ticketFindDTO">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      ticket_find
+    WHERE
+      1 = 1
+    ORDER BY
+      find_time DESC
+  </select>
+</mapper>

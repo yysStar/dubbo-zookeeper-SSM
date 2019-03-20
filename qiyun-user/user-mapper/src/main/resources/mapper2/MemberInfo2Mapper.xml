@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.MemberInfo2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.MemberInfo2" >
+    <id column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+    <result column="bank_part" property="bankPart" jdbcType="VARCHAR" />
+    <result column="IS_DNAPAY_USER" property="isDnapayUser" jdbcType="INTEGER" />
+    <result column="IS_UMPAY_OKP" property="isUmpayOkp" jdbcType="INTEGER" />
+    <result column="IS_LIANLIANPAY_OKP" property="isLianlianpayOkp" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    member_id, account, bank, bank_card, bank_part, IS_DNAPAY_USER, IS_UMPAY_OKP, IS_LIANLIANPAY_OKP
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.MemberInfo2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_info
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_info
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.MemberInfo2Query" >
+    delete from member_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.MemberInfo2" >
+    insert into member_info (member_id, account, bank, 
+      bank_card, bank_part, IS_DNAPAY_USER, 
+      IS_UMPAY_OKP, IS_LIANLIANPAY_OKP)
+    values (#{memberId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, 
+      #{bankCard,jdbcType=VARCHAR}, #{bankPart,jdbcType=VARCHAR}, #{isDnapayUser,jdbcType=INTEGER}, 
+      #{isUmpayOkp,jdbcType=INTEGER}, #{isLianlianpayOkp,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.MemberInfo2" >
+    insert into member_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="bankCard != null" >
+        bank_card,
+      </if>
+      <if test="bankPart != null" >
+        bank_part,
+      </if>
+      <if test="isDnapayUser != null" >
+        IS_DNAPAY_USER,
+      </if>
+      <if test="isUmpayOkp != null" >
+        IS_UMPAY_OKP,
+      </if>
+      <if test="isLianlianpayOkp != null" >
+        IS_LIANLIANPAY_OKP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPart != null" >
+        #{bankPart,jdbcType=VARCHAR},
+      </if>
+      <if test="isDnapayUser != null" >
+        #{isDnapayUser,jdbcType=INTEGER},
+      </if>
+      <if test="isUmpayOkp != null" >
+        #{isUmpayOkp,jdbcType=INTEGER},
+      </if>
+      <if test="isLianlianpayOkp != null" >
+        #{isLianlianpayOkp,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.MemberInfo2Query" resultType="java.lang.Integer" >
+    select count(*) from member_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member_info
+    <set >
+      <if test="record.memberId != null" >
+        member_id = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null" >
+        bank = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCard != null" >
+        bank_card = #{record.bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankPart != null" >
+        bank_part = #{record.bankPart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDnapayUser != null" >
+        IS_DNAPAY_USER = #{record.isDnapayUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.isUmpayOkp != null" >
+        IS_UMPAY_OKP = #{record.isUmpayOkp,jdbcType=INTEGER},
+      </if>
+      <if test="record.isLianlianpayOkp != null" >
+        IS_LIANLIANPAY_OKP = #{record.isLianlianpayOkp,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member_info
+    set member_id = #{record.memberId,jdbcType=INTEGER},
+      account = #{record.account,jdbcType=VARCHAR},
+      bank = #{record.bank,jdbcType=VARCHAR},
+      bank_card = #{record.bankCard,jdbcType=VARCHAR},
+      bank_part = #{record.bankPart,jdbcType=VARCHAR},
+      IS_DNAPAY_USER = #{record.isDnapayUser,jdbcType=INTEGER},
+      IS_UMPAY_OKP = #{record.isUmpayOkp,jdbcType=INTEGER},
+      IS_LIANLIANPAY_OKP = #{record.isLianlianpayOkp,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MemberInfo2" >
+    update member_info
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        bank_card = #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPart != null" >
+        bank_part = #{bankPart,jdbcType=VARCHAR},
+      </if>
+      <if test="isDnapayUser != null" >
+        IS_DNAPAY_USER = #{isDnapayUser,jdbcType=INTEGER},
+      </if>
+      <if test="isUmpayOkp != null" >
+        IS_UMPAY_OKP = #{isUmpayOkp,jdbcType=INTEGER},
+      </if>
+      <if test="isLianlianpayOkp != null" >
+        IS_LIANLIANPAY_OKP = #{isLianlianpayOkp,jdbcType=INTEGER},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MemberInfo2" >
+    update member_info
+    set account = #{account,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      bank_part = #{bankPart,jdbcType=VARCHAR},
+      IS_DNAPAY_USER = #{isDnapayUser,jdbcType=INTEGER},
+      IS_UMPAY_OKP = #{isUmpayOkp,jdbcType=INTEGER},
+      IS_LIANLIANPAY_OKP = #{isLianlianpayOkp,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+</mapper>

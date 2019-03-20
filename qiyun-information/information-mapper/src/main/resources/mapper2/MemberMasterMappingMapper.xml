@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.MemberMasterMappingMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.MemberMasterMapping">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="is_master" jdbcType="BIT" property="isMaster" />
+    <result column="is_highgrade" jdbcType="BIT" property="isHighgrade" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="is_fast_examine" jdbcType="BIT" property="isFastExamine" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, account, is_master, is_highgrade, create_datetime, update_datetime, sort, is_fast_examine
+  </sql>
+
+  <select id="selectByExample" parameterType="com.qiyun.model2.MemberMasterMappingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from member_master_mapping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member_master_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member_master_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.MemberMasterMapping">
+    insert into member_master_mapping (id, account, is_master, 
+      is_highgrade, create_datetime, update_datetime, 
+      sort, is_fast_examine)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{isMaster,jdbcType=BIT}, 
+      #{isHighgrade,jdbcType=BIT}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=INTEGER}, #{isFastExamine,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.MemberMasterMapping">
+    insert into member_master_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="isMaster != null">
+        is_master,
+      </if>
+      <if test="isHighgrade != null">
+        is_highgrade,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="isFastExamine != null">
+        is_fast_examine,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="isMaster != null">
+        #{isMaster,jdbcType=BIT},
+      </if>
+      <if test="isHighgrade != null">
+        #{isHighgrade,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isFastExamine != null">
+        #{isFastExamine,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MemberMasterMapping">
+    update member_master_mapping
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="isMaster != null">
+        is_master = #{isMaster,jdbcType=BIT},
+      </if>
+      <if test="isHighgrade != null">
+        is_highgrade = #{isHighgrade,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isFastExamine != null">
+        is_fast_examine = #{isFastExamine,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MemberMasterMapping">
+    update member_master_mapping
+    set account = #{account,jdbcType=VARCHAR},
+      is_master = #{isMaster,jdbcType=BIT},
+      is_highgrade = #{isHighgrade,jdbcType=BIT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      is_fast_examine = #{isFastExamine,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from member_master_mapping
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+
+  <resultMap id="memberDTO" type="com.qiyun.dto.MemberDTO">
+    <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
+    <result column="username" jdbcType="VARCHAR" property="userName" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+  </resultMap>
+
+  <select id="selectSearchList" parameterType="java.lang.String" resultMap="memberDTO">
+    SELECT
+        M.ACCOUNT,M.username,M.PICTURE
+    FROM
+        member_master_mapping MM
+    LEFT JOIN member M ON MM.account = M.ACCOUNT
+    WHERE
+        (MM.is_highgrade = 1 OR MM.is_master = 1) AND (M.ACCOUNT LIKE CONCAT('%',#{keywords},'%') OR M.username LIKE CONCAT('%',#{keywords},'%'))
+  </select>
+
+  <select id="selectMasterList" resultMap="memberDTO">
+    SELECT
+        M.ACCOUNT,M.username,M.PICTURE
+    FROM
+        member_master_mapping MM
+    LEFT JOIN member M ON MM.account = M.ACCOUNT
+    WHERE
+        MM.is_master = 1
+    ORDER BY MM.sort DESC
+  </select>
+  <select id="selectHighGradeList" resultMap="memberDTO">
+    SELECT
+        M.ACCOUNT,M.username,M.PICTURE
+    FROM
+        member_master_mapping MM
+    LEFT JOIN member M ON MM.account = M.ACCOUNT
+    WHERE
+        MM.is_highgrade = 1
+    ORDER BY MM.sort DESC
+  </select>
+  <select id="getAccountByusername" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT
+        ACCOUNT
+    FROM
+        member
+    WHERE
+        username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getRechargeList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+    SELECT
+        ML.*
+    FROM
+        member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+        trans_type in
+        <foreach  item="item" index="index" collection="list" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+    <if test="account != null">
+      AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+    ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+
+  <select id="getWithdrawList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+    SELECT
+    ML.*
+    FROM
+    member_clouds_line ML
+    <if test="account != null">
+      LEFT JOIN member M ON ML.account = M.ACCOUNT
+    </if>
+    WHERE
+      trans_type = 404
+    <if test="account != null">
+      AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+    </if>
+    ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+
+  <select id="getBuyRecommendList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+    SELECT
+    ML.*
+    FROM
+    member_clouds_line ML
+    <if test="account != null">
+      LEFT JOIN member M ON ML.account = M.ACCOUNT
+    </if>
+    WHERE
+    trans_type = 401
+    <if test="account != null">
+      AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+    </if>
+    ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+
+  <select id="getRecommendRefundList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+    SELECT
+    ML.*
+    FROM
+    member_clouds_line ML
+    <if test="account != null">
+      LEFT JOIN member M ON ML.account = M.ACCOUNT
+    </if>
+    WHERE
+    trans_type = 402
+    <if test="account != null">
+      AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+    </if>
+    ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+
+  <select id="getRewardList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+    SELECT
+    ML.*
+    FROM
+    member_clouds_line ML
+    <if test="account != null">
+      LEFT JOIN member M ON ML.account = M.ACCOUNT
+    </if>
+    WHERE
+    trans_type = 51
+    <if test="account != null">
+      AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+    </if>
+    ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+
+  <select id="getRecommendIncomeList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+    SELECT
+    ML.*
+    FROM
+    member_clouds_line ML
+    <if test="account != null">
+      LEFT JOIN member M ON ML.account = M.ACCOUNT
+    </if>
+    WHERE
+    trans_type = 403
+    <if test="account != null">
+      AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+    </if>
+    ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+  <select id="getRewardIncomeList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+    SELECT
+    ML.*
+    FROM
+    member_clouds_line ML
+    <if test="account != null">
+      LEFT JOIN member M ON ML.account = M.ACCOUNT
+    </if>
+    WHERE
+    trans_type = 52
+    <if test="account != null">
+      AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+    </if>
+    ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+
+  <select id="getQuickReviwList" resultType="com.qiyun.model2.MemberCloudsLine" parameterType="map">
+      SELECT
+      ML.*
+      FROM
+      member_clouds_line ML
+      <if test="account != null">
+          LEFT JOIN member M ON ML.account = M.ACCOUNT
+      </if>
+      WHERE
+      trans_type = 61
+      <if test="account != null">
+          AND (M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%'))
+      </if>
+      <if test="startTime!=null and endTime !=null">
+          AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+      </if>
+      <if test="startTime!=null and endTime ==null">
+          AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+      </if>
+      <if test="startTime==null and endTime !=null">
+          AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+      </if>
+      ORDER BY  ML.CREATE_DATE_TIME  DESC
+  </select>
+  <select id="getIds" resultType="java.lang.String">
+    SELECT ACCOUNT
+    FROM `member_clouds_line`
+    GROUP BY MEMBER_ID
+  </select>
+  <select id="getIds2" resultType="java.lang.String">
+    SELECT ML.ACCOUNT
+    FROM member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE M.ACCOUNT LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%') OR M.username LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%')
+    ORDER BY MEMBER_ID
+  </select>
+  <select id="getCloud" resultType="java.lang.Integer">
+    SELECT CLOUDS_ABLE_BALANCE
+    FROM member_clouds
+    WHERE ACCOUNT = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="getRechargeClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type in
+    <foreach  item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+  <select id="getWithdrawClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type = 404
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+  <select id="getBuyRecommendClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type = 401
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+  <select id="getRecommendRefundClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type = 402
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+  <select id="getRewardClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type = 51
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+  <select id="getRecommendIncomeClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type = 403
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+  <select id="getRewardIncomeClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type = 52
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+  <select id="getQuickReviwClound" resultType="java.lang.Integer" parameterType="map">
+    SELECT SUM(clouds)
+    FROM  member_clouds_line ML
+    LEFT JOIN member M ON ML.account = M.ACCOUNT
+    WHERE
+    trans_type = 61
+    <if test="account != null">
+      AND ML.account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND ML.CREATE_DATE_TIME &gt;#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND ML.CREATE_DATE_TIME &lt;#{endTime}
+    </if>
+  </select>
+
+
+</mapper>

@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.Ticket2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.Ticket2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="PLAN_NO" property="planNo" jdbcType="INTEGER" />
+    <result column="TERM" property="term" jdbcType="VARCHAR" />
+    <result column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER" />
+    <result column="AMOUNT" property="amount" jdbcType="INTEGER" />
+    <result column="CREATE_DATE_TIME" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="SEND_DATE_TIME" property="sendDateTime" jdbcType="TIMESTAMP" />
+    <result column="PRINT_DATE_TIME" property="printDateTime" jdbcType="TIMESTAMP" />
+    <result column="DEAL_DATE_TIME" property="dealDateTime" jdbcType="TIMESTAMP" />
+    <result column="MULTIPLE" property="multiple" jdbcType="INTEGER" />
+    <result column="PLAY_TYPE" property="playType" jdbcType="INTEGER" />
+    <result column="IS_BINGO" property="isBingo" jdbcType="INTEGER" />
+    <result column="BINGO_AMOUNT" property="bingoAmount" jdbcType="DOUBLE" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="ADD_ATTRIBUTE" property="addAttribute" jdbcType="VARCHAR" />
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="OUT_ID" property="outId" jdbcType="VARCHAR" />
+    <result column="NO_IN_BATCH" property="noInBatch" jdbcType="INTEGER" />
+    <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR" />
+    <result column="IS_CONVERT" property="isConvert" jdbcType="INTEGER" />
+    <result column="CONVERT_DATE_TIME" property="convertDateTime" jdbcType="TIMESTAMP" />
+    <result column="SERIAL_NO" property="serialNo" jdbcType="VARCHAR" />
+    <result column="PROVIDER" property="provider" jdbcType="INTEGER" />
+    <result column="ERROR_CODE" property="errorCode" jdbcType="INTEGER" />
+    <result column="WIN_STATUS" property="winStatus" jdbcType="INTEGER" />
+    <result column="open_result_time" property="openResultTime" jdbcType="TIMESTAMP" />
+    <result column="return_prize_time" property="returnPrizeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.Ticket2WithBLOBs" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+    <result column="BINGO_CONTENT" property="bingoContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, PLAN_NO, TERM, LOTTERY_TYPE, AMOUNT, CREATE_DATE_TIME, SEND_DATE_TIME, PRINT_DATE_TIME, 
+    DEAL_DATE_TIME, MULTIPLE, PLAY_TYPE, IS_BINGO, BINGO_AMOUNT, STATUS, ADD_ATTRIBUTE, 
+    ACCOUNT, OUT_ID, NO_IN_BATCH, BATCH_NO, IS_CONVERT, CONVERT_DATE_TIME, SERIAL_NO, 
+    PROVIDER, ERROR_CODE, WIN_STATUS, open_result_time, return_prize_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT, BINGO_CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.Ticket2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.Ticket2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ticket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.Ticket2Query" >
+    delete from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.Ticket2WithBLOBs" >
+    insert into ticket (id, PLAN_NO, TERM, 
+      LOTTERY_TYPE, AMOUNT, CREATE_DATE_TIME, 
+      SEND_DATE_TIME, PRINT_DATE_TIME, DEAL_DATE_TIME, 
+      MULTIPLE, PLAY_TYPE, IS_BINGO, 
+      BINGO_AMOUNT, STATUS, ADD_ATTRIBUTE, 
+      ACCOUNT, OUT_ID, NO_IN_BATCH, 
+      BATCH_NO, IS_CONVERT, CONVERT_DATE_TIME, 
+      SERIAL_NO, PROVIDER, ERROR_CODE, 
+      WIN_STATUS, open_result_time, return_prize_time, 
+      CONTENT, BINGO_CONTENT)
+    values (#{id,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{term,jdbcType=VARCHAR}, 
+      #{lotteryType,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{createDateTime,jdbcType=TIMESTAMP}, 
+      #{sendDateTime,jdbcType=TIMESTAMP}, #{printDateTime,jdbcType=TIMESTAMP}, #{dealDateTime,jdbcType=TIMESTAMP}, 
+      #{multiple,jdbcType=INTEGER}, #{playType,jdbcType=INTEGER}, #{isBingo,jdbcType=INTEGER}, 
+      #{bingoAmount,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{addAttribute,jdbcType=VARCHAR}, 
+      #{account,jdbcType=VARCHAR}, #{outId,jdbcType=VARCHAR}, #{noInBatch,jdbcType=INTEGER}, 
+      #{batchNo,jdbcType=VARCHAR}, #{isConvert,jdbcType=INTEGER}, #{convertDateTime,jdbcType=TIMESTAMP}, 
+      #{serialNo,jdbcType=VARCHAR}, #{provider,jdbcType=INTEGER}, #{errorCode,jdbcType=INTEGER}, 
+      #{winStatus,jdbcType=INTEGER}, #{openResultTime,jdbcType=TIMESTAMP}, #{returnPrizeTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR}, #{bingoContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.Ticket2WithBLOBs" >
+    insert into ticket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="planNo != null" >
+        PLAN_NO,
+      </if>
+      <if test="term != null" >
+        TERM,
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME,
+      </if>
+      <if test="sendDateTime != null" >
+        SEND_DATE_TIME,
+      </if>
+      <if test="printDateTime != null" >
+        PRINT_DATE_TIME,
+      </if>
+      <if test="dealDateTime != null" >
+        DEAL_DATE_TIME,
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE,
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE,
+      </if>
+      <if test="isBingo != null" >
+        IS_BINGO,
+      </if>
+      <if test="bingoAmount != null" >
+        BINGO_AMOUNT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="addAttribute != null" >
+        ADD_ATTRIBUTE,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="outId != null" >
+        OUT_ID,
+      </if>
+      <if test="noInBatch != null" >
+        NO_IN_BATCH,
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO,
+      </if>
+      <if test="isConvert != null" >
+        IS_CONVERT,
+      </if>
+      <if test="convertDateTime != null" >
+        CONVERT_DATE_TIME,
+      </if>
+      <if test="serialNo != null" >
+        SERIAL_NO,
+      </if>
+      <if test="provider != null" >
+        PROVIDER,
+      </if>
+      <if test="errorCode != null" >
+        ERROR_CODE,
+      </if>
+      <if test="winStatus != null" >
+        WIN_STATUS,
+      </if>
+      <if test="openResultTime != null" >
+        open_result_time,
+      </if>
+      <if test="returnPrizeTime != null" >
+        return_prize_time,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="bingoContent != null" >
+        BINGO_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null" >
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="lotteryType != null" >
+        #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendDateTime != null" >
+        #{sendDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printDateTime != null" >
+        #{printDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealDateTime != null" >
+        #{dealDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="multiple != null" >
+        #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="isBingo != null" >
+        #{isBingo,jdbcType=INTEGER},
+      </if>
+      <if test="bingoAmount != null" >
+        #{bingoAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addAttribute != null" >
+        #{addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="outId != null" >
+        #{outId,jdbcType=VARCHAR},
+      </if>
+      <if test="noInBatch != null" >
+        #{noInBatch,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null" >
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isConvert != null" >
+        #{isConvert,jdbcType=INTEGER},
+      </if>
+      <if test="convertDateTime != null" >
+        #{convertDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null" >
+        #{provider,jdbcType=INTEGER},
+      </if>
+      <if test="errorCode != null" >
+        #{errorCode,jdbcType=INTEGER},
+      </if>
+      <if test="winStatus != null" >
+        #{winStatus,jdbcType=INTEGER},
+      </if>
+      <if test="openResultTime != null" >
+        #{openResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnPrizeTime != null" >
+        #{returnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bingoContent != null" >
+        #{bingoContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.Ticket2Query" resultType="java.lang.Integer" >
+    select count(*) from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ticket
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.planNo != null" >
+        PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.term != null" >
+        TERM = #{record.term,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lotteryType != null" >
+        LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDateTime != null" >
+        CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sendDateTime != null" >
+        SEND_DATE_TIME = #{record.sendDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.printDateTime != null" >
+        PRINT_DATE_TIME = #{record.printDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dealDateTime != null" >
+        DEAL_DATE_TIME = #{record.dealDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.multiple != null" >
+        MULTIPLE = #{record.multiple,jdbcType=INTEGER},
+      </if>
+      <if test="record.playType != null" >
+        PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      </if>
+      <if test="record.isBingo != null" >
+        IS_BINGO = #{record.isBingo,jdbcType=INTEGER},
+      </if>
+      <if test="record.bingoAmount != null" >
+        BINGO_AMOUNT = #{record.bingoAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.addAttribute != null" >
+        ADD_ATTRIBUTE = #{record.addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outId != null" >
+        OUT_ID = #{record.outId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noInBatch != null" >
+        NO_IN_BATCH = #{record.noInBatch,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchNo != null" >
+        BATCH_NO = #{record.batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isConvert != null" >
+        IS_CONVERT = #{record.isConvert,jdbcType=INTEGER},
+      </if>
+      <if test="record.convertDateTime != null" >
+        CONVERT_DATE_TIME = #{record.convertDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serialNo != null" >
+        SERIAL_NO = #{record.serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provider != null" >
+        PROVIDER = #{record.provider,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorCode != null" >
+        ERROR_CODE = #{record.errorCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.winStatus != null" >
+        WIN_STATUS = #{record.winStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.openResultTime != null" >
+        open_result_time = #{record.openResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.returnPrizeTime != null" >
+        return_prize_time = #{record.returnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bingoContent != null" >
+        BINGO_CONTENT = #{record.bingoContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update ticket
+    set id = #{record.id,jdbcType=INTEGER},
+      PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      TERM = #{record.term,jdbcType=VARCHAR},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      AMOUNT = #{record.amount,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      SEND_DATE_TIME = #{record.sendDateTime,jdbcType=TIMESTAMP},
+      PRINT_DATE_TIME = #{record.printDateTime,jdbcType=TIMESTAMP},
+      DEAL_DATE_TIME = #{record.dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{record.multiple,jdbcType=INTEGER},
+      PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      IS_BINGO = #{record.isBingo,jdbcType=INTEGER},
+      BINGO_AMOUNT = #{record.bingoAmount,jdbcType=DOUBLE},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{record.addAttribute,jdbcType=VARCHAR},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      OUT_ID = #{record.outId,jdbcType=VARCHAR},
+      NO_IN_BATCH = #{record.noInBatch,jdbcType=INTEGER},
+      BATCH_NO = #{record.batchNo,jdbcType=VARCHAR},
+      IS_CONVERT = #{record.isConvert,jdbcType=INTEGER},
+      CONVERT_DATE_TIME = #{record.convertDateTime,jdbcType=TIMESTAMP},
+      SERIAL_NO = #{record.serialNo,jdbcType=VARCHAR},
+      PROVIDER = #{record.provider,jdbcType=INTEGER},
+      ERROR_CODE = #{record.errorCode,jdbcType=INTEGER},
+      WIN_STATUS = #{record.winStatus,jdbcType=INTEGER},
+      open_result_time = #{record.openResultTime,jdbcType=TIMESTAMP},
+      return_prize_time = #{record.returnPrizeTime,jdbcType=TIMESTAMP},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      BINGO_CONTENT = #{record.bingoContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ticket
+    set id = #{record.id,jdbcType=INTEGER},
+      PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      TERM = #{record.term,jdbcType=VARCHAR},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      AMOUNT = #{record.amount,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      SEND_DATE_TIME = #{record.sendDateTime,jdbcType=TIMESTAMP},
+      PRINT_DATE_TIME = #{record.printDateTime,jdbcType=TIMESTAMP},
+      DEAL_DATE_TIME = #{record.dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{record.multiple,jdbcType=INTEGER},
+      PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      IS_BINGO = #{record.isBingo,jdbcType=INTEGER},
+      BINGO_AMOUNT = #{record.bingoAmount,jdbcType=DOUBLE},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{record.addAttribute,jdbcType=VARCHAR},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      OUT_ID = #{record.outId,jdbcType=VARCHAR},
+      NO_IN_BATCH = #{record.noInBatch,jdbcType=INTEGER},
+      BATCH_NO = #{record.batchNo,jdbcType=VARCHAR},
+      IS_CONVERT = #{record.isConvert,jdbcType=INTEGER},
+      CONVERT_DATE_TIME = #{record.convertDateTime,jdbcType=TIMESTAMP},
+      SERIAL_NO = #{record.serialNo,jdbcType=VARCHAR},
+      PROVIDER = #{record.provider,jdbcType=INTEGER},
+      ERROR_CODE = #{record.errorCode,jdbcType=INTEGER},
+      WIN_STATUS = #{record.winStatus,jdbcType=INTEGER},
+      open_result_time = #{record.openResultTime,jdbcType=TIMESTAMP},
+      return_prize_time = #{record.returnPrizeTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.Ticket2WithBLOBs" >
+    update ticket
+    <set >
+      <if test="planNo != null" >
+        PLAN_NO = #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        TERM = #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendDateTime != null" >
+        SEND_DATE_TIME = #{sendDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printDateTime != null" >
+        PRINT_DATE_TIME = #{printDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealDateTime != null" >
+        DEAL_DATE_TIME = #{dealDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE = #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="isBingo != null" >
+        IS_BINGO = #{isBingo,jdbcType=INTEGER},
+      </if>
+      <if test="bingoAmount != null" >
+        BINGO_AMOUNT = #{bingoAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addAttribute != null" >
+        ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="outId != null" >
+        OUT_ID = #{outId,jdbcType=VARCHAR},
+      </if>
+      <if test="noInBatch != null" >
+        NO_IN_BATCH = #{noInBatch,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isConvert != null" >
+        IS_CONVERT = #{isConvert,jdbcType=INTEGER},
+      </if>
+      <if test="convertDateTime != null" >
+        CONVERT_DATE_TIME = #{convertDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serialNo != null" >
+        SERIAL_NO = #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null" >
+        PROVIDER = #{provider,jdbcType=INTEGER},
+      </if>
+      <if test="errorCode != null" >
+        ERROR_CODE = #{errorCode,jdbcType=INTEGER},
+      </if>
+      <if test="winStatus != null" >
+        WIN_STATUS = #{winStatus,jdbcType=INTEGER},
+      </if>
+      <if test="openResultTime != null" >
+        open_result_time = #{openResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnPrizeTime != null" >
+        return_prize_time = #{returnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bingoContent != null" >
+        BINGO_CONTENT = #{bingoContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.Ticket2WithBLOBs" >
+    update ticket
+    set PLAN_NO = #{planNo,jdbcType=INTEGER},
+      TERM = #{term,jdbcType=VARCHAR},
+      LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      SEND_DATE_TIME = #{sendDateTime,jdbcType=TIMESTAMP},
+      PRINT_DATE_TIME = #{printDateTime,jdbcType=TIMESTAMP},
+      DEAL_DATE_TIME = #{dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{multiple,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      IS_BINGO = #{isBingo,jdbcType=INTEGER},
+      BINGO_AMOUNT = #{bingoAmount,jdbcType=DOUBLE},
+      STATUS = #{status,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      OUT_ID = #{outId,jdbcType=VARCHAR},
+      NO_IN_BATCH = #{noInBatch,jdbcType=INTEGER},
+      BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      IS_CONVERT = #{isConvert,jdbcType=INTEGER},
+      CONVERT_DATE_TIME = #{convertDateTime,jdbcType=TIMESTAMP},
+      SERIAL_NO = #{serialNo,jdbcType=VARCHAR},
+      PROVIDER = #{provider,jdbcType=INTEGER},
+      ERROR_CODE = #{errorCode,jdbcType=INTEGER},
+      WIN_STATUS = #{winStatus,jdbcType=INTEGER},
+      open_result_time = #{openResultTime,jdbcType=TIMESTAMP},
+      return_prize_time = #{returnPrizeTime,jdbcType=TIMESTAMP},
+      CONTENT = #{content,jdbcType=LONGVARCHAR},
+      BINGO_CONTENT = #{bingoContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.Ticket2" >
+    update ticket
+    set PLAN_NO = #{planNo,jdbcType=INTEGER},
+      TERM = #{term,jdbcType=VARCHAR},
+      LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      SEND_DATE_TIME = #{sendDateTime,jdbcType=TIMESTAMP},
+      PRINT_DATE_TIME = #{printDateTime,jdbcType=TIMESTAMP},
+      DEAL_DATE_TIME = #{dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{multiple,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      IS_BINGO = #{isBingo,jdbcType=INTEGER},
+      BINGO_AMOUNT = #{bingoAmount,jdbcType=DOUBLE},
+      STATUS = #{status,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      OUT_ID = #{outId,jdbcType=VARCHAR},
+      NO_IN_BATCH = #{noInBatch,jdbcType=INTEGER},
+      BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      IS_CONVERT = #{isConvert,jdbcType=INTEGER},
+      CONVERT_DATE_TIME = #{convertDateTime,jdbcType=TIMESTAMP},
+      SERIAL_NO = #{serialNo,jdbcType=VARCHAR},
+      PROVIDER = #{provider,jdbcType=INTEGER},
+      ERROR_CODE = #{errorCode,jdbcType=INTEGER},
+      WIN_STATUS = #{winStatus,jdbcType=INTEGER},
+      open_result_time = #{openResultTime,jdbcType=TIMESTAMP},
+      return_prize_time = #{returnPrizeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateTicketByPlanBack"  >
+    update ticket
+    set status = 5
+    where plan_no = #{0}
+    and status != 4
+  </update>
+  <update id="updateStatusByPlanNo"  >
+    update ticket
+    set status = #{1}
+    where plan_no = #{0}
+  </update>
+  <update id="updateReturnPrize"  >
+    UPDATE ticket
+    SET win_status = 4,
+        return_prize_time =NOW()
+    WHERE
+        plan_no = #{0}
+    AND win_status = 3
+  </update>
+  <resultMap id="LotteryTermMap" type="com.qiyun.commonModel.LotteryTerm">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="term" property="term" jdbcType="VARCHAR"/>
+    <result column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER"/>
+    <result column="out_term" property="outTerm" jdbcType="VARCHAR"/>
+    <result column="open_date_time" property="openDateTime" jdbcType="TIMESTAMP"/>
+    <result column="start_date_time" property="startDateTime" jdbcType="TIMESTAMP"/>
+    <result column="end_date_time" property="endDateTime" jdbcType="TIMESTAMP"/>
+    <result column="terminal_end_date_time" property="terminalEndDateTime" jdbcType="TIMESTAMP"/>
+    <result column="is_able" property="isAble" jdbcType="INTEGER"/>
+    <result column="lot_mgr_is_able" property="lotMgrIsAble" jdbcType="INTEGER"/>
+    <result column="is_current_term" property="isCurrentTerm" jdbcType="INTEGER"/>
+    <result column="is_booking" property="isBooking" jdbcType="INTEGER"/>
+    <result column="STATUS" property="status" jdbcType="INTEGER"/>
+    <result column="result" property="result" jdbcType="VARCHAR"/>
+    <result column="total_amount" property="totalAmount" jdbcType="VARCHAR"/>
+    <result column="result_detail" property="resultDetail" jdbcType="VARCHAR"/>
+    <result column="award_pool" property="awardPool" jdbcType="INTEGER"/>
+    <result column="test_machine_code" property="testMachineCode" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="findPrintingTermByLotteryType" resultMap="LotteryTermMap">
+
+    select * from lottery_term where LOTTERY_TYPE =#{0} and terminal_end_date_time >#{1} order by term asc
+
+  </select>
+  <select id="getByCopyPlanNo" resultType="com.qiyun.model2.TicketFindNew2">
+  select * from ticket_find_new where copy_plan_no = #{0}
+</select>
+  <update id="updateForSongPiaoSuccess"  >
+    update ticket
+    set status = 3,
+        send_date_time = NOW()
+    where plan_no = #{0}
+    and status != 4
+  </update>
+  <update id="updateForSongPiaoFail"  >
+    update ticket
+    set status = 5,
+    send_date_time = NOW()
+    where plan_no = #{0}
+    and status != 4
+  </update>
+
+</mapper>

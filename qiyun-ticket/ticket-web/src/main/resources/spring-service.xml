@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--<bean id="redis" class="com.qiyun.httpUtil.RedisUtil">-->
+        <!--<property name="addr" value="${redis.addr}" />-->
+        <!--<property name="port" value="${redis.port}" />-->
+        <!--<property name="auth" value="${redis.auth}" />-->
+        <!--<property name="maxActive" value="${redis.maxActive}" />-->
+        <!--<property name="maxIdle" value="${redis.maxIdle}" />-->
+        <!--<property name="maxWait" value="${redis.maxWait}" />-->
+        <!--<property name="timeOut" value="${redis.timeOut}" />-->
+        <!--<property name="testOnBorrow" value="${redis.testOnBorrow}" />-->
+    <!--</bean>-->
+    <bean id="ticket" class="com.qiyun.util.TicketUtil">
+        <property name="tcymUrl" value="${txym.ticket.url}" />
+        <property name="tcymVersion" value="${txym.ticket.version}" />
+        <property name="tcymAgentID" value="${txym.ticket.agentID}" />
+        <property name="tcymAgentPwd" value="${txym.ticket.agentPwd}" />
+    </bean>
+</beans>

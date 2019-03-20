@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SportteryFootlballJqsawardMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.SportteryFootlballJqsaward" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="matchId" property="matchid" jdbcType="INTEGER" />
+    <result column="intTime" property="inttime" jdbcType="INTEGER" />
+    <result column="lineId" property="lineid" jdbcType="INTEGER" />
+    <result column="matchTime" property="matchtime" jdbcType="TIMESTAMP" />
+    <result column="passMode" property="passmode" jdbcType="INTEGER" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="s0_award" property="s0Award" jdbcType="DOUBLE" />
+    <result column="s1_award" property="s1Award" jdbcType="DOUBLE" />
+    <result column="s2_award" property="s2Award" jdbcType="DOUBLE" />
+    <result column="s3_award" property="s3Award" jdbcType="DOUBLE" />
+    <result column="s4_award" property="s4Award" jdbcType="DOUBLE" />
+    <result column="s5_award" property="s5Award" jdbcType="DOUBLE" />
+    <result column="s6_award" property="s6Award" jdbcType="DOUBLE" />
+    <result column="s7_award" property="s7Award" jdbcType="DOUBLE" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, matchId, intTime, lineId, matchTime, passMode, lastUpdateTime, s0_award, s1_award, 
+    s2_award, s3_award, s4_award, s5_award, s6_award, s7_award, CREATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.SportteryFootlballJqsawardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sporttery_footlball_jqsaward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sporttery_footlball_jqsaward
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sporttery_footlball_jqsaward
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.SportteryFootlballJqsaward" >
+    insert into sporttery_footlball_jqsaward (id, matchId, intTime, 
+      lineId, matchTime, passMode, 
+      lastUpdateTime, s0_award, s1_award, 
+      s2_award, s3_award, s4_award, 
+      s5_award, s6_award, s7_award, 
+      CREATE_DATE)
+    values (#{id,jdbcType=INTEGER}, #{matchid,jdbcType=INTEGER}, #{inttime,jdbcType=INTEGER}, 
+      #{lineid,jdbcType=INTEGER}, #{matchtime,jdbcType=TIMESTAMP}, #{passmode,jdbcType=INTEGER}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{s0Award,jdbcType=DOUBLE}, #{s1Award,jdbcType=DOUBLE}, 
+      #{s2Award,jdbcType=DOUBLE}, #{s3Award,jdbcType=DOUBLE}, #{s4Award,jdbcType=DOUBLE}, 
+      #{s5Award,jdbcType=DOUBLE}, #{s6Award,jdbcType=DOUBLE}, #{s7Award,jdbcType=DOUBLE}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.SportteryFootlballJqsaward" >
+    insert into sporttery_footlball_jqsaward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="matchid != null" >
+        matchId,
+      </if>
+      <if test="inttime != null" >
+        intTime,
+      </if>
+      <if test="lineid != null" >
+        lineId,
+      </if>
+      <if test="matchtime != null" >
+        matchTime,
+      </if>
+      <if test="passmode != null" >
+        passMode,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="s0Award != null" >
+        s0_award,
+      </if>
+      <if test="s1Award != null" >
+        s1_award,
+      </if>
+      <if test="s2Award != null" >
+        s2_award,
+      </if>
+      <if test="s3Award != null" >
+        s3_award,
+      </if>
+      <if test="s4Award != null" >
+        s4_award,
+      </if>
+      <if test="s5Award != null" >
+        s5_award,
+      </if>
+      <if test="s6Award != null" >
+        s6_award,
+      </if>
+      <if test="s7Award != null" >
+        s7_award,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchid != null" >
+        #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="matchtime != null" >
+        #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passmode != null" >
+        #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="s0Award != null" >
+        #{s0Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s1Award != null" >
+        #{s1Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s2Award != null" >
+        #{s2Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s3Award != null" >
+        #{s3Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s4Award != null" >
+        #{s4Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s5Award != null" >
+        #{s5Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s6Award != null" >
+        #{s6Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s7Award != null" >
+        #{s7Award,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SportteryFootlballJqsaward" >
+    update sporttery_footlball_jqsaward
+    <set >
+      <if test="matchid != null" >
+        matchId = #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        intTime = #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        lineId = #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="matchtime != null" >
+        matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passmode != null" >
+        passMode = #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="s0Award != null" >
+        s0_award = #{s0Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s1Award != null" >
+        s1_award = #{s1Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s2Award != null" >
+        s2_award = #{s2Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s3Award != null" >
+        s3_award = #{s3Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s4Award != null" >
+        s4_award = #{s4Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s5Award != null" >
+        s5_award = #{s5Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s6Award != null" >
+        s6_award = #{s6Award,jdbcType=DOUBLE},
+      </if>
+      <if test="s7Award != null" >
+        s7_award = #{s7Award,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SportteryFootlballJqsaward" >
+    update sporttery_footlball_jqsaward
+    set matchId = #{matchid,jdbcType=INTEGER},
+      intTime = #{inttime,jdbcType=INTEGER},
+      lineId = #{lineid,jdbcType=INTEGER},
+      matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      passMode = #{passmode,jdbcType=INTEGER},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      s0_award = #{s0Award,jdbcType=DOUBLE},
+      s1_award = #{s1Award,jdbcType=DOUBLE},
+      s2_award = #{s2Award,jdbcType=DOUBLE},
+      s3_award = #{s3Award,jdbcType=DOUBLE},
+      s4_award = #{s4Award,jdbcType=DOUBLE},
+      s5_award = #{s5Award,jdbcType=DOUBLE},
+      s6_award = #{s6Award,jdbcType=DOUBLE},
+      s7_award = #{s7Award,jdbcType=DOUBLE},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByMatchId" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from sporttery_footlball_jqsaward
+    where matchId = #{matchId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByLastUpdate" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from sporttery_footlball_jqsaward
+    where matchId = #{matchId,jdbcType=INTEGER}
+    Order By lastUpdateTime DESC
+    LIMIT 1
+  </select>
+</mapper>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.TicketNotifyMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model.TicketNotify" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="lot_id" property="lotId" jdbcType="VARCHAR" />
+    <result column="ticket_serial_no" property="ticketSerialNo" jdbcType="VARCHAR" />
+    <result column="print_serial_no" property="printSerialNo" jdbcType="VARCHAR" />
+    <result column="station_id" property="stationId" jdbcType="VARCHAR" />
+    <result column="fixed_bonus" property="fixedBonus" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_id, lot_id, ticket_serial_no, print_serial_no, station_id, fixed_bonus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model.TicketNotifyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ticket_notify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_notify
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_notify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.TicketNotify" >
+    insert into ticket_notify (id, order_id, lot_id, 
+      ticket_serial_no, print_serial_no, station_id, 
+      fixed_bonus)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{lotId,jdbcType=VARCHAR}, 
+      #{ticketSerialNo,jdbcType=VARCHAR}, #{printSerialNo,jdbcType=VARCHAR}, #{stationId,jdbcType=VARCHAR}, 
+      #{fixedBonus,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.TicketNotify" >
+    insert into ticket_notify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="lotId != null" >
+        lot_id,
+      </if>
+      <if test="ticketSerialNo != null" >
+        ticket_serial_no,
+      </if>
+      <if test="printSerialNo != null" >
+        print_serial_no,
+      </if>
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="fixedBonus != null" >
+        fixed_bonus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="lotId != null" >
+        #{lotId,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketSerialNo != null" >
+        #{ticketSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="printSerialNo != null" >
+        #{printSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stationId != null" >
+        #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedBonus != null" >
+        #{fixedBonus,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.TicketNotify" >
+    update ticket_notify
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="lotId != null" >
+        lot_id = #{lotId,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketSerialNo != null" >
+        ticket_serial_no = #{ticketSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="printSerialNo != null" >
+        print_serial_no = #{printSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stationId != null" >
+        station_id = #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedBonus != null" >
+        fixed_bonus = #{fixedBonus,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.TicketNotify" >
+    update ticket_notify
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      lot_id = #{lotId,jdbcType=VARCHAR},
+      ticket_serial_no = #{ticketSerialNo,jdbcType=VARCHAR},
+      print_serial_no = #{printSerialNo,jdbcType=VARCHAR},
+      station_id = #{stationId,jdbcType=VARCHAR},
+      fixed_bonus = #{fixedBonus,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from ticket_notify
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+</mapper>

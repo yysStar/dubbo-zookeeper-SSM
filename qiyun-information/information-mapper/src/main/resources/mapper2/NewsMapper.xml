@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.News" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="click" property="click" jdbcType="INTEGER" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="show_date_time" property="showDateTime" jdbcType="TIMESTAMP" />
+    <result column="is_show" property="isShow" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="short_title" property="shortTitle" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="content_type" property="contentType" jdbcType="INTEGER" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="news_source" property="newsSource" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="editor" property="editor" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.News" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type, click, create_date_time, show_date_time, is_show, title, short_title, keyword, 
+    content_type, link, sort, news_source, summary, label, editor, picture
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.NewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.NewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.News" >
+    insert into news (id, type, click, 
+      create_date_time, show_date_time, is_show, 
+      title, short_title, keyword, 
+      content_type, link, sort, 
+      news_source, summary, label, 
+      editor, picture, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{click,jdbcType=INTEGER}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{showDateTime,jdbcType=TIMESTAMP}, #{isShow,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{shortTitle,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{contentType,jdbcType=INTEGER}, #{link,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{newsSource,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{editor,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="click != null" >
+        click,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="showDateTime != null" >
+        show_date_time,
+      </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="shortTitle != null" >
+        short_title,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="contentType != null" >
+        content_type,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="newsSource != null" >
+        news_source,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+      <if test="editor != null" >
+        editor,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null" >
+        #{click,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showDateTime != null" >
+        #{showDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=INTEGER},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="newsSource != null" >
+        #{newsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.News" >
+    update news
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null" >
+        click = #{click,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showDateTime != null" >
+        show_date_time = #{showDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        short_title = #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="contentType != null" >
+        content_type = #{contentType,jdbcType=INTEGER},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="newsSource != null" >
+        news_source = #{newsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        editor = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.News" >
+    update news
+    set type = #{type,jdbcType=VARCHAR},
+      click = #{click,jdbcType=INTEGER},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      show_date_time = #{showDateTime,jdbcType=TIMESTAMP},
+      is_show = #{isShow,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      content_type = #{contentType,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      news_source = #{newsSource,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.News" >
+    update news
+    set type = #{type,jdbcType=VARCHAR},
+      click = #{click,jdbcType=INTEGER},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      show_date_time = #{showDateTime,jdbcType=TIMESTAMP},
+      is_show = #{isShow,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      content_type = #{contentType,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      news_source = #{newsSource,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getNewsList" resultMap="ResultMapWithBLOBs" parameterType="map">
+    SELECT id,`type`,click,create_date_time,show_date_time,is_show,title,short_title,keyword,content_type,link,sort,news_source,summary,label,editor,picture
+    FROM `news`
+    WHERE 1=1
+    <if test="type != null" >
+      AND type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="label != null" >
+      AND label = #{label,jdbcType=VARCHAR}
+    </if>
+    <if test="title != null" >
+      AND title LIKE CONCAT('%',#{title,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!=null and endTime !=null">
+      AND create_date_time BETWEEN #{startTime} and #{endTime}
+    </if>
+    <if test="startTime!=null and endTime ==null">
+      AND create_date_time <![CDATA[>=]]>#{startTime}
+    </if>
+    <if test="startTime==null and endTime !=null">
+      AND create_date_time <![CDATA[<=]]>#{endTime}
+    </if>
+    ORDER BY sort DESC,create_date_time DESC
+  </select>
+  <select id="getNew" resultMap="ResultMapWithBLOBs">
+  SELECT id,`type`,click,create_date_time,show_date_time,is_show,title,short_title,keyword,content_type,link,sort,news_source,summary,label,editor,content,picture
+  FROM `news`
+  WHERE id = #{id,jdbcType=INTEGER}
+</select>
+  <select id="getTypes" resultType="java.lang.String">
+  SELECT type
+  FROM `news`
+  GROUP BY type
+</select>
+  <select id="getLabels" resultType="java.lang.String">
+  SELECT label
+  FROM `news`
+  GROUP BY label
+</select>
+</mapper>

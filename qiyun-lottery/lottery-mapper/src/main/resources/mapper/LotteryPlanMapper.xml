@@ -1,0 +1,1247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper.LotteryPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model.LotteryPlan" >
+    <id column="PLAN_NO" property="planNo" jdbcType="INTEGER" />
+    <result column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER" />
+    <result column="TERM" property="term" jdbcType="VARCHAR" />
+    <result column="PLAN_TYPE" property="planType" jdbcType="INTEGER" />
+    <result column="SELECT_TYPE" property="selectType" jdbcType="INTEGER" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="INTEGER" />
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE_TIME" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="AMOUNT" property="amount" jdbcType="INTEGER" />
+    <result column="PER_AMOUNT" property="perAmount" jdbcType="INTEGER" />
+    <result column="PART" property="part" jdbcType="INTEGER" />
+    <result column="SOLD_PART" property="soldPart" jdbcType="INTEGER" />
+    <result column="FOUNDER_PART" property="founderPart" jdbcType="INTEGER" />
+    <result column="RESERVE_PART" property="reservePart" jdbcType="INTEGER" />
+    <result column="DEAL_DATE_TIME" property="dealDateTime" jdbcType="TIMESTAMP" />
+    <result column="MULTIPLE" property="multiple" jdbcType="INTEGER" />
+    <result column="PLAN_STATUS" property="planStatus" jdbcType="INTEGER" />
+    <result column="PRINT_TICKET_DATE_TIME" property="printTicketDateTime" jdbcType="TIMESTAMP" />
+    <result column="WIN_STATUS" property="winStatus" jdbcType="INTEGER" />
+    <result column="PRETAX_PRIZE" property="pretaxPrize" jdbcType="DECIMAL" />
+    <result column="POSTTAX_PRIZE" property="posttaxPrize" jdbcType="DECIMAL" />
+    <result column="CLICKS" property="clicks" jdbcType="INTEGER" />
+    <result column="PLAN_DESC" property="planDesc" jdbcType="VARCHAR" />
+    <result column="IS_UPLOAD_CONTENT" property="isUploadContent" jdbcType="INTEGER" />
+    <result column="EXPERIENCE" property="experience" jdbcType="INTEGER" />
+    <result column="IS_SUPER_MAN" property="isSuperMan" jdbcType="INTEGER" />
+    <result column="PLAY_TYPE" property="playType" jdbcType="INTEGER" />
+    <result column="ADD_ATTRIBUTE" property="addAttribute" jdbcType="VARCHAR" />
+    <result column="IS_TOP" property="isTop" jdbcType="INTEGER" />
+    <result column="MODEL" property="model" jdbcType="INTEGER" />
+    <result column="VERIFY_MD5" property="verifyMd5" jdbcType="VARCHAR" />
+    <result column="PUBLIC_STATUS" property="publicStatus" jdbcType="INTEGER" />
+    <result column="COMMISION" property="commision" jdbcType="INTEGER" />
+    <result column="GEN_TYPE" property="genType" jdbcType="INTEGER" />
+    <result column="BOOK_COUNT" property="bookCount" jdbcType="INTEGER" />
+    <result column="PLAN_TICKET_STATUS" property="planTicketStatus" jdbcType="INTEGER" />
+    <result column="IS_ABLE_TICKETING" property="isAbleTicketing" jdbcType="INTEGER" />
+    <result column="add_prize" property="addPrize" jdbcType="DECIMAL" />
+    <result column="open_result_time" property="openResultTime" jdbcType="TIMESTAMP" />
+    <result column="PLAN_HM_OG" property="planHmOg" jdbcType="INTEGER" />
+    <result column="OPEN_FINISH" property="openFinish" jdbcType="INTEGER" />
+    <result column="AUTOMATIC_TYPE" property="automaticType" jdbcType="VARCHAR" />
+    <result column="out_plan_no" property="outPlanNo" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+    <result column="JOIN_COUNT" property="joinCount" jdbcType="INTEGER" />
+    <result column="RETURN_PRIZE_TIME" property="returnPrizeTime" jdbcType="TIMESTAMP" />
+    <result column="PAY_FINISH_TIME" property="payFinishTime" jdbcType="TIMESTAMP" />
+    <result column="ACCEPT_TIME" property="acceptTime" jdbcType="TIMESTAMP" />
+    <result column="REFUND_START_TIME" property="refundStartTime" jdbcType="TIMESTAMP" />
+    <result column="ARRIVAL_TIME" property="arrivalTime" jdbcType="TIMESTAMP" />
+    <result column="TRADE_TYPE" property="tradeType" jdbcType="INTEGER" />
+    <result column="account_documentary" property="accountDocumentary" jdbcType="VARCHAR" />
+    <result column="planNo_copyDocumentary" property="plannoCopydocumentary" jdbcType="INTEGER" />
+    <result column="haploid_amount" property="haploidAmount" jdbcType="INTEGER" />
+    <result column="sumAmount" property="sumamount" jdbcType="INTEGER" />
+    <result column="gold" property="gold" jdbcType="DECIMAL" />
+    <result column="sum_gold" property="sumGold" jdbcType="DECIMAL" />
+    <result column="web_site_gold" property="webSiteGold" jdbcType="DECIMAL" />
+    <result column="sum_web_site_gold" property="sumWebSiteGold" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model.LotteryPlanWithBLOBs" extends="BaseResultMap" >
+    <result column="PRIZE_CONTENT" property="prizeContent" jdbcType="LONGVARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PLAN_NO, LOTTERY_TYPE, TERM, PLAN_TYPE, SELECT_TYPE, MEMBER_ID, ACCOUNT, CREATE_DATE_TIME, 
+    AMOUNT, PER_AMOUNT, PART, SOLD_PART, FOUNDER_PART, RESERVE_PART, DEAL_DATE_TIME, 
+    MULTIPLE, PLAN_STATUS, PRINT_TICKET_DATE_TIME, WIN_STATUS, PRETAX_PRIZE, POSTTAX_PRIZE, 
+    CLICKS, PLAN_DESC, IS_UPLOAD_CONTENT, EXPERIENCE, IS_SUPER_MAN, PLAY_TYPE, ADD_ATTRIBUTE, 
+    IS_TOP, MODEL, VERIFY_MD5, PUBLIC_STATUS, COMMISION, GEN_TYPE, BOOK_COUNT, PLAN_TICKET_STATUS, 
+    IS_ABLE_TICKETING, add_prize, open_result_time, PLAN_HM_OG, OPEN_FINISH, AUTOMATIC_TYPE, 
+    out_plan_no, platform, JOIN_COUNT, RETURN_PRIZE_TIME, PAY_FINISH_TIME, ACCEPT_TIME, 
+    REFUND_START_TIME, ARRIVAL_TIME, TRADE_TYPE, account_documentary, planNo_copyDocumentary, 
+    haploid_amount, sumAmount, gold, sum_gold, web_site_gold, sum_web_site_gold
+  </sql>
+  <sql id="Blob_Column_List" >
+    PRIZE_CONTENT, CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model.LotteryPlanQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lottery_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model.LotteryPlanQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lottery_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lottery_plan
+    where PLAN_NO = #{planNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lottery_plan
+    where PLAN_NO = #{planNo,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model.LotteryPlanQuery" >
+    delete from lottery_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.LotteryPlanWithBLOBs" useGeneratedKeys="true" keyProperty="planNo">
+    insert into lottery_plan (PLAN_NO, LOTTERY_TYPE, TERM, 
+      PLAN_TYPE, SELECT_TYPE, MEMBER_ID, 
+      ACCOUNT, CREATE_DATE_TIME, AMOUNT, 
+      PER_AMOUNT, PART, SOLD_PART, 
+      FOUNDER_PART, RESERVE_PART, DEAL_DATE_TIME, 
+      MULTIPLE, PLAN_STATUS, PRINT_TICKET_DATE_TIME, 
+      WIN_STATUS, PRETAX_PRIZE, POSTTAX_PRIZE, 
+      CLICKS, PLAN_DESC, IS_UPLOAD_CONTENT, 
+      EXPERIENCE, IS_SUPER_MAN, PLAY_TYPE, 
+      ADD_ATTRIBUTE, IS_TOP, MODEL, 
+      VERIFY_MD5, PUBLIC_STATUS, COMMISION, 
+      GEN_TYPE, BOOK_COUNT, PLAN_TICKET_STATUS, 
+      IS_ABLE_TICKETING, add_prize, open_result_time, 
+      PLAN_HM_OG, OPEN_FINISH, AUTOMATIC_TYPE, 
+      out_plan_no, platform, JOIN_COUNT, 
+      RETURN_PRIZE_TIME, PAY_FINISH_TIME, ACCEPT_TIME, 
+      REFUND_START_TIME, ARRIVAL_TIME, TRADE_TYPE, 
+      account_documentary, planNo_copyDocumentary, 
+      haploid_amount, sumAmount, gold, 
+      sum_gold, web_site_gold, sum_web_site_gold, 
+      PRIZE_CONTENT, CONTENT)
+    values (#{planNo,jdbcType=INTEGER}, #{lotteryType,jdbcType=INTEGER}, #{term,jdbcType=VARCHAR}, 
+      #{planType,jdbcType=INTEGER}, #{selectType,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, 
+      #{account,jdbcType=VARCHAR}, #{createDateTime,jdbcType=TIMESTAMP}, #{amount,jdbcType=INTEGER}, 
+      #{perAmount,jdbcType=INTEGER}, #{part,jdbcType=INTEGER}, #{soldPart,jdbcType=INTEGER}, 
+      #{founderPart,jdbcType=INTEGER}, #{reservePart,jdbcType=INTEGER}, #{dealDateTime,jdbcType=TIMESTAMP}, 
+      #{multiple,jdbcType=INTEGER}, #{planStatus,jdbcType=INTEGER}, #{printTicketDateTime,jdbcType=TIMESTAMP}, 
+      #{winStatus,jdbcType=INTEGER}, #{pretaxPrize,jdbcType=DECIMAL}, #{posttaxPrize,jdbcType=DECIMAL}, 
+      #{clicks,jdbcType=INTEGER}, #{planDesc,jdbcType=VARCHAR}, #{isUploadContent,jdbcType=INTEGER}, 
+      #{experience,jdbcType=INTEGER}, #{isSuperMan,jdbcType=INTEGER}, #{playType,jdbcType=INTEGER}, 
+      #{addAttribute,jdbcType=VARCHAR}, #{isTop,jdbcType=INTEGER}, #{model,jdbcType=INTEGER}, 
+      #{verifyMd5,jdbcType=VARCHAR}, #{publicStatus,jdbcType=INTEGER}, #{commision,jdbcType=INTEGER}, 
+      #{genType,jdbcType=INTEGER}, #{bookCount,jdbcType=INTEGER}, #{planTicketStatus,jdbcType=INTEGER}, 
+      #{isAbleTicketing,jdbcType=INTEGER}, #{addPrize,jdbcType=DECIMAL}, #{openResultTime,jdbcType=TIMESTAMP}, 
+      #{planHmOg,jdbcType=INTEGER}, #{openFinish,jdbcType=INTEGER}, #{automaticType,jdbcType=VARCHAR}, 
+      #{outPlanNo,jdbcType=VARCHAR}, #{platform,jdbcType=INTEGER}, #{joinCount,jdbcType=INTEGER}, 
+      #{returnPrizeTime,jdbcType=TIMESTAMP}, #{payFinishTime,jdbcType=TIMESTAMP}, #{acceptTime,jdbcType=TIMESTAMP}, 
+      #{refundStartTime,jdbcType=TIMESTAMP}, #{arrivalTime,jdbcType=TIMESTAMP}, #{tradeType,jdbcType=INTEGER}, 
+      #{accountDocumentary,jdbcType=VARCHAR}, #{plannoCopydocumentary,jdbcType=INTEGER}, 
+      #{haploidAmount,jdbcType=INTEGER}, #{sumamount,jdbcType=INTEGER}, #{gold,jdbcType=DECIMAL}, 
+      #{sumGold,jdbcType=DECIMAL}, #{webSiteGold,jdbcType=DECIMAL}, #{sumWebSiteGold,jdbcType=DECIMAL}, 
+      #{prizeContent,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.LotteryPlanWithBLOBs" >
+    insert into lottery_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="planNo != null" >
+        PLAN_NO,
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE,
+      </if>
+      <if test="term != null" >
+        TERM,
+      </if>
+      <if test="planType != null" >
+        PLAN_TYPE,
+      </if>
+      <if test="selectType != null" >
+        SELECT_TYPE,
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="perAmount != null" >
+        PER_AMOUNT,
+      </if>
+      <if test="part != null" >
+        PART,
+      </if>
+      <if test="soldPart != null" >
+        SOLD_PART,
+      </if>
+      <if test="founderPart != null" >
+        FOUNDER_PART,
+      </if>
+      <if test="reservePart != null" >
+        RESERVE_PART,
+      </if>
+      <if test="dealDateTime != null" >
+        DEAL_DATE_TIME,
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE,
+      </if>
+      <if test="planStatus != null" >
+        PLAN_STATUS,
+      </if>
+      <if test="printTicketDateTime != null" >
+        PRINT_TICKET_DATE_TIME,
+      </if>
+      <if test="winStatus != null" >
+        WIN_STATUS,
+      </if>
+      <if test="pretaxPrize != null" >
+        PRETAX_PRIZE,
+      </if>
+      <if test="posttaxPrize != null" >
+        POSTTAX_PRIZE,
+      </if>
+      <if test="clicks != null" >
+        CLICKS,
+      </if>
+      <if test="planDesc != null" >
+        PLAN_DESC,
+      </if>
+      <if test="isUploadContent != null" >
+        IS_UPLOAD_CONTENT,
+      </if>
+      <if test="experience != null" >
+        EXPERIENCE,
+      </if>
+      <if test="isSuperMan != null" >
+        IS_SUPER_MAN,
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE,
+      </if>
+      <if test="addAttribute != null" >
+        ADD_ATTRIBUTE,
+      </if>
+      <if test="isTop != null" >
+        IS_TOP,
+      </if>
+      <if test="model != null" >
+        MODEL,
+      </if>
+      <if test="verifyMd5 != null" >
+        VERIFY_MD5,
+      </if>
+      <if test="publicStatus != null" >
+        PUBLIC_STATUS,
+      </if>
+      <if test="commision != null" >
+        COMMISION,
+      </if>
+      <if test="genType != null" >
+        GEN_TYPE,
+      </if>
+      <if test="bookCount != null" >
+        BOOK_COUNT,
+      </if>
+      <if test="planTicketStatus != null" >
+        PLAN_TICKET_STATUS,
+      </if>
+      <if test="isAbleTicketing != null" >
+        IS_ABLE_TICKETING,
+      </if>
+      <if test="addPrize != null" >
+        add_prize,
+      </if>
+      <if test="openResultTime != null" >
+        open_result_time,
+      </if>
+      <if test="planHmOg != null" >
+        PLAN_HM_OG,
+      </if>
+      <if test="openFinish != null" >
+        OPEN_FINISH,
+      </if>
+      <if test="automaticType != null" >
+        AUTOMATIC_TYPE,
+      </if>
+      <if test="outPlanNo != null" >
+        out_plan_no,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="joinCount != null" >
+        JOIN_COUNT,
+      </if>
+      <if test="returnPrizeTime != null" >
+        RETURN_PRIZE_TIME,
+      </if>
+      <if test="payFinishTime != null" >
+        PAY_FINISH_TIME,
+      </if>
+      <if test="acceptTime != null" >
+        ACCEPT_TIME,
+      </if>
+      <if test="refundStartTime != null" >
+        REFUND_START_TIME,
+      </if>
+      <if test="arrivalTime != null" >
+        ARRIVAL_TIME,
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE,
+      </if>
+      <if test="accountDocumentary != null" >
+        account_documentary,
+      </if>
+      <if test="plannoCopydocumentary != null" >
+        planNo_copyDocumentary,
+      </if>
+      <if test="haploidAmount != null" >
+        haploid_amount,
+      </if>
+      <if test="sumamount != null" >
+        sumAmount,
+      </if>
+      <if test="gold != null" >
+        gold,
+      </if>
+      <if test="sumGold != null" >
+        sum_gold,
+      </if>
+      <if test="webSiteGold != null" >
+        web_site_gold,
+      </if>
+      <if test="sumWebSiteGold != null" >
+        sum_web_site_gold,
+      </if>
+      <if test="prizeContent != null" >
+        PRIZE_CONTENT,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="planNo != null" >
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryType != null" >
+        #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null" >
+        #{planType,jdbcType=INTEGER},
+      </if>
+      <if test="selectType != null" >
+        #{selectType,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="perAmount != null" >
+        #{perAmount,jdbcType=INTEGER},
+      </if>
+      <if test="part != null" >
+        #{part,jdbcType=INTEGER},
+      </if>
+      <if test="soldPart != null" >
+        #{soldPart,jdbcType=INTEGER},
+      </if>
+      <if test="founderPart != null" >
+        #{founderPart,jdbcType=INTEGER},
+      </if>
+      <if test="reservePart != null" >
+        #{reservePart,jdbcType=INTEGER},
+      </if>
+      <if test="dealDateTime != null" >
+        #{dealDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="multiple != null" >
+        #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="planStatus != null" >
+        #{planStatus,jdbcType=INTEGER},
+      </if>
+      <if test="printTicketDateTime != null" >
+        #{printTicketDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="winStatus != null" >
+        #{winStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pretaxPrize != null" >
+        #{pretaxPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="posttaxPrize != null" >
+        #{posttaxPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="clicks != null" >
+        #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="planDesc != null" >
+        #{planDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isUploadContent != null" >
+        #{isUploadContent,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="isSuperMan != null" >
+        #{isSuperMan,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="addAttribute != null" >
+        #{addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=INTEGER},
+      </if>
+      <if test="verifyMd5 != null" >
+        #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="publicStatus != null" >
+        #{publicStatus,jdbcType=INTEGER},
+      </if>
+      <if test="commision != null" >
+        #{commision,jdbcType=INTEGER},
+      </if>
+      <if test="genType != null" >
+        #{genType,jdbcType=INTEGER},
+      </if>
+      <if test="bookCount != null" >
+        #{bookCount,jdbcType=INTEGER},
+      </if>
+      <if test="planTicketStatus != null" >
+        #{planTicketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isAbleTicketing != null" >
+        #{isAbleTicketing,jdbcType=INTEGER},
+      </if>
+      <if test="addPrize != null" >
+        #{addPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="openResultTime != null" >
+        #{openResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planHmOg != null" >
+        #{planHmOg,jdbcType=INTEGER},
+      </if>
+      <if test="openFinish != null" >
+        #{openFinish,jdbcType=INTEGER},
+      </if>
+      <if test="automaticType != null" >
+        #{automaticType,jdbcType=VARCHAR},
+      </if>
+      <if test="outPlanNo != null" >
+        #{outPlanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="joinCount != null" >
+        #{joinCount,jdbcType=INTEGER},
+      </if>
+      <if test="returnPrizeTime != null" >
+        #{returnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payFinishTime != null" >
+        #{payFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptTime != null" >
+        #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundStartTime != null" >
+        #{refundStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalTime != null" >
+        #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="accountDocumentary != null" >
+        #{accountDocumentary,jdbcType=VARCHAR},
+      </if>
+      <if test="plannoCopydocumentary != null" >
+        #{plannoCopydocumentary,jdbcType=INTEGER},
+      </if>
+      <if test="haploidAmount != null" >
+        #{haploidAmount,jdbcType=INTEGER},
+      </if>
+      <if test="sumamount != null" >
+        #{sumamount,jdbcType=INTEGER},
+      </if>
+      <if test="gold != null" >
+        #{gold,jdbcType=DECIMAL},
+      </if>
+      <if test="sumGold != null" >
+        #{sumGold,jdbcType=DECIMAL},
+      </if>
+      <if test="webSiteGold != null" >
+        #{webSiteGold,jdbcType=DECIMAL},
+      </if>
+      <if test="sumWebSiteGold != null" >
+        #{sumWebSiteGold,jdbcType=DECIMAL},
+      </if>
+      <if test="prizeContent != null" >
+        #{prizeContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model.LotteryPlanQuery" resultType="java.lang.Integer" >
+    select count(*) from lottery_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lottery_plan
+    <set >
+      <if test="record.planNo != null" >
+        PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.lotteryType != null" >
+        LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="record.term != null" >
+        TERM = #{record.term,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planType != null" >
+        PLAN_TYPE = #{record.planType,jdbcType=INTEGER},
+      </if>
+      <if test="record.selectType != null" >
+        SELECT_TYPE = #{record.selectType,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDateTime != null" >
+        CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.perAmount != null" >
+        PER_AMOUNT = #{record.perAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.part != null" >
+        PART = #{record.part,jdbcType=INTEGER},
+      </if>
+      <if test="record.soldPart != null" >
+        SOLD_PART = #{record.soldPart,jdbcType=INTEGER},
+      </if>
+      <if test="record.founderPart != null" >
+        FOUNDER_PART = #{record.founderPart,jdbcType=INTEGER},
+      </if>
+      <if test="record.reservePart != null" >
+        RESERVE_PART = #{record.reservePart,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealDateTime != null" >
+        DEAL_DATE_TIME = #{record.dealDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.multiple != null" >
+        MULTIPLE = #{record.multiple,jdbcType=INTEGER},
+      </if>
+      <if test="record.planStatus != null" >
+        PLAN_STATUS = #{record.planStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.printTicketDateTime != null" >
+        PRINT_TICKET_DATE_TIME = #{record.printTicketDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.winStatus != null" >
+        WIN_STATUS = #{record.winStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.pretaxPrize != null" >
+        PRETAX_PRIZE = #{record.pretaxPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.posttaxPrize != null" >
+        POSTTAX_PRIZE = #{record.posttaxPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.clicks != null" >
+        CLICKS = #{record.clicks,jdbcType=INTEGER},
+      </if>
+      <if test="record.planDesc != null" >
+        PLAN_DESC = #{record.planDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isUploadContent != null" >
+        IS_UPLOAD_CONTENT = #{record.isUploadContent,jdbcType=INTEGER},
+      </if>
+      <if test="record.experience != null" >
+        EXPERIENCE = #{record.experience,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSuperMan != null" >
+        IS_SUPER_MAN = #{record.isSuperMan,jdbcType=INTEGER},
+      </if>
+      <if test="record.playType != null" >
+        PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      </if>
+      <if test="record.addAttribute != null" >
+        ADD_ATTRIBUTE = #{record.addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isTop != null" >
+        IS_TOP = #{record.isTop,jdbcType=INTEGER},
+      </if>
+      <if test="record.model != null" >
+        MODEL = #{record.model,jdbcType=INTEGER},
+      </if>
+      <if test="record.verifyMd5 != null" >
+        VERIFY_MD5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicStatus != null" >
+        PUBLIC_STATUS = #{record.publicStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.commision != null" >
+        COMMISION = #{record.commision,jdbcType=INTEGER},
+      </if>
+      <if test="record.genType != null" >
+        GEN_TYPE = #{record.genType,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookCount != null" >
+        BOOK_COUNT = #{record.bookCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.planTicketStatus != null" >
+        PLAN_TICKET_STATUS = #{record.planTicketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.isAbleTicketing != null" >
+        IS_ABLE_TICKETING = #{record.isAbleTicketing,jdbcType=INTEGER},
+      </if>
+      <if test="record.addPrize != null" >
+        add_prize = #{record.addPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.openResultTime != null" >
+        open_result_time = #{record.openResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.planHmOg != null" >
+        PLAN_HM_OG = #{record.planHmOg,jdbcType=INTEGER},
+      </if>
+      <if test="record.openFinish != null" >
+        OPEN_FINISH = #{record.openFinish,jdbcType=INTEGER},
+      </if>
+      <if test="record.automaticType != null" >
+        AUTOMATIC_TYPE = #{record.automaticType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outPlanNo != null" >
+        out_plan_no = #{record.outPlanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinCount != null" >
+        JOIN_COUNT = #{record.joinCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.returnPrizeTime != null" >
+        RETURN_PRIZE_TIME = #{record.returnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payFinishTime != null" >
+        PAY_FINISH_TIME = #{record.payFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.acceptTime != null" >
+        ACCEPT_TIME = #{record.acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.refundStartTime != null" >
+        REFUND_START_TIME = #{record.refundStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.arrivalTime != null" >
+        ARRIVAL_TIME = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tradeType != null" >
+        TRADE_TYPE = #{record.tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountDocumentary != null" >
+        account_documentary = #{record.accountDocumentary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plannoCopydocumentary != null" >
+        planNo_copyDocumentary = #{record.plannoCopydocumentary,jdbcType=INTEGER},
+      </if>
+      <if test="record.haploidAmount != null" >
+        haploid_amount = #{record.haploidAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.sumamount != null" >
+        sumAmount = #{record.sumamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.gold != null" >
+        gold = #{record.gold,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumGold != null" >
+        sum_gold = #{record.sumGold,jdbcType=DECIMAL},
+      </if>
+      <if test="record.webSiteGold != null" >
+        web_site_gold = #{record.webSiteGold,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumWebSiteGold != null" >
+        sum_web_site_gold = #{record.sumWebSiteGold,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prizeContent != null" >
+        PRIZE_CONTENT = #{record.prizeContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update lottery_plan
+    set PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      TERM = #{record.term,jdbcType=VARCHAR},
+      PLAN_TYPE = #{record.planType,jdbcType=INTEGER},
+      SELECT_TYPE = #{record.selectType,jdbcType=INTEGER},
+      MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      AMOUNT = #{record.amount,jdbcType=INTEGER},
+      PER_AMOUNT = #{record.perAmount,jdbcType=INTEGER},
+      PART = #{record.part,jdbcType=INTEGER},
+      SOLD_PART = #{record.soldPart,jdbcType=INTEGER},
+      FOUNDER_PART = #{record.founderPart,jdbcType=INTEGER},
+      RESERVE_PART = #{record.reservePart,jdbcType=INTEGER},
+      DEAL_DATE_TIME = #{record.dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{record.multiple,jdbcType=INTEGER},
+      PLAN_STATUS = #{record.planStatus,jdbcType=INTEGER},
+      PRINT_TICKET_DATE_TIME = #{record.printTicketDateTime,jdbcType=TIMESTAMP},
+      WIN_STATUS = #{record.winStatus,jdbcType=INTEGER},
+      PRETAX_PRIZE = #{record.pretaxPrize,jdbcType=DECIMAL},
+      POSTTAX_PRIZE = #{record.posttaxPrize,jdbcType=DECIMAL},
+      CLICKS = #{record.clicks,jdbcType=INTEGER},
+      PLAN_DESC = #{record.planDesc,jdbcType=VARCHAR},
+      IS_UPLOAD_CONTENT = #{record.isUploadContent,jdbcType=INTEGER},
+      EXPERIENCE = #{record.experience,jdbcType=INTEGER},
+      IS_SUPER_MAN = #{record.isSuperMan,jdbcType=INTEGER},
+      PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{record.addAttribute,jdbcType=VARCHAR},
+      IS_TOP = #{record.isTop,jdbcType=INTEGER},
+      MODEL = #{record.model,jdbcType=INTEGER},
+      VERIFY_MD5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      PUBLIC_STATUS = #{record.publicStatus,jdbcType=INTEGER},
+      COMMISION = #{record.commision,jdbcType=INTEGER},
+      GEN_TYPE = #{record.genType,jdbcType=INTEGER},
+      BOOK_COUNT = #{record.bookCount,jdbcType=INTEGER},
+      PLAN_TICKET_STATUS = #{record.planTicketStatus,jdbcType=INTEGER},
+      IS_ABLE_TICKETING = #{record.isAbleTicketing,jdbcType=INTEGER},
+      add_prize = #{record.addPrize,jdbcType=DECIMAL},
+      open_result_time = #{record.openResultTime,jdbcType=TIMESTAMP},
+      PLAN_HM_OG = #{record.planHmOg,jdbcType=INTEGER},
+      OPEN_FINISH = #{record.openFinish,jdbcType=INTEGER},
+      AUTOMATIC_TYPE = #{record.automaticType,jdbcType=VARCHAR},
+      out_plan_no = #{record.outPlanNo,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=INTEGER},
+      JOIN_COUNT = #{record.joinCount,jdbcType=INTEGER},
+      RETURN_PRIZE_TIME = #{record.returnPrizeTime,jdbcType=TIMESTAMP},
+      PAY_FINISH_TIME = #{record.payFinishTime,jdbcType=TIMESTAMP},
+      ACCEPT_TIME = #{record.acceptTime,jdbcType=TIMESTAMP},
+      REFUND_START_TIME = #{record.refundStartTime,jdbcType=TIMESTAMP},
+      ARRIVAL_TIME = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      TRADE_TYPE = #{record.tradeType,jdbcType=INTEGER},
+      account_documentary = #{record.accountDocumentary,jdbcType=VARCHAR},
+      planNo_copyDocumentary = #{record.plannoCopydocumentary,jdbcType=INTEGER},
+      haploid_amount = #{record.haploidAmount,jdbcType=INTEGER},
+      sumAmount = #{record.sumamount,jdbcType=INTEGER},
+      gold = #{record.gold,jdbcType=DECIMAL},
+      sum_gold = #{record.sumGold,jdbcType=DECIMAL},
+      web_site_gold = #{record.webSiteGold,jdbcType=DECIMAL},
+      sum_web_site_gold = #{record.sumWebSiteGold,jdbcType=DECIMAL},
+      PRIZE_CONTENT = #{record.prizeContent,jdbcType=LONGVARCHAR},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lottery_plan
+    set PLAN_NO = #{record.planNo,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      TERM = #{record.term,jdbcType=VARCHAR},
+      PLAN_TYPE = #{record.planType,jdbcType=INTEGER},
+      SELECT_TYPE = #{record.selectType,jdbcType=INTEGER},
+      MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      AMOUNT = #{record.amount,jdbcType=INTEGER},
+      PER_AMOUNT = #{record.perAmount,jdbcType=INTEGER},
+      PART = #{record.part,jdbcType=INTEGER},
+      SOLD_PART = #{record.soldPart,jdbcType=INTEGER},
+      FOUNDER_PART = #{record.founderPart,jdbcType=INTEGER},
+      RESERVE_PART = #{record.reservePart,jdbcType=INTEGER},
+      DEAL_DATE_TIME = #{record.dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{record.multiple,jdbcType=INTEGER},
+      PLAN_STATUS = #{record.planStatus,jdbcType=INTEGER},
+      PRINT_TICKET_DATE_TIME = #{record.printTicketDateTime,jdbcType=TIMESTAMP},
+      WIN_STATUS = #{record.winStatus,jdbcType=INTEGER},
+      PRETAX_PRIZE = #{record.pretaxPrize,jdbcType=DECIMAL},
+      POSTTAX_PRIZE = #{record.posttaxPrize,jdbcType=DECIMAL},
+      CLICKS = #{record.clicks,jdbcType=INTEGER},
+      PLAN_DESC = #{record.planDesc,jdbcType=VARCHAR},
+      IS_UPLOAD_CONTENT = #{record.isUploadContent,jdbcType=INTEGER},
+      EXPERIENCE = #{record.experience,jdbcType=INTEGER},
+      IS_SUPER_MAN = #{record.isSuperMan,jdbcType=INTEGER},
+      PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{record.addAttribute,jdbcType=VARCHAR},
+      IS_TOP = #{record.isTop,jdbcType=INTEGER},
+      MODEL = #{record.model,jdbcType=INTEGER},
+      VERIFY_MD5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      PUBLIC_STATUS = #{record.publicStatus,jdbcType=INTEGER},
+      COMMISION = #{record.commision,jdbcType=INTEGER},
+      GEN_TYPE = #{record.genType,jdbcType=INTEGER},
+      BOOK_COUNT = #{record.bookCount,jdbcType=INTEGER},
+      PLAN_TICKET_STATUS = #{record.planTicketStatus,jdbcType=INTEGER},
+      IS_ABLE_TICKETING = #{record.isAbleTicketing,jdbcType=INTEGER},
+      add_prize = #{record.addPrize,jdbcType=DECIMAL},
+      open_result_time = #{record.openResultTime,jdbcType=TIMESTAMP},
+      PLAN_HM_OG = #{record.planHmOg,jdbcType=INTEGER},
+      OPEN_FINISH = #{record.openFinish,jdbcType=INTEGER},
+      AUTOMATIC_TYPE = #{record.automaticType,jdbcType=VARCHAR},
+      out_plan_no = #{record.outPlanNo,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=INTEGER},
+      JOIN_COUNT = #{record.joinCount,jdbcType=INTEGER},
+      RETURN_PRIZE_TIME = #{record.returnPrizeTime,jdbcType=TIMESTAMP},
+      PAY_FINISH_TIME = #{record.payFinishTime,jdbcType=TIMESTAMP},
+      ACCEPT_TIME = #{record.acceptTime,jdbcType=TIMESTAMP},
+      REFUND_START_TIME = #{record.refundStartTime,jdbcType=TIMESTAMP},
+      ARRIVAL_TIME = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      TRADE_TYPE = #{record.tradeType,jdbcType=INTEGER},
+      account_documentary = #{record.accountDocumentary,jdbcType=VARCHAR},
+      planNo_copyDocumentary = #{record.plannoCopydocumentary,jdbcType=INTEGER},
+      haploid_amount = #{record.haploidAmount,jdbcType=INTEGER},
+      sumAmount = #{record.sumamount,jdbcType=INTEGER},
+      gold = #{record.gold,jdbcType=DECIMAL},
+      sum_gold = #{record.sumGold,jdbcType=DECIMAL},
+      web_site_gold = #{record.webSiteGold,jdbcType=DECIMAL},
+      sum_web_site_gold = #{record.sumWebSiteGold,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.LotteryPlanWithBLOBs" >
+    update lottery_plan
+    <set >
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        TERM = #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null" >
+        PLAN_TYPE = #{planType,jdbcType=INTEGER},
+      </if>
+      <if test="selectType != null" >
+        SELECT_TYPE = #{selectType,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="perAmount != null" >
+        PER_AMOUNT = #{perAmount,jdbcType=INTEGER},
+      </if>
+      <if test="part != null" >
+        PART = #{part,jdbcType=INTEGER},
+      </if>
+      <if test="soldPart != null" >
+        SOLD_PART = #{soldPart,jdbcType=INTEGER},
+      </if>
+      <if test="founderPart != null" >
+        FOUNDER_PART = #{founderPart,jdbcType=INTEGER},
+      </if>
+      <if test="reservePart != null" >
+        RESERVE_PART = #{reservePart,jdbcType=INTEGER},
+      </if>
+      <if test="dealDateTime != null" >
+        DEAL_DATE_TIME = #{dealDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE = #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="planStatus != null" >
+        PLAN_STATUS = #{planStatus,jdbcType=INTEGER},
+      </if>
+      <if test="printTicketDateTime != null" >
+        PRINT_TICKET_DATE_TIME = #{printTicketDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="winStatus != null" >
+        WIN_STATUS = #{winStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pretaxPrize != null" >
+        PRETAX_PRIZE = #{pretaxPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="posttaxPrize != null" >
+        POSTTAX_PRIZE = #{posttaxPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="clicks != null" >
+        CLICKS = #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="planDesc != null" >
+        PLAN_DESC = #{planDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isUploadContent != null" >
+        IS_UPLOAD_CONTENT = #{isUploadContent,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null" >
+        EXPERIENCE = #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="isSuperMan != null" >
+        IS_SUPER_MAN = #{isSuperMan,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="addAttribute != null" >
+        ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        IS_TOP = #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="model != null" >
+        MODEL = #{model,jdbcType=INTEGER},
+      </if>
+      <if test="verifyMd5 != null" >
+        VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="publicStatus != null" >
+        PUBLIC_STATUS = #{publicStatus,jdbcType=INTEGER},
+      </if>
+      <if test="commision != null" >
+        COMMISION = #{commision,jdbcType=INTEGER},
+      </if>
+      <if test="genType != null" >
+        GEN_TYPE = #{genType,jdbcType=INTEGER},
+      </if>
+      <if test="bookCount != null" >
+        BOOK_COUNT = #{bookCount,jdbcType=INTEGER},
+      </if>
+      <if test="planTicketStatus != null" >
+        PLAN_TICKET_STATUS = #{planTicketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isAbleTicketing != null" >
+        IS_ABLE_TICKETING = #{isAbleTicketing,jdbcType=INTEGER},
+      </if>
+      <if test="addPrize != null" >
+        add_prize = #{addPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="openResultTime != null" >
+        open_result_time = #{openResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planHmOg != null" >
+        PLAN_HM_OG = #{planHmOg,jdbcType=INTEGER},
+      </if>
+      <if test="openFinish != null" >
+        OPEN_FINISH = #{openFinish,jdbcType=INTEGER},
+      </if>
+      <if test="automaticType != null" >
+        AUTOMATIC_TYPE = #{automaticType,jdbcType=VARCHAR},
+      </if>
+      <if test="outPlanNo != null" >
+        out_plan_no = #{outPlanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="joinCount != null" >
+        JOIN_COUNT = #{joinCount,jdbcType=INTEGER},
+      </if>
+      <if test="returnPrizeTime != null" >
+        RETURN_PRIZE_TIME = #{returnPrizeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payFinishTime != null" >
+        PAY_FINISH_TIME = #{payFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptTime != null" >
+        ACCEPT_TIME = #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundStartTime != null" >
+        REFUND_START_TIME = #{refundStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalTime != null" >
+        ARRIVAL_TIME = #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="accountDocumentary != null" >
+        account_documentary = #{accountDocumentary,jdbcType=VARCHAR},
+      </if>
+      <if test="plannoCopydocumentary != null" >
+        planNo_copyDocumentary = #{plannoCopydocumentary,jdbcType=INTEGER},
+      </if>
+      <if test="haploidAmount != null" >
+        haploid_amount = #{haploidAmount,jdbcType=INTEGER},
+      </if>
+      <if test="sumamount != null" >
+        sumAmount = #{sumamount,jdbcType=INTEGER},
+      </if>
+      <if test="gold != null" >
+        gold = #{gold,jdbcType=DECIMAL},
+      </if>
+      <if test="sumGold != null" >
+        sum_gold = #{sumGold,jdbcType=DECIMAL},
+      </if>
+      <if test="webSiteGold != null" >
+        web_site_gold = #{webSiteGold,jdbcType=DECIMAL},
+      </if>
+      <if test="sumWebSiteGold != null" >
+        sum_web_site_gold = #{sumWebSiteGold,jdbcType=DECIMAL},
+      </if>
+      <if test="prizeContent != null" >
+        PRIZE_CONTENT = #{prizeContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PLAN_NO = #{planNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model.LotteryPlanWithBLOBs" >
+    update lottery_plan
+    set LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      TERM = #{term,jdbcType=VARCHAR},
+      PLAN_TYPE = #{planType,jdbcType=INTEGER},
+      SELECT_TYPE = #{selectType,jdbcType=INTEGER},
+      MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      PER_AMOUNT = #{perAmount,jdbcType=INTEGER},
+      PART = #{part,jdbcType=INTEGER},
+      SOLD_PART = #{soldPart,jdbcType=INTEGER},
+      FOUNDER_PART = #{founderPart,jdbcType=INTEGER},
+      RESERVE_PART = #{reservePart,jdbcType=INTEGER},
+      DEAL_DATE_TIME = #{dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{multiple,jdbcType=INTEGER},
+      PLAN_STATUS = #{planStatus,jdbcType=INTEGER},
+      PRINT_TICKET_DATE_TIME = #{printTicketDateTime,jdbcType=TIMESTAMP},
+      WIN_STATUS = #{winStatus,jdbcType=INTEGER},
+      PRETAX_PRIZE = #{pretaxPrize,jdbcType=DECIMAL},
+      POSTTAX_PRIZE = #{posttaxPrize,jdbcType=DECIMAL},
+      CLICKS = #{clicks,jdbcType=INTEGER},
+      PLAN_DESC = #{planDesc,jdbcType=VARCHAR},
+      IS_UPLOAD_CONTENT = #{isUploadContent,jdbcType=INTEGER},
+      EXPERIENCE = #{experience,jdbcType=INTEGER},
+      IS_SUPER_MAN = #{isSuperMan,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      IS_TOP = #{isTop,jdbcType=INTEGER},
+      MODEL = #{model,jdbcType=INTEGER},
+      VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      PUBLIC_STATUS = #{publicStatus,jdbcType=INTEGER},
+      COMMISION = #{commision,jdbcType=INTEGER},
+      GEN_TYPE = #{genType,jdbcType=INTEGER},
+      BOOK_COUNT = #{bookCount,jdbcType=INTEGER},
+      PLAN_TICKET_STATUS = #{planTicketStatus,jdbcType=INTEGER},
+      IS_ABLE_TICKETING = #{isAbleTicketing,jdbcType=INTEGER},
+      add_prize = #{addPrize,jdbcType=DECIMAL},
+      open_result_time = #{openResultTime,jdbcType=TIMESTAMP},
+      PLAN_HM_OG = #{planHmOg,jdbcType=INTEGER},
+      OPEN_FINISH = #{openFinish,jdbcType=INTEGER},
+      AUTOMATIC_TYPE = #{automaticType,jdbcType=VARCHAR},
+      out_plan_no = #{outPlanNo,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=INTEGER},
+      JOIN_COUNT = #{joinCount,jdbcType=INTEGER},
+      RETURN_PRIZE_TIME = #{returnPrizeTime,jdbcType=TIMESTAMP},
+      PAY_FINISH_TIME = #{payFinishTime,jdbcType=TIMESTAMP},
+      ACCEPT_TIME = #{acceptTime,jdbcType=TIMESTAMP},
+      REFUND_START_TIME = #{refundStartTime,jdbcType=TIMESTAMP},
+      ARRIVAL_TIME = #{arrivalTime,jdbcType=TIMESTAMP},
+      TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
+      account_documentary = #{accountDocumentary,jdbcType=VARCHAR},
+      planNo_copyDocumentary = #{plannoCopydocumentary,jdbcType=INTEGER},
+      haploid_amount = #{haploidAmount,jdbcType=INTEGER},
+      sumAmount = #{sumamount,jdbcType=INTEGER},
+      gold = #{gold,jdbcType=DECIMAL},
+      sum_gold = #{sumGold,jdbcType=DECIMAL},
+      web_site_gold = #{webSiteGold,jdbcType=DECIMAL},
+      sum_web_site_gold = #{sumWebSiteGold,jdbcType=DECIMAL},
+      PRIZE_CONTENT = #{prizeContent,jdbcType=LONGVARCHAR},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where PLAN_NO = #{planNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.LotteryPlan" >
+    update lottery_plan
+    set LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      TERM = #{term,jdbcType=VARCHAR},
+      PLAN_TYPE = #{planType,jdbcType=INTEGER},
+      SELECT_TYPE = #{selectType,jdbcType=INTEGER},
+      MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      PER_AMOUNT = #{perAmount,jdbcType=INTEGER},
+      PART = #{part,jdbcType=INTEGER},
+      SOLD_PART = #{soldPart,jdbcType=INTEGER},
+      FOUNDER_PART = #{founderPart,jdbcType=INTEGER},
+      RESERVE_PART = #{reservePart,jdbcType=INTEGER},
+      DEAL_DATE_TIME = #{dealDateTime,jdbcType=TIMESTAMP},
+      MULTIPLE = #{multiple,jdbcType=INTEGER},
+      PLAN_STATUS = #{planStatus,jdbcType=INTEGER},
+      PRINT_TICKET_DATE_TIME = #{printTicketDateTime,jdbcType=TIMESTAMP},
+      WIN_STATUS = #{winStatus,jdbcType=INTEGER},
+      PRETAX_PRIZE = #{pretaxPrize,jdbcType=DECIMAL},
+      POSTTAX_PRIZE = #{posttaxPrize,jdbcType=DECIMAL},
+      CLICKS = #{clicks,jdbcType=INTEGER},
+      PLAN_DESC = #{planDesc,jdbcType=VARCHAR},
+      IS_UPLOAD_CONTENT = #{isUploadContent,jdbcType=INTEGER},
+      EXPERIENCE = #{experience,jdbcType=INTEGER},
+      IS_SUPER_MAN = #{isSuperMan,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      IS_TOP = #{isTop,jdbcType=INTEGER},
+      MODEL = #{model,jdbcType=INTEGER},
+      VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      PUBLIC_STATUS = #{publicStatus,jdbcType=INTEGER},
+      COMMISION = #{commision,jdbcType=INTEGER},
+      GEN_TYPE = #{genType,jdbcType=INTEGER},
+      BOOK_COUNT = #{bookCount,jdbcType=INTEGER},
+      PLAN_TICKET_STATUS = #{planTicketStatus,jdbcType=INTEGER},
+      IS_ABLE_TICKETING = #{isAbleTicketing,jdbcType=INTEGER},
+      add_prize = #{addPrize,jdbcType=DECIMAL},
+      open_result_time = #{openResultTime,jdbcType=TIMESTAMP},
+      PLAN_HM_OG = #{planHmOg,jdbcType=INTEGER},
+      OPEN_FINISH = #{openFinish,jdbcType=INTEGER},
+      AUTOMATIC_TYPE = #{automaticType,jdbcType=VARCHAR},
+      out_plan_no = #{outPlanNo,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=INTEGER},
+      JOIN_COUNT = #{joinCount,jdbcType=INTEGER},
+      RETURN_PRIZE_TIME = #{returnPrizeTime,jdbcType=TIMESTAMP},
+      PAY_FINISH_TIME = #{payFinishTime,jdbcType=TIMESTAMP},
+      ACCEPT_TIME = #{acceptTime,jdbcType=TIMESTAMP},
+      REFUND_START_TIME = #{refundStartTime,jdbcType=TIMESTAMP},
+      ARRIVAL_TIME = #{arrivalTime,jdbcType=TIMESTAMP},
+      TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
+      account_documentary = #{accountDocumentary,jdbcType=VARCHAR},
+      planNo_copyDocumentary = #{plannoCopydocumentary,jdbcType=INTEGER},
+      haploid_amount = #{haploidAmount,jdbcType=INTEGER},
+      sumAmount = #{sumamount,jdbcType=INTEGER},
+      gold = #{gold,jdbcType=DECIMAL},
+      sum_gold = #{sumGold,jdbcType=DECIMAL},
+      web_site_gold = #{webSiteGold,jdbcType=DECIMAL},
+      sum_web_site_gold = #{sumWebSiteGold,jdbcType=DECIMAL}
+    where PLAN_NO = #{planNo,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  - Application context definition for JPetStore's business layer.
+  - Contains bean references to the transaction manager and to the DAOs in
+  - dataAccessContext-local/jta.xml (see web.xml's "contextConfigLocation").
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 低频彩彩期守护线程配置 start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+	<!--&lt;!&ndash; ssq期数守护线程 &ndash;&gt;-->
+	<!--<bean id="ssqHandle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>100</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_Low" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_Low" /></property>-->
+	<!--</bean>-->
+
+	<!--&lt;!&ndash; 七乐彩期数守护线程 &ndash;&gt;-->
+	<!--<bean id="qlcHandle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>101</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_Low" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_Low" /></property>-->
+	<!--</bean>-->
+
+	<!--&lt;!&ndash; 3d期数守护线程 &ndash;&gt;-->
+	<!--<bean id="fc3dHandle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>102</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_Low" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_Low" /></property>-->
+	<!--</bean>-->
+
+	<!-- 排列5期数守护线程 -->
+	<bean id="pl5Handle" class="com.qiyun.handle.CommonHandle"
+		  init-method="start" destroy-method="onEnd" autowire="byName">
+		<property name="lotteryType"><value>4</value></property>
+		<property name="hmStopEvent"><ref bean="hmStopEvent_Low" /></property>
+		<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>
+		<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>
+		<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_Low" /></property>
+	</bean>
+	<!-- 排列3期数守护线程 -->
+	<bean id="pl3Handle" class="com.qiyun.handle.CommonHandle"
+		  init-method="start" destroy-method="onEnd" autowire="byName">
+		<property name="lotteryType"><value>3</value></property>
+		<property name="hmStopEvent"><ref bean="hmStopEvent_Low" /></property>
+		<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>
+		<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>
+		<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_Low" /></property>
+	</bean>
+
+	<!-- 七星彩期数守护线程 -->
+	<bean id="qxcHandle" class="com.qiyun.handle.CommonHandle"
+		  init-method="start" destroy-method="onEnd" autowire="byName">
+		<property name="lotteryType"><value>2</value></property>
+		<property name="hmStopEvent"><ref bean="hmStopEvent_Low" /></property>
+		<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>
+		<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>
+		<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_Low" /></property>
+	</bean>
+
+	<!-- 大乐透期数守护线程 -->
+	<bean id="dltHandle" class="com.qiyun.handle.CommonHandle"
+		  init-method="start" destroy-method="onEnd" autowire="byName">
+		<property name="lotteryType"><value>1</value></property>
+		<property name="hmStopEvent"><ref bean="hmStopEvent_Low" /></property>
+		<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>
+		<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>
+		<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_Low" /></property>
+	</bean>
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 低频彩彩期守护线程配置 end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 高频彩彩期守护线程配置 start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	<!-- 山东11选5 -->
+	<bean id="syydjHandle" class="com.qiyun.handle.CommonHandle"
+		  init-method="start" destroy-method="onEnd" autowire="byName">
+		<property name="lotteryType"><value>50</value></property>
+		<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>
+		<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>
+		<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>
+		<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>
+	</bean>
+	<!--&lt;!&ndash; 江西11选5 &ndash;&gt;-->
+	<!--<bean id="jx11X5Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>52</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!-- 广东11选5 -->
+	<bean id="gd11X5Handle" class="com.qiyun.handle.CommonHandle"
+		  init-method="start" destroy-method="onEnd" autowire="byName">
+		<property name="lotteryType"><value>53</value></property>
+		<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>
+		<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>
+		<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>
+		<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>
+	</bean>
+	<!--&lt;!&ndash; 辽宁11选5 &ndash;&gt;-->
+	<!--<bean id="ln11X5Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>55</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 上海11选5 &ndash;&gt;-->
+	<!--<bean id="sh11X5Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>57</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 黑龙江11选5 &ndash;&gt;-->
+	<!--<bean id="hlj11X5Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>58</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 江苏11选5 &ndash;&gt;-->
+	<!--<bean id="js11X5Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>59</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 江苏快3 &ndash;&gt;-->
+	<!--<bean id="jsk3Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>157</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 吉林快3 &ndash;&gt;-->
+	<!--<bean id="jlk3Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>159</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 湖北快3 &ndash;&gt;-->
+	<!--<bean id="hbk3Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>161</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 安徽快3 &ndash;&gt;-->
+	<!--<bean id="ahk3Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>163</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 江西快3 &ndash;&gt;-->
+	<!--<bean id="jxk3Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>174</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 广东快乐十分 &ndash;&gt;-->
+	<!--<bean id="gdklsfHandle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>152</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 重庆快乐十分 &ndash;&gt;-->
+	<!--<bean id="cqklsfHandle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>158</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 重庆时时彩 &ndash;&gt;-->
+	<!--<bean id="cqsscHandle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>150</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 山东快乐扑克3 &ndash;&gt;-->
+	<!--<bean id="poker3Handle" class="com.qiyun.handle.CommonHandle"-->
+	<!--init-method="start" destroy-method="onEnd" autowire="byName">-->
+	<!--<property name="lotteryType"><value>56</value></property>-->
+	<!--<property name="hmStopEvent"><ref bean="hmStopEvent_High" /></property>-->
+	<!--<property name="termStopEvent"><ref bean="commonTermStopEvent" /></property>-->
+	<!--<property name="terminalStopEvent"><ref bean="commonTerminalStopEvent" /></property>-->
+	<!--<property name="openPrizeEvent"><ref bean="commonOpenPrizeEventImpl_High" /></property>-->
+	<!--</bean>-->
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 高频彩彩期守护线程配置 end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+	<!-- 通用低频合买截止事件 (非单例模式)-->
+	<bean id="hmStopEvent_Low" class="com.qiyun.event.impl.CommonHmStopEventImpl_Low"
+		  autowire="byName" scope="prototype"/>
+	<!-- 通用高频频合买截止事件(空处理)(非单例模式) -->
+	<bean id="hmStopEvent_High" class="com.qiyun.event.impl.CommonHmStopEventImpl_High"
+		  autowire="byName" scope="prototype"/>
+	<!-- 通用彩期截止事件 (非单例模式)-->
+	<bean id="commonTermStopEvent" class="com.qiyun.event.impl.CommonTermStopEventImpl"
+		  autowire="byName" scope="prototype"/>
+	<!-- 通用终端截止事件 (非单例模式)-->
+	<bean id="commonTerminalStopEvent" class="com.qiyun.event.impl.CommonTerminalStopEventImpl"
+		  autowire="byName" scope="prototype"/>
+	<!-- 低频通用开奖事件 (非单例模式)-->
+	<bean id="commonOpenPrizeEventImpl_Low" class="com.qiyun.event.impl.CommonOpenPrizeEventImpl_Low"
+		  autowire="byName" scope="prototype"/>
+	<!-- 高频通用开奖事件 (非单例模式)-->
+	<bean id="commonOpenPrizeEventImpl_High" class="com.qiyun.event.impl.CommonOpenPrizeEventImpl_High"
+		  autowire="byName" scope="prototype"/>
+	<!-- 乐彩开奖结果抓取  (非单例模式!)-->
+	<bean id="leCaiOpenResultThread" class="com.qiyun.thread.LeCaiOpenResultThread"
+		  autowire="byName" scope="prototype"/>
+
+</beans>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.FootballTeam2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.FootballTeam2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ls_id" property="lsId" jdbcType="INTEGER" />
+    <result column="g" property="g" jdbcType="VARCHAR" />
+    <result column="b" property="b" jdbcType="VARCHAR" />
+    <result column="e" property="e" jdbcType="VARCHAR" />
+    <result column="found" property="found" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="gym" property="gym" jdbcType="VARCHAR" />
+    <result column="capacity" property="capacity" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="master" property="master" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ls_id, g, b, e, found, area, gym, capacity, flag, addr, url, master
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.FootballTeam2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from football_team2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from football_team2
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from football_team2
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.FootballTeam2" >
+    insert into football_team2 (id, ls_id, g, 
+      b, e, found, area, 
+      gym, capacity, flag, 
+      addr, url, master)
+    values (#{id,jdbcType=INTEGER}, #{lsId,jdbcType=INTEGER}, #{g,jdbcType=VARCHAR}, 
+      #{b,jdbcType=VARCHAR}, #{e,jdbcType=VARCHAR}, #{found,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{gym,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
+      #{addr,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{master,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.FootballTeam2" >
+    insert into football_team2
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lsId != null" >
+        ls_id,
+      </if>
+      <if test="g != null" >
+        g,
+      </if>
+      <if test="b != null" >
+        b,
+      </if>
+      <if test="e != null" >
+        e,
+      </if>
+      <if test="found != null" >
+        found,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="gym != null" >
+        gym,
+      </if>
+      <if test="capacity != null" >
+        capacity,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="master != null" >
+        master,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lsId != null" >
+        #{lsId,jdbcType=INTEGER},
+      </if>
+      <if test="g != null" >
+        #{g,jdbcType=VARCHAR},
+      </if>
+      <if test="b != null" >
+        #{b,jdbcType=VARCHAR},
+      </if>
+      <if test="e != null" >
+        #{e,jdbcType=VARCHAR},
+      </if>
+      <if test="found != null" >
+        #{found,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="gym != null" >
+        #{gym,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null" >
+        #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null" >
+        #{master,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.FootballTeam2" >
+    update football_team2
+    <set >
+      <if test="lsId != null" >
+        ls_id = #{lsId,jdbcType=INTEGER},
+      </if>
+      <if test="g != null" >
+        g = #{g,jdbcType=VARCHAR},
+      </if>
+      <if test="b != null" >
+        b = #{b,jdbcType=VARCHAR},
+      </if>
+      <if test="e != null" >
+        e = #{e,jdbcType=VARCHAR},
+      </if>
+      <if test="found != null" >
+        found = #{found,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="gym != null" >
+        gym = #{gym,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null" >
+        capacity = #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null" >
+        master = #{master,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.FootballTeam2" >
+    update football_team2
+    set ls_id = #{lsId,jdbcType=INTEGER},
+      g = #{g,jdbcType=VARCHAR},
+      b = #{b,jdbcType=VARCHAR},
+      e = #{e,jdbcType=VARCHAR},
+      found = #{found,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      gym = #{gym,jdbcType=VARCHAR},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      master = #{master,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

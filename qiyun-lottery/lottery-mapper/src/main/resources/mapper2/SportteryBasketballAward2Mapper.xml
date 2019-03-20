@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SportteryBasketballAward2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.SportteryBasketballAward2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="matchId" property="matchid" jdbcType="INTEGER" />
+    <result column="intTime" property="inttime" jdbcType="INTEGER" />
+    <result column="lineId" property="lineid" jdbcType="INTEGER" />
+    <result column="passMode" property="passmode" jdbcType="INTEGER" />
+    <result column="awardOfWinOrBig" property="awardofwinorbig" jdbcType="DOUBLE" />
+    <result column="change_winOrBig" property="changeWinorbig" jdbcType="INTEGER" />
+    <result column="awardOfLoseOrSmall" property="awardofloseorsmall" jdbcType="DOUBLE" />
+    <result column="change_loseOrSmall" property="changeLoseorsmall" jdbcType="INTEGER" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="handicap" property="handicap" jdbcType="DOUBLE" />
+    <result column="change_handicap" property="changeHandicap" jdbcType="INTEGER" />
+    <result column="handUpdateTime" property="handupdatetime" jdbcType="TIMESTAMP" />
+    <result column="baseBigOrSmall" property="basebigorsmall" jdbcType="DOUBLE" />
+    <result column="change_bs" property="changeBs" jdbcType="INTEGER" />
+    <result column="bsUpdateTime" property="bsupdatetime" jdbcType="TIMESTAMP" />
+    <result column="playType" property="playtype" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, matchId, intTime, lineId, passMode, awardOfWinOrBig, change_winOrBig, awardOfLoseOrSmall, 
+    change_loseOrSmall, lastUpdateTime, handicap, change_handicap, handUpdateTime, baseBigOrSmall, 
+    change_bs, bsUpdateTime, playType
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.SportteryBasketballAward2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sporttery_basketball_award
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sporttery_basketball_award
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sporttery_basketball_award
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.SportteryBasketballAward2"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into sporttery_basketball_award (id, matchId, intTime, 
+      lineId, passMode, awardOfWinOrBig, 
+      change_winOrBig, awardOfLoseOrSmall, change_loseOrSmall, 
+      lastUpdateTime, handicap, change_handicap, 
+      handUpdateTime, baseBigOrSmall, change_bs, 
+      bsUpdateTime, playType)
+    values (#{id,jdbcType=INTEGER}, #{matchid,jdbcType=INTEGER}, #{inttime,jdbcType=INTEGER}, 
+      #{lineid,jdbcType=INTEGER}, #{passmode,jdbcType=INTEGER}, #{awardofwinorbig,jdbcType=DOUBLE}, 
+      #{changeWinorbig,jdbcType=INTEGER}, #{awardofloseorsmall,jdbcType=DOUBLE}, #{changeLoseorsmall,jdbcType=INTEGER}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{handicap,jdbcType=DOUBLE}, #{changeHandicap,jdbcType=INTEGER}, 
+      #{handupdatetime,jdbcType=TIMESTAMP}, #{basebigorsmall,jdbcType=DOUBLE}, #{changeBs,jdbcType=INTEGER}, 
+      #{bsupdatetime,jdbcType=TIMESTAMP}, #{playtype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.SportteryBasketballAward2"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into sporttery_basketball_award
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="matchid != null" >
+        matchId,
+      </if>
+      <if test="inttime != null" >
+        intTime,
+      </if>
+      <if test="lineid != null" >
+        lineId,
+      </if>
+      <if test="passmode != null" >
+        passMode,
+      </if>
+      <if test="awardofwinorbig != null" >
+        awardOfWinOrBig,
+      </if>
+      <if test="changeWinorbig != null" >
+        change_winOrBig,
+      </if>
+      <if test="awardofloseorsmall != null" >
+        awardOfLoseOrSmall,
+      </if>
+      <if test="changeLoseorsmall != null" >
+        change_loseOrSmall,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="handicap != null" >
+        handicap,
+      </if>
+      <if test="changeHandicap != null" >
+        change_handicap,
+      </if>
+      <if test="handupdatetime != null" >
+        handUpdateTime,
+      </if>
+      <if test="basebigorsmall != null" >
+        baseBigOrSmall,
+      </if>
+      <if test="changeBs != null" >
+        change_bs,
+      </if>
+      <if test="bsupdatetime != null" >
+        bsUpdateTime,
+      </if>
+      <if test="playtype != null" >
+        playType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchid != null" >
+        #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="passmode != null" >
+        #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="awardofwinorbig != null" >
+        #{awardofwinorbig,jdbcType=DOUBLE},
+      </if>
+      <if test="changeWinorbig != null" >
+        #{changeWinorbig,jdbcType=INTEGER},
+      </if>
+      <if test="awardofloseorsmall != null" >
+        #{awardofloseorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="changeLoseorsmall != null" >
+        #{changeLoseorsmall,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handicap != null" >
+        #{handicap,jdbcType=DOUBLE},
+      </if>
+      <if test="changeHandicap != null" >
+        #{changeHandicap,jdbcType=INTEGER},
+      </if>
+      <if test="handupdatetime != null" >
+        #{handupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basebigorsmall != null" >
+        #{basebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="changeBs != null" >
+        #{changeBs,jdbcType=INTEGER},
+      </if>
+      <if test="bsupdatetime != null" >
+        #{bsupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playtype != null" >
+        #{playtype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SportteryBasketballAward2" >
+    update sporttery_basketball_award
+    <set >
+      <if test="matchid != null" >
+        matchId = #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        intTime = #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        lineId = #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="passmode != null" >
+        passMode = #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="awardofwinorbig != null" >
+        awardOfWinOrBig = #{awardofwinorbig,jdbcType=DOUBLE},
+      </if>
+      <if test="changeWinorbig != null" >
+        change_winOrBig = #{changeWinorbig,jdbcType=INTEGER},
+      </if>
+      <if test="awardofloseorsmall != null" >
+        awardOfLoseOrSmall = #{awardofloseorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="changeLoseorsmall != null" >
+        change_loseOrSmall = #{changeLoseorsmall,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handicap != null" >
+        handicap = #{handicap,jdbcType=DOUBLE},
+      </if>
+      <if test="changeHandicap != null" >
+        change_handicap = #{changeHandicap,jdbcType=INTEGER},
+      </if>
+      <if test="handupdatetime != null" >
+        handUpdateTime = #{handupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basebigorsmall != null" >
+        baseBigOrSmall = #{basebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="changeBs != null" >
+        change_bs = #{changeBs,jdbcType=INTEGER},
+      </if>
+      <if test="bsupdatetime != null" >
+        bsUpdateTime = #{bsupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playtype != null" >
+        playType = #{playtype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SportteryBasketballAward2" >
+    update sporttery_basketball_award
+    set matchId = #{matchid,jdbcType=INTEGER},
+      intTime = #{inttime,jdbcType=INTEGER},
+      lineId = #{lineid,jdbcType=INTEGER},
+      passMode = #{passmode,jdbcType=INTEGER},
+      awardOfWinOrBig = #{awardofwinorbig,jdbcType=DOUBLE},
+      change_winOrBig = #{changeWinorbig,jdbcType=INTEGER},
+      awardOfLoseOrSmall = #{awardofloseorsmall,jdbcType=DOUBLE},
+      change_loseOrSmall = #{changeLoseorsmall,jdbcType=INTEGER},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      handicap = #{handicap,jdbcType=DOUBLE},
+      change_handicap = #{changeHandicap,jdbcType=INTEGER},
+      handUpdateTime = #{handupdatetime,jdbcType=TIMESTAMP},
+      baseBigOrSmall = #{basebigorsmall,jdbcType=DOUBLE},
+      change_bs = #{changeBs,jdbcType=INTEGER},
+      bsUpdateTime = #{bsupdatetime,jdbcType=TIMESTAMP},
+      playType = #{playtype,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="abstractAward" type="com.qiyun.grabber.model.AbstractAward">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="matchId" property="matchId" jdbcType="INTEGER" />
+    <result column="intTime" property="intTime" jdbcType="INTEGER" />
+    <result column="lineId" property="lineId" jdbcType="INTEGER" />
+    <result column="passMode" property="passMode" jdbcType="INTEGER" />
+    <result column="lastUpdateTime" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="SFAward" type="com.qiyun.model.basketball.SFAward" extends="abstractAward">
+    <result column="awardOfWinOrBig" property="winOrBigAward" jdbcType="DOUBLE" />
+    <result column="change_winOrBig" property="winOrBigChange" jdbcType="INTEGER" />
+    <result column="awardOfLoseOrSmall" property="loseOrSmallAward" jdbcType="DOUBLE" />
+    <result column="change_loseOrSmall" property="loseOrSmallChange" jdbcType="INTEGER" />
+    <result column="handicap" property="handicap" jdbcType="DOUBLE" />
+    <result column="change_handicap" property="handicapChange" jdbcType="INTEGER" />
+    <result column="handUpdateTime" property="handUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="baseBigOrSmall" property="baseBigOrSmall" jdbcType="DOUBLE" />
+    <result column="change_bs" property="bsChange" jdbcType="INTEGER" />
+    <result column="bsUpdateTime" property="bsUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="playType" property="playType" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectByIntTime" resultMap="SFAward">
+    SELECT
+      *
+    FROM
+      sporttery_basketball_award
+    WHERE
+      intTime = #{intTime,jdbcType=INTEGER}
+  </select>
+  <select id="selectByIntTimes" resultMap="SFAward">
+    SELECT
+      *
+    FROM
+      sporttery_basketball_award
+    WHERE
+      intTime IN
+        <foreach collection="intTimes" item="intTime" index="index"
+                 open="(" close=")" separator=",">
+          #{intTime}
+        </foreach>
+  </select>
+  <select id="selectByIntTimeAndLineId" resultMap="SFAward">
+    SELECT
+      *
+    FROM
+      sporttery_basketball_award
+    WHERE
+      intTime = #{intTime,jdbcType=INTEGER}
+      AND lineId = #{lineId,jdbcType=INTEGER}
+      AND passMode = #{pm,jdbcType=INTEGER}
+      AND playType = #{playType,jdbcType=INTEGER}
+  </select>
+</mapper>

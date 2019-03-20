@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.RedPacketLogMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.RedPacketLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="redpacket_id" property="redpacketId" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, redpacket_id, account, money, create_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.RedPacketLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from red_packet_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from red_packet_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from red_packet_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.RedPacketLog"
+          useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into red_packet_log (id, redpacket_id, account, 
+      money, create_datetime)
+    values (#{id,jdbcType=INTEGER}, #{redpacketId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
+      #{money,jdbcType=DECIMAL}, #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.RedPacketLog"
+          useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into red_packet_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="redpacketId != null" >
+        redpacket_id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="redpacketId != null" >
+        #{redpacketId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.RedPacketLog" >
+    update red_packet_log
+    <set >
+      <if test="redpacketId != null" >
+        redpacket_id = #{redpacketId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.RedPacketLog" >
+    update red_packet_log
+    set redpacket_id = #{redpacketId,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPacketId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from red_packet_log
+    where redpacket_id = #{redpacketId,jdbcType=INTEGER}
+    AND account = #{account,jdbcType=VARCHAR}
+  </select>
+  <resultMap id="grabRedRacketDTO" type="com.qiyun.dto.GrabRedRacketDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="grab_name" jdbcType="VARCHAR" property="grabName" />
+    <result column="grab_account" jdbcType="VARCHAR" property="grabAccount" />
+    <result column="grab_money" jdbcType="DECIMAL" property="grabMoney" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectAll" resultMap="grabRedRacketDTO">
+    SELECT
+        RPL.id,
+        JU.username AS name,
+        JU.account,
+        M1.username AS grab_name,
+        M1.ACCOUNT AS grab_account,
+        RPL.money AS grab_money,
+        RPL.create_datetime
+    FROM
+        red_packet_log RPL
+    LEFT JOIN member M1 ON RPL.account = M1.ACCOUNT
+    LEFT JOIN (
+        SELECT
+            R.id,
+            M2.username,
+            R.account
+        FROM
+            red_packet R
+        LEFT JOIN member M2 ON R.account = M2.ACCOUNT
+    ) JU ON RPL.redpacket_id = JU.id
+    WHERE
+        1 = 1
+    ORDER BY
+        create_datetime DESC
+  </select>
+  <select id="selectById" resultMap="grabRedRacketDTO">
+    SELECT
+        RPL.id,
+        JU.username AS name,
+        JU.account,
+        M1.username AS grab_name,
+        M1.ACCOUNT AS grab_account,
+        RPL.money AS grab_money,
+        RPL.create_datetime
+    FROM
+        red_packet_log RPL
+    LEFT JOIN member M1 ON RPL.account = M1.ACCOUNT
+    LEFT JOIN (
+    SELECT
+        R.id,
+        M2.username,
+        R.account
+    FROM
+        red_packet R
+    LEFT JOIN member M2 ON R.account = M2.ACCOUNT
+    ) JU ON RPL.redpacket_id = JU.id
+    WHERE
+        1 = 1
+    AND JU.id = #{id,jdbcType=INTEGER}
+    ORDER BY
+        create_datetime DESC
+  </select>
+  <select id="selectMyList" resultMap="grabRedRacketDTO">
+    SELECT
+      RPL.id,
+      JU.username AS name,
+      JU.account,
+	  JU.PICTURE AS picture,
+      M1.username AS grab_name,
+      M1.ACCOUNT AS grab_account,
+      RPL.money AS grab_money,
+      RPL.create_datetime
+    FROM
+      red_packet_log RPL
+    LEFT JOIN member M1 ON RPL.account = M1.ACCOUNT
+    LEFT JOIN (
+    SELECT
+      R.id,
+      M2.username,
+      M2.PICTURE,
+      R.account
+    FROM
+      red_packet R
+    LEFT JOIN member M2 ON R.account = M2.ACCOUNT
+    ) JU ON RPL.redpacket_id = JU.id
+    WHERE
+      1 = 1
+    AND M1.ACCOUNT = #{account,jdbcType=VARCHAR}
+    ORDER BY
+      create_datetime DESC
+  </select>
+  <resultMap id="totalRedRacketDTO" type="com.qiyun.dto.MyTotalRedRacketDTO">
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="total" jdbcType="DECIMAL" property="totalMoney" />
+  </resultMap>
+  <select id="selectTotalMoney" resultMap="totalRedRacketDTO">
+    SELECT
+    M1.username AS name,
+    M1.ACCOUNT AS account,
+    M1.PICTURE AS picture,
+    IFNULL(SA.total,0) AS total
+    FROM
+    member M1
+    LEFT JOIN (
+    SELECT SUM(money) AS total,account FROM
+    red_packet_log GROUP BY account
+    ) SA ON M1.ACCOUNT = SA.account
+    WHERE M1.ACCOUNT = #{account,jdbcType=VARCHAR}
+  </select>
+</mapper>

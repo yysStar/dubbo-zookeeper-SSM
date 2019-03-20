@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.MemberGrade2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.MemberGrade2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="INTEGER" />
+    <result column="MEMBER_ACCOUNT" property="memberAccount" jdbcType="VARCHAR" />
+    <result column="IS_RETURN_POINT" property="isReturnPoint" jdbcType="INTEGER" />
+    <result column="IS_VIP" property="isVip" jdbcType="INTEGER" />
+    <result column="is_provider_ticket" property="isProviderTicket" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, MEMBER_ID, MEMBER_ACCOUNT, IS_RETURN_POINT, IS_VIP, is_provider_ticket
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.MemberGrade2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_grade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_grade
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_grade
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.MemberGrade2Query" >
+    delete from member_grade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.MemberGrade2" >
+    insert into member_grade (id, MEMBER_ID, MEMBER_ACCOUNT, 
+      IS_RETURN_POINT, IS_VIP, is_provider_ticket
+      )
+    values (#{id,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberAccount,jdbcType=VARCHAR}, 
+      #{isReturnPoint,jdbcType=INTEGER}, #{isVip,jdbcType=INTEGER}, #{isProviderTicket,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.MemberGrade2" >
+    insert into member_grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="memberAccount != null" >
+        MEMBER_ACCOUNT,
+      </if>
+      <if test="isReturnPoint != null" >
+        IS_RETURN_POINT,
+      </if>
+      <if test="isVip != null" >
+        IS_VIP,
+      </if>
+      <if test="isProviderTicket != null" >
+        is_provider_ticket,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberAccount != null" >
+        #{memberAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="isReturnPoint != null" >
+        #{isReturnPoint,jdbcType=INTEGER},
+      </if>
+      <if test="isVip != null" >
+        #{isVip,jdbcType=INTEGER},
+      </if>
+      <if test="isProviderTicket != null" >
+        #{isProviderTicket,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.MemberGrade2Query" resultType="java.lang.Integer" >
+    select count(*) from member_grade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member_grade
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberAccount != null" >
+        MEMBER_ACCOUNT = #{record.memberAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isReturnPoint != null" >
+        IS_RETURN_POINT = #{record.isReturnPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.isVip != null" >
+        IS_VIP = #{record.isVip,jdbcType=INTEGER},
+      </if>
+      <if test="record.isProviderTicket != null" >
+        is_provider_ticket = #{record.isProviderTicket,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member_grade
+    set id = #{record.id,jdbcType=INTEGER},
+      MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+      MEMBER_ACCOUNT = #{record.memberAccount,jdbcType=VARCHAR},
+      IS_RETURN_POINT = #{record.isReturnPoint,jdbcType=INTEGER},
+      IS_VIP = #{record.isVip,jdbcType=INTEGER},
+      is_provider_ticket = #{record.isProviderTicket,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MemberGrade2" >
+    update member_grade
+    <set >
+      <if test="memberId != null" >
+        MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberAccount != null" >
+        MEMBER_ACCOUNT = #{memberAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="isReturnPoint != null" >
+        IS_RETURN_POINT = #{isReturnPoint,jdbcType=INTEGER},
+      </if>
+      <if test="isVip != null" >
+        IS_VIP = #{isVip,jdbcType=INTEGER},
+      </if>
+      <if test="isProviderTicket != null" >
+        is_provider_ticket = #{isProviderTicket,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MemberGrade2" >
+    update member_grade
+    set MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      MEMBER_ACCOUNT = #{memberAccount,jdbcType=VARCHAR},
+      IS_RETURN_POINT = #{isReturnPoint,jdbcType=INTEGER},
+      IS_VIP = #{isVip,jdbcType=INTEGER},
+      is_provider_ticket = #{isProviderTicket,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByAccount" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from member_grade
+    where MEMBER_ACCOUNT = #{account, jdbcType=VARCHAR}
+  </select>
+  <select id="getMemberTicket" resultType="map"  >
+    SELECT
+        m.account,
+        m.username
+    FROM
+        member m,
+        member_grade mg
+    WHERE
+        m.ACCOUNT = mg.MEMBER_ACCOUNT
+    AND mg.is_provider_ticket = 1
+  </select>
+</mapper>

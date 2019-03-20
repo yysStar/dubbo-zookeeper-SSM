@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.CmsNews2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.CmsNews2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SHORT_TITLE" property="shortTitle" jdbcType="VARCHAR" />
+    <result column="HTML_DESCRIPTION" property="htmlDescription" jdbcType="VARCHAR" />
+    <result column="CLICK" property="click" jdbcType="INTEGER" />
+    <result column="KEYWORD" property="keyword" jdbcType="VARCHAR" />
+    <result column="EDITOR" property="editor" jdbcType="VARCHAR" />
+    <result column="IS_HEAD" property="isHead" jdbcType="INTEGER" />
+    <result column="CREATE_DATE_TIME" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="CONTENT_TYPE" property="contentType" jdbcType="INTEGER" />
+    <result column="LINK" property="link" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="INTEGER" />
+    <result column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="PLAY_TYPE" property="playType" jdbcType="INTEGER" />
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="COLOR" property="color" jdbcType="VARCHAR" />
+    <result column="TAG" property="tag" jdbcType="VARCHAR" />
+    <result column="HTML_KEYWORD" property="htmlKeyword" jdbcType="VARCHAR" />
+    <result column="digs" property="digs" jdbcType="INTEGER" />
+    <result column="undigs" property="undigs" jdbcType="INTEGER" />
+    <result column="news_source" property="newsSource" jdbcType="VARCHAR" />
+    <result column="IF_REMARK" property="ifRemark" jdbcType="INTEGER" />
+    <result column="EXPERT_ID" property="expertId" jdbcType="INTEGER" />
+    <result column="COMMEND_TITLE" property="commendTitle" jdbcType="VARCHAR" />
+    <result column="VIDEO_NAME" property="videoName" jdbcType="VARCHAR" />
+    <result column="VIDEO_PATH" property="videoPath" jdbcType="VARCHAR" />
+    <result column="IS_LOTTERY_TYPE" property="isLotteryType" jdbcType="INTEGER" />
+    <result column="IS_FIRST_HEAD" property="isFirstHead" jdbcType="INTEGER" />
+    <result column="IS_PRIORITY" property="isPriority" jdbcType="INTEGER" />
+    <result column="SHOW_DATE_TIME" property="showDateTime" jdbcType="TIMESTAMP" />
+    <result column="IF_DYNAMIC" property="ifDynamic" jdbcType="INTEGER" />
+    <result column="HOTSPOT_TITLE" property="hotspotTitle" jdbcType="VARCHAR" />
+    <result column="IS_SHOW" property="isShow" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.CmsNews2WithBLOBs" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+    <result column="COMMEND_CONTENT" property="commendContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type_id, TITLE, SHORT_TITLE, HTML_DESCRIPTION, CLICK, KEYWORD, EDITOR, IS_HEAD, 
+    CREATE_DATE_TIME, CONTENT_TYPE, LINK, PROVINCE, LOTTERY_TYPE, STATUS, PLAY_TYPE, 
+    ACCOUNT, COLOR, TAG, HTML_KEYWORD, digs, undigs, news_source, IF_REMARK, EXPERT_ID, 
+    COMMEND_TITLE, VIDEO_NAME, VIDEO_PATH, IS_LOTTERY_TYPE, IS_FIRST_HEAD, IS_PRIORITY, 
+    SHOW_DATE_TIME, IF_DYNAMIC, HOTSPOT_TITLE, IS_SHOW
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT, COMMEND_CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.CmsNews2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cms_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.CmsNews2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cms_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cms_news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.CmsNews2Query" >
+    delete from cms_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.CmsNews2WithBLOBs" >
+    insert into cms_news (id, type_id, TITLE, 
+      SHORT_TITLE, HTML_DESCRIPTION, CLICK, 
+      KEYWORD, EDITOR, IS_HEAD, 
+      CREATE_DATE_TIME, CONTENT_TYPE, LINK, 
+      PROVINCE, LOTTERY_TYPE, STATUS, 
+      PLAY_TYPE, ACCOUNT, COLOR, 
+      TAG, HTML_KEYWORD, digs, 
+      undigs, news_source, IF_REMARK, 
+      EXPERT_ID, COMMEND_TITLE, VIDEO_NAME, 
+      VIDEO_PATH, IS_LOTTERY_TYPE, IS_FIRST_HEAD, 
+      IS_PRIORITY, SHOW_DATE_TIME, IF_DYNAMIC, 
+      HOTSPOT_TITLE, IS_SHOW, CONTENT, 
+      COMMEND_CONTENT)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{shortTitle,jdbcType=VARCHAR}, #{htmlDescription,jdbcType=VARCHAR}, #{click,jdbcType=INTEGER}, 
+      #{keyword,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, #{isHead,jdbcType=INTEGER}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{contentType,jdbcType=INTEGER}, #{link,jdbcType=VARCHAR}, 
+      #{province,jdbcType=INTEGER}, #{lotteryType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{playType,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{htmlKeyword,jdbcType=VARCHAR}, #{digs,jdbcType=INTEGER}, 
+      #{undigs,jdbcType=INTEGER}, #{newsSource,jdbcType=VARCHAR}, #{ifRemark,jdbcType=INTEGER}, 
+      #{expertId,jdbcType=INTEGER}, #{commendTitle,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{videoPath,jdbcType=VARCHAR}, #{isLotteryType,jdbcType=INTEGER}, #{isFirstHead,jdbcType=INTEGER}, 
+      #{isPriority,jdbcType=INTEGER}, #{showDateTime,jdbcType=TIMESTAMP}, #{ifDynamic,jdbcType=INTEGER}, 
+      #{hotspotTitle,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}, 
+      #{commendContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.CmsNews2WithBLOBs" >
+    insert into cms_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="shortTitle != null" >
+        SHORT_TITLE,
+      </if>
+      <if test="htmlDescription != null" >
+        HTML_DESCRIPTION,
+      </if>
+      <if test="click != null" >
+        CLICK,
+      </if>
+      <if test="keyword != null" >
+        KEYWORD,
+      </if>
+      <if test="editor != null" >
+        EDITOR,
+      </if>
+      <if test="isHead != null" >
+        IS_HEAD,
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME,
+      </if>
+      <if test="contentType != null" >
+        CONTENT_TYPE,
+      </if>
+      <if test="link != null" >
+        LINK,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="color != null" >
+        COLOR,
+      </if>
+      <if test="tag != null" >
+        TAG,
+      </if>
+      <if test="htmlKeyword != null" >
+        HTML_KEYWORD,
+      </if>
+      <if test="digs != null" >
+        digs,
+      </if>
+      <if test="undigs != null" >
+        undigs,
+      </if>
+      <if test="newsSource != null" >
+        news_source,
+      </if>
+      <if test="ifRemark != null" >
+        IF_REMARK,
+      </if>
+      <if test="expertId != null" >
+        EXPERT_ID,
+      </if>
+      <if test="commendTitle != null" >
+        COMMEND_TITLE,
+      </if>
+      <if test="videoName != null" >
+        VIDEO_NAME,
+      </if>
+      <if test="videoPath != null" >
+        VIDEO_PATH,
+      </if>
+      <if test="isLotteryType != null" >
+        IS_LOTTERY_TYPE,
+      </if>
+      <if test="isFirstHead != null" >
+        IS_FIRST_HEAD,
+      </if>
+      <if test="isPriority != null" >
+        IS_PRIORITY,
+      </if>
+      <if test="showDateTime != null" >
+        SHOW_DATE_TIME,
+      </if>
+      <if test="ifDynamic != null" >
+        IF_DYNAMIC,
+      </if>
+      <if test="hotspotTitle != null" >
+        HOTSPOT_TITLE,
+      </if>
+      <if test="isShow != null" >
+        IS_SHOW,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="commendContent != null" >
+        COMMEND_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlDescription != null" >
+        #{htmlDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null" >
+        #{click,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="isHead != null" >
+        #{isHead,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=INTEGER},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryType != null" >
+        #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlKeyword != null" >
+        #{htmlKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="digs != null" >
+        #{digs,jdbcType=INTEGER},
+      </if>
+      <if test="undigs != null" >
+        #{undigs,jdbcType=INTEGER},
+      </if>
+      <if test="newsSource != null" >
+        #{newsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="ifRemark != null" >
+        #{ifRemark,jdbcType=INTEGER},
+      </if>
+      <if test="expertId != null" >
+        #{expertId,jdbcType=INTEGER},
+      </if>
+      <if test="commendTitle != null" >
+        #{commendTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null" >
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPath != null" >
+        #{videoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isLotteryType != null" >
+        #{isLotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="isFirstHead != null" >
+        #{isFirstHead,jdbcType=INTEGER},
+      </if>
+      <if test="isPriority != null" >
+        #{isPriority,jdbcType=INTEGER},
+      </if>
+      <if test="showDateTime != null" >
+        #{showDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifDynamic != null" >
+        #{ifDynamic,jdbcType=INTEGER},
+      </if>
+      <if test="hotspotTitle != null" >
+        #{hotspotTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="commendContent != null" >
+        #{commendContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.CmsNews2Query" resultType="java.lang.Integer" >
+    select count(*) from cms_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cms_news
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortTitle != null" >
+        SHORT_TITLE = #{record.shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htmlDescription != null" >
+        HTML_DESCRIPTION = #{record.htmlDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.click != null" >
+        CLICK = #{record.click,jdbcType=INTEGER},
+      </if>
+      <if test="record.keyword != null" >
+        KEYWORD = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editor != null" >
+        EDITOR = #{record.editor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isHead != null" >
+        IS_HEAD = #{record.isHead,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDateTime != null" >
+        CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contentType != null" >
+        CONTENT_TYPE = #{record.contentType,jdbcType=INTEGER},
+      </if>
+      <if test="record.link != null" >
+        LINK = #{record.link,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.lotteryType != null" >
+        LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.playType != null" >
+        PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null" >
+        COLOR = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null" >
+        TAG = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htmlKeyword != null" >
+        HTML_KEYWORD = #{record.htmlKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.digs != null" >
+        digs = #{record.digs,jdbcType=INTEGER},
+      </if>
+      <if test="record.undigs != null" >
+        undigs = #{record.undigs,jdbcType=INTEGER},
+      </if>
+      <if test="record.newsSource != null" >
+        news_source = #{record.newsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifRemark != null" >
+        IF_REMARK = #{record.ifRemark,jdbcType=INTEGER},
+      </if>
+      <if test="record.expertId != null" >
+        EXPERT_ID = #{record.expertId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commendTitle != null" >
+        COMMEND_TITLE = #{record.commendTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoName != null" >
+        VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoPath != null" >
+        VIDEO_PATH = #{record.videoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLotteryType != null" >
+        IS_LOTTERY_TYPE = #{record.isLotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="record.isFirstHead != null" >
+        IS_FIRST_HEAD = #{record.isFirstHead,jdbcType=INTEGER},
+      </if>
+      <if test="record.isPriority != null" >
+        IS_PRIORITY = #{record.isPriority,jdbcType=INTEGER},
+      </if>
+      <if test="record.showDateTime != null" >
+        SHOW_DATE_TIME = #{record.showDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ifDynamic != null" >
+        IF_DYNAMIC = #{record.ifDynamic,jdbcType=INTEGER},
+      </if>
+      <if test="record.hotspotTitle != null" >
+        HOTSPOT_TITLE = #{record.hotspotTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isShow != null" >
+        IS_SHOW = #{record.isShow,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.commendContent != null" >
+        COMMEND_CONTENT = #{record.commendContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cms_news
+    set id = #{record.id,jdbcType=INTEGER},
+      type_id = #{record.typeId,jdbcType=INTEGER},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      SHORT_TITLE = #{record.shortTitle,jdbcType=VARCHAR},
+      HTML_DESCRIPTION = #{record.htmlDescription,jdbcType=VARCHAR},
+      CLICK = #{record.click,jdbcType=INTEGER},
+      KEYWORD = #{record.keyword,jdbcType=VARCHAR},
+      EDITOR = #{record.editor,jdbcType=VARCHAR},
+      IS_HEAD = #{record.isHead,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      CONTENT_TYPE = #{record.contentType,jdbcType=INTEGER},
+      LINK = #{record.link,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      COLOR = #{record.color,jdbcType=VARCHAR},
+      TAG = #{record.tag,jdbcType=VARCHAR},
+      HTML_KEYWORD = #{record.htmlKeyword,jdbcType=VARCHAR},
+      digs = #{record.digs,jdbcType=INTEGER},
+      undigs = #{record.undigs,jdbcType=INTEGER},
+      news_source = #{record.newsSource,jdbcType=VARCHAR},
+      IF_REMARK = #{record.ifRemark,jdbcType=INTEGER},
+      EXPERT_ID = #{record.expertId,jdbcType=INTEGER},
+      COMMEND_TITLE = #{record.commendTitle,jdbcType=VARCHAR},
+      VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      VIDEO_PATH = #{record.videoPath,jdbcType=VARCHAR},
+      IS_LOTTERY_TYPE = #{record.isLotteryType,jdbcType=INTEGER},
+      IS_FIRST_HEAD = #{record.isFirstHead,jdbcType=INTEGER},
+      IS_PRIORITY = #{record.isPriority,jdbcType=INTEGER},
+      SHOW_DATE_TIME = #{record.showDateTime,jdbcType=TIMESTAMP},
+      IF_DYNAMIC = #{record.ifDynamic,jdbcType=INTEGER},
+      HOTSPOT_TITLE = #{record.hotspotTitle,jdbcType=VARCHAR},
+      IS_SHOW = #{record.isShow,jdbcType=INTEGER},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      COMMEND_CONTENT = #{record.commendContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cms_news
+    set id = #{record.id,jdbcType=INTEGER},
+      type_id = #{record.typeId,jdbcType=INTEGER},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      SHORT_TITLE = #{record.shortTitle,jdbcType=VARCHAR},
+      HTML_DESCRIPTION = #{record.htmlDescription,jdbcType=VARCHAR},
+      CLICK = #{record.click,jdbcType=INTEGER},
+      KEYWORD = #{record.keyword,jdbcType=VARCHAR},
+      EDITOR = #{record.editor,jdbcType=VARCHAR},
+      IS_HEAD = #{record.isHead,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{record.createDateTime,jdbcType=TIMESTAMP},
+      CONTENT_TYPE = #{record.contentType,jdbcType=INTEGER},
+      LINK = #{record.link,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{record.lotteryType,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      PLAY_TYPE = #{record.playType,jdbcType=INTEGER},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      COLOR = #{record.color,jdbcType=VARCHAR},
+      TAG = #{record.tag,jdbcType=VARCHAR},
+      HTML_KEYWORD = #{record.htmlKeyword,jdbcType=VARCHAR},
+      digs = #{record.digs,jdbcType=INTEGER},
+      undigs = #{record.undigs,jdbcType=INTEGER},
+      news_source = #{record.newsSource,jdbcType=VARCHAR},
+      IF_REMARK = #{record.ifRemark,jdbcType=INTEGER},
+      EXPERT_ID = #{record.expertId,jdbcType=INTEGER},
+      COMMEND_TITLE = #{record.commendTitle,jdbcType=VARCHAR},
+      VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      VIDEO_PATH = #{record.videoPath,jdbcType=VARCHAR},
+      IS_LOTTERY_TYPE = #{record.isLotteryType,jdbcType=INTEGER},
+      IS_FIRST_HEAD = #{record.isFirstHead,jdbcType=INTEGER},
+      IS_PRIORITY = #{record.isPriority,jdbcType=INTEGER},
+      SHOW_DATE_TIME = #{record.showDateTime,jdbcType=TIMESTAMP},
+      IF_DYNAMIC = #{record.ifDynamic,jdbcType=INTEGER},
+      HOTSPOT_TITLE = #{record.hotspotTitle,jdbcType=VARCHAR},
+      IS_SHOW = #{record.isShow,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.CmsNews2WithBLOBs" >
+    update cms_news
+    <set >
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        SHORT_TITLE = #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlDescription != null" >
+        HTML_DESCRIPTION = #{htmlDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null" >
+        CLICK = #{click,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        KEYWORD = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        EDITOR = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="isHead != null" >
+        IS_HEAD = #{isHead,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contentType != null" >
+        CONTENT_TYPE = #{contentType,jdbcType=INTEGER},
+      </if>
+      <if test="link != null" >
+        LINK = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        COLOR = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        TAG = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlKeyword != null" >
+        HTML_KEYWORD = #{htmlKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="digs != null" >
+        digs = #{digs,jdbcType=INTEGER},
+      </if>
+      <if test="undigs != null" >
+        undigs = #{undigs,jdbcType=INTEGER},
+      </if>
+      <if test="newsSource != null" >
+        news_source = #{newsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="ifRemark != null" >
+        IF_REMARK = #{ifRemark,jdbcType=INTEGER},
+      </if>
+      <if test="expertId != null" >
+        EXPERT_ID = #{expertId,jdbcType=INTEGER},
+      </if>
+      <if test="commendTitle != null" >
+        COMMEND_TITLE = #{commendTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null" >
+        VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPath != null" >
+        VIDEO_PATH = #{videoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isLotteryType != null" >
+        IS_LOTTERY_TYPE = #{isLotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="isFirstHead != null" >
+        IS_FIRST_HEAD = #{isFirstHead,jdbcType=INTEGER},
+      </if>
+      <if test="isPriority != null" >
+        IS_PRIORITY = #{isPriority,jdbcType=INTEGER},
+      </if>
+      <if test="showDateTime != null" >
+        SHOW_DATE_TIME = #{showDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifDynamic != null" >
+        IF_DYNAMIC = #{ifDynamic,jdbcType=INTEGER},
+      </if>
+      <if test="hotspotTitle != null" >
+        HOTSPOT_TITLE = #{hotspotTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        IS_SHOW = #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="commendContent != null" >
+        COMMEND_CONTENT = #{commendContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.CmsNews2WithBLOBs" >
+    update cms_news
+    set type_id = #{typeId,jdbcType=INTEGER},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SHORT_TITLE = #{shortTitle,jdbcType=VARCHAR},
+      HTML_DESCRIPTION = #{htmlDescription,jdbcType=VARCHAR},
+      CLICK = #{click,jdbcType=INTEGER},
+      KEYWORD = #{keyword,jdbcType=VARCHAR},
+      EDITOR = #{editor,jdbcType=VARCHAR},
+      IS_HEAD = #{isHead,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      CONTENT_TYPE = #{contentType,jdbcType=INTEGER},
+      LINK = #{link,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      COLOR = #{color,jdbcType=VARCHAR},
+      TAG = #{tag,jdbcType=VARCHAR},
+      HTML_KEYWORD = #{htmlKeyword,jdbcType=VARCHAR},
+      digs = #{digs,jdbcType=INTEGER},
+      undigs = #{undigs,jdbcType=INTEGER},
+      news_source = #{newsSource,jdbcType=VARCHAR},
+      IF_REMARK = #{ifRemark,jdbcType=INTEGER},
+      EXPERT_ID = #{expertId,jdbcType=INTEGER},
+      COMMEND_TITLE = #{commendTitle,jdbcType=VARCHAR},
+      VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      VIDEO_PATH = #{videoPath,jdbcType=VARCHAR},
+      IS_LOTTERY_TYPE = #{isLotteryType,jdbcType=INTEGER},
+      IS_FIRST_HEAD = #{isFirstHead,jdbcType=INTEGER},
+      IS_PRIORITY = #{isPriority,jdbcType=INTEGER},
+      SHOW_DATE_TIME = #{showDateTime,jdbcType=TIMESTAMP},
+      IF_DYNAMIC = #{ifDynamic,jdbcType=INTEGER},
+      HOTSPOT_TITLE = #{hotspotTitle,jdbcType=VARCHAR},
+      IS_SHOW = #{isShow,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=LONGVARCHAR},
+      COMMEND_CONTENT = #{commendContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.CmsNews2" >
+    update cms_news
+    set type_id = #{typeId,jdbcType=INTEGER},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SHORT_TITLE = #{shortTitle,jdbcType=VARCHAR},
+      HTML_DESCRIPTION = #{htmlDescription,jdbcType=VARCHAR},
+      CLICK = #{click,jdbcType=INTEGER},
+      KEYWORD = #{keyword,jdbcType=VARCHAR},
+      EDITOR = #{editor,jdbcType=VARCHAR},
+      IS_HEAD = #{isHead,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      CONTENT_TYPE = #{contentType,jdbcType=INTEGER},
+      LINK = #{link,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      COLOR = #{color,jdbcType=VARCHAR},
+      TAG = #{tag,jdbcType=VARCHAR},
+      HTML_KEYWORD = #{htmlKeyword,jdbcType=VARCHAR},
+      digs = #{digs,jdbcType=INTEGER},
+      undigs = #{undigs,jdbcType=INTEGER},
+      news_source = #{newsSource,jdbcType=VARCHAR},
+      IF_REMARK = #{ifRemark,jdbcType=INTEGER},
+      EXPERT_ID = #{expertId,jdbcType=INTEGER},
+      COMMEND_TITLE = #{commendTitle,jdbcType=VARCHAR},
+      VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      VIDEO_PATH = #{videoPath,jdbcType=VARCHAR},
+      IS_LOTTERY_TYPE = #{isLotteryType,jdbcType=INTEGER},
+      IS_FIRST_HEAD = #{isFirstHead,jdbcType=INTEGER},
+      IS_PRIORITY = #{isPriority,jdbcType=INTEGER},
+      SHOW_DATE_TIME = #{showDateTime,jdbcType=TIMESTAMP},
+      IF_DYNAMIC = #{ifDynamic,jdbcType=INTEGER},
+      HOTSPOT_TITLE = #{hotspotTitle,jdbcType=VARCHAR},
+      IS_SHOW = #{isShow,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="addMail" parameterType="map">
+    insert into mail(title, content, type, target, create_date, author, status) values(#{title},#{content},#{type},#{target},#{create_date},#{author},#{status})
+  </insert>
+</mapper>

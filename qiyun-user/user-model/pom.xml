@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>qiyun-user</artifactId>
+        <groupId>com.qiyun.user</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>user-model</artifactId>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qiyun.util</groupId>
+            <artifactId>model-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+        </dependency>
+    </dependencies>
+
+    <!--<dependencies>-->
+        <!--&lt;!&ndash; log &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-api</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>ch.qos.logback</groupId>-->
+            <!--<artifactId>logback-classic</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>log4j-over-slf4j</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>jcl-over-slf4j</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; log &ndash;&gt;-->
+        <!--&lt;!&ndash; http &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpcore</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>commons-httpclient</groupId>-->
+            <!--<artifactId>commons-httpclient</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; http &ndash;&gt;-->
+        <!--&lt;!&ndash; servlet.api &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; servlet.api &ndash;&gt;-->
+        <!--&lt;!&ndash; struts2 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.struts</groupId>-->
+            <!--<artifactId>struts2-core</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; struts2 &ndash;&gt;-->
+
+        <!--&lt;!&ndash; jdom &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>jdom</groupId>-->
+            <!--<artifactId>jdom</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; jdom &ndash;&gt;-->
+
+        <!--&lt;!&ndash; htmlparser &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.htmlparser</groupId>-->
+            <!--<artifactId>htmlparser</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; htmlparser &ndash;&gt;-->
+    <!--</dependencies>-->
+
+</project>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper.MatchResultMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model.MatchResult" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="cancel" property="cancel" jdbcType="INTEGER" />
+    <result column="day" property="day" jdbcType="VARCHAR" />
+    <result column="week_id" property="weekId" jdbcType="INTEGER" />
+    <result column="team_id" property="teamId" jdbcType="VARCHAR" />
+    <result column="let_point" property="letPoint" jdbcType="INTEGER" />
+    <result column="base_point" property="basePoint" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="half_result" property="halfResult" jdbcType="VARCHAR" />
+    <result column="b0" property="b0" jdbcType="DECIMAL" />
+    <result column="b1" property="b1" jdbcType="DECIMAL" />
+    <result column="b2" property="b2" jdbcType="DECIMAL" />
+    <result column="b3" property="b3" jdbcType="DECIMAL" />
+    <result column="b4" property="b4" jdbcType="DECIMAL" />
+    <result column="b5" property="b5" jdbcType="DECIMAL" />
+    <result column="b6" property="b6" jdbcType="DECIMAL" />
+    <result column="b7" property="b7" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type, cancel, day, week_id, team_id, let_point, base_point, result, half_result, 
+    b0, b1, b2, b3, b4, b5, b6, b7
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model.MatchResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from match_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from match_result
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from match_result
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.MatchResult" >
+    insert into match_result (id, type, cancel, 
+      day, week_id, team_id, 
+      let_point, base_point, result, 
+      half_result, b0, b1, 
+      b2, b3, b4, b5, 
+      b6, b7)
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{cancel,jdbcType=INTEGER}, 
+      #{day,jdbcType=VARCHAR}, #{weekId,jdbcType=INTEGER}, #{teamId,jdbcType=VARCHAR}, 
+      #{letPoint,jdbcType=INTEGER}, #{basePoint,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, 
+      #{halfResult,jdbcType=VARCHAR}, #{b0,jdbcType=DECIMAL}, #{b1,jdbcType=DECIMAL}, 
+      #{b2,jdbcType=DECIMAL}, #{b3,jdbcType=DECIMAL}, #{b4,jdbcType=DECIMAL}, #{b5,jdbcType=DECIMAL}, 
+      #{b6,jdbcType=DECIMAL}, #{b7,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.MatchResult" >
+    insert into match_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="cancel != null" >
+        cancel,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="weekId != null" >
+        week_id,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="letPoint != null" >
+        let_point,
+      </if>
+      <if test="basePoint != null" >
+        base_point,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="halfResult != null" >
+        half_result,
+      </if>
+      <if test="b0 != null" >
+        b0,
+      </if>
+      <if test="b1 != null" >
+        b1,
+      </if>
+      <if test="b2 != null" >
+        b2,
+      </if>
+      <if test="b3 != null" >
+        b3,
+      </if>
+      <if test="b4 != null" >
+        b4,
+      </if>
+      <if test="b5 != null" >
+        b5,
+      </if>
+      <if test="b6 != null" >
+        b6,
+      </if>
+      <if test="b7 != null" >
+        b7,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="cancel != null" >
+        #{cancel,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="weekId != null" >
+        #{weekId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="letPoint != null" >
+        #{letPoint,jdbcType=INTEGER},
+      </if>
+      <if test="basePoint != null" >
+        #{basePoint,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="halfResult != null" >
+        #{halfResult,jdbcType=VARCHAR},
+      </if>
+      <if test="b0 != null" >
+        #{b0,jdbcType=DECIMAL},
+      </if>
+      <if test="b1 != null" >
+        #{b1,jdbcType=DECIMAL},
+      </if>
+      <if test="b2 != null" >
+        #{b2,jdbcType=DECIMAL},
+      </if>
+      <if test="b3 != null" >
+        #{b3,jdbcType=DECIMAL},
+      </if>
+      <if test="b4 != null" >
+        #{b4,jdbcType=DECIMAL},
+      </if>
+      <if test="b5 != null" >
+        #{b5,jdbcType=DECIMAL},
+      </if>
+      <if test="b6 != null" >
+        #{b6,jdbcType=DECIMAL},
+      </if>
+      <if test="b7 != null" >
+        #{b7,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.MatchResult" >
+    update match_result
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="cancel != null" >
+        cancel = #{cancel,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="weekId != null" >
+        week_id = #{weekId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="letPoint != null" >
+        let_point = #{letPoint,jdbcType=INTEGER},
+      </if>
+      <if test="basePoint != null" >
+        base_point = #{basePoint,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="halfResult != null" >
+        half_result = #{halfResult,jdbcType=VARCHAR},
+      </if>
+      <if test="b0 != null" >
+        b0 = #{b0,jdbcType=DECIMAL},
+      </if>
+      <if test="b1 != null" >
+        b1 = #{b1,jdbcType=DECIMAL},
+      </if>
+      <if test="b2 != null" >
+        b2 = #{b2,jdbcType=DECIMAL},
+      </if>
+      <if test="b3 != null" >
+        b3 = #{b3,jdbcType=DECIMAL},
+      </if>
+      <if test="b4 != null" >
+        b4 = #{b4,jdbcType=DECIMAL},
+      </if>
+      <if test="b5 != null" >
+        b5 = #{b5,jdbcType=DECIMAL},
+      </if>
+      <if test="b6 != null" >
+        b6 = #{b6,jdbcType=DECIMAL},
+      </if>
+      <if test="b7 != null" >
+        b7 = #{b7,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.MatchResult" >
+    update match_result
+    set type = #{type,jdbcType=INTEGER},
+      cancel = #{cancel,jdbcType=INTEGER},
+      day = #{day,jdbcType=VARCHAR},
+      week_id = #{weekId,jdbcType=INTEGER},
+      team_id = #{teamId,jdbcType=VARCHAR},
+      let_point = #{letPoint,jdbcType=INTEGER},
+      base_point = #{basePoint,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR},
+      half_result = #{halfResult,jdbcType=VARCHAR},
+      b0 = #{b0,jdbcType=DECIMAL},
+      b1 = #{b1,jdbcType=DECIMAL},
+      b2 = #{b2,jdbcType=DECIMAL},
+      b3 = #{b3,jdbcType=DECIMAL},
+      b4 = #{b4,jdbcType=DECIMAL},
+      b5 = #{b5,jdbcType=DECIMAL},
+      b6 = #{b6,jdbcType=DECIMAL},
+      b7 = #{b7,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

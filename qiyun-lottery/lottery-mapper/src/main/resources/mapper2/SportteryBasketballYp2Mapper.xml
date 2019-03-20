@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SportteryBasketballYp2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.SportteryBasketballYp2" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="match_id" property="matchId" jdbcType="INTEGER" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="home" property="home" jdbcType="DOUBLE" />
+    <result column="home_change" property="homeChange" jdbcType="INTEGER" />
+    <result column="pankou" property="pankou" jdbcType="DOUBLE" />
+    <result column="pankou_change" property="pankouChange" jdbcType="INTEGER" />
+    <result column="guest" property="guest" jdbcType="DOUBLE" />
+    <result column="guest_change" property="guestChange" jdbcType="INTEGER" />
+    <result column="is_first" property="isFirst" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, match_id, company, home, home_change, pankou, pankou_change, guest, guest_change, 
+    is_first, time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.SportteryBasketballYp2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sporttery_basketball_yp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sporttery_basketball_yp
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sporttery_basketball_yp
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.SportteryBasketballYp2" >
+    insert into sporttery_basketball_yp (Id, match_id, company, 
+      home, home_change, pankou, 
+      pankou_change, guest, guest_change, 
+      is_first, time)
+    values (#{id,jdbcType=INTEGER}, #{matchId,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, 
+      #{home,jdbcType=DOUBLE}, #{homeChange,jdbcType=INTEGER}, #{pankou,jdbcType=DOUBLE}, 
+      #{pankouChange,jdbcType=INTEGER}, #{guest,jdbcType=DOUBLE}, #{guestChange,jdbcType=INTEGER}, 
+      #{isFirst,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.SportteryBasketballYp2" >
+    insert into sporttery_basketball_yp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="matchId != null" >
+        match_id,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="home != null" >
+        home,
+      </if>
+      <if test="homeChange != null" >
+        home_change,
+      </if>
+      <if test="pankou != null" >
+        pankou,
+      </if>
+      <if test="pankouChange != null" >
+        pankou_change,
+      </if>
+      <if test="guest != null" >
+        guest,
+      </if>
+      <if test="guestChange != null" >
+        guest_change,
+      </if>
+      <if test="isFirst != null" >
+        is_first,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchId != null" >
+        #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        #{home,jdbcType=DOUBLE},
+      </if>
+      <if test="homeChange != null" >
+        #{homeChange,jdbcType=INTEGER},
+      </if>
+      <if test="pankou != null" >
+        #{pankou,jdbcType=DOUBLE},
+      </if>
+      <if test="pankouChange != null" >
+        #{pankouChange,jdbcType=INTEGER},
+      </if>
+      <if test="guest != null" >
+        #{guest,jdbcType=DOUBLE},
+      </if>
+      <if test="guestChange != null" >
+        #{guestChange,jdbcType=INTEGER},
+      </if>
+      <if test="isFirst != null" >
+        #{isFirst,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SportteryBasketballYp2" >
+    update sporttery_basketball_yp
+    <set >
+      <if test="matchId != null" >
+        match_id = #{matchId,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        home = #{home,jdbcType=DOUBLE},
+      </if>
+      <if test="homeChange != null" >
+        home_change = #{homeChange,jdbcType=INTEGER},
+      </if>
+      <if test="pankou != null" >
+        pankou = #{pankou,jdbcType=DOUBLE},
+      </if>
+      <if test="pankouChange != null" >
+        pankou_change = #{pankouChange,jdbcType=INTEGER},
+      </if>
+      <if test="guest != null" >
+        guest = #{guest,jdbcType=DOUBLE},
+      </if>
+      <if test="guestChange != null" >
+        guest_change = #{guestChange,jdbcType=INTEGER},
+      </if>
+      <if test="isFirst != null" >
+        is_first = #{isFirst,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SportteryBasketballYp2" >
+    update sporttery_basketball_yp
+    set match_id = #{matchId,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      home = #{home,jdbcType=DOUBLE},
+      home_change = #{homeChange,jdbcType=INTEGER},
+      pankou = #{pankou,jdbcType=DOUBLE},
+      pankou_change = #{pankouChange,jdbcType=INTEGER},
+      guest = #{guest,jdbcType=DOUBLE},
+      guest_change = #{guestChange,jdbcType=INTEGER},
+      is_first = #{isFirst,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="basketballYp" type="com.qiyun.model.basketball.BasketballYp">
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="match_id" property="matchId" jdbcType="INTEGER" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="home" property="home" jdbcType="DOUBLE" />
+    <result column="home_change" property="homeChange" jdbcType="INTEGER" />
+    <result column="pankou" property="pankou" jdbcType="DOUBLE" />
+    <result column="pankou_change" property="pankouChange" jdbcType="INTEGER" />
+    <result column="guest" property="guest" jdbcType="DOUBLE" />
+    <result column="guest_change" property="guestChange" jdbcType="INTEGER" />
+    <result column="is_first" property="isFirst" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="selectByIntTimes" resultMap="basketballYp"  parameterType="java.util.List">
+    SELECT
+        yp.*
+    FROM
+        sporttery_basketball_yp yp
+    WHERE
+        yp.id IN (
+            SELECT
+                Max(tmpYp.Id)
+            FROM
+                sporttery_basketball_yp tmpYp
+            WHERE
+                tmpYp.match_id IN (
+                    SELECT
+                        id
+                    FROM
+                        sporttery_basket_match m
+                    WHERE
+                        m.intTime IN
+                    <foreach collection="intTimes" item="intTime" index="index"
+                             open="(" close=")" separator=",">
+                      #{intTime}
+                    </foreach>
+            )
+            GROUP BY
+                tmpYp.match_id,
+                company
+        )
+  </select>
+</mapper>

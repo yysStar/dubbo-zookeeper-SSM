@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SportteryFootballBfawardMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.SportteryFootballBfaward" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="matchId" property="matchid" jdbcType="INTEGER" />
+    <result column="intTime" property="inttime" jdbcType="INTEGER" />
+    <result column="lineId" property="lineid" jdbcType="INTEGER" />
+    <result column="matchTime" property="matchtime" jdbcType="TIMESTAMP" />
+    <result column="passMode" property="passmode" jdbcType="INTEGER" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="s10award" property="s10award" jdbcType="DOUBLE" />
+    <result column="s20award" property="s20award" jdbcType="DOUBLE" />
+    <result column="s21award" property="s21award" jdbcType="DOUBLE" />
+    <result column="s30award" property="s30award" jdbcType="DOUBLE" />
+    <result column="s31award" property="s31award" jdbcType="DOUBLE" />
+    <result column="s32award" property="s32award" jdbcType="DOUBLE" />
+    <result column="s40award" property="s40award" jdbcType="DOUBLE" />
+    <result column="s41award" property="s41award" jdbcType="DOUBLE" />
+    <result column="s42award" property="s42award" jdbcType="DOUBLE" />
+    <result column="s50award" property="s50award" jdbcType="DOUBLE" />
+    <result column="s51award" property="s51award" jdbcType="DOUBLE" />
+    <result column="s52award" property="s52award" jdbcType="DOUBLE" />
+    <result column="s_win_award" property="sWinAward" jdbcType="DOUBLE" />
+    <result column="s00award" property="s00award" jdbcType="DOUBLE" />
+    <result column="s11award" property="s11award" jdbcType="DOUBLE" />
+    <result column="s22award" property="s22award" jdbcType="DOUBLE" />
+    <result column="s33award" property="s33award" jdbcType="DOUBLE" />
+    <result column="s_draw_award" property="sDrawAward" jdbcType="DOUBLE" />
+    <result column="s01award" property="s01award" jdbcType="DOUBLE" />
+    <result column="s02award" property="s02award" jdbcType="DOUBLE" />
+    <result column="s12award" property="s12award" jdbcType="DOUBLE" />
+    <result column="s03award" property="s03award" jdbcType="DOUBLE" />
+    <result column="s13award" property="s13award" jdbcType="DOUBLE" />
+    <result column="s23award" property="s23award" jdbcType="DOUBLE" />
+    <result column="s04award" property="s04award" jdbcType="DOUBLE" />
+    <result column="s14award" property="s14award" jdbcType="DOUBLE" />
+    <result column="s24award" property="s24award" jdbcType="DOUBLE" />
+    <result column="s05award" property="s05award" jdbcType="DOUBLE" />
+    <result column="s15award" property="s15award" jdbcType="DOUBLE" />
+    <result column="s25award" property="s25award" jdbcType="DOUBLE" />
+    <result column="s_lose_award" property="sLoseAward" jdbcType="DOUBLE" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, matchId, intTime, lineId, matchTime, passMode, lastUpdateTime, s10award, s20award, 
+    s21award, s30award, s31award, s32award, s40award, s41award, s42award, s50award, s51award, 
+    s52award, s_win_award, s00award, s11award, s22award, s33award, s_draw_award, s01award, 
+    s02award, s12award, s03award, s13award, s23award, s04award, s14award, s24award, s05award, 
+    s15award, s25award, s_lose_award, CREATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.SportteryFootballBfawardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sporttery_football_bfaward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sporttery_football_bfaward
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sporttery_football_bfaward
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.SportteryFootballBfaward" >
+    insert into sporttery_football_bfaward (id, matchId, intTime, 
+      lineId, matchTime, passMode, 
+      lastUpdateTime, s10award, s20award, 
+      s21award, s30award, s31award, 
+      s32award, s40award, s41award, 
+      s42award, s50award, s51award, 
+      s52award, s_win_award, s00award, 
+      s11award, s22award, s33award, 
+      s_draw_award, s01award, s02award, 
+      s12award, s03award, s13award, 
+      s23award, s04award, s14award, 
+      s24award, s05award, s15award, 
+      s25award, s_lose_award, CREATE_DATE
+      )
+    values (#{id,jdbcType=INTEGER}, #{matchid,jdbcType=INTEGER}, #{inttime,jdbcType=INTEGER}, 
+      #{lineid,jdbcType=INTEGER}, #{matchtime,jdbcType=TIMESTAMP}, #{passmode,jdbcType=INTEGER}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{s10award,jdbcType=DOUBLE}, #{s20award,jdbcType=DOUBLE}, 
+      #{s21award,jdbcType=DOUBLE}, #{s30award,jdbcType=DOUBLE}, #{s31award,jdbcType=DOUBLE}, 
+      #{s32award,jdbcType=DOUBLE}, #{s40award,jdbcType=DOUBLE}, #{s41award,jdbcType=DOUBLE}, 
+      #{s42award,jdbcType=DOUBLE}, #{s50award,jdbcType=DOUBLE}, #{s51award,jdbcType=DOUBLE}, 
+      #{s52award,jdbcType=DOUBLE}, #{sWinAward,jdbcType=DOUBLE}, #{s00award,jdbcType=DOUBLE}, 
+      #{s11award,jdbcType=DOUBLE}, #{s22award,jdbcType=DOUBLE}, #{s33award,jdbcType=DOUBLE}, 
+      #{sDrawAward,jdbcType=DOUBLE}, #{s01award,jdbcType=DOUBLE}, #{s02award,jdbcType=DOUBLE}, 
+      #{s12award,jdbcType=DOUBLE}, #{s03award,jdbcType=DOUBLE}, #{s13award,jdbcType=DOUBLE}, 
+      #{s23award,jdbcType=DOUBLE}, #{s04award,jdbcType=DOUBLE}, #{s14award,jdbcType=DOUBLE}, 
+      #{s24award,jdbcType=DOUBLE}, #{s05award,jdbcType=DOUBLE}, #{s15award,jdbcType=DOUBLE}, 
+      #{s25award,jdbcType=DOUBLE}, #{sLoseAward,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.SportteryFootballBfaward" >
+    insert into sporttery_football_bfaward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="matchid != null" >
+        matchId,
+      </if>
+      <if test="inttime != null" >
+        intTime,
+      </if>
+      <if test="lineid != null" >
+        lineId,
+      </if>
+      <if test="matchtime != null" >
+        matchTime,
+      </if>
+      <if test="passmode != null" >
+        passMode,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="s10award != null" >
+        s10award,
+      </if>
+      <if test="s20award != null" >
+        s20award,
+      </if>
+      <if test="s21award != null" >
+        s21award,
+      </if>
+      <if test="s30award != null" >
+        s30award,
+      </if>
+      <if test="s31award != null" >
+        s31award,
+      </if>
+      <if test="s32award != null" >
+        s32award,
+      </if>
+      <if test="s40award != null" >
+        s40award,
+      </if>
+      <if test="s41award != null" >
+        s41award,
+      </if>
+      <if test="s42award != null" >
+        s42award,
+      </if>
+      <if test="s50award != null" >
+        s50award,
+      </if>
+      <if test="s51award != null" >
+        s51award,
+      </if>
+      <if test="s52award != null" >
+        s52award,
+      </if>
+      <if test="sWinAward != null" >
+        s_win_award,
+      </if>
+      <if test="s00award != null" >
+        s00award,
+      </if>
+      <if test="s11award != null" >
+        s11award,
+      </if>
+      <if test="s22award != null" >
+        s22award,
+      </if>
+      <if test="s33award != null" >
+        s33award,
+      </if>
+      <if test="sDrawAward != null" >
+        s_draw_award,
+      </if>
+      <if test="s01award != null" >
+        s01award,
+      </if>
+      <if test="s02award != null" >
+        s02award,
+      </if>
+      <if test="s12award != null" >
+        s12award,
+      </if>
+      <if test="s03award != null" >
+        s03award,
+      </if>
+      <if test="s13award != null" >
+        s13award,
+      </if>
+      <if test="s23award != null" >
+        s23award,
+      </if>
+      <if test="s04award != null" >
+        s04award,
+      </if>
+      <if test="s14award != null" >
+        s14award,
+      </if>
+      <if test="s24award != null" >
+        s24award,
+      </if>
+      <if test="s05award != null" >
+        s05award,
+      </if>
+      <if test="s15award != null" >
+        s15award,
+      </if>
+      <if test="s25award != null" >
+        s25award,
+      </if>
+      <if test="sLoseAward != null" >
+        s_lose_award,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchid != null" >
+        #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="matchtime != null" >
+        #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passmode != null" >
+        #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="s10award != null" >
+        #{s10award,jdbcType=DOUBLE},
+      </if>
+      <if test="s20award != null" >
+        #{s20award,jdbcType=DOUBLE},
+      </if>
+      <if test="s21award != null" >
+        #{s21award,jdbcType=DOUBLE},
+      </if>
+      <if test="s30award != null" >
+        #{s30award,jdbcType=DOUBLE},
+      </if>
+      <if test="s31award != null" >
+        #{s31award,jdbcType=DOUBLE},
+      </if>
+      <if test="s32award != null" >
+        #{s32award,jdbcType=DOUBLE},
+      </if>
+      <if test="s40award != null" >
+        #{s40award,jdbcType=DOUBLE},
+      </if>
+      <if test="s41award != null" >
+        #{s41award,jdbcType=DOUBLE},
+      </if>
+      <if test="s42award != null" >
+        #{s42award,jdbcType=DOUBLE},
+      </if>
+      <if test="s50award != null" >
+        #{s50award,jdbcType=DOUBLE},
+      </if>
+      <if test="s51award != null" >
+        #{s51award,jdbcType=DOUBLE},
+      </if>
+      <if test="s52award != null" >
+        #{s52award,jdbcType=DOUBLE},
+      </if>
+      <if test="sWinAward != null" >
+        #{sWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="s00award != null" >
+        #{s00award,jdbcType=DOUBLE},
+      </if>
+      <if test="s11award != null" >
+        #{s11award,jdbcType=DOUBLE},
+      </if>
+      <if test="s22award != null" >
+        #{s22award,jdbcType=DOUBLE},
+      </if>
+      <if test="s33award != null" >
+        #{s33award,jdbcType=DOUBLE},
+      </if>
+      <if test="sDrawAward != null" >
+        #{sDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="s01award != null" >
+        #{s01award,jdbcType=DOUBLE},
+      </if>
+      <if test="s02award != null" >
+        #{s02award,jdbcType=DOUBLE},
+      </if>
+      <if test="s12award != null" >
+        #{s12award,jdbcType=DOUBLE},
+      </if>
+      <if test="s03award != null" >
+        #{s03award,jdbcType=DOUBLE},
+      </if>
+      <if test="s13award != null" >
+        #{s13award,jdbcType=DOUBLE},
+      </if>
+      <if test="s23award != null" >
+        #{s23award,jdbcType=DOUBLE},
+      </if>
+      <if test="s04award != null" >
+        #{s04award,jdbcType=DOUBLE},
+      </if>
+      <if test="s14award != null" >
+        #{s14award,jdbcType=DOUBLE},
+      </if>
+      <if test="s24award != null" >
+        #{s24award,jdbcType=DOUBLE},
+      </if>
+      <if test="s05award != null" >
+        #{s05award,jdbcType=DOUBLE},
+      </if>
+      <if test="s15award != null" >
+        #{s15award,jdbcType=DOUBLE},
+      </if>
+      <if test="s25award != null" >
+        #{s25award,jdbcType=DOUBLE},
+      </if>
+      <if test="sLoseAward != null" >
+        #{sLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SportteryFootballBfaward" >
+    update sporttery_football_bfaward
+    <set >
+      <if test="matchid != null" >
+        matchId = #{matchid,jdbcType=INTEGER},
+      </if>
+      <if test="inttime != null" >
+        intTime = #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="lineid != null" >
+        lineId = #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="matchtime != null" >
+        matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passmode != null" >
+        passMode = #{passmode,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="s10award != null" >
+        s10award = #{s10award,jdbcType=DOUBLE},
+      </if>
+      <if test="s20award != null" >
+        s20award = #{s20award,jdbcType=DOUBLE},
+      </if>
+      <if test="s21award != null" >
+        s21award = #{s21award,jdbcType=DOUBLE},
+      </if>
+      <if test="s30award != null" >
+        s30award = #{s30award,jdbcType=DOUBLE},
+      </if>
+      <if test="s31award != null" >
+        s31award = #{s31award,jdbcType=DOUBLE},
+      </if>
+      <if test="s32award != null" >
+        s32award = #{s32award,jdbcType=DOUBLE},
+      </if>
+      <if test="s40award != null" >
+        s40award = #{s40award,jdbcType=DOUBLE},
+      </if>
+      <if test="s41award != null" >
+        s41award = #{s41award,jdbcType=DOUBLE},
+      </if>
+      <if test="s42award != null" >
+        s42award = #{s42award,jdbcType=DOUBLE},
+      </if>
+      <if test="s50award != null" >
+        s50award = #{s50award,jdbcType=DOUBLE},
+      </if>
+      <if test="s51award != null" >
+        s51award = #{s51award,jdbcType=DOUBLE},
+      </if>
+      <if test="s52award != null" >
+        s52award = #{s52award,jdbcType=DOUBLE},
+      </if>
+      <if test="sWinAward != null" >
+        s_win_award = #{sWinAward,jdbcType=DOUBLE},
+      </if>
+      <if test="s00award != null" >
+        s00award = #{s00award,jdbcType=DOUBLE},
+      </if>
+      <if test="s11award != null" >
+        s11award = #{s11award,jdbcType=DOUBLE},
+      </if>
+      <if test="s22award != null" >
+        s22award = #{s22award,jdbcType=DOUBLE},
+      </if>
+      <if test="s33award != null" >
+        s33award = #{s33award,jdbcType=DOUBLE},
+      </if>
+      <if test="sDrawAward != null" >
+        s_draw_award = #{sDrawAward,jdbcType=DOUBLE},
+      </if>
+      <if test="s01award != null" >
+        s01award = #{s01award,jdbcType=DOUBLE},
+      </if>
+      <if test="s02award != null" >
+        s02award = #{s02award,jdbcType=DOUBLE},
+      </if>
+      <if test="s12award != null" >
+        s12award = #{s12award,jdbcType=DOUBLE},
+      </if>
+      <if test="s03award != null" >
+        s03award = #{s03award,jdbcType=DOUBLE},
+      </if>
+      <if test="s13award != null" >
+        s13award = #{s13award,jdbcType=DOUBLE},
+      </if>
+      <if test="s23award != null" >
+        s23award = #{s23award,jdbcType=DOUBLE},
+      </if>
+      <if test="s04award != null" >
+        s04award = #{s04award,jdbcType=DOUBLE},
+      </if>
+      <if test="s14award != null" >
+        s14award = #{s14award,jdbcType=DOUBLE},
+      </if>
+      <if test="s24award != null" >
+        s24award = #{s24award,jdbcType=DOUBLE},
+      </if>
+      <if test="s05award != null" >
+        s05award = #{s05award,jdbcType=DOUBLE},
+      </if>
+      <if test="s15award != null" >
+        s15award = #{s15award,jdbcType=DOUBLE},
+      </if>
+      <if test="s25award != null" >
+        s25award = #{s25award,jdbcType=DOUBLE},
+      </if>
+      <if test="sLoseAward != null" >
+        s_lose_award = #{sLoseAward,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SportteryFootballBfaward" >
+    update sporttery_football_bfaward
+    set matchId = #{matchid,jdbcType=INTEGER},
+      intTime = #{inttime,jdbcType=INTEGER},
+      lineId = #{lineid,jdbcType=INTEGER},
+      matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      passMode = #{passmode,jdbcType=INTEGER},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      s10award = #{s10award,jdbcType=DOUBLE},
+      s20award = #{s20award,jdbcType=DOUBLE},
+      s21award = #{s21award,jdbcType=DOUBLE},
+      s30award = #{s30award,jdbcType=DOUBLE},
+      s31award = #{s31award,jdbcType=DOUBLE},
+      s32award = #{s32award,jdbcType=DOUBLE},
+      s40award = #{s40award,jdbcType=DOUBLE},
+      s41award = #{s41award,jdbcType=DOUBLE},
+      s42award = #{s42award,jdbcType=DOUBLE},
+      s50award = #{s50award,jdbcType=DOUBLE},
+      s51award = #{s51award,jdbcType=DOUBLE},
+      s52award = #{s52award,jdbcType=DOUBLE},
+      s_win_award = #{sWinAward,jdbcType=DOUBLE},
+      s00award = #{s00award,jdbcType=DOUBLE},
+      s11award = #{s11award,jdbcType=DOUBLE},
+      s22award = #{s22award,jdbcType=DOUBLE},
+      s33award = #{s33award,jdbcType=DOUBLE},
+      s_draw_award = #{sDrawAward,jdbcType=DOUBLE},
+      s01award = #{s01award,jdbcType=DOUBLE},
+      s02award = #{s02award,jdbcType=DOUBLE},
+      s12award = #{s12award,jdbcType=DOUBLE},
+      s03award = #{s03award,jdbcType=DOUBLE},
+      s13award = #{s13award,jdbcType=DOUBLE},
+      s23award = #{s23award,jdbcType=DOUBLE},
+      s04award = #{s04award,jdbcType=DOUBLE},
+      s14award = #{s14award,jdbcType=DOUBLE},
+      s24award = #{s24award,jdbcType=DOUBLE},
+      s05award = #{s05award,jdbcType=DOUBLE},
+      s15award = #{s15award,jdbcType=DOUBLE},
+      s25award = #{s25award,jdbcType=DOUBLE},
+      s_lose_award = #{sLoseAward,jdbcType=DOUBLE},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByMatchId" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from sporttery_football_bfaward
+    where matchId = #{matchId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByLastUpdate" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from sporttery_football_bfaward
+    where matchId = #{matchId,jdbcType=INTEGER}
+    Order By lastUpdateTime DESC
+    LIMIT 1
+  </select>
+</mapper>

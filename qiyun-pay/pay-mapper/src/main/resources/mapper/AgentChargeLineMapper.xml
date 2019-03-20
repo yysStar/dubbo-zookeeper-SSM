@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper.AgentChargeLineMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model.AgentChargeLine" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="agent_account" property="agentAccount" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="credit_limit_" property="creditLimit" jdbcType="DOUBLE" />
+    <result column="able_credit_balance" property="ableCreditBalance" jdbcType="DOUBLE" />
+    <result column="freeze_credit_balance" property="freezeCreditBalance" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, agent_account, account, username, amount, create_time, credit_limit_, able_credit_balance, 
+    freeze_credit_balance
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model.AgentChargeLineQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from agent_charge_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from agent_charge_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from agent_charge_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model.AgentChargeLineQuery" >
+    delete from agent_charge_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.AgentChargeLine" >
+    insert into agent_charge_line (id, agent_account, account, 
+      username, amount, create_time, 
+      credit_limit_, able_credit_balance, freeze_credit_balance
+      )
+    values (#{id,jdbcType=INTEGER}, #{agentAccount,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creditLimit,jdbcType=DOUBLE}, #{ableCreditBalance,jdbcType=DOUBLE}, #{freezeCreditBalance,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.AgentChargeLine" >
+    insert into agent_charge_line
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="agentAccount != null" >
+        agent_account,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creditLimit != null" >
+        credit_limit_,
+      </if>
+      <if test="ableCreditBalance != null" >
+        able_credit_balance,
+      </if>
+      <if test="freezeCreditBalance != null" >
+        freeze_credit_balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="agentAccount != null" >
+        #{agentAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditLimit != null" >
+        #{creditLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="ableCreditBalance != null" >
+        #{ableCreditBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="freezeCreditBalance != null" >
+        #{freezeCreditBalance,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model.AgentChargeLineQuery" resultType="java.lang.Integer" >
+    select count(*) from agent_charge_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update agent_charge_line
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentAccount != null" >
+        agent_account = #{record.agentAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creditLimit != null" >
+        credit_limit_ = #{record.creditLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ableCreditBalance != null" >
+        able_credit_balance = #{record.ableCreditBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.freezeCreditBalance != null" >
+        freeze_credit_balance = #{record.freezeCreditBalance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update agent_charge_line
+    set id = #{record.id,jdbcType=INTEGER},
+      agent_account = #{record.agentAccount,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      credit_limit_ = #{record.creditLimit,jdbcType=DOUBLE},
+      able_credit_balance = #{record.ableCreditBalance,jdbcType=DOUBLE},
+      freeze_credit_balance = #{record.freezeCreditBalance,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.AgentChargeLine" >
+    update agent_charge_line
+    <set >
+      <if test="agentAccount != null" >
+        agent_account = #{agentAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditLimit != null" >
+        credit_limit_ = #{creditLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="ableCreditBalance != null" >
+        able_credit_balance = #{ableCreditBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="freezeCreditBalance != null" >
+        freeze_credit_balance = #{freezeCreditBalance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.AgentChargeLine" >
+    update agent_charge_line
+    set agent_account = #{agentAccount,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      credit_limit_ = #{creditLimit,jdbcType=DOUBLE},
+      able_credit_balance = #{ableCreditBalance,jdbcType=DOUBLE},
+      freeze_credit_balance = #{freezeCreditBalance,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
