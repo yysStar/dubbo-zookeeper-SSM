@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.BasketballTeam2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.BasketballTeam2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ls_id" property="lsId" jdbcType="INTEGER" />
+    <result column="short" property="ashort" jdbcType="VARCHAR" />
+    <result column="gb" property="gb" jdbcType="VARCHAR" />
+    <result column="big5" property="big5" jdbcType="VARCHAR" />
+    <result column="en" property="en" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="location_id" property="locationId" jdbcType="INTEGER" />
+    <result column="match_addr_id" property="matchAddrId" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="gymnasium" property="gymnasium" jdbcType="VARCHAR" />
+    <result column="capacity" property="capacity" jdbcType="INTEGER" />
+    <result column="join_year" property="joinYear" jdbcType="INTEGER" />
+    <result column="first_time" property="firstTime" jdbcType="INTEGER" />
+    <result column="drillmaster" property="drillmaster" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ls_id, `short`, gb, big5, en, logo, url, location_id, match_addr_id, city, gymnasium,
+    capacity, join_year, first_time, drillmaster
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.BasketballTeam2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from basketball_team2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from basketball_team2
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from basketball_team2
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.BasketballTeam2" >
+    insert into basketball_team2 (id, ls_id, `short`,
+      gb, big5, en, logo, 
+      url, location_id, match_addr_id, 
+      city, gymnasium, capacity, 
+      join_year, first_time, drillmaster
+      )
+    values (#{id,jdbcType=INTEGER}, #{lsId,jdbcType=INTEGER}, #{ashort,jdbcType=VARCHAR},
+      #{gb,jdbcType=VARCHAR}, #{big5,jdbcType=VARCHAR}, #{en,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{locationId,jdbcType=INTEGER}, #{matchAddrId,jdbcType=INTEGER}, 
+      #{city,jdbcType=VARCHAR}, #{gymnasium,jdbcType=VARCHAR}, #{capacity,jdbcType=INTEGER}, 
+      #{joinYear,jdbcType=INTEGER}, #{firstTime,jdbcType=INTEGER}, #{drillmaster,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.BasketballTeam2" >
+    insert into basketball_team2
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lsId != null" >
+        ls_id,
+      </if>
+      <if test="ashort != null" >
+        `short`,
+      </if>
+      <if test="gb != null" >
+        gb,
+      </if>
+      <if test="big5 != null" >
+        big5,
+      </if>
+      <if test="en != null" >
+        en,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="locationId != null" >
+        location_id,
+      </if>
+      <if test="matchAddrId != null" >
+        match_addr_id,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="gymnasium != null" >
+        gymnasium,
+      </if>
+      <if test="capacity != null" >
+        capacity,
+      </if>
+      <if test="joinYear != null" >
+        join_year,
+      </if>
+      <if test="firstTime != null" >
+        first_time,
+      </if>
+      <if test="drillmaster != null" >
+        drillmaster,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lsId != null" >
+        #{lsId,jdbcType=INTEGER},
+      </if>
+      <if test="ashort != null" >
+        #{ashort,jdbcType=VARCHAR},
+      </if>
+      <if test="gb != null" >
+        #{gb,jdbcType=VARCHAR},
+      </if>
+      <if test="big5 != null" >
+        #{big5,jdbcType=VARCHAR},
+      </if>
+      <if test="en != null" >
+        #{en,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="locationId != null" >
+        #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="matchAddrId != null" >
+        #{matchAddrId,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="gymnasium != null" >
+        #{gymnasium,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null" >
+        #{capacity,jdbcType=INTEGER},
+      </if>
+      <if test="joinYear != null" >
+        #{joinYear,jdbcType=INTEGER},
+      </if>
+      <if test="firstTime != null" >
+        #{firstTime,jdbcType=INTEGER},
+      </if>
+      <if test="drillmaster != null" >
+        #{drillmaster,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.BasketballTeam2" >
+    update basketball_team2
+    <set >
+      <if test="lsId != null" >
+        ls_id = #{lsId,jdbcType=INTEGER},
+      </if>
+      <if test="ashort != null" >
+        `short` = #{ashort,jdbcType=VARCHAR},
+      </if>
+      <if test="gb != null" >
+        gb = #{gb,jdbcType=VARCHAR},
+      </if>
+      <if test="big5 != null" >
+        big5 = #{big5,jdbcType=VARCHAR},
+      </if>
+      <if test="en != null" >
+        en = #{en,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="locationId != null" >
+        location_id = #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="matchAddrId != null" >
+        match_addr_id = #{matchAddrId,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="gymnasium != null" >
+        gymnasium = #{gymnasium,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null" >
+        capacity = #{capacity,jdbcType=INTEGER},
+      </if>
+      <if test="joinYear != null" >
+        join_year = #{joinYear,jdbcType=INTEGER},
+      </if>
+      <if test="firstTime != null" >
+        first_time = #{firstTime,jdbcType=INTEGER},
+      </if>
+      <if test="drillmaster != null" >
+        drillmaster = #{drillmaster,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.BasketballTeam2" >
+    update basketball_team2
+    set ls_id = #{lsId,jdbcType=INTEGER},
+      `short` = #{ashort,jdbcType=VARCHAR},
+      gb = #{gb,jdbcType=VARCHAR},
+      big5 = #{big5,jdbcType=VARCHAR},
+      en = #{en,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      location_id = #{locationId,jdbcType=INTEGER},
+      match_addr_id = #{matchAddrId,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      gymnasium = #{gymnasium,jdbcType=VARCHAR},
+      capacity = #{capacity,jdbcType=INTEGER},
+      join_year = #{joinYear,jdbcType=INTEGER},
+      first_time = #{firstTime,jdbcType=INTEGER},
+      drillmaster = #{drillmaster,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

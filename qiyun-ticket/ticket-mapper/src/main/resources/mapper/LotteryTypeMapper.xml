@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper.LotteryTypeMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model.LotteryType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="high_id" jdbcType="INTEGER" property="highId" />
+    <result column="ticket_id" jdbcType="INTEGER" property="ticketId" />
+    <result column="is_bottom" jdbcType="BIT" property="isBottom" />
+  </resultMap>
+  <resultMap id="LotteryBusinessDTO" type="com.qiyun.DTO.LotteryBusinessDTO">
+    <id column="id" jdbcType="INTEGER" property="lotteryTypeId" />
+    <result column="name" jdbcType="VARCHAR" property="lotteryTypeName" />
+    <result column="business_name" jdbcType="INTEGER" property="defaultBusiness" />
+    <collection column="id" property="businessList" ofType="com.qiyun.DTO.BusinessDTO"
+                select="com.qiyun.mapper2.TicketBusinessMapper.selectByLotteryId"/>
+  </resultMap>
+  <select id="getLotteryBusinessList" resultMap="LotteryBusinessDTO">
+    SELECT
+        L.*, B.`name` AS business_name
+    FROM
+        lottery_type L
+    LEFT JOIN ticket_business B ON L.ticket_id = B.id
+    WHERE
+        is_bottom = '1'
+    ORDER BY
+        high_id,
+        id
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, high_id, ticket_id, is_bottom
+  </sql>
+  <select id="selectByExample" parameterType="com.qiyun.model.LotteryTypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from lottery_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lottery_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from lottery_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.LotteryType">
+    insert into lottery_type (id, name, high_id, 
+      ticket_id, is_bottom)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{highId,jdbcType=INTEGER}, 
+      #{ticketId,jdbcType=INTEGER}, #{isBottom,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.LotteryType">
+    insert into lottery_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="highId != null">
+        high_id,
+      </if>
+      <if test="ticketId != null">
+        ticket_id,
+      </if>
+      <if test="isBottom != null">
+        is_bottom,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="highId != null">
+        #{highId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketId != null">
+        #{ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="isBottom != null">
+        #{isBottom,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.LotteryType">
+    update lottery_type
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="highId != null">
+        high_id = #{highId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketId != null">
+        ticket_id = #{ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="isBottom != null">
+        is_bottom = #{isBottom,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.LotteryType">
+    update lottery_type
+    set name = #{name,jdbcType=VARCHAR},
+      high_id = #{highId,jdbcType=INTEGER},
+      ticket_id = #{ticketId,jdbcType=INTEGER},
+      is_bottom = #{isBottom,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

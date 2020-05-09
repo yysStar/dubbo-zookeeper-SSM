@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.MemberWallet2Mapper" >
+    <resultMap id="BaseResultMap" type="com.qiyun.model2.MemberWallet2" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="MEMBER_ID" property="memberId" jdbcType="INTEGER" />
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+        <result column="ABLE_BALANCE" property="ableBalance" jdbcType="DOUBLE" />
+        <result column="take_cash_quota" property="takeCashQuota" jdbcType="DOUBLE" />
+        <result column="FREEZE_BALANCE" property="freezeBalance" jdbcType="DOUBLE" />
+        <result column="HEAP_BALANCE" property="heapBalance" jdbcType="DOUBLE" />
+        <result column="HEAP_PRIZE" property="heapPrize" jdbcType="DOUBLE" />
+        <result column="VERIFY_MD5" property="verifyMd5" jdbcType="VARCHAR" />
+        <result column="WALLET_TYPE" property="walletType" jdbcType="INTEGER" />
+        <result column="PRIZE_BALANCE" property="prizeBalance" jdbcType="DOUBLE" />
+        <result column="credit_limit" property="creditLimit" jdbcType="DOUBLE" />
+        <result column="able_credit_balance" property="ableCreditBalance" jdbcType="DOUBLE" />
+        <result column="freeze_credit_balance" property="freezeCreditBalance" jdbcType="DOUBLE" />
+        <result column="red_packet_balance" property="redPacketBalance" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        ID, MEMBER_ID, ACCOUNT, ABLE_BALANCE, take_cash_quota, FREEZE_BALANCE, HEAP_BALANCE,
+        HEAP_PRIZE, VERIFY_MD5, WALLET_TYPE, PRIZE_BALANCE, credit_limit, able_credit_balance,
+        freeze_credit_balance, red_packet_balance
+    </sql>
+    <sql id="Much_Column_List" >
+        w.ID, w.MEMBER_ID, w.ACCOUNT, w.ABLE_BALANCE, w.take_cash_quota, w.FREEZE_BALANCE, HEAP_BALANCE,
+        w.HEAP_PRIZE, w.VERIFY_MD5, w.WALLET_TYPE, w.PRIZE_BALANCE, w.credit_limit, w.able_credit_balance,
+        w.freeze_credit_balance, red_packet_balance
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.MemberWallet2Query" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from member_wallet
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from member_wallet
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from member_wallet
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.qiyun.model2.MemberWallet2Query" >
+        delete from member_wallet
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.qiyun.model2.MemberWallet2" >
+        insert into member_wallet (ID, MEMBER_ID, ACCOUNT,
+        ABLE_BALANCE, take_cash_quota, FREEZE_BALANCE,
+        HEAP_BALANCE, HEAP_PRIZE, VERIFY_MD5,
+        WALLET_TYPE, PRIZE_BALANCE, credit_limit,
+        able_credit_balance, freeze_credit_balance)
+        values (#{id,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR},
+        #{ableBalance,jdbcType=DOUBLE}, #{takeCashQuota,jdbcType=DOUBLE}, #{freezeBalance,jdbcType=DOUBLE},
+        #{heapBalance,jdbcType=DOUBLE}, #{heapPrize,jdbcType=DOUBLE}, #{verifyMd5,jdbcType=VARCHAR},
+        #{walletType,jdbcType=INTEGER}, #{prizeBalance,jdbcType=DOUBLE}, #{creditLimit,jdbcType=DOUBLE},
+        #{ableCreditBalance,jdbcType=DOUBLE}, #{freezeCreditBalance,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.qiyun.model2.MemberWallet2" >
+        insert into member_wallet
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="memberId != null" >
+                MEMBER_ID,
+            </if>
+            <if test="account != null" >
+                ACCOUNT,
+            </if>
+            <if test="ableBalance != null" >
+                ABLE_BALANCE,
+            </if>
+            <if test="takeCashQuota != null" >
+                take_cash_quota,
+            </if>
+            <if test="freezeBalance != null" >
+                FREEZE_BALANCE,
+            </if>
+            <if test="heapBalance != null" >
+                HEAP_BALANCE,
+            </if>
+            <if test="heapPrize != null" >
+                HEAP_PRIZE,
+            </if>
+            <if test="verifyMd5 != null" >
+                VERIFY_MD5,
+            </if>
+            <if test="walletType != null" >
+                WALLET_TYPE,
+            </if>
+            <if test="prizeBalance != null" >
+                PRIZE_BALANCE,
+            </if>
+            <if test="creditLimit != null" >
+                credit_limit,
+            </if>
+            <if test="ableCreditBalance != null" >
+                able_credit_balance,
+            </if>
+            <if test="freezeCreditBalance != null" >
+                freeze_credit_balance,
+            </if>
+            <if test="redPacketBalance != null" >
+                red_packet_balance,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null" >
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="account != null" >
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="ableBalance != null" >
+                #{ableBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="takeCashQuota != null" >
+                #{takeCashQuota,jdbcType=DOUBLE},
+            </if>
+            <if test="freezeBalance != null" >
+                #{freezeBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="heapBalance != null" >
+                #{heapBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="heapPrize != null" >
+                #{heapPrize,jdbcType=DOUBLE},
+            </if>
+            <if test="verifyMd5 != null" >
+                #{verifyMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="walletType != null" >
+                #{walletType,jdbcType=INTEGER},
+            </if>
+            <if test="prizeBalance != null" >
+                #{prizeBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="creditLimit != null" >
+                #{creditLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="ableCreditBalance != null" >
+                #{ableCreditBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="freezeCreditBalance != null" >
+                #{freezeCreditBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="redPacketBalance != null" >
+                #{redPacketBalance,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.qiyun.model2.MemberWallet2Query" resultType="java.lang.Integer" >
+        select count(*) from member_wallet
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update member_wallet
+        <set >
+            <if test="record.id != null" >
+                ID = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberId != null" >
+                MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+            </if>
+            <if test="record.account != null" >
+                ACCOUNT = #{record.account,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ableBalance != null" >
+                ABLE_BALANCE = #{record.ableBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.takeCashQuota != null" >
+                take_cash_quota = #{record.takeCashQuota,jdbcType=DOUBLE},
+            </if>
+            <if test="record.freezeBalance != null" >
+                FREEZE_BALANCE = #{record.freezeBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.heapBalance != null" >
+                HEAP_BALANCE = #{record.heapBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.heapPrize != null" >
+                HEAP_PRIZE = #{record.heapPrize,jdbcType=DOUBLE},
+            </if>
+            <if test="record.verifyMd5 != null" >
+                VERIFY_MD5 = #{record.verifyMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="record.walletType != null" >
+                WALLET_TYPE = #{record.walletType,jdbcType=INTEGER},
+            </if>
+            <if test="record.prizeBalance != null" >
+                PRIZE_BALANCE = #{record.prizeBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.creditLimit != null" >
+                credit_limit = #{record.creditLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="record.ableCreditBalance != null" >
+                able_credit_balance = #{record.ableCreditBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.freezeCreditBalance != null" >
+                freeze_credit_balance = #{record.freezeCreditBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.redPacketBalance != null" >
+                red_packet_balance = #{record.redPacketBalance,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update member_wallet
+        set ID = #{record.id,jdbcType=INTEGER},
+        MEMBER_ID = #{record.memberId,jdbcType=INTEGER},
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+        ABLE_BALANCE = #{record.ableBalance,jdbcType=DOUBLE},
+        take_cash_quota = #{record.takeCashQuota,jdbcType=DOUBLE},
+        FREEZE_BALANCE = #{record.freezeBalance,jdbcType=DOUBLE},
+        HEAP_BALANCE = #{record.heapBalance,jdbcType=DOUBLE},
+        HEAP_PRIZE = #{record.heapPrize,jdbcType=DOUBLE},
+        VERIFY_MD5 = #{record.verifyMd5,jdbcType=VARCHAR},
+        WALLET_TYPE = #{record.walletType,jdbcType=INTEGER},
+        PRIZE_BALANCE = #{record.prizeBalance,jdbcType=DOUBLE},
+        credit_limit = #{record.creditLimit,jdbcType=DOUBLE},
+        able_credit_balance = #{record.ableCreditBalance,jdbcType=DOUBLE},
+        freeze_credit_balance = #{record.freezeCreditBalance,jdbcType=DOUBLE}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MemberWallet2" >
+        update member_wallet
+        <set >
+            <if test="memberId != null" >
+                MEMBER_ID = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="account != null" >
+                ACCOUNT = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="ableBalance != null" >
+                ABLE_BALANCE = #{ableBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="takeCashQuota != null" >
+                take_cash_quota = #{takeCashQuota,jdbcType=DOUBLE},
+            </if>
+            <if test="freezeBalance != null" >
+                FREEZE_BALANCE = #{freezeBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="heapBalance != null" >
+                HEAP_BALANCE = #{heapBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="heapPrize != null" >
+                HEAP_PRIZE = #{heapPrize,jdbcType=DOUBLE},
+            </if>
+            <if test="verifyMd5 != null" >
+                VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="walletType != null" >
+                WALLET_TYPE = #{walletType,jdbcType=INTEGER},
+            </if>
+            <if test="prizeBalance != null" >
+                PRIZE_BALANCE = #{prizeBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="creditLimit != null" >
+                credit_limit = #{creditLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="ableCreditBalance != null" >
+                able_credit_balance = #{ableCreditBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="freezeCreditBalance != null" >
+                freeze_credit_balance = #{freezeCreditBalance,jdbcType=DOUBLE},
+            </if>
+            <if test="redPacketBalance != null" >
+                red_packet_balance = #{redPacketBalance,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MemberWallet2" >
+    update member_wallet
+    set MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      ABLE_BALANCE = #{ableBalance,jdbcType=DOUBLE},
+      take_cash_quota = #{takeCashQuota,jdbcType=DOUBLE},
+      FREEZE_BALANCE = #{freezeBalance,jdbcType=DOUBLE},
+      HEAP_BALANCE = #{heapBalance,jdbcType=DOUBLE},
+      HEAP_PRIZE = #{heapPrize,jdbcType=DOUBLE},
+      VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      WALLET_TYPE = #{walletType,jdbcType=INTEGER},
+      PRIZE_BALANCE = #{prizeBalance,jdbcType=DOUBLE},
+      credit_limit = #{creditLimit,jdbcType=DOUBLE},
+      able_credit_balance = #{ableCreditBalance,jdbcType=DOUBLE},
+      freeze_credit_balance = #{freezeCreditBalance,jdbcType=DOUBLE},
+      red_packet_balance = #{redPacketBalance,jdbcType=DOUBLE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from member_wallet
+        where member_id = #{memberId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByAccount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from member_wallet
+        where account = #{account,jdbcType=VARCHAR}
+    </select>
+    <!--<resultMap id="PacketListMap" type="com.qiyun.dto.RedPacketListDTO" >-->
+        <!--<id column="ID" property="walletLineNo" jdbcType="INTEGER" />-->
+        <!--<result column="wallet_Line_No" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="id" property="qbAccount" jdbcType="VARCHAR" />-->
+        <!--<result column="ACCOUNT" property="fbAccount" jdbcType="VARCHAR" />-->
+        <!--<result column="account" property="money" jdbcType="DOUBLE" />-->
+        <!--<result column="FREEZE_BALANCE" property="amount" jdbcType="DOUBLE" />-->
+        <!--<result column="HEAP_BALANCE" property="ableBalance" jdbcType="DOUBLE" />-->
+        <!--<result column="HEAP_PRIZE" property="time" jdbcType="Date" />-->
+        <!--<result column="VERIFY_MD5" property="number" jdbcType="Integer" />-->
+        <!--<result column="WALLET_TYPE" property="status" jdbcType="Integer" />-->
+        <!--<result column="PRIZE_BALANCE" property="surplusMoney" jdbcType="Double" />-->
+        <!--<result column="credit_limit" property="surplusNumber" jdbcType="Integer" />-->
+        <!--<result column="credit_limit" property="apply" jdbcType="Integer" />-->
+    <!--</resultMap>-->
+    <select id="grabRedRacketList" resultType="com.qiyun.dto.RedPacketListDTO" parameterType="map">
+        SELECT m.wallet_Line_No walletLineNo,r.id,m.ACCOUNT qbAccount,r.account fbAccount,r.money,m.AMOUNT amount,m.ABLE_BALANCE ableBalance,m.CREATE_DATE_TIME time,r.number,r.status,r.surplus_number surplusNumber,r.surplus_money surplusMoney,r.apply
+        FROM red_packet r
+        LEFT JOIN member_wallet_line m
+        ON r.id = m.PLAN_NO
+        WHERE m.TRANS_TYPE = 42
+        <if test="account != null" >
+            AND title LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startTime!=null and endTime !=null">
+            AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!=null and endTime ==null">
+            AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+        </if>
+        <if test="startTime==null and endTime !=null">
+            AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+        </if>
+        ORDER BY m.CREATE_DATE_TIME
+    </select>
+
+    <select id="putRedRacketList" resultType="com.qiyun.dto.RedPacketListDTO" parameterType="map">
+        SELECT m.wallet_Line_No walletLineNo,r.id,r.account fbAccount,r.money,m.AMOUNT amount,m.ABLE_BALANCE ableBalance,m.CREATE_DATE_TIME time,r.number,r.status,r.surplus_number surplusNumber,r.surplus_money surplusMoney,r.apply
+        FROM red_packet r
+        LEFT JOIN member_wallet_line m
+        ON r.id = m.PLAN_NO
+        WHERE m.TRANS_TYPE = 41
+        <if test="account != null" >
+            AND fbAccount LIKE CONCAT('%',#{account,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startTime!=null and endTime !=null">
+            AND ML.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!=null and endTime ==null">
+            AND ML.CREATE_DATE_TIME <![CDATA[>=]]>#{startTime}
+        </if>
+        <if test="startTime==null and endTime !=null">
+            AND ML.CREATE_DATE_TIME <![CDATA[<=]]>#{endTime}
+        </if>
+        ORDER BY m.CREATE_DATE_TIME
+    </select>
+</mapper>

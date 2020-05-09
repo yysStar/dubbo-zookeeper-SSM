@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.LotteryChase2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.LotteryChase2" >
+    <id column="CHASE_NO" property="chaseNo" jdbcType="INTEGER" />
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER" />
+    <result column="CHASE_TYPE" property="chaseType" jdbcType="INTEGER" />
+    <result column="AMOUNT" property="amount" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="WALLET_TYPE" property="walletType" jdbcType="INTEGER" />
+    <result column="SELECT_TYPE" property="selectType" jdbcType="INTEGER" />
+    <result column="PLAY_TYPE" property="playType" jdbcType="INTEGER" />
+    <result column="MULTIPLE" property="multiple" jdbcType="INTEGER" />
+    <result column="ADD_ATTRIBUTE" property="addAttribute" jdbcType="VARCHAR" />
+    <result column="VERIFY_MD5" property="verifyMd5" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE_TIME" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="IS_PACKAGE" property="isPackage" jdbcType="INTEGER" />
+    <result column="PACKAGE_AMOUNT" property="packageAmount" jdbcType="DOUBLE" />
+    <result column="TOTAL_TERM" property="totalTerm" jdbcType="INTEGER" />
+    <result column="SOLD_TERM" property="soldTerm" jdbcType="INTEGER" />
+    <result column="TOTAL_PRIZE" property="totalPrize" jdbcType="DOUBLE" />
+    <result column="STOP_CONDITION" property="stopCondition" jdbcType="VARCHAR" />
+    <result column="START_CONDITION" property="startCondition" jdbcType="VARCHAR" />
+    <result column="GAIN_CONDITION" property="gainCondition" jdbcType="VARCHAR" />
+    <result column="GEN_TYPE" property="genType" jdbcType="INTEGER" />
+    <result column="TRADE_TYPE" property="tradeType" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.LotteryChase2" extends="BaseResultMap" >
+    <result column="CHASE_CONTENT" property="chaseContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CHASE_NO, ACCOUNT, LOTTERY_TYPE, CHASE_TYPE, AMOUNT, STATUS, WALLET_TYPE, SELECT_TYPE, 
+    PLAY_TYPE, MULTIPLE, ADD_ATTRIBUTE, VERIFY_MD5, CREATE_DATE_TIME, IS_PACKAGE, PACKAGE_AMOUNT, 
+    TOTAL_TERM, SOLD_TERM, TOTAL_PRIZE, STOP_CONDITION, START_CONDITION, GAIN_CONDITION, 
+    GEN_TYPE, TRADE_TYPE, platform
+  </sql>
+  <sql id="Blob_Column_List" >
+    CHASE_CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.LotteryChase2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lottery_chase
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.LotteryChase2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from lottery_chase
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lottery_chase
+    where CHASE_NO = #{chaseNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lottery_chase
+    where CHASE_NO = #{chaseNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.LotteryChase2" >
+    insert into lottery_chase (CHASE_NO, ACCOUNT, LOTTERY_TYPE, 
+      CHASE_TYPE, AMOUNT, STATUS, 
+      WALLET_TYPE, SELECT_TYPE, PLAY_TYPE, 
+      MULTIPLE, ADD_ATTRIBUTE, VERIFY_MD5, 
+      CREATE_DATE_TIME, IS_PACKAGE, PACKAGE_AMOUNT, 
+      TOTAL_TERM, SOLD_TERM, TOTAL_PRIZE, 
+      STOP_CONDITION, START_CONDITION, GAIN_CONDITION, 
+      GEN_TYPE, TRADE_TYPE, platform, 
+      CHASE_CONTENT)
+    values (#{chaseNo,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{lotteryType,jdbcType=INTEGER}, 
+      #{chaseType,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{walletType,jdbcType=INTEGER}, #{selectType,jdbcType=INTEGER}, #{playType,jdbcType=INTEGER}, 
+      #{multiple,jdbcType=INTEGER}, #{addAttribute,jdbcType=VARCHAR}, #{verifyMd5,jdbcType=VARCHAR}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{isPackage,jdbcType=INTEGER}, #{packageAmount,jdbcType=DOUBLE}, 
+      #{totalTerm,jdbcType=INTEGER}, #{soldTerm,jdbcType=INTEGER}, #{totalPrize,jdbcType=DOUBLE}, 
+      #{stopCondition,jdbcType=VARCHAR}, #{startCondition,jdbcType=VARCHAR}, #{gainCondition,jdbcType=VARCHAR}, 
+      #{genType,jdbcType=INTEGER}, #{tradeType,jdbcType=INTEGER}, #{platform,jdbcType=INTEGER}, 
+      #{chaseContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.LotteryChase2" >
+    insert into lottery_chase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chaseNo != null" >
+        CHASE_NO,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE,
+      </if>
+      <if test="chaseType != null" >
+        CHASE_TYPE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="walletType != null" >
+        WALLET_TYPE,
+      </if>
+      <if test="selectType != null" >
+        SELECT_TYPE,
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE,
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE,
+      </if>
+      <if test="addAttribute != null" >
+        ADD_ATTRIBUTE,
+      </if>
+      <if test="verifyMd5 != null" >
+        VERIFY_MD5,
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME,
+      </if>
+      <if test="isPackage != null" >
+        IS_PACKAGE,
+      </if>
+      <if test="packageAmount != null" >
+        PACKAGE_AMOUNT,
+      </if>
+      <if test="totalTerm != null" >
+        TOTAL_TERM,
+      </if>
+      <if test="soldTerm != null" >
+        SOLD_TERM,
+      </if>
+      <if test="totalPrize != null" >
+        TOTAL_PRIZE,
+      </if>
+      <if test="stopCondition != null" >
+        STOP_CONDITION,
+      </if>
+      <if test="startCondition != null" >
+        START_CONDITION,
+      </if>
+      <if test="gainCondition != null" >
+        GAIN_CONDITION,
+      </if>
+      <if test="genType != null" >
+        GEN_TYPE,
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="chaseContent != null" >
+        CHASE_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chaseNo != null" >
+        #{chaseNo,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="lotteryType != null" >
+        #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="chaseType != null" >
+        #{chaseType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="walletType != null" >
+        #{walletType,jdbcType=INTEGER},
+      </if>
+      <if test="selectType != null" >
+        #{selectType,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="multiple != null" >
+        #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="addAttribute != null" >
+        #{addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyMd5 != null" >
+        #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPackage != null" >
+        #{isPackage,jdbcType=INTEGER},
+      </if>
+      <if test="packageAmount != null" >
+        #{packageAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="totalTerm != null" >
+        #{totalTerm,jdbcType=INTEGER},
+      </if>
+      <if test="soldTerm != null" >
+        #{soldTerm,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrize != null" >
+        #{totalPrize,jdbcType=DOUBLE},
+      </if>
+      <if test="stopCondition != null" >
+        #{stopCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="startCondition != null" >
+        #{startCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="gainCondition != null" >
+        #{gainCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="genType != null" >
+        #{genType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="chaseContent != null" >
+        #{chaseContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.LotteryChase2" >
+    update lottery_chase
+    <set >
+      <if test="account != null" >
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="chaseType != null" >
+        CHASE_TYPE = #{chaseType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="walletType != null" >
+        WALLET_TYPE = #{walletType,jdbcType=INTEGER},
+      </if>
+      <if test="selectType != null" >
+        SELECT_TYPE = #{selectType,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE = #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="addAttribute != null" >
+        ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyMd5 != null" >
+        VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPackage != null" >
+        IS_PACKAGE = #{isPackage,jdbcType=INTEGER},
+      </if>
+      <if test="packageAmount != null" >
+        PACKAGE_AMOUNT = #{packageAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="totalTerm != null" >
+        TOTAL_TERM = #{totalTerm,jdbcType=INTEGER},
+      </if>
+      <if test="soldTerm != null" >
+        SOLD_TERM = #{soldTerm,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrize != null" >
+        TOTAL_PRIZE = #{totalPrize,jdbcType=DOUBLE},
+      </if>
+      <if test="stopCondition != null" >
+        STOP_CONDITION = #{stopCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="startCondition != null" >
+        START_CONDITION = #{startCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="gainCondition != null" >
+        GAIN_CONDITION = #{gainCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="genType != null" >
+        GEN_TYPE = #{genType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="chaseContent != null" >
+        CHASE_CONTENT = #{chaseContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where CHASE_NO = #{chaseNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.LotteryChase2" >
+    update lottery_chase
+    set ACCOUNT = #{account,jdbcType=VARCHAR},
+      LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      CHASE_TYPE = #{chaseType,jdbcType=INTEGER},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      WALLET_TYPE = #{walletType,jdbcType=INTEGER},
+      SELECT_TYPE = #{selectType,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      MULTIPLE = #{multiple,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      IS_PACKAGE = #{isPackage,jdbcType=INTEGER},
+      PACKAGE_AMOUNT = #{packageAmount,jdbcType=DOUBLE},
+      TOTAL_TERM = #{totalTerm,jdbcType=INTEGER},
+      SOLD_TERM = #{soldTerm,jdbcType=INTEGER},
+      TOTAL_PRIZE = #{totalPrize,jdbcType=DOUBLE},
+      STOP_CONDITION = #{stopCondition,jdbcType=VARCHAR},
+      START_CONDITION = #{startCondition,jdbcType=VARCHAR},
+      GAIN_CONDITION = #{gainCondition,jdbcType=VARCHAR},
+      GEN_TYPE = #{genType,jdbcType=INTEGER},
+      TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
+      platform = #{platform,jdbcType=INTEGER},
+      CHASE_CONTENT = #{chaseContent,jdbcType=LONGVARCHAR}
+    where CHASE_NO = #{chaseNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.LotteryChase2" >
+    update lottery_chase
+    set ACCOUNT = #{account,jdbcType=VARCHAR},
+      LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      CHASE_TYPE = #{chaseType,jdbcType=INTEGER},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      WALLET_TYPE = #{walletType,jdbcType=INTEGER},
+      SELECT_TYPE = #{selectType,jdbcType=INTEGER},
+      PLAY_TYPE = #{playType,jdbcType=INTEGER},
+      MULTIPLE = #{multiple,jdbcType=INTEGER},
+      ADD_ATTRIBUTE = #{addAttribute,jdbcType=VARCHAR},
+      VERIFY_MD5 = #{verifyMd5,jdbcType=VARCHAR},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      IS_PACKAGE = #{isPackage,jdbcType=INTEGER},
+      PACKAGE_AMOUNT = #{packageAmount,jdbcType=DOUBLE},
+      TOTAL_TERM = #{totalTerm,jdbcType=INTEGER},
+      SOLD_TERM = #{soldTerm,jdbcType=INTEGER},
+      TOTAL_PRIZE = #{totalPrize,jdbcType=DOUBLE},
+      STOP_CONDITION = #{stopCondition,jdbcType=VARCHAR},
+      START_CONDITION = #{startCondition,jdbcType=VARCHAR},
+      GAIN_CONDITION = #{gainCondition,jdbcType=VARCHAR},
+      GEN_TYPE = #{genType,jdbcType=INTEGER},
+      TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
+      platform = #{platform,jdbcType=INTEGER}
+    where CHASE_NO = #{chaseNo,jdbcType=INTEGER}
+  </update>
+</mapper>

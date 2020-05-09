@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.ChampionMatchMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.ChampionMatch">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="team_name" jdbcType="VARCHAR" property="teamName" />
+    <result column="sp" jdbcType="DECIMAL" property="sp" />
+    <result column="support_rate" jdbcType="VARCHAR" property="supportRate" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    <result column="national_flag" jdbcType="VARCHAR" property="nationalFlag" />
+    <result column="sell_status" jdbcType="VARCHAR" property="sellStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, team_name, sp, support_rate, team_id, national_flag, sell_status
+  </sql>
+  <select id="selectByExample" parameterType="com.qiyun.model2.ChampionMatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from champion_match
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from champion_match
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from champion_match
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.ChampionMatch">
+    insert into champion_match (id, team_name, sp, 
+      support_rate, team_id, national_flag, 
+      sell_status)
+    values (#{id,jdbcType=INTEGER}, #{teamName,jdbcType=VARCHAR}, #{sp,jdbcType=DECIMAL}, 
+      #{supportRate,jdbcType=VARCHAR}, #{teamId,jdbcType=INTEGER}, #{nationalFlag,jdbcType=VARCHAR}, 
+      #{sellStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.ChampionMatch">
+    insert into champion_match
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="teamName != null">
+        team_name,
+      </if>
+      <if test="sp != null">
+        sp,
+      </if>
+      <if test="supportRate != null">
+        support_rate,
+      </if>
+      <if test="teamId != null">
+        team_id,
+      </if>
+      <if test="nationalFlag != null">
+        national_flag,
+      </if>
+      <if test="sellStatus != null">
+        sell_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teamName != null">
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="sp != null">
+        #{sp,jdbcType=DECIMAL},
+      </if>
+      <if test="supportRate != null">
+        #{supportRate,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="nationalFlag != null">
+        #{nationalFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sellStatus != null">
+        #{sellStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.ChampionMatch">
+    update champion_match
+    <set>
+      <if test="teamName != null">
+        team_name = #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="sp != null">
+        sp = #{sp,jdbcType=DECIMAL},
+      </if>
+      <if test="supportRate != null">
+        support_rate = #{supportRate,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null">
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="nationalFlag != null">
+        national_flag = #{nationalFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sellStatus != null">
+        sell_status = #{sellStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.ChampionMatch">
+    update champion_match
+    set team_name = #{teamName,jdbcType=VARCHAR},
+      sp = #{sp,jdbcType=DECIMAL},
+      support_rate = #{supportRate,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=INTEGER},
+      national_flag = #{nationalFlag,jdbcType=VARCHAR},
+      sell_status = #{sellStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from champion_match
+    where 1 = 1
+  </select>
+</mapper>

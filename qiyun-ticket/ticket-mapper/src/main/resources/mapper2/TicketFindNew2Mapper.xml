@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.TicketFindNew2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.TicketFindNew2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="plan_no" property="planNo" jdbcType="INTEGER" />
+    <result column="find_time" property="findTime" jdbcType="TIMESTAMP" />
+    <result column="kh_account" property="khAccount" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="copy_plan_no" property="copyPlanNo" jdbcType="INTEGER" />
+    <result column="xp_account" property="xpAccount" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="ticket_status" property="ticketStatus" jdbcType="INTEGER" />
+    <result column="copy_status" property="copyStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, plan_no, find_time, kh_account, status, copy_plan_no, xp_account, type, ticket_status, 
+    copy_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.TicketFindNew2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ticket_find_new
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_find_new
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_find_new
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.TicketFindNew2Query" >
+    delete from ticket_find_new
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.TicketFindNew2" >
+    insert into ticket_find_new (id, plan_no, find_time, 
+      kh_account, status, copy_plan_no, 
+      xp_account, type, ticket_status, 
+      copy_status)
+    values (#{id,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{findTime,jdbcType=TIMESTAMP}, 
+      #{khAccount,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{copyPlanNo,jdbcType=INTEGER}, 
+      #{xpAccount,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{ticketStatus,jdbcType=INTEGER}, 
+      #{copyStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.TicketFindNew2" >
+    insert into ticket_find_new
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="planNo != null" >
+        plan_no,
+      </if>
+      <if test="findTime != null" >
+        find_time,
+      </if>
+      <if test="khAccount != null" >
+        kh_account,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="copyPlanNo != null" >
+        copy_plan_no,
+      </if>
+      <if test="xpAccount != null" >
+        xp_account,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="ticketStatus != null" >
+        ticket_status,
+      </if>
+      <if test="copyStatus != null" >
+        copy_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null" >
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="findTime != null" >
+        #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="khAccount != null" >
+        #{khAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="copyPlanNo != null" >
+        #{copyPlanNo,jdbcType=INTEGER},
+      </if>
+      <if test="xpAccount != null" >
+        #{xpAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="ticketStatus != null" >
+        #{ticketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="copyStatus != null" >
+        #{copyStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.TicketFindNew2Query" resultType="java.lang.Integer" >
+    select count(*) from ticket_find_new
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ticket_find_new
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.planNo != null" >
+        plan_no = #{record.planNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.findTime != null" >
+        find_time = #{record.findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.khAccount != null" >
+        kh_account = #{record.khAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.copyPlanNo != null" >
+        copy_plan_no = #{record.copyPlanNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.xpAccount != null" >
+        xp_account = #{record.xpAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketStatus != null" >
+        ticket_status = #{record.ticketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.copyStatus != null" >
+        copy_status = #{record.copyStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ticket_find_new
+    set id = #{record.id,jdbcType=INTEGER},
+      plan_no = #{record.planNo,jdbcType=INTEGER},
+      find_time = #{record.findTime,jdbcType=TIMESTAMP},
+      kh_account = #{record.khAccount,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      copy_plan_no = #{record.copyPlanNo,jdbcType=INTEGER},
+      xp_account = #{record.xpAccount,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      ticket_status = #{record.ticketStatus,jdbcType=INTEGER},
+      copy_status = #{record.copyStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.TicketFindNew2" >
+    update ticket_find_new
+    <set >
+      <if test="planNo != null" >
+        plan_no = #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="findTime != null" >
+        find_time = #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="khAccount != null" >
+        kh_account = #{khAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="copyPlanNo != null" >
+        copy_plan_no = #{copyPlanNo,jdbcType=INTEGER},
+      </if>
+      <if test="xpAccount != null" >
+        xp_account = #{xpAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="ticketStatus != null" >
+        ticket_status = #{ticketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="copyStatus != null" >
+        copy_status = #{copyStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.TicketFindNew2" >
+    update ticket_find_new
+    set plan_no = #{planNo,jdbcType=INTEGER},
+      find_time = #{findTime,jdbcType=TIMESTAMP},
+      kh_account = #{khAccount,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      copy_plan_no = #{copyPlanNo,jdbcType=INTEGER},
+      xp_account = #{xpAccount,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      ticket_status = #{ticketStatus,jdbcType=INTEGER},
+      copy_status = #{copyStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findTicketList" resultType="map" parameterType="map" >
+    SELECT
+    tfn.plan_no,
+    tfn.`status`,
+    (SELECT  username FROM member  WHERE account = tfn.kh_account ) kh_username,
+    tfn.kh_account,
+    ( SELECT  username FROM member WHERE account = tfn.xp_account ) xp_username,
+    tfn.xp_account,
+    lp.CREATE_DATE_TIME create_date_time,
+    tfn.find_time,
+    tfn.copy_status,
+    tfn.copy_plan_no,
+    tfn.ticket_status
+    FROM
+    ticket_find_new tfn,
+    lottery_plan lp
+    WHERE
+    tfn.plan_no = lp.PLAN_NO
+    <if test="type==1">
+      and tfn.xp_account = #{account}
+    </if>
+    <if test="planNo != 0">
+      and tfn.plan_no = #{planNo}
+    </if>
+    and tfn.find_time>=DATE_SUB(now(), INTERVAL 6 DAY)
+    ORDER BY tfn.find_time desc
+
+  </select>
+</mapper>

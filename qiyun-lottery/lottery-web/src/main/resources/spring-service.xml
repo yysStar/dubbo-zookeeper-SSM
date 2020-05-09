@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sportteryFootballMatchStopTrigger"
+          class="com.qiyun.thread.football.SportteryFootballMatchStopTrigger" autowire="byName" />
+    <bean id="sportteryBasketBallMatchStopTrigger"
+          class="com.qiyun.thread.basketball.SportteryBasketBallMatchStopTrigger" autowire="byName" />
+    <bean id="sportteryFootballAutoSnatchScoreTrigger"
+          class="com.qiyun.thread.football.SportteryFootballAutoSnatchScoreTrigger" autowire="byName" />
+    <bean id="sportteryBasketballAutoSnatchScoreTrigger"
+          class="com.qiyun.thread.basketball.BasketballAutoSnatchScoreTrigger" autowire="byName" />
+
+    <bean id="myDaemon" class="com.qiyun.thread.base.MyDaemon" init-method="start" autowire="byName">
+        <property name="priority" value="10"/>
+        <property name="threadPoolSize" value="8"/>
+        <property name="triggers">
+            <list>
+                <ref bean="sportteryFootballMatchStopTrigger"/>
+                <ref bean="sportteryBasketBallMatchStopTrigger"/>
+                <ref bean="sportteryFootballAutoSnatchScoreTrigger"/>
+                <ref bean="sportteryBasketballAutoSnatchScoreTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 开奖结果服务工厂类 -->
+    <bean id="openResultService" class="com.qiyun.openResult.OpenResultService">
+        <property name="snatcherMap">
+            <map>
+                <!-- 体彩 -->
+                <entry key="1" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="2" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="3" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="4" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="5" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="7" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="8" value-ref="snatcher_Low_NewTicketArch"/>
+                <!-- 福彩 -->
+                <entry key="100" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="101" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="102" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="103" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="105" value-ref="snatcher_Low_NewTicketArch"/>
+                <entry key="106" value-ref="snatcher_Low_NewTicketArch"/>
+                <!-- 十一选五 -->
+                <entry key="50" value-ref="snatcher_High"/>
+                <entry key="52" value-ref="snatcher_High"/>
+                <entry key="53" value-ref="snatcher_High"/>
+                <entry key="55" value-ref="snatcher_High"/>
+                <entry key="57" value-ref="snatcher_High"/>
+                <entry key="58" value-ref="snatcher_High"/>
+                <entry key="59" value-ref="snatcher_High"/>
+                <!-- 快三 -->
+                <entry key="157" value-ref="snatcher_High"/>
+                <entry key="159" value-ref="snatcher_High"/>
+                <entry key="161" value-ref="snatcher_High"/>
+                <entry key="163" value-ref="snatcher_High"/>
+                <entry key="174" value-ref="snatcher_High"/>
+                <!-- 快乐十分 -->
+                <entry key="152" value-ref="snatcher_High"/>
+                <entry key="158" value-ref="snatcher_High"/>
+                <!-- 时时彩 -->
+                <entry key="150" value-ref="snatcher_High"/>
+                <!-- 快乐扑克 -->
+                <entry key="56" value-ref="snatcher_High"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 低频，新出票架构开奖号抓取器-->
+    <bean id="snatcher_Low_NewTicketArch" class="com.qiyun.openResult.Snatcher_Low_NewTicketArch" autowire="byName"/>
+    <!-- 高频，开奖信息抓取器-->
+    <bean id="openCaiSnatcher" class="com.qiyun.openResult.OpenCaiSnatcher">
+        <property name="url"><value>http://a.apiplus.net/t5f6e009276fcd33bk/%s.json</value></property>
+        <property name="lotteryTypeMap">
+            <map>
+                <entry key="53" value="gd11x5"/>
+                <entry key="58" value="hlj11x5"/>
+                <entry key="59" value="js11x5"/>
+                <entry key="52" value="jx11x5"/>
+                <entry key="55" value="ln11x5"/>
+                <entry key="50" value="sd11x5"/>
+                <entry key="57" value="sh11x5"/>
+                <entry key="163" value="ahk3"/>
+                <entry key="161" value="hubk3"/>
+                <entry key="159" value="jlk3"/>
+                <entry key="157" value="jsk3"/>
+                <entry key="174" value="jxk3"/>
+                <entry key="158" value="cqklsf"/>
+                <entry key="152" value="gdklsf"/>
+                <entry key="150" value="cqssc"/>
+                <entry key="56" value="sdklpk3"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="snatcher_High" class="com.qiyun.openResult.Snatcher_High" autowire="byName"/>
+
+</beans>

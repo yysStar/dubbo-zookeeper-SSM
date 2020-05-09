@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.UserCountMapper">
+
+    <select id="findAgentByQD" resultType="string">
+
+        select account from member  where SOURCE_ID in (select MEMBER_ID from member_agent where  status = 1 and account in
+        <foreach collection="list" separator="," index="index" item="item" open="(" close=")">
+            #{item}
+        </foreach>
+
+        )
+
+    </select>
+    <select id="findAccountWall" resultType="map" >
+        SELECT
+        m.username,
+        a.account,
+        a.countNum,
+        IFNULL(a.grouping,0) grouping
+
+        FROM
+        (
+        SELECT
+        ma.ACCOUNT account,
+        count(m.ACCOUNT) countNum,
+        ma.grouping
+        FROM
+        member_agent ma
+        LEFT JOIN member m ON m.SOURCE_ID = ma.MEMBER_ID
+        WHERE
+        ma.`STATUS` = 1
+        and m.type =0
+        and ma.MEMBER_ID &lt;&gt;85
+        <if test="startTime!='' and endTime !=''">
+            AND m.REGISTER_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and m.REGISTER_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and m.REGISTER_DATE_TIME &lt;#{endTime}
+        </if>
+        <if test="startTime =='' and endTime ==''">
+            AND TO_DAYS(m.REGISTER_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+        and ma.ACCOUNT in
+        <foreach collection="list" separator="," index="index" item="item" open="(" close=")">
+            #{item}
+        </foreach>
+        GROUP BY
+        ma.ACCOUNT
+
+        ) a
+        LEFT JOIN member m ON m.ACCOUNT = a.account
+
+        order by a.countNum
+
+
+    </select>
+
+
+    <select id="findAgentByQDAccount" resultType="map">
+   SELECT m.account,m.username,ifnull(ma.grouping,0) grouping from member m LEFT JOIN member_agent ma on m.ACCOUNT =ma.ACCOUNT WHERE m
+.SOURCE_ID =(SELECT id from member where ACCOUNT=#{0})
+
+AND ma.AGENT_TYPE =1 AND ma.`STATUS`=1
+</select>
+    <update id="setAgentToGroup" parameterType="map">
+update member_agent set grouping =#{groupName} where ACCOUNT=#{dlAccount}
+</update>
+    <select id="findAccountActiveWall" resultType="map">
+        SELECT
+        m.username,
+        a.account,
+        a.countNum,
+        IFNULL(a.grouping,0) grouping
+        FROM
+        (
+        SELECT
+        ma.ACCOUNT account,
+        count(m.ACCOUNT) countNum,
+        ma.grouping
+        FROM
+        member_agent ma
+        LEFT JOIN member m ON m.SOURCE_ID = ma.MEMBER_ID
+        WHERE
+        ma.`STATUS` = 1
+        and m.type =0
+        and ma.MEMBER_ID &lt;&gt;85
+
+        <if test="startTime!='' and endTime !=''">
+            AND m.REGISTER_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and m.REGISTER_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and m.REGISTER_DATE_TIME &lt;#{endTime}
+        </if>
+        <if test="startTime =='' and endTime ==''">
+            AND TO_DAYS(m.REGISTER_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+        and ma.ACCOUNT in
+        <foreach collection="list" separator="," index="index" item="item" open="(" close=")">
+            #{item}
+        </foreach>
+        GROUP BY
+        ma.ACCOUNT
+        ) a
+        LEFT JOIN member m ON m.ACCOUNT = a.account
+        order by a.countNum
+    </select>
+    <select id="findRechargeAndConsumerWall" resultType="map">
+        SELECT
+        IFNULL(m.username,m.ACCOUNT) username,
+        IFNULL(m.ACCOUNT,0) account,
+        IFNULL(mwl.AMOUNT,0) rechargeMoney,
+        mwl.TRANS_TYPE rechargeType,
+        IFNULL(mwl.ABLE_BALANCE,0) ableMoney,
+        IFNULL((SELECT ACCOUNT from member WHERE id = m.SOURCE_ID),'') agentAccount,
+        IFNULL((SELECT username from member WHERE id = m.SOURCE_ID),'') agentnName
+        FROM
+        member m
+        LEFT JOIN member_wallet_line mwl
+
+        on m.ACCOUNT =mwl.ACCOUNT
+
+        where mwl.TRANS_TYPE
+        <if test="isConsumer==1 and isConsumer!=null">
+            in(0,1000,2058,2062,2063,2064,2065,2066,2067,2068,2069,2070,2071,2072)
+        </if>
+        <if test="isConsumer==0 and isConsumer!=null">
+            in (2065,30,2054,2061)
+        </if>
+        and m.SOURCE_ID in
+        (select id from member where ACCOUNT in
+        <foreach collection="list" separator="," index="index" item="item" open="(" close=")">
+            #{item}
+        </foreach>
+        )
+        and m.type =0
+        and m.SOURCE_ID&lt;&gt;85
+        <if test="startTime!='' and endTime !=''">
+            AND  mwl.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and  mwl.CREATE_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and  mwl.CREATE_DATE_TIME &lt;#{endTime}
+        </if>
+        <if test="startTime =='' and endTime ==''">
+            AND TO_DAYS( mwl.CREATE_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+
+        order by rechargeMoney desc
+    </select>
+    <select id="findMemAccountByupAccount" resultType="string">
+        select account from member where SOURCE_ID in (
+        select id from member where ACCOUNT in
+        <foreach collection="list" separator="," index="index" item="item" open="(" close=")">
+            #{item}
+        </foreach>)
+    </select>
+
+    <update id="updatePaySwitch">
+        update pay_open set pay_name =#{1},is_open=#{3},update_time=#{4},pay_picture=#{2} where id =#{0}
+    </update>
+    <insert id="addPaySwitch">
+        insert into pay_open ( pay_name, pay_picture, is_open,create_time, update_time) values (#{0},#{1},#{2},#{3},#{3});
+    </insert>
+    <select id="findPaySwitch" resultType="map">
+        select * from pay_open;
+    </select>
+    <select id="findFocusMember" resultType="map">
+        select mn.id ,mn.member_id,IFNULL(mn.memeber_tel,"") memeber_tel ,IFNULL(mn.member_zxb,"") member_zxb ,IFNULL(mn.member_wx,"") member_wx,m.username,(SELECT username from member where id = m.SOURCE_ID) account from member_note mn  left join  member m on  mn.member_id = m.ACCOUNT
+        left join member_agent ma on ma.MEMBER_ID =m.id
+        where mn.is_key = 1
+        <if test="agentAccount!=null and agentAccount!=''">
+     and m.SOURCE_ID=(select id from member where m.ACCOUNT=#{0})
+        </if>
+ORDER BY ACCOUNT ,mn.id desc
+
+    </select>
+    <select id="findAllBanner" resultType="map">
+        select id,create_time,update_time,picture,render_url,is_use,weights from banner
+        where 1=1
+        <if test="is_use!=null and is_use!=''">
+            and is_use=#{is_use}
+        </if>
+        order by weights
+    </select>
+    <insert id="insertBanner" parameterType="map">
+        insert into banner(picture, render_url, update_time, create_time,is_use,weights) values (#{picture},#{render_url},#{update_time},#{create_time},#{is_use},#{weights})
+    </insert>
+    <update id="updateBanner" parameterType="map">
+        update  banner set picture=#{picture} ,render_url=#{render_url},update_time=#{update_time} ,weights = #{weights},is_use=#{is_use} where id=#{id}
+    </update>
+    <update id="updateWeight" parameterType="map">
+        update banner set weights = weights+1 where  id=#{id}
+    </update>
+</mapper>

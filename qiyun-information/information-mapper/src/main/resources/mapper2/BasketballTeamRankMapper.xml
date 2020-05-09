@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.BasketballTeamRankMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.BasketballTeamRank" >
+    <id column="team_id" property="teamId" jdbcType="VARCHAR" />
+    <result column="league" property="league" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="match_season" property="matchSeason" jdbcType="VARCHAR" />
+    <result column="home_win" property="homeWin" jdbcType="VARCHAR" />
+    <result column="home_loss" property="homeLoss" jdbcType="VARCHAR" />
+    <result column="away_win" property="awayWin" jdbcType="VARCHAR" />
+    <result column="away_loss" property="awayLoss" jdbcType="VARCHAR" />
+    <result column="win_scale" property="winScale" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="home_order" property="homeOrder" jdbcType="VARCHAR" />
+    <result column="away_order" property="awayOrder" jdbcType="VARCHAR" />
+    <result column="total_order" property="totalOrder" jdbcType="VARCHAR" />
+    <result column="home_score" property="homeScore" jdbcType="VARCHAR" />
+    <result column="home_loss_score" property="homeLossScore" jdbcType="VARCHAR" />
+    <result column="away_score" property="awayScore" jdbcType="VARCHAR" />
+    <result column="away_loss_score" property="awayLossScore" jdbcType="VARCHAR" />
+    <result column="near10_win" property="near10Win" jdbcType="VARCHAR" />
+    <result column="near10_loss" property="near10Loss" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    team_id, league, name, match_season, home_win, home_loss, away_win, away_loss, win_scale, 
+    state, home_order, away_order, total_order, home_score, home_loss_score, away_score, 
+    away_loss_score, near10_win, near10_loss
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.BasketballTeamRankExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from basketball_team_rank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from basketball_team_rank
+    where team_id = #{teamId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from basketball_team_rank
+    where team_id = #{teamId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.BasketballTeamRank" >
+    insert into basketball_team_rank (team_id, league, name, 
+      match_season, home_win, home_loss, 
+      away_win, away_loss, win_scale, 
+      state, home_order, away_order, 
+      total_order, home_score, home_loss_score, 
+      away_score, away_loss_score, near10_win, 
+      near10_loss)
+    values (#{teamId,jdbcType=VARCHAR}, #{league,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{matchSeason,jdbcType=VARCHAR}, #{homeWin,jdbcType=VARCHAR}, #{homeLoss,jdbcType=VARCHAR}, 
+      #{awayWin,jdbcType=VARCHAR}, #{awayLoss,jdbcType=VARCHAR}, #{winScale,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{homeOrder,jdbcType=VARCHAR}, #{awayOrder,jdbcType=VARCHAR}, 
+      #{totalOrder,jdbcType=VARCHAR}, #{homeScore,jdbcType=VARCHAR}, #{homeLossScore,jdbcType=VARCHAR}, 
+      #{awayScore,jdbcType=VARCHAR}, #{awayLossScore,jdbcType=VARCHAR}, #{near10Win,jdbcType=VARCHAR}, 
+      #{near10Loss,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.BasketballTeamRank" >
+    insert into basketball_team_rank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="league != null" >
+        league,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="matchSeason != null" >
+        match_season,
+      </if>
+      <if test="homeWin != null" >
+        home_win,
+      </if>
+      <if test="homeLoss != null" >
+        home_loss,
+      </if>
+      <if test="awayWin != null" >
+        away_win,
+      </if>
+      <if test="awayLoss != null" >
+        away_loss,
+      </if>
+      <if test="winScale != null" >
+        win_scale,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="homeOrder != null" >
+        home_order,
+      </if>
+      <if test="awayOrder != null" >
+        away_order,
+      </if>
+      <if test="totalOrder != null" >
+        total_order,
+      </if>
+      <if test="homeScore != null" >
+        home_score,
+      </if>
+      <if test="homeLossScore != null" >
+        home_loss_score,
+      </if>
+      <if test="awayScore != null" >
+        away_score,
+      </if>
+      <if test="awayLossScore != null" >
+        away_loss_score,
+      </if>
+      <if test="near10Win != null" >
+        near10_win,
+      </if>
+      <if test="near10Loss != null" >
+        near10_loss,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teamId != null" >
+        #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="matchSeason != null" >
+        #{matchSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="homeWin != null" >
+        #{homeWin,jdbcType=VARCHAR},
+      </if>
+      <if test="homeLoss != null" >
+        #{homeLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="awayWin != null" >
+        #{awayWin,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLoss != null" >
+        #{awayLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="winScale != null" >
+        #{winScale,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOrder != null" >
+        #{homeOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="awayOrder != null" >
+        #{awayOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="totalOrder != null" >
+        #{totalOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="homeLossScore != null" >
+        #{homeLossScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLossScore != null" >
+        #{awayLossScore,jdbcType=VARCHAR},
+      </if>
+      <if test="near10Win != null" >
+        #{near10Win,jdbcType=VARCHAR},
+      </if>
+      <if test="near10Loss != null" >
+        #{near10Loss,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.BasketballTeamRank" >
+    update basketball_team_rank
+    <set >
+      <if test="league != null" >
+        league = #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="matchSeason != null" >
+        match_season = #{matchSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="homeWin != null" >
+        home_win = #{homeWin,jdbcType=VARCHAR},
+      </if>
+      <if test="homeLoss != null" >
+        home_loss = #{homeLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="awayWin != null" >
+        away_win = #{awayWin,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLoss != null" >
+        away_loss = #{awayLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="winScale != null" >
+        win_scale = #{winScale,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="homeOrder != null" >
+        home_order = #{homeOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="awayOrder != null" >
+        away_order = #{awayOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="totalOrder != null" >
+        total_order = #{totalOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        home_score = #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="homeLossScore != null" >
+        home_loss_score = #{homeLossScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        away_score = #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayLossScore != null" >
+        away_loss_score = #{awayLossScore,jdbcType=VARCHAR},
+      </if>
+      <if test="near10Win != null" >
+        near10_win = #{near10Win,jdbcType=VARCHAR},
+      </if>
+      <if test="near10Loss != null" >
+        near10_loss = #{near10Loss,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where team_id = #{teamId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.BasketballTeamRank" >
+    update basketball_team_rank
+    set league = #{league,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      match_season = #{matchSeason,jdbcType=VARCHAR},
+      home_win = #{homeWin,jdbcType=VARCHAR},
+      home_loss = #{homeLoss,jdbcType=VARCHAR},
+      away_win = #{awayWin,jdbcType=VARCHAR},
+      away_loss = #{awayLoss,jdbcType=VARCHAR},
+      win_scale = #{winScale,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      home_order = #{homeOrder,jdbcType=VARCHAR},
+      away_order = #{awayOrder,jdbcType=VARCHAR},
+      total_order = #{totalOrder,jdbcType=VARCHAR},
+      home_score = #{homeScore,jdbcType=VARCHAR},
+      home_loss_score = #{homeLossScore,jdbcType=VARCHAR},
+      away_score = #{awayScore,jdbcType=VARCHAR},
+      away_loss_score = #{awayLossScore,jdbcType=VARCHAR},
+      near10_win = #{near10Win,jdbcType=VARCHAR},
+      near10_loss = #{near10Loss,jdbcType=VARCHAR}
+    where team_id = #{teamId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <!--========================= 11选5 ============================-->
+    <lottery name="山东11选5" type="50" >
+        <source name="新浪爱彩" href="http://kaijiang.aicai.com/11ydj/" listquery=".bqzj_tab>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{8}" termformat="20XXXXXX0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_sd11x5.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="百度彩票" href="http://baidu.lecai.com/lottery/draw/list/20?d={$date}" dateformat="yyyy-MM-dd" listquery=".right_main>div>table>tbody>tr">
+          	<item termquery="td:eq(1)" termreg="\d{8}" termformat="20XXXXXX0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+        <source name="一定牛" href="https://www.ydniu.com/open/62.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    <lottery name="江西11选5" type="52" >
+        <source name="新浪爱彩" href="http://kaijiang.aicai.com/jx11x5/" listquery=".bqzj_tab>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXXXX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_jx11x5.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMddXX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/70.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" codequery="td:eq(5)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    <lottery name="广东11选5" type="53" >
+        <source name="新浪爱彩" href="http://kaijiang.aicai.com/gd11x5/" listquery=".bqzj_tab>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_gd11x5.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMddXX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="爱彩乐" href="http://pub.icaile.com/gd11x5kjjg.php" listquery=".main>.chart>.prepare>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{8}" termformat="20XXXXXXXX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/78.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" codequery="td:eq(5)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+       	<source name="大奖网" href="http://www.jiang.com/staticHtml/lottery/history_gd11x5.html" listquery=".lottery-right>table>.l_items>tr" >
+          	<item termquery="td:eq(1)" termreg="\d{10}" codequery="td:eq(3)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+    </lottery>
+    <lottery name="辽宁11选5" type="55" >
+        <source name="新浪爱彩" href="http://kaijiang.aicai.com/ln11x5/" listquery=".bqzj_tab>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_ln11x5.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/100.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    <lottery name="上海11选5" type="57" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_sh11x5.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMddXX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="百度彩票" href="http://baidu.lecai.com/lottery/draw/list/562?d={$date}" dateformat="yyyy-MM-dd" listquery=".right_main>div>table>tbody>tr">
+          	<item termquery="td:eq(1)" termreg="\d{10}"  codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/87.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" codequery="td:eq(5)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    <lottery name="黑龙江11选5" type="58">
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_hlj11x5.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMddXX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/102.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" codequery="td:eq(5)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    <lottery name="江苏11选5" type="59" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_js11x5.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/95.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+ 	<!--========================= 快3 ============================-->
+    <lottery name="江苏快3" type="157" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_jsk3.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X" />
+       	</source>
+        <source name="百度彩票" href="http://baidu.lecai.com/lottery/draw/list/564?d={$date}" dateformat="yyyy-MM-dd" listquery=".right_main>div>table>tbody>tr">
+          	<item termquery="td:eq(1)" termreg="\d{9}" termformat="20XXXXXXXXX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X"  />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/86.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{3}" codeformat="X,X,X"  />
+       	</source>
+    </lottery>
+    <lottery name="吉林快3" type="159" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_jlk3.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/84.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{3}" codeformat="X,X,X"  />
+       	</source>
+    </lottery>
+    <lottery name="湖北快3" type="161" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_hbk3.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/90.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{3}" codeformat="X,X,X"  />
+       	</source>
+    </lottery>
+    <lottery name="安徽快3" type="163" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_ahk3.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/85.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{3}" codeformat="X,X,X"  />
+       	</source>
+    </lottery>
+    <!-- 
+    <lottery name="内蒙古快3" type="164" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_nmgk3.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMdd0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X" />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/122.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{3}" codeformat="X,X,X"  />
+       	</source>
+    </lottery>
+     -->
+    <lottery name="江西快3" type="174" >
+        <source name="一定牛" href="https://www.ydniu.com/open/83.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X"  />
+          	<item termquery="td:eq(3)" termreg="\d{10}" termformat="XXXXXXXX0XX" codequery="td:eq(5)" codereg="\d{3}" codeformat="X,X,X"  />
+       	</source>
+       	<source name="江西福彩官网" href="http://www.jxfczx.cn/report/K3_WinMessage.aspx" listquery=".mian>.frame_left>div>.win_deail>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{9}" termformat="20XXXXXXXXX" codequery="td:eq(1)" codereg="\d{3}" codeformat="X,X,X" />
+       	</source>
+       	<source name="爱彩乐" href="http://pub.icaile.com/jxk3kjjg.php" listquery=".main>.chart>.prepare>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{9}" termformat="20XXXXXXXXX" codequery="td:eq(2)" codereg="\d{3}" codeformat="X,X,X" />
+       	</source>
+    </lottery>
+    <!--========================= 时时彩 ============================-->
+    <lottery name="广东快乐十分" type="152" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_gdklsf.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMddXX" codequery="td:eq(2)" codereg="\d{16}" codeformat="XX,XX,XX,XX,XX,XX,XX,XX"  />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/133.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(1)" codereg="\d{16}" codeformat="XX,XX,XX,XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(2)" termreg="\d{10}" codequery="td:eq(3)" codereg="\d{16}" codeformat="XX,XX,XX,XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    <lottery name="重庆快乐十分" type="158" >
+        <source name="彩吧助手" href="http://kjh.55128.cn/xq_cqklsf.aspx" listquery="form>div:eq(1)>table>tbody>tr,form>div:eq(2)>table>tbody>tr,form>div:eq(3)>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{2}" termformat="yyyyMMddXX" codequery="td:eq(2)" codereg="\d{16}" codeformat="XX,XX,XX,XX,XX,XX,XX,XX"  />
+       	</source>
+        <source name="一定牛" href="http://chart.ydniu.com/trend/kl10cq/" listquery="#trend>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(1)" codereg="\d{16}" codeformat="XX,XX,XX,XX,XX,XX,XX,XX"  />
+       	</source>
+        <source name="一定牛" href="http://www.ydniu.com/open/134.html" listquery=".mainright>.gg_ssq>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" codequery="td:eq(1)" codereg="\d{16}" codeformat="XX,XX,XX,XX,XX,XX,XX,XX"  />
+          	<item termquery="td:eq(2)" termreg="\d{10}" codequery="td:eq(3)" codereg="\d{16}" codeformat="XX,XX,XX,XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    <lottery name="重庆时时彩" type="150">
+        <source name="重庆时时彩官网" href="http://www.cqcp.net/game/ssc/" listquery="#openlist>ul">
+          	<item termquery="li:eq(0)" termreg="\d{9}" termformat="20XXXXXXXXX" codequery="li:eq(1)" codereg="\d{5}" codeformat="X,X,X,X,X"  />
+       	</source>
+        <source name="新浪爱彩" href="http://kaijiang.aicai.com/cqssc/" listquery=".bqzj_tab>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{11}" codequery="td:eq(2)" codereg="\d{5}" codeformat="X,X,X,X,X"  />
+       	</source>
+        <source name="大奖网" href="http://www.jiang.com/staticHtml/lottery/history_cqssc.html" listquery=".wrap>.lottery-right>table>.l_items>tr">
+          	<item termquery="td:eq(1)" termreg="\d{11}" codequery="td:eq(3)" codereg="\d{5}" codeformat="X,X,X,X,X"  />
+       	</source>
+    </lottery>
+    <!-- 
+    <lottery name="山东群英会" type="154" >
+        <source name="百度彩票" href="http://baidu.lecai.com/lottery/draw/list/517?d={$date}" dateformat="yyyy-MM-dd" listquery=".right_main>div>table>tbody>tr" >
+          	<item termquery="td:eq(1)" termreg="\d{11}" termformat="##XXXXXXKXXX" codequery="td:eq(2)" codereg="\d{10}" codeformat="XX,XX,XX,XX,XX"  />
+       	</source>
+    </lottery>
+    -->
+    <lottery name="山东快乐扑克3" type="56" >
+        <source name="新浪爱彩" href="http://kaijiang.aicai.com/klpk/" listquery=".bqzj_tab>table>tbody>tr">
+          	<item termquery="td:eq(0)" termreg="\d{10}" 
+          	    codequery="td:eq(2)" 
+          	    coderepalcemap="♠:1;♥:2;♣:3;♦:4;A:01;J:11;Q:12;K:13" 
+          	    codereg="\d{9}" 
+          	    codeformat="XXX,XXX,XXX"  />
+       	</source>
+        <source name="百度彩票" href="http://baidu.lecai.com/lottery/draw/list/567?d={$date}" dateformat="yyyy-MM-dd" listquery=".right_main>div>table>tbody>tr">
+          	<item termquery="td:eq(1)" termreg="\d{10}"
+          	    codequery="td:eq(2)" 
+          	    coderepalcemap="♠:1;♥:2;♣:3;♦:4;A:01;J:11;Q:12;K:13" 
+          	    codereg="\d{9}" 
+          	    codeformat="XXX,XXX,XXX"  />
+       	</source>
+        <source name="大奖网" href="http://www.jiang.com/staticHtml/lottery/history_sdklpk3.html" 
+            listquery=".wrap>.lottery-right>table>.l_items>tr" method="method1">
+          	<item termquery="td:eq(1)" termreg="\d{10}"
+          	    codequery="td:eq(3)" 
+          	    coderepalcemap="♠:1;♥:2;♣:3;♦:4;A:01;J:11;Q:12;K:13" 
+          	    codereg="\d{9}" 
+          	    codeformat="XXX,XXX,XXX"  />
+       	</source>
+    </lottery>
+</xml>

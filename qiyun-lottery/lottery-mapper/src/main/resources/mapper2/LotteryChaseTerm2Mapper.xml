@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.LotteryChaseTerm2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.LotteryChaseTerm2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="CHASE_NO" property="chaseNo" jdbcType="INTEGER" />
+    <result column="LOTTERY_TYPE" property="lotteryType" jdbcType="INTEGER" />
+    <result column="TERM" property="term" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="MULTIPLE" property="multiple" jdbcType="INTEGER" />
+    <result column="AMOUNT" property="amount" jdbcType="INTEGER" />
+    <result column="PLAN_NO" property="planNo" jdbcType="INTEGER" />
+    <result column="CANCEL_TYPE" property="cancelType" jdbcType="INTEGER" />
+    <result column="CANCEL_DATE_TIME" property="cancelDateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, CHASE_NO, LOTTERY_TYPE, TERM, STATUS, MULTIPLE, AMOUNT, PLAN_NO, CANCEL_TYPE, 
+    CANCEL_DATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.LotteryChaseTerm2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from lottery_chase_term
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lottery_chase_term
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lottery_chase_term
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.LotteryChaseTerm2" >
+    insert into lottery_chase_term (id, CHASE_NO, LOTTERY_TYPE, 
+      TERM, STATUS, MULTIPLE, 
+      AMOUNT, PLAN_NO, CANCEL_TYPE, 
+      CANCEL_DATE_TIME)
+    values (#{id,jdbcType=INTEGER}, #{chaseNo,jdbcType=INTEGER}, #{lotteryType,jdbcType=INTEGER}, 
+      #{term,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{multiple,jdbcType=INTEGER}, 
+      #{amount,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{cancelType,jdbcType=INTEGER}, 
+      #{cancelDateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.LotteryChaseTerm2" >
+    insert into lottery_chase_term
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="chaseNo != null" >
+        CHASE_NO,
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE,
+      </if>
+      <if test="term != null" >
+        TERM,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="planNo != null" >
+        PLAN_NO,
+      </if>
+      <if test="cancelType != null" >
+        CANCEL_TYPE,
+      </if>
+      <if test="cancelDateTime != null" >
+        CANCEL_DATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="chaseNo != null" >
+        #{chaseNo,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryType != null" >
+        #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="multiple != null" >
+        #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null" >
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="cancelType != null" >
+        #{cancelType,jdbcType=INTEGER},
+      </if>
+      <if test="cancelDateTime != null" >
+        #{cancelDateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.LotteryChaseTerm2" >
+    update lottery_chase_term
+    <set >
+      <if test="chaseNo != null" >
+        CHASE_NO = #{chaseNo,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryType != null" >
+        LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      </if>
+      <if test="term != null" >
+        TERM = #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="multiple != null" >
+        MULTIPLE = #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null" >
+        PLAN_NO = #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="cancelType != null" >
+        CANCEL_TYPE = #{cancelType,jdbcType=INTEGER},
+      </if>
+      <if test="cancelDateTime != null" >
+        CANCEL_DATE_TIME = #{cancelDateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.LotteryChaseTerm2" >
+    update lottery_chase_term
+    set CHASE_NO = #{chaseNo,jdbcType=INTEGER},
+      LOTTERY_TYPE = #{lotteryType,jdbcType=INTEGER},
+      TERM = #{term,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      MULTIPLE = #{multiple,jdbcType=INTEGER},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      PLAN_NO = #{planNo,jdbcType=INTEGER},
+      CANCEL_TYPE = #{cancelType,jdbcType=INTEGER},
+      CANCEL_DATE_TIME = #{cancelDateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

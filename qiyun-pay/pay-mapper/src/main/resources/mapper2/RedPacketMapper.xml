@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.RedPacketMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.RedPacket">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="apply" jdbcType="INTEGER" property="apply" />
+    <result column="surplus_money" jdbcType="DECIMAL" property="surplusMoney" />
+    <result column="surplus_number" jdbcType="INTEGER" property="surplusNumber" />
+    <result column="mark" jdbcType="INTEGER" property="mark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, money, number, type, create_datetime, status, account, name, apply, surplus_money, 
+    surplus_number, mark
+  </sql>
+  <select id="selectByExample" parameterType="com.qiyun.model2.RedPacketExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from red_packet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from red_packet
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from red_packet
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.RedPacket">
+    insert into red_packet (id, money, number, 
+      type, create_datetime, status, 
+      account, name, apply, 
+      surplus_money, surplus_number, mark
+      )
+    values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, #{number,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{createDatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{apply,jdbcType=INTEGER}, 
+      #{surplusMoney,jdbcType=DECIMAL}, #{surplusNumber,jdbcType=INTEGER}, #{mark,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.qiyun.model2.RedPacket" useGeneratedKeys="true">
+    insert into red_packet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="apply != null">
+        apply,
+      </if>
+      <if test="surplusMoney != null">
+        surplus_money,
+      </if>
+      <if test="surplusNumber != null">
+        surplus_number,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="apply != null">
+        #{apply,jdbcType=INTEGER},
+      </if>
+      <if test="surplusMoney != null">
+        #{surplusMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="surplusNumber != null">
+        #{surplusNumber,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.RedPacket">
+    update red_packet
+    <set>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="apply != null">
+        apply = #{apply,jdbcType=INTEGER},
+      </if>
+      <if test="surplusMoney != null">
+        surplus_money = #{surplusMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="surplusNumber != null">
+        surplus_number = #{surplusNumber,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.RedPacket">
+    update red_packet
+    set money = #{money,jdbcType=DECIMAL},
+      number = #{number,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      apply = #{apply,jdbcType=INTEGER},
+      surplus_money = #{surplusMoney,jdbcType=DECIMAL},
+      surplus_number = #{surplusNumber,jdbcType=INTEGER},
+      mark = #{mark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="RedPacketDTO" type="com.qiyun.dto.RedPacketDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+    <result column="apply" jdbcType="INTEGER" property="apply" />
+    <result column="surplus_money" jdbcType="DECIMAL" property="surplusMoney" />
+    <result column="surplus_number" jdbcType="INTEGER" property="surplusNumber" />
+    <result column="mark" jdbcType="INTEGER" property="mark" />
+
+  </resultMap>
+  <select id="selectAll" resultMap="RedPacketDTO">
+    SELECT
+        R.*,M.username AS user_name,M.PICTURE
+    FROM
+        red_packet R
+    LEFT JOIN
+        member M ON R.account = M.ACCOUNT
+    WHERE
+        1 = 1
+    ORDER BY
+        create_datetime DESC
+  </select>
+  <select id="selectByAccount" resultMap="RedPacketDTO">
+    SELECT
+        R.*,M.username AS user_name,M.PICTURE
+    FROM
+        red_packet R
+    LEFT JOIN
+        member M ON R.account = M.ACCOUNT
+    WHERE
+        1 = 1
+    AND R.account = #{account,jdbcType=VARCHAR}
+    ORDER BY
+        create_datetime DESC
+  </select>
+  <select id="selectNowByAccount" resultMap="RedPacketDTO">
+    SELECT
+        R.*, M.username AS user_name,M.PICTURE
+    FROM
+        red_packet R
+    LEFT JOIN member M ON R.account = M.ACCOUNT
+    WHERE
+        R.create_datetime = (
+            SELECT
+                MAX(create_datetime)
+            FROM
+                red_packet
+            WHERE
+                account = #{account,jdbcType=VARCHAR}
+        )
+  </select>
+  <resultMap id="redPacketDetailsDTO" type="com.qiyun.dto.RedPacketDetailsDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+    <result column="apply" jdbcType="INTEGER" property="apply" />
+    <result column="surplus_money" jdbcType="DECIMAL" property="surplusMoney" />
+    <result column="surplus_number" jdbcType="INTEGER" property="surplusNumber" />
+    <result column="mark" jdbcType="INTEGER" property="mark" />
+    <collection column="id" ofType="com.qiyun.dto.GrabRedRacketDTO" property="logList" select="com.qiyun.mapper2.RedPacketLogMapper.selectById" />
+  </resultMap>
+  <select id="selectDetailsByPrimaryKey" resultMap="redPacketDetailsDTO">
+    SELECT
+        R.*,M.username AS user_name,M.PICTURE
+    FROM
+        red_packet R
+    LEFT JOIN
+        member M ON R.account = M.ACCOUNT
+    WHERE
+        1 = 1
+    AND R.id = #{id,jdbcType=INTEGER}
+    ORDER BY
+        create_datetime DESC
+  </select>
+  <resultMap id="totalRedRacketDTO" type="com.qiyun.dto.MyTotalRedRacketDTO">
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="total" jdbcType="DECIMAL" property="totalMoney" />
+  </resultMap>
+  <select id="selectTotalMoney" resultMap="totalRedRacketDTO">
+    SELECT
+        M.username AS name,
+        M.ACCOUNT AS account,
+        M.PICTURE AS picture,
+        SUM(R.money) AS total
+    FROM
+        red_packet R
+    LEFT JOIN
+        member M ON R.account = M.ACCOUNT
+    WHERE
+        1 = 1
+    AND R.account = #{account,jdbcType=VARCHAR}
+  </select>
+  <resultMap id="planDTO" type="com.qiyun.dto.PlanDTO">
+    <result column="PLAN_NO" jdbcType="INTEGER" property="planNo" />
+    <result column="name" jdbcType="VARCHAR" property="lotteryType" />
+    <result column="people_num" jdbcType="INTEGER" property="peopleNum" />
+    <result column="all_buy_money" jdbcType="INTEGER" property="allBuyMoney" />
+    <result column="unit_price" jdbcType="INTEGER" property="unitPrice" />
+    <result column="AMOUNT" jdbcType="INTEGER" property="amount" />
+    <result column="SUMAMOUNT" jdbcType="INTEGER" property="sumAmount" />
+    <result column="POSTTAX_PRIZE" jdbcType="DECIMAL" property="bingoMoney" />
+  </resultMap>
+
+  <select id="selectPlayingPlan" resultMap="planDTO">
+    SELECT
+    IFNULL(AM.people_num, 0)  AS people_num,
+    IFNULL(AM.all_buy_money, 0) + LP.AMOUNT AS all_buy_money,
+    LP.AMOUNT / LP.MULTIPLE AS unit_price,
+    LT.`name`,
+    LPO.POSTTAX_PRIZE,
+    LP.PLAN_NO,
+    LP.AMOUNT,
+    LP.SUMAMOUNT
+    FROM
+    lottery_plan_order LPO
+    LEFT JOIN lottery_plan LP ON LPO.PLAN_NO = LP.PLAN_NO
+    LEFT JOIN lottery_type LT ON LP.LOTTERY_TYPE = LT.id
+    LEFT JOIN (
+    SELECT
+    COUNT(PLAN_NO) AS people_num,
+    SUM(AMOUNT) AS all_buy_money,
+    planNo_copyDocumentary
+    FROM
+    lottery_plan
+    WHERE
+    1 = 1
+    GROUP BY
+    planNo_copyDocumentary
+    ) AM ON LP.PLAN_NO = AM.planNo_copyDocumentary
+    WHERE
+    LPO.CREATE_DATE_TIME &gt; DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+    AND LP.ACCOUNT = #{account,jdbcType=VARCHAR}
+    AND LPO.`STATUS` = 2
+    AND LP.WIN_STATUS = 1
+    AND LP.IS_SUPER_MAN = 1
+    AND LP.DEAL_DATE_TIME &gt; NOW()
+    GROUP BY
+    LP.PLAN_NO
+    ORDER BY
+    LP.CREATE_DATE_TIME DESC
+  </select>
+
+  <select id="selectBingoPlan" resultMap="planDTO">
+    SELECT
+    IFNULL(AM.people_num, 0) AS people_num,
+    IFNULL(AM.all_buy_money, 0) + LP.AMOUNT AS all_buy_money,
+    LP.AMOUNT / LP.MULTIPLE AS unit_price,
+    LT.`name`,
+    LPO.POSTTAX_PRIZE,
+    LP.PLAN_NO,
+    LP.AMOUNT,
+    LP.SUMAMOUNT
+    FROM
+    lottery_plan_order LPO
+    LEFT JOIN lottery_plan LP ON LPO.PLAN_NO = LP.PLAN_NO
+    LEFT JOIN lottery_type LT ON LP.LOTTERY_TYPE = LT.id
+    LEFT JOIN (
+    SELECT
+    COUNT(PLAN_NO) AS people_num,
+    SUM(AMOUNT) AS all_buy_money,
+    planNo_copyDocumentary
+    FROM
+    lottery_plan
+    WHERE
+    1 = 1
+    GROUP BY
+    planNo_copyDocumentary
+    ) AM ON LP.PLAN_NO = AM.planNo_copyDocumentary
+    WHERE
+    LPO.CREATE_DATE_TIME &gt; DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+    AND LP.ACCOUNT = #{account,jdbcType=VARCHAR}
+    AND LPO.`STATUS` = 2
+    AND LP.WIN_STATUS = 4
+    AND LP.IS_SUPER_MAN = 1
+    GROUP BY
+    LP.PLAN_NO
+    ORDER BY
+    LP.CREATE_DATE_TIME DESC
+  </select>
+
+  <select id="getJump" resultType="java.lang.Integer">
+  SELECT  mark
+  FROM red_packet
+  WHERE id=#{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getAccount" resultType="java.lang.String">
+  SELECT  account
+  FROM red_packet
+  WHERE id=#{id,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="getFollow" resultType="java.lang.Integer">
+    SELECT
+    LP.PLAN_NO
+    FROM
+    lottery_plan_order LPO
+    LEFT JOIN lottery_plan LP ON LPO.PLAN_NO = LP.PLAN_NO
+    WHERE
+    LPO.CREATE_DATE_TIME &gt; DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+    AND LP.ACCOUNT = #{account,jdbcType=VARCHAR}
+    AND LPO.`STATUS` = 2
+    AND LP.WIN_STATUS = 1
+    AND LP.IS_SUPER_MAN = 1
+    AND LP.DEAL_DATE_TIME &gt; NOW()
+    GROUP BY
+    LP.PLAN_NO
+    ORDER BY
+    LP.CREATE_DATE_TIME DESC
+    LIMIT 1
+  </select>
+
+  <select id="getAmount" resultType="java.lang.Integer">
+  SELECT  AMOUNT
+  FROM lottery_plan
+  WHERE PLAN_NO=#{planNo,jdbcType=INTEGER}
+  </select>
+
+  <select id="getMultiple" resultType="java.lang.Integer">
+  SELECT  MULTIPLE
+  FROM lottery_plan
+  WHERE PLAN_NO=#{planNo,jdbcType=INTEGER}
+  </select>
+
+  <select id="getType" resultType="java.lang.Integer">
+  SELECT type
+  FROM member
+  WHERE ACCOUNT=#{account,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getCyMultiple" resultType="java.lang.Integer">
+  SELECT multiple
+  FROM member
+  WHERE ACCOUNT=#{account,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getRed" resultType="java.lang.Integer">
+  SELECT PLAN_NO
+  FROM lottery_plan_order
+  WHERE ACCOUNT=#{account,jdbcType=VARCHAR}
+  AND POSTTAX_PRIZE&gt;0
+  ORDER BY  CREATE_DATE_TIME  DESC
+  LIMIT 1
+  </select>
+
+  <select id="getUsername" parameterType="java.lang.String" resultType="java.lang.String">
+  SELECT  username
+  FROM member
+  WHERE ACCOUNT=#{account,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getPICTURE" parameterType="java.lang.String" resultType="java.lang.String">
+  SELECT  PICTURE
+  FROM member
+  WHERE ACCOUNT=#{account,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer">
+  SELECT count(*)
+  FROM red_packet_log
+  WHERE redpacket_id=#{redPacketId,jdbcType=INTEGER}
+  </select>
+
+  <select id="getNew" resultType="java.lang.Integer">
+    SELECT count(*)
+    FROM red_packet
+    WHERE status &lt; 3
+  </select>
+</mapper>

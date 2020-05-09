@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.WinPromotionCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.WinPromotionComment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="propaganda_id" property="propagandaId" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="floor" property="floor" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.WinPromotionComment" extends="BaseResultMap" >
+    <result column="connect" property="connect" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, propaganda_id, account, username, picture, comment_time, status, sort, like_count, 
+    floor
+  </sql>
+  <sql id="Blob_Column_List" >
+    connect
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.WinPromotionCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from win_promotion_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.WinPromotionCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from win_promotion_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from win_promotion_comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from win_promotion_comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.WinPromotionComment" >
+    insert into win_promotion_comment (id, propaganda_id, account, 
+      username, picture, comment_time, 
+      status, sort, like_count, 
+      floor, connect)
+    values (#{id,jdbcType=INTEGER}, #{propagandaId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, 
+      #{floor,jdbcType=INTEGER}, #{connect,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.WinPromotionComment" >
+    insert into win_promotion_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="propagandaId != null" >
+        propaganda_id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="commentTime != null" >
+        comment_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="likeCount != null" >
+        like_count,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="connect != null" >
+        connect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="propagandaId != null" >
+        #{propagandaId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null" >
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="connect != null" >
+        #{connect,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.WinPromotionComment" >
+    update win_promotion_comment
+    <set >
+      <if test="propagandaId != null" >
+        propaganda_id = #{propagandaId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null" >
+        comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="connect != null" >
+        connect = #{connect,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.WinPromotionComment" >
+    update win_promotion_comment
+    set propaganda_id = #{propagandaId,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      floor = #{floor,jdbcType=INTEGER},
+      connect = #{connect,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.WinPromotionComment" >
+    update win_promotion_comment
+    set propaganda_id = #{propagandaId,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      floor = #{floor,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getFloor" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  SELECT max(floor)
+  FROM win_promotion_comment
+  WHERE propaganda_id = #{planNo,jdbcType=INTEGER}
+</select>
+  <update id="likePromotionComment" parameterType="java.lang.Integer">
+  UPDATE win_promotion_comment SET like_count = like_count+1 WHERE id = #{commentId,jdbcType=INTEGER}
+</update>
+  <select id="getCommentListByTime" resultMap="ResultMapWithBLOBs" parameterType="map">
+    SELECT
+    *
+    FROM `win_promotion_comment`
+    WHERE propaganda_id = #{planNo,jdbcType=INTEGER}
+    AND (status =1 OR account = #{account,jdbcType=VARCHAR})
+    ORDER BY sort DESC,comment_time DESC
+  </select>
+  <select id="getCommentListByLike" resultMap="ResultMapWithBLOBs" parameterType="map">
+    SELECT
+    *
+    FROM `win_promotion_comment`
+    WHERE propaganda_id = #{planNo,jdbcType=INTEGER}
+    AND (status =1 OR account = #{account,jdbcType=VARCHAR})
+    ORDER BY sort DESC,like_count DESC,comment_time DESC
+  </select>
+  <update id="likeComment" parameterType="java.lang.Integer">
+  UPDATE win_promotion_comment SET like_count = like_count+1 WHERE id = #{commentId,jdbcType=INTEGER}
+</update>
+  <update id="nolikeComment" parameterType="java.lang.Integer">
+  UPDATE win_promotion_comment SET like_count = like_count-1 WHERE id = #{commentId,jdbcType=INTEGER}
+</update>
+</mapper>

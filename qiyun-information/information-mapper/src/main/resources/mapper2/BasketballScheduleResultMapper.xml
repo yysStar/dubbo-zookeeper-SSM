@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.BasketballScheduleResultMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.BasketballScheduleResult" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="league_id" property="leagueId" jdbcType="VARCHAR" />
+    <result column="league_type" property="leagueType" jdbcType="VARCHAR" />
+    <result column="league" property="league" jdbcType="VARCHAR" />
+    <result column="section_count" property="sectionCount" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="remain_time" property="remainTime" jdbcType="VARCHAR" />
+    <result column="home_id" property="homeId" jdbcType="VARCHAR" />
+    <result column="home" property="home" jdbcType="VARCHAR" />
+    <result column="away_id" property="awayId" jdbcType="VARCHAR" />
+    <result column="away" property="away" jdbcType="VARCHAR" />
+    <result column="order1" property="order1" jdbcType="VARCHAR" />
+    <result column="order2" property="order2" jdbcType="VARCHAR" />
+    <result column="home_score" property="homeScore" jdbcType="VARCHAR" />
+    <result column="away_score" property="awayScore" jdbcType="VARCHAR" />
+    <result column="zd1" property="zd1" jdbcType="VARCHAR" />
+    <result column="kd1" property="kd1" jdbcType="VARCHAR" />
+    <result column="zd2" property="zd2" jdbcType="VARCHAR" />
+    <result column="kd2" property="kd2" jdbcType="VARCHAR" />
+    <result column="zd3" property="zd3" jdbcType="VARCHAR" />
+    <result column="kd3" property="kd3" jdbcType="VARCHAR" />
+    <result column="zd4" property="zd4" jdbcType="VARCHAR" />
+    <result column="kd4" property="kd4" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="VARCHAR" />
+    <result column="zd1ot" property="zd1ot" jdbcType="VARCHAR" />
+    <result column="kd1ot" property="kd1ot" jdbcType="VARCHAR" />
+    <result column="zd2ot" property="zd2ot" jdbcType="VARCHAR" />
+    <result column="kd2ot" property="kd2ot" jdbcType="VARCHAR" />
+    <result column="zd3ot" property="zd3ot" jdbcType="VARCHAR" />
+    <result column="kd3ot" property="kd3ot" jdbcType="VARCHAR" />
+    <result column="have_technical" property="haveTechnical" jdbcType="VARCHAR" />
+    <result column="tv" property="tv" jdbcType="VARCHAR" />
+    <result column="mark" property="mark" jdbcType="VARCHAR" />
+    <result column="zl" property="zl" jdbcType="VARCHAR" />
+    <result column="season" property="season" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="place" property="place" jdbcType="VARCHAR" />
+    <result column="game_type" property="gameType" jdbcType="VARCHAR" />
+    <result column="game_sub_type" property="gameSubType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, league_id, league_type, league, section_count, color, time, state, remain_time, 
+    home_id, home, away_id, away, order1, order2, home_score, away_score, zd1, kd1, zd2, 
+    kd2, zd3, kd3, zd4, kd4, add_time, zd1ot, kd1ot, zd2ot, kd2ot, zd3ot, kd3ot, have_technical, 
+    tv, mark, zl, season, type, place, game_type, game_sub_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.BasketballScheduleResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from basketball_schedule_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from basketball_schedule_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from basketball_schedule_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.BasketballScheduleResult" >
+    insert into basketball_schedule_result (id, league_id, league_type, 
+      league, section_count, color, 
+      time, state, remain_time, 
+      home_id, home, away_id, 
+      away, order1, order2, 
+      home_score, away_score, zd1, 
+      kd1, zd2, kd2, zd3, 
+      kd3, zd4, kd4, add_time, 
+      zd1ot, kd1ot, zd2ot, 
+      kd2ot, zd3ot, kd3ot, 
+      have_technical, tv, mark, 
+      zl, season, type, place, 
+      game_type, game_sub_type)
+    values (#{id,jdbcType=INTEGER}, #{leagueId,jdbcType=VARCHAR}, #{leagueType,jdbcType=VARCHAR}, 
+      #{league,jdbcType=VARCHAR}, #{sectionCount,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{remainTime,jdbcType=VARCHAR}, 
+      #{homeId,jdbcType=VARCHAR}, #{home,jdbcType=VARCHAR}, #{awayId,jdbcType=VARCHAR}, 
+      #{away,jdbcType=VARCHAR}, #{order1,jdbcType=VARCHAR}, #{order2,jdbcType=VARCHAR}, 
+      #{homeScore,jdbcType=VARCHAR}, #{awayScore,jdbcType=VARCHAR}, #{zd1,jdbcType=VARCHAR}, 
+      #{kd1,jdbcType=VARCHAR}, #{zd2,jdbcType=VARCHAR}, #{kd2,jdbcType=VARCHAR}, #{zd3,jdbcType=VARCHAR}, 
+      #{kd3,jdbcType=VARCHAR}, #{zd4,jdbcType=VARCHAR}, #{kd4,jdbcType=VARCHAR}, #{addTime,jdbcType=VARCHAR}, 
+      #{zd1ot,jdbcType=VARCHAR}, #{kd1ot,jdbcType=VARCHAR}, #{zd2ot,jdbcType=VARCHAR}, 
+      #{kd2ot,jdbcType=VARCHAR}, #{zd3ot,jdbcType=VARCHAR}, #{kd3ot,jdbcType=VARCHAR}, 
+      #{haveTechnical,jdbcType=VARCHAR}, #{tv,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, 
+      #{zl,jdbcType=VARCHAR}, #{season,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{gameType,jdbcType=VARCHAR}, #{gameSubType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.BasketballScheduleResult" >
+    insert into basketball_schedule_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="leagueId != null" >
+        league_id,
+      </if>
+      <if test="leagueType != null" >
+        league_type,
+      </if>
+      <if test="league != null" >
+        league,
+      </if>
+      <if test="sectionCount != null" >
+        section_count,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remainTime != null" >
+        remain_time,
+      </if>
+      <if test="homeId != null" >
+        home_id,
+      </if>
+      <if test="home != null" >
+        home,
+      </if>
+      <if test="awayId != null" >
+        away_id,
+      </if>
+      <if test="away != null" >
+        away,
+      </if>
+      <if test="order1 != null" >
+        order1,
+      </if>
+      <if test="order2 != null" >
+        order2,
+      </if>
+      <if test="homeScore != null" >
+        home_score,
+      </if>
+      <if test="awayScore != null" >
+        away_score,
+      </if>
+      <if test="zd1 != null" >
+        zd1,
+      </if>
+      <if test="kd1 != null" >
+        kd1,
+      </if>
+      <if test="zd2 != null" >
+        zd2,
+      </if>
+      <if test="kd2 != null" >
+        kd2,
+      </if>
+      <if test="zd3 != null" >
+        zd3,
+      </if>
+      <if test="kd3 != null" >
+        kd3,
+      </if>
+      <if test="zd4 != null" >
+        zd4,
+      </if>
+      <if test="kd4 != null" >
+        kd4,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="zd1ot != null" >
+        zd1ot,
+      </if>
+      <if test="kd1ot != null" >
+        kd1ot,
+      </if>
+      <if test="zd2ot != null" >
+        zd2ot,
+      </if>
+      <if test="kd2ot != null" >
+        kd2ot,
+      </if>
+      <if test="zd3ot != null" >
+        zd3ot,
+      </if>
+      <if test="kd3ot != null" >
+        kd3ot,
+      </if>
+      <if test="haveTechnical != null" >
+        have_technical,
+      </if>
+      <if test="tv != null" >
+        tv,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
+      <if test="zl != null" >
+        zl,
+      </if>
+      <if test="season != null" >
+        season,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="place != null" >
+        place,
+      </if>
+      <if test="gameType != null" >
+        game_type,
+      </if>
+      <if test="gameSubType != null" >
+        game_sub_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="leagueId != null" >
+        #{leagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="leagueType != null" >
+        #{leagueType,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionCount != null" >
+        #{sectionCount,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remainTime != null" >
+        #{remainTime,jdbcType=VARCHAR},
+      </if>
+      <if test="homeId != null" >
+        #{homeId,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="awayId != null" >
+        #{awayId,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="order1 != null" >
+        #{order1,jdbcType=VARCHAR},
+      </if>
+      <if test="order2 != null" >
+        #{order2,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="zd1 != null" >
+        #{zd1,jdbcType=VARCHAR},
+      </if>
+      <if test="kd1 != null" >
+        #{kd1,jdbcType=VARCHAR},
+      </if>
+      <if test="zd2 != null" >
+        #{zd2,jdbcType=VARCHAR},
+      </if>
+      <if test="kd2 != null" >
+        #{kd2,jdbcType=VARCHAR},
+      </if>
+      <if test="zd3 != null" >
+        #{zd3,jdbcType=VARCHAR},
+      </if>
+      <if test="kd3 != null" >
+        #{kd3,jdbcType=VARCHAR},
+      </if>
+      <if test="zd4 != null" >
+        #{zd4,jdbcType=VARCHAR},
+      </if>
+      <if test="kd4 != null" >
+        #{kd4,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zd1ot != null" >
+        #{zd1ot,jdbcType=VARCHAR},
+      </if>
+      <if test="kd1ot != null" >
+        #{kd1ot,jdbcType=VARCHAR},
+      </if>
+      <if test="zd2ot != null" >
+        #{zd2ot,jdbcType=VARCHAR},
+      </if>
+      <if test="kd2ot != null" >
+        #{kd2ot,jdbcType=VARCHAR},
+      </if>
+      <if test="zd3ot != null" >
+        #{zd3ot,jdbcType=VARCHAR},
+      </if>
+      <if test="kd3ot != null" >
+        #{kd3ot,jdbcType=VARCHAR},
+      </if>
+      <if test="haveTechnical != null" >
+        #{haveTechnical,jdbcType=VARCHAR},
+      </if>
+      <if test="tv != null" >
+        #{tv,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="zl != null" >
+        #{zl,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null" >
+        #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="gameSubType != null" >
+        #{gameSubType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.BasketballScheduleResult" >
+    update basketball_schedule_result
+    <set >
+      <if test="leagueId != null" >
+        league_id = #{leagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="leagueType != null" >
+        league_type = #{leagueType,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        league = #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionCount != null" >
+        section_count = #{sectionCount,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remainTime != null" >
+        remain_time = #{remainTime,jdbcType=VARCHAR},
+      </if>
+      <if test="homeId != null" >
+        home_id = #{homeId,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        home = #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="awayId != null" >
+        away_id = #{awayId,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        away = #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="order1 != null" >
+        order1 = #{order1,jdbcType=VARCHAR},
+      </if>
+      <if test="order2 != null" >
+        order2 = #{order2,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        home_score = #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        away_score = #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="zd1 != null" >
+        zd1 = #{zd1,jdbcType=VARCHAR},
+      </if>
+      <if test="kd1 != null" >
+        kd1 = #{kd1,jdbcType=VARCHAR},
+      </if>
+      <if test="zd2 != null" >
+        zd2 = #{zd2,jdbcType=VARCHAR},
+      </if>
+      <if test="kd2 != null" >
+        kd2 = #{kd2,jdbcType=VARCHAR},
+      </if>
+      <if test="zd3 != null" >
+        zd3 = #{zd3,jdbcType=VARCHAR},
+      </if>
+      <if test="kd3 != null" >
+        kd3 = #{kd3,jdbcType=VARCHAR},
+      </if>
+      <if test="zd4 != null" >
+        zd4 = #{zd4,jdbcType=VARCHAR},
+      </if>
+      <if test="kd4 != null" >
+        kd4 = #{kd4,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zd1ot != null" >
+        zd1ot = #{zd1ot,jdbcType=VARCHAR},
+      </if>
+      <if test="kd1ot != null" >
+        kd1ot = #{kd1ot,jdbcType=VARCHAR},
+      </if>
+      <if test="zd2ot != null" >
+        zd2ot = #{zd2ot,jdbcType=VARCHAR},
+      </if>
+      <if test="kd2ot != null" >
+        kd2ot = #{kd2ot,jdbcType=VARCHAR},
+      </if>
+      <if test="zd3ot != null" >
+        zd3ot = #{zd3ot,jdbcType=VARCHAR},
+      </if>
+      <if test="kd3ot != null" >
+        kd3ot = #{kd3ot,jdbcType=VARCHAR},
+      </if>
+      <if test="haveTechnical != null" >
+        have_technical = #{haveTechnical,jdbcType=VARCHAR},
+      </if>
+      <if test="tv != null" >
+        tv = #{tv,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="zl != null" >
+        zl = #{zl,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null" >
+        season = #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        game_type = #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="gameSubType != null" >
+        game_sub_type = #{gameSubType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.BasketballScheduleResult" >
+    update basketball_schedule_result
+    set league_id = #{leagueId,jdbcType=VARCHAR},
+      league_type = #{leagueType,jdbcType=VARCHAR},
+      league = #{league,jdbcType=VARCHAR},
+      section_count = #{sectionCount,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      remain_time = #{remainTime,jdbcType=VARCHAR},
+      home_id = #{homeId,jdbcType=VARCHAR},
+      home = #{home,jdbcType=VARCHAR},
+      away_id = #{awayId,jdbcType=VARCHAR},
+      away = #{away,jdbcType=VARCHAR},
+      order1 = #{order1,jdbcType=VARCHAR},
+      order2 = #{order2,jdbcType=VARCHAR},
+      home_score = #{homeScore,jdbcType=VARCHAR},
+      away_score = #{awayScore,jdbcType=VARCHAR},
+      zd1 = #{zd1,jdbcType=VARCHAR},
+      kd1 = #{kd1,jdbcType=VARCHAR},
+      zd2 = #{zd2,jdbcType=VARCHAR},
+      kd2 = #{kd2,jdbcType=VARCHAR},
+      zd3 = #{zd3,jdbcType=VARCHAR},
+      kd3 = #{kd3,jdbcType=VARCHAR},
+      zd4 = #{zd4,jdbcType=VARCHAR},
+      kd4 = #{kd4,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=VARCHAR},
+      zd1ot = #{zd1ot,jdbcType=VARCHAR},
+      kd1ot = #{kd1ot,jdbcType=VARCHAR},
+      zd2ot = #{zd2ot,jdbcType=VARCHAR},
+      kd2ot = #{kd2ot,jdbcType=VARCHAR},
+      zd3ot = #{zd3ot,jdbcType=VARCHAR},
+      kd3ot = #{kd3ot,jdbcType=VARCHAR},
+      have_technical = #{haveTechnical,jdbcType=VARCHAR},
+      tv = #{tv,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      zl = #{zl,jdbcType=VARCHAR},
+      season = #{season,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      place = #{place,jdbcType=VARCHAR},
+      game_type = #{gameType,jdbcType=VARCHAR},
+      game_sub_type = #{gameSubType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getScheduleResultByDate" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from basketball_schedule_result
+    where time LIKE CONCAT('%',#{date,jdbcType=VARCHAR},'%')
+    and league_id in(1,2)
+  </select>
+
+
+</mapper>

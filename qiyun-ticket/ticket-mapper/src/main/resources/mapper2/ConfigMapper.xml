@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.ConfigMapper" >
+
+
+  <select id="getLess5Auto" resultType="Integer"  >
+    select auto_copy_for_less5 from config where id = 1
+  </select>
+  <select id="getMore5Auto" resultType="Integer"  >
+    select auto_copy_for_more5 from config where id = 1
+  </select>
+
+  <update id="updateDealTime">
+      update config SET match_deal_time = #{0} where id = 1
+  </update>
+
+  <select id="getChaiPiaoCount" resultType="Integer"  >
+    select chai_piao_count from config where id = 1
+  </select>
+  <update id="updateChaiPiaoCount">
+    update config SET chai_piao_count = #{0} where id = 1
+  </update>
+</mapper>

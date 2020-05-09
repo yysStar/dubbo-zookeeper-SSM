@@ -1,0 +1,2324 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.Member2Mapper">
+    <resultMap id="BaseResultMap" type="com.qiyun.model2.Member2">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="CERT_TYPE" property="certType" jdbcType="INTEGER"/>
+        <result column="CERT_NO" property="certNo" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="RANK" property="rank" jdbcType="INTEGER"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="REGISTER_DATE_TIME" property="registerDateTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_LOGIN_DATE_TIME" property="lastLoginDateTime" jdbcType="TIMESTAMP"/>
+        <result column="EXPRERIENCE" property="exprerience" jdbcType="INTEGER"/>
+        <result column="SOURCE_ID" property="sourceId" jdbcType="INTEGER"/>
+        <result column="RECOMMENDER" property="recommender" jdbcType="INTEGER"/>
+        <result column="SIGN" property="sign" jdbcType="VARCHAR"/>
+        <result column="PROVIDER" property="provider" jdbcType="VARCHAR"/>
+        <result column="PICTURE" property="picture" jdbcType="VARCHAR"/>
+        <result column="CARD" property="card" jdbcType="INTEGER"/>
+        <result column="IS_MOBILE_AUTHED" property="isMobileAuthed" jdbcType="INTEGER"/>
+        <result column="IS_EMAIL_AUTHED" property="isEmailAuthed" jdbcType="INTEGER"/>
+        <result column="CERATE_PLAY_DATE" property="ceratePlayDate" jdbcType="TIMESTAMP"/>
+        <result column="PLAY_STATUS" property="playStatus" jdbcType="INTEGER"/>
+        <result column="USER_GRADE_TYPE" property="userGradeType" jdbcType="INTEGER"/>
+        <result column="ERROR_COUNT" property="errorCount" jdbcType="INTEGER"/>
+        <result column="ERROR_DATE" property="errorDate" jdbcType="TIMESTAMP"/>
+        <result column="IS_CHARGE" property="isCharge" jdbcType="INTEGER"/>
+        <result column="DIGEST" property="digest" jdbcType="VARCHAR"/>
+        <result column="IS_WHITELIST" property="isWhitelist" jdbcType="INTEGER"/>
+        <result column="PAY_WAYS" property="payWays" jdbcType="VARCHAR"/>
+        <result column="zfb_account" property="zfbAccount" jdbcType="VARCHAR"/>
+        <result column="wx_account" property="wxAccount" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="multiple" property="multiple" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="PayMemberResultMap" type="com.qiyun.model.PayMember">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="source_id" property="sourceId" jdbcType="INTEGER"/>
+        <result column="pay_ways" property="payWays" jdbcType="VARCHAR"/>
+        <result column="agent_type" property="type" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, ACCOUNT, NAME, CERT_TYPE, CERT_NO, PASSWORD, RANK, EMAIL, MOBILE, STATUS, REGISTER_DATE_TIME, 
+    LAST_LOGIN_DATE_TIME, EXPRERIENCE, SOURCE_ID, RECOMMENDER, SIGN, PROVIDER, PICTURE, 
+    CARD, IS_MOBILE_AUTHED, IS_EMAIL_AUTHED, CERATE_PLAY_DATE, PLAY_STATUS, USER_GRADE_TYPE, 
+    ERROR_COUNT, ERROR_DATE, IS_CHARGE, DIGEST, IS_WHITELIST, PAY_WAYS, zfb_account, 
+    wx_account, username, type, multiple
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.Member2Query">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.qiyun.model2.Member2Query">
+        delete from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.qiyun.model2.Member2" useGeneratedKeys="true" keyProperty="id">
+    insert into member (id, ACCOUNT, NAME, 
+      CERT_TYPE, CERT_NO, PASSWORD, 
+      RANK, EMAIL, MOBILE, 
+      STATUS, REGISTER_DATE_TIME, LAST_LOGIN_DATE_TIME, 
+      EXPRERIENCE, SOURCE_ID, RECOMMENDER, 
+      SIGN, PROVIDER, PICTURE, 
+      CARD, IS_MOBILE_AUTHED, IS_EMAIL_AUTHED, 
+      CERATE_PLAY_DATE, PLAY_STATUS, USER_GRADE_TYPE, 
+      ERROR_COUNT, ERROR_DATE, IS_CHARGE, 
+      DIGEST, IS_WHITELIST, PAY_WAYS, 
+      zfb_account, wx_account, username, 
+      type, multiple)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{certType,jdbcType=INTEGER}, #{certNo,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{rank,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{registerDateTime,jdbcType=TIMESTAMP}, #{lastLoginDateTime,jdbcType=TIMESTAMP}, 
+      #{exprerience,jdbcType=INTEGER}, #{sourceId,jdbcType=INTEGER}, #{recommender,jdbcType=INTEGER}, 
+      #{sign,jdbcType=VARCHAR}, #{provider,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{card,jdbcType=INTEGER}, #{isMobileAuthed,jdbcType=INTEGER}, #{isEmailAuthed,jdbcType=INTEGER}, 
+      #{ceratePlayDate,jdbcType=TIMESTAMP}, #{playStatus,jdbcType=INTEGER}, #{userGradeType,jdbcType=INTEGER}, 
+      #{errorCount,jdbcType=INTEGER}, #{errorDate,jdbcType=TIMESTAMP}, #{isCharge,jdbcType=INTEGER}, 
+      #{digest,jdbcType=VARCHAR}, #{isWhitelist,jdbcType=INTEGER}, #{payWays,jdbcType=VARCHAR}, 
+      #{zfbAccount,jdbcType=VARCHAR}, #{wxAccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{multiple,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.qiyun.model2.Member2" useGeneratedKeys="true" keyProperty="id">
+        insert into member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="account != null">
+                ACCOUNT,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="certType != null">
+                CERT_TYPE,
+            </if>
+            <if test="certNo != null">
+                CERT_NO,
+            </if>
+            <if test="password != null">
+                PASSWORD,
+            </if>
+            <if test="rank != null">
+                RANK,
+            </if>
+            <if test="email != null">
+                EMAIL,
+            </if>
+            <if test="mobile != null">
+                MOBILE,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="registerDateTime != null">
+                REGISTER_DATE_TIME,
+            </if>
+            <if test="lastLoginDateTime != null">
+                LAST_LOGIN_DATE_TIME,
+            </if>
+            <if test="exprerience != null">
+                EXPRERIENCE,
+            </if>
+            <if test="sourceId != null">
+                SOURCE_ID,
+            </if>
+            <if test="recommender != null">
+                RECOMMENDER,
+            </if>
+            <if test="sign != null">
+                SIGN,
+            </if>
+            <if test="provider != null">
+                PROVIDER,
+            </if>
+            <if test="picture != null">
+                PICTURE,
+            </if>
+            <if test="card != null">
+                CARD,
+            </if>
+            <if test="isMobileAuthed != null">
+                IS_MOBILE_AUTHED,
+            </if>
+            <if test="isEmailAuthed != null">
+                IS_EMAIL_AUTHED,
+            </if>
+            <if test="ceratePlayDate != null">
+                CERATE_PLAY_DATE,
+            </if>
+            <if test="playStatus != null">
+                PLAY_STATUS,
+            </if>
+            <if test="userGradeType != null">
+                USER_GRADE_TYPE,
+            </if>
+            <if test="errorCount != null">
+                ERROR_COUNT,
+            </if>
+            <if test="errorDate != null">
+                ERROR_DATE,
+            </if>
+            <if test="isCharge != null">
+                IS_CHARGE,
+            </if>
+            <if test="digest != null">
+                DIGEST,
+            </if>
+            <if test="isWhitelist != null">
+                IS_WHITELIST,
+            </if>
+            <if test="payWays != null">
+                PAY_WAYS,
+            </if>
+            <if test="zfbAccount != null">
+                zfb_account,
+            </if>
+            <if test="wxAccount != null">
+                wx_account,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="multiple != null">
+                multiple,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="certType != null">
+                #{certType,jdbcType=INTEGER},
+            </if>
+            <if test="certNo != null">
+                #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="rank != null">
+                #{rank,jdbcType=INTEGER},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="registerDateTime != null">
+                #{registerDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginDateTime != null">
+                #{lastLoginDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="exprerience != null">
+                #{exprerience,jdbcType=INTEGER},
+            </if>
+            <if test="sourceId != null">
+                #{sourceId,jdbcType=INTEGER},
+            </if>
+            <if test="recommender != null">
+                #{recommender,jdbcType=INTEGER},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="provider != null">
+                #{provider,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null">
+                #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="card != null">
+                #{card,jdbcType=INTEGER},
+            </if>
+            <if test="isMobileAuthed != null">
+                #{isMobileAuthed,jdbcType=INTEGER},
+            </if>
+            <if test="isEmailAuthed != null">
+                #{isEmailAuthed,jdbcType=INTEGER},
+            </if>
+            <if test="ceratePlayDate != null">
+                #{ceratePlayDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="playStatus != null">
+                #{playStatus,jdbcType=INTEGER},
+            </if>
+            <if test="userGradeType != null">
+                #{userGradeType,jdbcType=INTEGER},
+            </if>
+            <if test="errorCount != null">
+                #{errorCount,jdbcType=INTEGER},
+            </if>
+            <if test="errorDate != null">
+                #{errorDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isCharge != null">
+                #{isCharge,jdbcType=INTEGER},
+            </if>
+            <if test="digest != null">
+                #{digest,jdbcType=VARCHAR},
+            </if>
+            <if test="isWhitelist != null">
+                #{isWhitelist,jdbcType=INTEGER},
+            </if>
+            <if test="payWays != null">
+                #{payWays,jdbcType=VARCHAR},
+            </if>
+            <if test="zfbAccount != null">
+                #{zfbAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="wxAccount != null">
+                #{wxAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="multiple != null">
+                #{multiple,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.qiyun.model2.Member2Query" resultType="java.lang.Integer">
+        select count(*) from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update member
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.account != null">
+                ACCOUNT = #{record.account,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                NAME = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.certType != null">
+                CERT_TYPE = #{record.certType,jdbcType=INTEGER},
+            </if>
+            <if test="record.certNo != null">
+                CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                PASSWORD = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rank != null">
+                RANK = #{record.rank,jdbcType=INTEGER},
+            </if>
+            <if test="record.email != null">
+                EMAIL = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mobile != null">
+                MOBILE = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                STATUS = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.registerDateTime != null">
+                REGISTER_DATE_TIME = #{record.registerDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastLoginDateTime != null">
+                LAST_LOGIN_DATE_TIME = #{record.lastLoginDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.exprerience != null">
+                EXPRERIENCE = #{record.exprerience,jdbcType=INTEGER},
+            </if>
+            <if test="record.sourceId != null">
+                SOURCE_ID = #{record.sourceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.recommender != null">
+                RECOMMENDER = #{record.recommender,jdbcType=INTEGER},
+            </if>
+            <if test="record.sign != null">
+                SIGN = #{record.sign,jdbcType=VARCHAR},
+            </if>
+            <if test="record.provider != null">
+                PROVIDER = #{record.provider,jdbcType=VARCHAR},
+            </if>
+            <if test="record.picture != null">
+                PICTURE = #{record.picture,jdbcType=VARCHAR},
+            </if>
+            <if test="record.card != null">
+                CARD = #{record.card,jdbcType=INTEGER},
+            </if>
+            <if test="record.isMobileAuthed != null">
+                IS_MOBILE_AUTHED = #{record.isMobileAuthed,jdbcType=INTEGER},
+            </if>
+            <if test="record.isEmailAuthed != null">
+                IS_EMAIL_AUTHED = #{record.isEmailAuthed,jdbcType=INTEGER},
+            </if>
+            <if test="record.ceratePlayDate != null">
+                CERATE_PLAY_DATE = #{record.ceratePlayDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.playStatus != null">
+                PLAY_STATUS = #{record.playStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.userGradeType != null">
+                USER_GRADE_TYPE = #{record.userGradeType,jdbcType=INTEGER},
+            </if>
+            <if test="record.errorCount != null">
+                ERROR_COUNT = #{record.errorCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.errorDate != null">
+                ERROR_DATE = #{record.errorDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isCharge != null">
+                IS_CHARGE = #{record.isCharge,jdbcType=INTEGER},
+            </if>
+            <if test="record.digest != null">
+                DIGEST = #{record.digest,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isWhitelist != null">
+                IS_WHITELIST = #{record.isWhitelist,jdbcType=INTEGER},
+            </if>
+            <if test="record.payWays != null">
+                PAY_WAYS = #{record.payWays,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zfbAccount != null">
+                zfb_account = #{record.zfbAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wxAccount != null">
+                wx_account = #{record.wxAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.multiple != null">
+                multiple = #{record.multiple,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update member
+        set id = #{record.id,jdbcType=INTEGER},
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+        NAME = #{record.name,jdbcType=VARCHAR},
+        CERT_TYPE = #{record.certType,jdbcType=INTEGER},
+        CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+        RANK = #{record.rank,jdbcType=INTEGER},
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+        STATUS = #{record.status,jdbcType=INTEGER},
+        REGISTER_DATE_TIME = #{record.registerDateTime,jdbcType=TIMESTAMP},
+        LAST_LOGIN_DATE_TIME = #{record.lastLoginDateTime,jdbcType=TIMESTAMP},
+        EXPRERIENCE = #{record.exprerience,jdbcType=INTEGER},
+        SOURCE_ID = #{record.sourceId,jdbcType=INTEGER},
+        RECOMMENDER = #{record.recommender,jdbcType=INTEGER},
+        SIGN = #{record.sign,jdbcType=VARCHAR},
+        PROVIDER = #{record.provider,jdbcType=VARCHAR},
+        PICTURE = #{record.picture,jdbcType=VARCHAR},
+        CARD = #{record.card,jdbcType=INTEGER},
+        IS_MOBILE_AUTHED = #{record.isMobileAuthed,jdbcType=INTEGER},
+        IS_EMAIL_AUTHED = #{record.isEmailAuthed,jdbcType=INTEGER},
+        CERATE_PLAY_DATE = #{record.ceratePlayDate,jdbcType=TIMESTAMP},
+        PLAY_STATUS = #{record.playStatus,jdbcType=INTEGER},
+        USER_GRADE_TYPE = #{record.userGradeType,jdbcType=INTEGER},
+        ERROR_COUNT = #{record.errorCount,jdbcType=INTEGER},
+        ERROR_DATE = #{record.errorDate,jdbcType=TIMESTAMP},
+        IS_CHARGE = #{record.isCharge,jdbcType=INTEGER},
+        DIGEST = #{record.digest,jdbcType=VARCHAR},
+        IS_WHITELIST = #{record.isWhitelist,jdbcType=INTEGER},
+        PAY_WAYS = #{record.payWays,jdbcType=VARCHAR},
+        zfb_account = #{record.zfbAccount,jdbcType=VARCHAR},
+        wx_account = #{record.wxAccount,jdbcType=VARCHAR},
+        username = #{record.username,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=INTEGER},
+        multiple = #{record.multiple,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.Member2">
+        update member
+        <set>
+            <if test="account != null">
+                ACCOUNT = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="certType != null">
+                CERT_TYPE = #{certType,jdbcType=INTEGER},
+            </if>
+            <if test="certNo != null">
+                CERT_NO = #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="rank != null">
+                RANK = #{rank,jdbcType=INTEGER},
+            </if>
+            <if test="email != null">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                MOBILE = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="registerDateTime != null">
+                REGISTER_DATE_TIME = #{registerDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginDateTime != null">
+                LAST_LOGIN_DATE_TIME = #{lastLoginDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="exprerience != null">
+                EXPRERIENCE = #{exprerience,jdbcType=INTEGER},
+            </if>
+            <if test="sourceId != null">
+                SOURCE_ID = #{sourceId,jdbcType=INTEGER},
+            </if>
+            <if test="recommender != null">
+                RECOMMENDER = #{recommender,jdbcType=INTEGER},
+            </if>
+            <if test="sign != null">
+                SIGN = #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="provider != null">
+                PROVIDER = #{provider,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null">
+                PICTURE = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="card != null">
+                CARD = #{card,jdbcType=INTEGER},
+            </if>
+            <if test="isMobileAuthed != null">
+                IS_MOBILE_AUTHED = #{isMobileAuthed,jdbcType=INTEGER},
+            </if>
+            <if test="isEmailAuthed != null">
+                IS_EMAIL_AUTHED = #{isEmailAuthed,jdbcType=INTEGER},
+            </if>
+            <if test="ceratePlayDate != null">
+                CERATE_PLAY_DATE = #{ceratePlayDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="playStatus != null">
+                PLAY_STATUS = #{playStatus,jdbcType=INTEGER},
+            </if>
+            <if test="userGradeType != null">
+                USER_GRADE_TYPE = #{userGradeType,jdbcType=INTEGER},
+            </if>
+            <if test="errorCount != null">
+                ERROR_COUNT = #{errorCount,jdbcType=INTEGER},
+            </if>
+            <if test="errorDate != null">
+                ERROR_DATE = #{errorDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isCharge != null">
+                IS_CHARGE = #{isCharge,jdbcType=INTEGER},
+            </if>
+            <if test="digest != null">
+                DIGEST = #{digest,jdbcType=VARCHAR},
+            </if>
+            <if test="isWhitelist != null">
+                IS_WHITELIST = #{isWhitelist,jdbcType=INTEGER},
+            </if>
+            <if test="payWays != null">
+                PAY_WAYS = #{payWays,jdbcType=VARCHAR},
+            </if>
+            <if test="zfbAccount != null">
+                zfb_account = #{zfbAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="wxAccount != null">
+                wx_account = #{wxAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="multiple != null">
+                multiple = #{multiple,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.Member2">
+    update member
+    set ACCOUNT = #{account,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      CERT_TYPE = #{certType,jdbcType=INTEGER},
+      CERT_NO = #{certNo,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      RANK = #{rank,jdbcType=INTEGER},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      REGISTER_DATE_TIME = #{registerDateTime,jdbcType=TIMESTAMP},
+      LAST_LOGIN_DATE_TIME = #{lastLoginDateTime,jdbcType=TIMESTAMP},
+      EXPRERIENCE = #{exprerience,jdbcType=INTEGER},
+      SOURCE_ID = #{sourceId,jdbcType=INTEGER},
+      RECOMMENDER = #{recommender,jdbcType=INTEGER},
+      SIGN = #{sign,jdbcType=VARCHAR},
+      PROVIDER = #{provider,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      CARD = #{card,jdbcType=INTEGER},
+      IS_MOBILE_AUTHED = #{isMobileAuthed,jdbcType=INTEGER},
+      IS_EMAIL_AUTHED = #{isEmailAuthed,jdbcType=INTEGER},
+      CERATE_PLAY_DATE = #{ceratePlayDate,jdbcType=TIMESTAMP},
+      PLAY_STATUS = #{playStatus,jdbcType=INTEGER},
+      USER_GRADE_TYPE = #{userGradeType,jdbcType=INTEGER},
+      ERROR_COUNT = #{errorCount,jdbcType=INTEGER},
+      ERROR_DATE = #{errorDate,jdbcType=TIMESTAMP},
+      IS_CHARGE = #{isCharge,jdbcType=INTEGER},
+      DIGEST = #{digest,jdbcType=VARCHAR},
+      IS_WHITELIST = #{isWhitelist,jdbcType=INTEGER},
+      PAY_WAYS = #{payWays,jdbcType=VARCHAR},
+      zfb_account = #{zfbAccount,jdbcType=VARCHAR},
+      wx_account = #{wxAccount,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      multiple = #{multiple,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where account = #{account,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByMobileOrAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where mobile = #{account,jdbcType=VARCHAR} or account = #{account,jdbcType=VARCHAR}
+    </select>
+    <select id="getPayMember" resultMap="PayMemberResultMap">
+    select
+    m.id,m.pay_ways,m.account,m.name,m.source_id,ma.agent_type
+    from member m,member_agent ma
+    where m.id = ma.member_id and ma.status=1
+  </select>
+    <select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+
+
+    <!--记录修改白名单的时间-->
+    <update id="updateUserToWrite">
+    update  member set tobe_write_time = #{1} where account =#{0}
+  </update>
+    <!--查询一个月及以上未登录的用户-->
+    <select id="getBeforeOneMonth" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `member`
+        WHERE LAST_LOGIN_DATE_TIME <![CDATA[<=]]> #{date}
+        ORDER BY LAST_LOGIN_DATE_TIME DESC
+    </select>
+
+    <!-- 今日开户-->
+    <select id="findAccountNum" parameterType="string" resultType="int">
+ select count(*) from member WHERE TO_DAYS(REGISTER_DATE_TIME) = TO_DAYS(NOW()) and source_id =(select id from member where ACCOUNT=#{0}) and type=0
+  </select>
+    <select id="findAccountNumBy" parameterType="map" resultType="int">
+        select count(id) from member WHERE source_id =#{agentName} and type=0
+
+        <if test="startTime!='' and endTime !=''">
+            AND REGISTER_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and REGISTER_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and REGISTER_DATE_TIME &lt;#{endTime}
+        </if>
+        <if test="startTime =='' and endTime ==''">
+            AND TO_DAYS(REGISTER_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+    </select>
+    <!--今日激活-->
+    <select id="findActiveNum" parameterType="string" resultType="int">
+    select count(*) from member where TO_DAYS(IFNULL(tobe_write_time,REGISTER_DATE_TIME)) = TO_DAYS(NOW()) AND  source_id =(select id from member where ACCOUNT=#{0}) and IS_CHARGE=0
+
+  </select>
+    <select id="findActiveNumBy" parameterType="string" resultType="int">
+        select count(id) from member where source_id =#{agentName} and IS_CHARGE=1
+        and
+        type=0
+        <if test="startTime!='' and endTime !=''">
+            AND IFNULL(tobe_write_time,REGISTER_DATE_TIME) BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and IFNULL(tobe_write_time,REGISTER_DATE_TIME) &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and IFNULL(tobe_write_time,REGISTER_DATE_TIME) &lt;#{endTime}
+        </if>
+        <if test="startTime =='' and endTime ==''">
+            and TO_DAYS(IFNULL(tobe_write_time,REGISTER_DATE_TIME)) = TO_DAYS(NOW())
+        </if>
+    </select>
+    <!--今日消费和销量-->
+
+    <select id="findPayNum" resultType="map">
+
+    select IFNULL(sum(amount),0)allPayNum ,count(PLAN_NO) orderNum from lottery_plan where TO_DAYS(CREATE_DATE_TIME) = TO_DAYS(NOW())   and PLAN_TICKET_STATUS=4
+        and
+        PLAN_STATUS = 4
+         and ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        )
+</select>
+
+    <select id="findPayNumBy" resultType="map" parameterType="map">
+        select IFNULL(count(lp.PLAN_NO),0) allPayNum FROM
+        lottery_plan lp
+        LEFT JOIN lottery_plan_order lpo ON lp.plan_no = lpo.PLAN_NO
+        LEFT JOIN member m ON m.ACCOUNT = lpo.ACCOUNT
+        WHERE
+        lp.PLAN_TICKET_STATUS=4
+        and
+        lp.PLAN_STATUS = 4
+        AND lpo.`STATUS` = 2
+        and m.SOURCE_ID=#{agentName}
+        <if test="startTime!=null and endTime !=null">
+            AND lp.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!=null and endTime ==null">
+            and lp.CREATE_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime==null and endTime !=null">
+            and lp.CREATE_DATE_TIME &lt;#{endTime}
+        </if>
+        <if test="startTime ==null and endTime ==null">
+            and TO_DAYS( lp.CREATE_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+    </select>
+
+    <resultMap id="superGodDTO" type="com.qiyun.dto.SuperGodDTO">
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+        <result column="username" property="name" jdbcType="VARCHAR"/>
+        <result column="PICTURE" property="picture" jdbcType="VARCHAR"/>
+        <result column="follow_num" property="followNum" jdbcType="INTEGER"/>
+        <result column="fans_num" property="fansNum" jdbcType="INTEGER"/>
+        <result column="bingo_money" property="bingoMoney" jdbcType="DECIMAL"/>
+        <result column="bingo_num" property="bingoNum" jdbcType="INTEGER"/>
+        <result column="buy_num" property="BuyNum" jdbcType="INTEGER"/>
+        <result column="winning_rate" property="winningRate" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getSuperGod" resultMap="superGodDTO" parameterType="java.lang.String">
+    SELECT
+      M.username,
+      M.ACCOUNT,
+      M.PICTURE,
+      IFNULL(FN1.fans_num,0) AS fans_num,
+      IFNULL(FN2.follow_num,0) AS follow_num,
+      SUM(LPO.AMOUNT) AS buy_money,
+      SUM(LPO.POSTTAX_PRIZE) AS bingo_money,
+      BN.bingo_num,
+      COUNT(ORDER_NO) AS buy_num,
+      FORMAT(
+          BN.bingo_num / COUNT(ORDER_NO),
+          2
+      ) AS winning_rate
+  FROM
+      member M
+  LEFT JOIN (
+      SELECT
+          COUNT(MF1.fans_account) AS fans_num,
+          M1.ACCOUNT
+      FROM
+          member M1
+      LEFT JOIN member_follow_mapping MF1 ON M1.ACCOUNT = MF1.account
+      WHERE MF1.is_cancel = 0
+      GROUP BY
+          MF1.account
+  ) AS FN1 ON M.ACCOUNT = FN1.ACCOUNT
+  LEFT JOIN (
+      SELECT
+          COUNT(MF2.account) AS follow_num,
+          M2.ACCOUNT
+      FROM
+          member M2
+      LEFT JOIN member_follow_mapping MF2 ON M2.ACCOUNT = MF2.fans_account
+      WHERE MF2.is_cancel = 0
+      GROUP BY
+          MF2.fans_account
+  ) AS FN2 ON M.ACCOUNT = FN2.ACCOUNT
+  LEFT JOIN lottery_plan_order LPO ON M.ACCOUNT = LPO.ACCOUNT
+  LEFT JOIN lottery_plan LP ON LPO.PLAN_NO = LP.PLAN_NO
+  LEFT JOIN (
+      SELECT
+          COUNT(L1.ORDER_NO) AS bingo_num,
+          L1.ACCOUNT
+      FROM
+          lottery_plan_order L1
+      LEFT JOIN lottery_plan L2 ON L1.PLAN_NO = L2.PLAN_NO
+      WHERE
+          L1.`STATUS` = 2
+      AND L1.PRIZE_SETTLE_STATUS = 0
+      AND L2.PUBLIC_STATUS != 1
+      AND L1.CREATE_DATE_TIME > DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+      GROUP BY
+          ACCOUNT
+  ) AS BN ON LPO.ACCOUNT = BN.ACCOUNT
+  WHERE
+      LPO.CREATE_DATE_TIME > DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+  AND LPO.`STATUS` = 2
+  AND LP.PUBLIC_STATUS != 1
+  AND LPO.ACCOUNT = #{account,jdbcType=VARCHAR}
+  GROUP BY
+      M.ACCOUNT
+  </select>
+
+    <select id="getSuperGodN" resultMap="superGodDTO" parameterType="java.lang.String">
+        SELECT
+      M.username,
+      M.ACCOUNT,
+      M.PICTURE,
+      IFNULL(FN1.fans_num,0) AS fans_num,
+      IFNULL(FN2.follow_num,0) AS follow_num
+  FROM
+      member M
+  LEFT JOIN (
+      SELECT
+          COUNT(MF1.fans_account) AS fans_num,
+          M1.ACCOUNT
+      FROM
+          member M1
+      LEFT JOIN member_follow_mapping MF1 ON M1.ACCOUNT = MF1.account
+      WHERE MF1.is_cancel = 0
+      GROUP BY
+          MF1.account
+  ) AS FN1 ON M.ACCOUNT = FN1.ACCOUNT
+  LEFT JOIN (
+      SELECT
+          COUNT(MF2.account) AS follow_num,
+          M2.ACCOUNT
+      FROM
+          member M2
+      LEFT JOIN member_follow_mapping MF2 ON M2.ACCOUNT = MF2.fans_account
+      WHERE MF2.is_cancel = 0
+      GROUP BY
+          MF2.fans_account
+  ) AS FN2 ON M.ACCOUNT = FN2.ACCOUNT
+  WHERE
+  M.ACCOUNT = #{account,jdbcType=VARCHAR}
+  GROUP BY
+      M.ACCOUNT
+  </select>
+
+    <!-- 获取代理激活code -->
+    <select id="getAgentCode" resultType="string">
+    select  ACTIVE_CODE  from member_agent  where ACCOUNT =#{0}
+  </select>
+    <!--修改会员备注信息 判断是否是第一次修改-->
+    <select id="findMemberNote" parameterType="map" resultType="int">
+
+    select count(*) from member_note where member_id=#{member_id,jdbcType=INTEGER}
+  </select>
+
+    <insert id="addMemberNote" parameterType="map">
+    insert into member_note(member_id, memeber_tel, member_zxb, member_wx, note) values (#{member_id,jdbcType=VARCHAR},
+    #{memeber_tel,jdbcType=VARCHAR},#{member_zxb,jdbcType=VARCHAR},#{member_wx,jdbcType=VARCHAR},#{note,jdbcType=VARCHAR}
+    )
+  </insert>
+    <update id="updateMemberNote" parameterType="map">
+    update member_note SET   memeber_tel= #{memeber_tel,jdbcType=VARCHAR},
+     member_zxb=#{member_zxb,jdbcType=VARCHAR}, member_wx=#{member_wx,jdbcType=VARCHAR},
+     note=#{note,jdbcType=VARCHAR}
+      where  member_id=#{member_id,jdbcType=INTEGER}
+  </update>
+    <!-- 三天内的销售记录-->
+
+    <select id="findSalesMoneyInfo" resultType="map">
+
+        <!-- SELECT DISTINCT IFNULL(lpo.amount,0) amount , lp.IS_SUPER_MAN is_super_man, IFNULL(mac.AGENT_COMMISION,0) agentCommision, lp.CREATE_DATE_TIME create_date_time FROM lottery_plan_order lpo LEFT JOIN member m ON lpo.MEMBER_ID = m.id LEFT JOIN lottery_plan lp ON lp.PLAN_NO = lpo.PLAN_NO LEFT JOIN member_agent_commision mac ON mac.MEMBER_AGENT_ID = ( SELECT id mid FROM member WHERE ACCOUNT = #{account} ) WHERE lpo.STATUS=2 and m.type =0 and m.SOURCE_ID = ( SELECT id FROM member WHERE ACCOUNT = #{account} ) <if test="isMonth==0"> and lp.CREATE_DATE_TIME > DATE_SUB(now(),INTERVAL 3 DAY) </if> <if test="isMonth==1"> and DATE_FORMAT(lp.CREATE_DATE_TIME, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) </if>-->
+
+        SELECT lefttable.date, IFNULL(lp.sumMoney,0) selfBuy, IFNULL(lpo.sumMoney,0) fllowBuy, IFNULL(mac.commision,0)
+        commision FROM (SELECT date_sub(CURDATE(),interval @i:=@i+1 day) as date from ( select 1 union all select 1
+        union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select
+        1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all
+        select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union
+        all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1
+        union all select 1) as tmp,(select @i:= -1) t) as lefttable
+        LEFT JOIN (SELECT SUM(lp.AMOUNT) sumMoney,DATE_FORMAT(
+        lp.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t from lottery_plan lp
+        WHERE
+        lp.IS_SUPER_MAN = 1
+        and lp.PLAN_STATUS = 4
+        and lp.PLAN_TICKET_STATUS=4
+        and lp.ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        )
+        GROUP BY t)lp on lp.t = lefttable.date
+
+        LEFT JOIN (SELECT SUM(lp.AMOUNT) sumMoney,DATE_FORMAT(
+        lp.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t from lottery_plan lp
+        WHERE
+        lp.IS_SUPER_MAN =0
+        and lp.PLAN_STATUS = 4
+        and lp.PLAN_TICKET_STATUS=4
+        and lp.ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        )
+        GROUP BY t)lpo on lpo.t = lefttable.date
+        left JOIN ( SELECT format(sum(mac.commision),2) commision,DATE_FORMAT(
+        mac.date,
+        '%Y-%m-%d'
+        ) AS t FROM commision mac
+        left join lottery_plan lp on mac.plan_no = lp.PLAN_NO
+
+        where lp.ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID =
+        (SELECT
+        id mid
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        )
+        and lp.PLAN_STATUS = 4
+        and lp.PLAN_TICKET_STATUS=4
+        GROUP BY t
+        ) mac on mac.t = lefttable.date
+        where 1=1
+        <if test="isMonth == 0">
+            and lefttable.date > DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+        </if>
+        order by lefttable.date desc
+    </select>
+    <!--开户墙-->
+    <select id="findAccountWall" resultType="map" parameterType="map">
+        SELECT
+        m.username,
+        a.account,
+        a.countNum,
+        a.REGISTER_DATE_TIME
+        FROM
+        (
+        SELECT
+        ma.ACCOUNT account,
+        count(m.ACCOUNT) countNum,
+        m.REGISTER_DATE_TIME
+        FROM
+        member_agent ma
+        LEFT JOIN member m ON m.SOURCE_ID = ma.MEMBER_ID
+        WHERE
+        ma.`STATUS` = 1
+        and m.type =0
+        and ma.MEMBER_ID&lt;&gt;85
+        AND TO_DAYS( m.REGISTER_DATE_TIME) = TO_DAYS(NOW())
+        GROUP BY
+        ma.ACCOUNT
+        <if test="mincout !=null and mincout!=''">
+            HAVING countNum>#{mincout}
+        </if>
+        ) a
+        LEFT JOIN member m ON m.ACCOUNT = a.account
+
+        order by a.countNum
+
+    </select>
+
+    <!--充值墙和消费墙-->
+    <select id="findRechargeWall" parameterType="map" resultType="map">
+        SELECT
+        IFNULL(m.username,m.ACCOUNT) username,
+        IFNULL(m.ACCOUNT,0) account,
+        IFNULL(mwl.AMOUNT,0) rechargeMoney,
+        mwl.TRANS_TYPE rechargeType,
+        IFNULL(mwl.ABLE_BALANCE,0) ableMoney,
+        IFNULL((SELECT ACCOUNT from member WHERE id = m.SOURCE_ID),'') agentAccount,
+        IFNULL((SELECT username from member WHERE id = m.SOURCE_ID),'') agentnName
+        FROM
+        member m
+        LEFT JOIN member_wallet_line mwl
+
+        on m.ACCOUNT =mwl.ACCOUNT
+        where mwl.TRANS_TYPE
+        <if test="isConsumer==1 and isConsumer!=null">
+            in(0,1000,2058,2062,2063,2064,2065,2066,2067,2068,2069,2070,2071,2072,2073,2074,2075.2076,2077,2078)
+        </if>
+        <if test="isConsumer==0 and isConsumer!=null">
+            in (2065,30,2061)
+        </if>
+        <if test="account!=null and account!=''">
+            and m.SOURCE_ID =(select id from member where ACCOUNT =#{account})
+        </if>
+        <if test="username!= null and username!=''">
+            and (M.ACCOUNT LIKE CONCAT('%',#{username},'%') OR M.username LIKE CONCAT('%',#{username},'%'))
+        </if>
+        and m.type =0
+        and m.SOURCE_ID&lt;&gt;85
+        and TO_DAYS( mwl.CREATE_DATE_TIME) = TO_DAYS(NOW())
+        <if test="minCount !=null and minCount!=''">
+            and mwl.AMOUNT>=#{minCount}
+        </if>
+        order by rechargeMoney desc
+
+    </select>
+    <!--身份证是否在黑名单-->
+    <select id="checkCertNo" parameterType="string" resultType="int">
+
+        select count(*) from black_for_cert where cert_no = #{0};
+    </select>
+    <!--验证手机是否在黑名单-->
+    <select id="checkMobile" parameterType="string" resultType="int">
+        select count(*) from black_for_mobile where mobile = #{0};
+    </select>
+
+    <!--通过昵称判断用户是否存在-->
+    <select id="checkName" resultType="int">
+        select count(ACCOUNT) from member where ACCOUNT=#{0}
+    </select>
+    <!--会员关联代理-->
+    <insert id="memberToAgent" parameterType="map">
+        insert into member_review(member_account, agent_account, erview_status, create_time, update_time, note,is_success,is_move,move_agentName)
+        values (#{memberName},#{agentName},0,#{create_time},#{create_time},#{note},#{is_success},#{is_move},#{move_agentName})
+    </insert>
+    <!-- 客户转移记录-->
+    <select id="memberMoveLogs" resultType="map">
+        select member_account ,is_success,create_time,is_move from member_review where  create_time>=DATE_SUB(now(), INTERVAL 6 DAY)
+     ORDER BY create_time desc
+    </select>
+    <!--通过会员查询方案-->
+
+    <select id="findMemberPlan" parameterType="map" resultType="map">
+        SELECT
+        ifnull(m.username,m.ACCOUNT) username,
+        lpo.PLAN_NO,
+        lpo.CREATE_DATE_TIME,
+        lpo.WIN_STATUS
+        FROM
+        member m
+        LEFT JOIN lottery_plan lpo ON lpo.ACCOUNT = m.ACCOUNT
+        WHERE
+        <!--<if test="is_username == 0">-->
+        <!--m.ACCOUNT = #{member}-->
+        <!--</if>-->
+        <!--<if test="is_username==1">-->
+        <!--m.username = #{member}-->
+        <!--</if>-->
+
+        lpo.CREATE_DATE_TIME > DATE_SUB(now(), INTERVAL 2 DAY)
+        and lpo.PLAN_TICKET_STATUS =4
+        <if test="member != null">
+            AND (m.ACCOUNT LIKE CONCAT('%',#{member},'%') OR m.username LIKE
+            CONCAT('%',#{member},'%'))
+        </if>
+
+        order by lpo.CREATE_DATE_TIME desc
+    </select>
+    <select id="findMemberPlanByMember" resultType="map">
+        SELECT
+        ifnull(m.username,m.ACCOUNT) username,
+        lpo.PLAN_NO,
+        lpo.CREATE_DATE_TIME,
+        lpo.WIN_STATUS
+        FROM
+        member m
+        LEFT JOIN lottery_plan lpo ON lpo.ACCOUNT = m.ACCOUNT
+        WHERE
+        <!--<if test="is_username == 0">-->
+        <!--m.ACCOUNT = #{member}-->
+        <!--</if>-->
+        <!--<if test="is_username==1">-->
+        <!--m.username = #{member}-->
+        <!--</if>-->
+
+        lpo.CREATE_DATE_TIME > DATE_SUB(now(), INTERVAL 2 DAY)
+        and lpo.PLAN_TICKET_STATUS =4
+        and m.ACCOUNT in
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        order by lpo.CREATE_DATE_TIME desc
+
+    </select>
+    <select id="getByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where username = #{0}
+    </select>
+
+    <select id="getRobotList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where type = 2
+    </select>
+
+    <!--查询自购订单数等数据-->
+    <select id="findSaleDatas" parameterType="map" resultType="map">
+        SELECT
+        datas.date,
+        datas.accountNum,
+        datas.activeNum,
+        datas.allPayNum,
+        (
+        datas.fllowBuy + datas.selfBuy
+        ) allBuy,
+        FORMAT(datas.commision,2) commission,
+        datas.fllowBuy,
+        datas.selfBuy
+        FROM
+        (
+        SELECT
+        lefttable.date,
+        IFNULL(righttable.num, '0') AS selfBuy,
+        IFNULL(fllowBuy.num, '0') fllowBuy,
+        IFNULL(account.accountNum, 0) accountNum,
+        IFNULL(active.activeNum, 0) activeNum,
+        IFNULL(allPay.allPayNum, 0) allPayNum,
+        IFNULL(agentCommision.commision, 0) commision
+        FROM
+        (SELECT date_sub(CURDATE(),interval @i:=@i+1 day) as date
+        from ( select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1
+        union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select
+        1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all
+        select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union
+        all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1
+        union all select 1) as tmp,(select @i:= -1) t) as lefttable
+        LEFT JOIN (
+        SELECT
+        IFNULL(sum(lp.AMOUNT), 0) num,
+        DATE_FORMAT(
+        lp.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t
+        FROM
+        lottery_plan lp
+        WHERE
+        lp.IS_SUPER_MAN = 1
+        and lp.PLAN_STATUS = 4
+        and lp.PLAN_TICKET_STATUS=4
+        and lp.ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        )
+        <if test="isMonth==0">
+            AND DATE_FORMAT(lp.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY
+        t
+        ) AS righttable ON lefttable.date = righttable.T
+        LEFT JOIN (
+        SELECT
+        IFNULL(sum(lp.AMOUNT), 0) num,
+        DATE_FORMAT(
+        lp.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t
+        FROM
+        lottery_plan lp
+
+        WHERE
+
+        lp.PLAN_STATUS = 4
+
+        and lp.PLAN_TICKET_STATUS=4
+        and
+        lp.IS_SUPER_MAN = 0
+        and lp.ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        )
+        <if test="isMonth==0">
+            AND DATE_FORMAT(lp.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY
+        t
+        ) fllowBuy ON fllowBuy.t = lefttable.date
+        LEFT JOIN (
+        SELECT
+        count(*) accountNum,
+        DATE_FORMAT(
+        REGISTER_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t
+        FROM
+        member
+        WHERE
+        DATE_FORMAT(REGISTER_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        AND source_id = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        GROUP BY
+        t
+        ) AS account ON account.t = lefttable.date
+        LEFT JOIN (
+        SELECT
+        count(*) activeNum,
+        DATE_FORMAT(
+        REGISTER_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t
+        FROM
+        member
+        WHERE
+        <if test="isMonth==0">
+            DATE_FORMAT(REGISTER_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        AND source_id = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        AND IS_CHARGE = 1
+        GROUP BY
+        t
+        ) active ON active.t = lefttable.date
+        LEFT JOIN (
+        SELECT
+        IFNULL(count(lp.PLAN_NO), 0) allPayNum,
+        DATE_FORMAT(
+        lp.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t
+        FROM
+        lottery_plan lp
+
+        WHERE
+        lp.PLAN_STATUS = 4
+        and lp.PLAN_TICKET_STATUS=4
+
+        and lp.IS_SUPER_MAN = 1
+
+        and lp.ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID = (
+        SELECT
+        id
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        ))
+        <if test="isMonth==0">
+            and DATE_FORMAT(CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            and DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+
+        GROUP BY
+        t
+        ) AS allPay ON allPay.t = lefttable.date
+        left join(
+        SELECT format(sum(mac.commision),2) commision, DATE_FORMAT(
+        mac.date,
+        '%Y-%m-%d'
+        ) AS t
+        FROM commision mac
+        left join lottery_plan lp on mac.plan_no = lp.PLAN_NO
+        where lp.ACCOUNT IN (
+        SELECT
+        account
+        FROM
+        member
+        WHERE
+        SOURCE_ID =
+        (SELECT
+        id mid
+        FROM
+        member
+        WHERE
+        ACCOUNT = #{account}
+        )
+        )
+        and lp.PLAN_STATUS = 4
+        and lp.PLAN_TICKET_STATUS=4
+        <if test="isMonth==0">
+            and DATE_FORMAT(mac.date, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            and DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY t
+        ) agentCommision on agentCommision.t = lefttable.date
+        WHERE
+        <if test="isMonth==0">
+            lefttable.date >= (
+            SELECT
+            DATE_ADD(
+            curdate(),
+            INTERVAL - DAY (curdate()) + 1 DAY
+            )
+            )
+        </if>
+        <if test="isMonth==1">
+            lefttable.date > DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+        </if>
+        ) datas order by datas.date desc
+    </select>
+
+    <select id="findMemberAssociation" resultType="map">
+        SELECT
+        mr.member_account,
+        mr.agent_account,
+        mr.create_time,
+        <!-- 1未实名,0实名-->
+        CASE WHEN m.CERT_NO is NULL then 1 ELSE 0 end isReal
+        FROM
+        member_review mr
+        LEFT JOIN member m
+        ON mr.member_account = m.username
+        WHERE
+        mr.is_success = 0
+        AND mr.is_move = 0
+        and mr.erview_status = 0
+        <if test="agentName != null and agentName !=''">
+            and mr.agent_account = #{agentName}
+        </if>
+        <if test="startDate!=''  and endDate !=''">
+            and mr.create_time between #{startDate} and #{endDate}
+        </if>
+        <if test=" startDate!='' and  endDate ==''">
+            and mr.create_time &gt; #{startDate}
+        </if>
+        <if test="startDate=='' and endDate!=''">
+            and mr.create_time &lt; #{endDate}
+        </if>
+        <!-- <if test="startDate=='' and endDate==''">
+             and mr.create_time  &gt; =DATE_SUB(now(), INTERVAL 6 DAY)
+         </if>-->
+        order by mr.create_time desc
+    </select>
+
+    <select id="findMemberMove" resultType="map">
+
+        SELECT
+        mr.member_account,
+        mr.agent_account,
+        mr.create_time,
+        CASE WHEN m.CERT_NO is NULL then 1 ELSE 0 end isReal,
+        mr.note,
+        mr.move_agentName
+        FROM
+        member_review mr
+        LEFT JOIN member m
+        ON mr.member_account = m.username
+        WHERE
+        is_success = 0
+        AND is_move = 1
+        and mr.erview_status = 0
+
+        <if test="agentName != null and agentName !=''">
+            and mr.agent_account = #{agentName}
+        </if>
+        <if test="startDate!=''  and endDate !=''">
+            and mr.create_time between #{startDate} and #{endDate}
+        </if>
+        <if test=" startDate!='' and  endDate ==''">
+            and mr.create_time &gt; #{startDate}
+        </if>
+        <if test="startDate=='' and endDate!=''">
+            and mr.create_time &lt; #{endDate}
+        </if>
+        <!--  <if test="startDate=='' and endDate==''">
+              and mr.create_time  &gt; =DATE_SUB(now(), INTERVAL 6 DAY)
+          </if>-->
+        order by mr.create_time desc
+    </select>
+    <!--授信价款流水-->
+    <select id="findMemberWalletLine" resultType="map">
+        SELECT
+        mwl.ACCOUNT,
+        m.username,
+        mwl.AMOUNT,
+        mwl.CREATE_DATE_TIME,
+        (
+        SELECT
+        username
+        FROM
+        member
+        WHERE
+        id = mwl.SOURCE_ID
+        ) agentName,
+        mwl.FREEZE_BALANCE,
+        mw.credit_limit
+
+        FROM
+        member_wallet_line mwl
+        LEFT JOIN member m ON m.ACCOUNT = mwl.ACCOUNT
+        LEFT JOIN member_wallet mw ON mw.MEMBER_ID = mwl.SOURCE_ID
+        WHERE
+        TRANS_TYPE = '2062'
+        <if test="startDate==''  and endDate ==''">
+            and TO_DAYS(mwl.CREATE_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+        <if test="agentName != null and agentName !=''">
+            and mwl.SOURCE_ID = (select id from member where ACCOUNT = #{agentName})
+        </if>
+        <if test="startDate!=''  and endDate !=''">
+            and mwl.CREATE_DATE_TIME between #{startDate} and #{endDate}
+        </if>
+        <if test=" startDate!='' and  endDate ==''">
+            and mwl.CREATE_DATE_TIME &gt; #{startDate}
+        </if>
+        <if test="startDate=='' and endDate!=''">
+            and mwl.CREATE_DATE_TIME &lt; #{endDate}
+        </if>
+        order by mwl.CREATE_DATE_TIME
+    </select>
+    <!--线上充值流水-->
+    <select id="findRechargeLine" resultType="map">
+        select
+        m.ACCOUNT,
+        m.username,
+        m.CREATE_DATE_TIME,
+        m.agentName,
+        m.FREEZE_BALANCE,
+        m.credit_limit,
+        m.wallet_Line_No
+        from
+        (SELECT
+        mwl.ACCOUNT,
+        m.username,
+        mwl.AMOUNT,
+        mwl.CREATE_DATE_TIME,
+        (
+        SELECT
+        username
+        FROM
+        member
+        WHERE
+        id = mwl.SOURCE_ID
+        ) agentName,
+        mwl.FREEZE_BALANCE,
+        mw.credit_limit,
+        mwl.wallet_Line_No
+        FROM
+        member_wallet_line mwl
+        LEFT JOIN member m ON m.ACCOUNT = mwl.ACCOUNT
+        LEFT JOIN member_wallet mw ON mw.MEMBER_ID = mwl.SOURCE_ID
+        WHERE
+        TRANS_TYPE = '0') m
+        where 1=1
+        <if test="startDate==''  and endDate ==''">
+            and TO_DAYS(m.CREATE_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+        <if test="agentName != null and agentName !=''">
+            and m.agentName = #{agentName}
+        </if>
+        <if test="startDate!=''  and endDate !=''">
+            and m.CREATE_DATE_TIME between #{startDate} and #{endDate}
+        </if>
+        <if test=" startDate!='' and  endDate ==''">
+            and m.CREATE_DATE_TIME &gt; #{startDate}
+        </if>
+        <if test="startDate=='' and endDate!=''">
+            and m.CREATE_DATE_TIME &lt; #{endDate}
+        </if>
+    </select>
+
+    <!--线下充值-->
+    <select id="findRechargeUnderLine" resultType="map" parameterType="map">
+        SELECT
+        m.ACCOUNT,
+        m.username,
+        m.CREATE_DATE_TIME,
+        m.agentName,
+        m.FREEZE_BALANCE,
+        m.credit_limit,
+        m.wallet_Line_No,
+        m.freeze_credit_balance,
+        m.ABLE_BALANCE
+        FROM
+        (
+        SELECT
+        mwl.ACCOUNT,
+        m.username,
+        mwl.AMOUNT,
+        mwl.CREATE_DATE_TIME,
+        (
+        SELECT
+        username
+        FROM
+        member
+        WHERE
+        id = mwl.SOURCE_ID
+        ) agentName,
+        mwl.FREEZE_BALANCE,
+        mw.credit_limit,
+        mwl.wallet_Line_No,
+        mwl.ABLE_BALANCE,
+        mw.freeze_credit_balance
+        FROM
+        member_wallet_line mwl
+        LEFT JOIN member m ON m.ACCOUNT = mwl.ACCOUNT
+        LEFT JOIN member_wallet mw ON mw.MEMBER_ID = mwl.SOURCE_ID
+        WHERE
+        TRANS_TYPE = 2058
+        and TO_DAYS(mwl.CREATE_DATE_TIME) = TO_DAYS(NOW())
+        ) m
+        where 1=1
+        <if test="agentName != '' and agentName!=null">
+            and m.ACCOUNT=#{agentName}
+        </if>
+        <if test="startTime!='' and endTime !=''">
+            AND m.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and m.CREATE_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and m.CREATE_DATE_TIME &lt;#{endTime}
+        </if>
+    </select>
+
+    <!--查询所有代理-->
+    <select id="findDlInfoByQD" resultType="map">
+        SELECT ma.MEMBER_ID agentId,ma.ACCOUNT,(select username from member where id = m.SOURCE_ID)
+        qdName,ifnull(m.username,m.ACCOUNT) agentName FROM member_agent ma LEFT JOIN member m on ma.ACCOUNT= m.ACCOUNT
+        where ma.AGENT_TYPE=1
+        AND m.SOURCE_ID in ( select id from member where account in
+        <foreach collection="qdList" index="index" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        )
+        <if test="dlAccount !=null and  dlAccount != ''">
+            AND m.account LIKE CONCAT('%', #{dlAccount} ,'%')or m.username LIKE
+            CONCAT('%',#{dlAccount},'%')
+        </if>
+    </select>
+    <!--销售数据-->
+    <select id="findselfBuy" parameterType="map" resultType="map">
+        select
+        m1.selfBuy,
+        m1.fllowBuy,
+        m2.username agentName,
+        m1.commision sumCommision,
+        m1.CountSelfBuyNum,
+        m1.CountFllowBuyNum,
+        (
+        m1.CountFllowBuyNum + m1.CountSelfBuyNum
+        ) allBuyNum,
+        (m1.selfBuy + m1.fllowBuy) allBuyMoney,
+        (select username from member where id = m2.SOURCE_ID) qdName
+        FROM
+        (
+        SELECT
+        IFNULL(
+        sum(
+        CASE lp.IS_SUPER_MAN
+        WHEN 1 THEN
+        lp.AMOUNT
+        END
+        ),
+        0
+        ) selfBuy,
+        IFNULL(
+        COUNT(
+        CASE lp.IS_SUPER_MAN
+        WHEN 1 THEN
+        lp.AMOUNT
+        END
+        ),
+        0
+        ) CountSelfBuyNum,
+        m.SOURCE_ID,
+        IFNULL(
+        sum(
+        CASE lp.IS_SUPER_MAN
+        WHEN 0 THEN
+        lp.AMOUNT
+        END
+        ),
+        0
+        ) fllowBuy,
+        IFNULL(
+        COUNT(
+        CASE lp.IS_SUPER_MAN
+        WHEN 0 THEN
+        lp.AMOUNT
+        END
+        ),
+        0
+        ) CountFllowBuyNum,
+        IFNULL(
+        TRUNCATE (sum(mac.commision), 2),
+        0
+        ) commision
+        FROM
+        lottery_plan lp
+        LEFT JOIN member m ON m.ACCOUNT = lp.ACCOUNT
+        LEFT JOIN commision mac ON mac.plan_no = lp.PLAN_NO
+        WHERE
+        lp.PLAN_STATUS = 4
+        AND lp.PLAN_TICKET_STATUS = 4
+        AND m.SOURCE_ID IN
+        <foreach collection="agentName" item="item" index="index" open="(" close=")" separator=",">
+            #{item.agentId}
+        </foreach>
+
+        <if test="startTime!='' and endTime !=''">
+            AND lp.CREATE_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and lp.CREATE_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and lp.CREATE_DATE_TIME &lt;#{.endTime}
+        </if>
+        <if test="startTime =='' and endTime ==''">
+            AND TO_DAYS(lp.CREATE_DATE_TIME) = TO_DAYS(NOW())
+        </if>
+        GROUP BY
+        m.SOURCE_ID ) m1
+        LEFT JOIN member m2 ON m2.id = m1.SOURCE_ID
+    </select>
+
+    <!-- 财务后台现金明细 -->
+    <select id="findFinancialCashInfo" resultType="map" parameterType="map">
+        SELECT
+        lefttable.date,
+        ifnull(m.allMoney,0) officeUnderLineAdd
+        FROM
+        (SELECT date_sub(CURDATE(),interval @i:=@i+1 day) as date
+        from ( select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1
+        union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select
+        1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all
+        select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union
+        all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1
+        union all select 1) as tmp,(select @i:= -1) t) as lefttable
+        LEFT JOIN( SELECT SUM(mwl.AMOUNT) allMoney,DATE_FORMAT(
+        mwl.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t FROM member_wallet_line mwl
+        where TRANS_TYPE =2062
+        GROUP BY t
+        ) m ON m.t = lefttable.date
+        where
+        <if test="isMonth==0">
+            lefttable.date >= (
+            SELECT
+            DATE_ADD(
+            curdate(),
+            INTERVAL - DAY (curdate()) + 1 DAY
+            )
+            )
+        </if>
+        <if test="isMonth==1">
+            lefttable.date > DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+        </if>
+
+        ORDER BY lefttable.date desc
+    </select>
+
+
+    <select id="findFinancialMoneyInfo" parameterType="map" resultType="map">
+        SELECT
+        lefttable.date,
+        IFNULL(m.allMoney,0) allUnderLineMoney,
+        IFNULL(mm.allMoney,0) allOnLineMoney,
+        IFNULL(mmm.allMoney,0) allWithdrawalMoney,
+        IFNULL(mmmm.allMoney,0) allconsumMoney,
+        IFNULL(ma.allMoney,0) saleCommissionMoney,
+        IFNULL(lp.platformMoney,0) platformCommissionMoney,
+        IFNULL(lp.posttaxPrize,0) posttaxPrize
+
+        FROM
+        (SELECT date_sub(CURDATE(),interval @i:=@i+1 day) as date
+        from ( select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1
+        union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select
+        1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all
+        select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union
+        all select 1 union all select 1 union all select 1 union all select 1 union all select 1 union all select 1
+        union all select 1) as tmp,(select @i:= -1) t) as lefttable
+        LEFT JOIN( SELECT SUM(mwl.AMOUNT) allMoney,DATE_FORMAT(
+        mwl.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t FROM member_wallet_line mwl
+        where TRANS_TYPE in(2058)
+        <if test="isMonth==0">
+            AND DATE_FORMAT(mwl.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY t
+        ) m ON m.t = lefttable.date
+
+        LEFT JOIN( SELECT SUM(mwl.AMOUNT) allMoney,DATE_FORMAT(
+        mwl.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t FROM member_wallet_line mwl
+        where TRANS_TYPE in(0)
+        <if test="isMonth==0">
+            AND DATE_FORMAT(mwl.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY t
+        ) mm ON mm.t = lefttable.date
+
+        LEFT JOIN( SELECT SUM(mwl.AMOUNT) allMoney,DATE_FORMAT(
+        mwl.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t FROM member_wallet_line mwl
+        where TRANS_TYPE in(36)
+        <if test="isMonth==0">
+            AND DATE_FORMAT(mwl.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY t
+        ) mmm ON mmm.t = lefttable.date
+        LEFT JOIN( SELECT SUM(mwl.AMOUNT) allMoney,DATE_FORMAT(
+        mwl.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t FROM member_wallet_line mwl
+        where TRANS_TYPE in(30)
+        <if test="isMonth==0">
+            AND DATE_FORMAT(mwl.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY t
+        ) mmmm ON mmmm.t = lefttable.date
+        LEFT JOIN( SELECT SUM(mwl.AMOUNT) allMoney,DATE_FORMAT(
+        mwl.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t FROM member_wallet_line mwl
+        where TRANS_TYPE in(1056)
+        <if test="isMonth==0">
+            AND DATE_FORMAT(mwl.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY t
+        ) ma ON ma.t = lefttable.date
+        left JOIN(
+        SELECT SUM(lpo.web_site_gold) platformMoney,
+        sum(lpo.POSTTAX_PRIZE) posttaxPrize,
+        DATE_FORMAT(
+        lpo.CREATE_DATE_TIME,
+        '%Y-%m-%d'
+        ) AS t FROM lottery_plan_order lpo
+        where 1=1
+        <if test="isMonth==0">
+            AND DATE_FORMAT(lpo.CREATE_DATE_TIME, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        <if test="isMonth==1">
+            AND DATE_SUB(CURDATE(),INTERVAL 7 DAY)&lt;DATE_FORMAT(CURDATE(), '%Y%m')
+        </if>
+        GROUP BY t
+        ) lp ON lp.t = lefttable.date
+        WHERE
+        <if test="isMonth==0">
+            lefttable.date >= (
+            SELECT
+            DATE_ADD(
+            curdate(),
+            INTERVAL - DAY (curdate()) + 1 DAY
+            )
+            )
+        </if>
+        <if test="isMonth==1">
+            lefttable.date > DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+        </if>
+        order by lefttable.date desc
+
+    </select>
+    <select id="getMemberByAgent" resultType="Map" parameterType="Map">
+        SELECT
+        m.username,
+        m.account,
+        m.REGISTER_DATE_TIME,
+        m.LAST_LOGIN_DATE_TIME,
+        m.`STATUS`,
+        m.CERT_NO,
+        m.IS_WHITELIST,
+        mn.memeber_tel,
+        mn.member_zxb,
+        mn.member_wx,
+        mn.note,
+        mn.is_key
+        FROM
+        member m LEFT JOIN
+        member_note mn
+        on
+        m.account = mn.member_id
+        where m.SOURCE_ID = #{id,jdbcType=INTEGER}
+        <if test="_parameter.containsKey('username')">
+            AND (m.account LIKE CONCAT('%', #{username,jdbcType=VARCHAR} ,'%')or m.username LIKE
+            CONCAT('%',#{username,jdbcType=VARCHAR},'%'))
+        </if>
+        ORDER BY m.REGISTER_DATE_TIME desc
+    </select>
+
+    <select id="findRechargeAndWitdrawlInfo" resultType="map">
+
+        SELECT IFNULL(m.username,mwl.ACCOUNT) username,mwl.AMOUNT,mwl.CREATE_DATE_TIME,mwl.`STATUS` ,mwl.TRANS_TYPE from
+        member_wallet_line mwl
+
+        LEFT JOIN member m on m.ACCOUNT = mwl.ACCOUNT
+
+        WHERE mwl.SOURCE_ID=(SELECT id FROM member WHERE ACCOUNT =#{0})
+        <!-- 充值类型-->
+        AND mwl.TRANS_TYPE
+        in(0,1000,2058,2062,2063,2064,2065,2066,2067,2068,2069,2070,2071,2072,36,2073,2074,2075.2076,2077,2078)
+        and DATE_SUB(CURDATE(), INTERVAL 2 DAY)&lt;= date(mwl.CREATE_DATE_TIME)
+        order by mwl.CREATE_DATE_TIME desc
+    </select>
+
+    <select id="findRoleByAccount" resultType="map" parameterType="string">
+
+        select arn.name,arn.id ,ifnull(arn.PERMISSION,"")permission from admin_role arn left join admin_user au on arn.id = au.ROLE_ID
+
+        where  au.ACCOUNT =#{0}
+    </select>
+    <select id="findAllParentModel" resultType="map">
+        select id,name,ifnull(MEMO,'') MEMO from admin_permission_module
+        <if test="model_id !=null and model_id !=''">
+            <where>
+                id=#{model_id}
+            </where>
+        </if>
+
+    </select>
+    <select id="findChildModel" resultType="map">
+        select apn.id,apn.model_parent,ifnull(apn.desciption,'') descriprion,apn.model_url,apn.model_name,adm.name
+        parent_name from admin_permission_new apn left join admin_permission_module adm
+        on apn
+        .model_parent = adm.ID
+        where is_del =1
+        <if test="id!=null and id !=''">
+            and apn.id=#{id}
+        </if>
+    </select>
+    <!--添加账号-->
+    <insert id="addUser" parameterType="map">
+        insert into admin_user(ACCOUNT, PASSWORD, NAME, STATUS, ROLE_ID) values (#{account},#{password},#{name},#{status},#{role_id})
+    </insert>
+    <!--查找所有角色-->
+    <select id="findAllRole" resultType="map" parameterType="map">
+        select id,NAME,ifnull(MEMO,'') memo,ifnull(PERMISSION,'') PERMISSION from admin_role where 1=1
+        <if test="role_id!=null and role_id!=''">
+            and id = #{role_id}
+        </if>
+    </select>
+    <!--查找所有用户-->
+    <select id="findAllUserAndRole" resultType="map">
+        select au.ACCOUNT, au.NAME,arn.name role_name ,au.ID,au.STATUS from admin_user au left join admin_role arn on
+        au.ROLE_ID = arn.id where 1 =1
+        <if test="user_id !=null and user_id !=''">
+            and au.ID = #{user_id}
+        </if>
+    </select>
+    <!--修改父模块-->
+    <update id="updateParentModel" parameterType="map">
+        update admin_permission_module set name =#{modelName},memo=#{desc} where id = #{model_id}
+    </update>
+    <!--添加权限 子模块-->
+    <insert id="addPermission" parameterType="map">
+        insert into  admin_permission_new(model_name, model_url, model_parent ,desciption) values (#{modelName},#{modelUrl},#{modeParentId},#{desc})
+    </insert>
+    <!--添加父模块-->
+    <insert id="addParentModel" parameterType="map">
+        insert into admin_permission_module(NAME, MEMO) values (#{modelName},#{desc})
+    </insert>
+    <!--添加角色-->
+    <insert id="addRole" parameterType="map">
+        insert into admin_role(name,memo) values (#{role_name},#{role_desc})
+    </insert>
+    <!--修改权限-->
+    <update id="updatePermission" parameterType="map">
+        update admin_role set PERMISSION = #{permissions} ,NAME=#{role_name},MEMO=#{role_desc} where ID=#{role_id}
+    </update>
+    <!--修改子权限-->
+    <insert id="updateChildPermission" parameterType="map">
+        insert into admin_permission_item_new(permission_id, method_value,role_id) values (#{child_model_id},#{child_permission},#{role_id})
+    </insert>
+    <update id="updateChild" parameterType="map">
+        update  admin_permission_item_new set  method_value = #{child_permission} where id = #{id}
+    </update>
+    <select id="findchildRole" parameterType="map" resultType="map">
+        select  *  from admin_permission_item_new where permission_id = #{child_model_id}  and role_id=#{role_id}
+    </select>
+    <!--查询父菜单名字-->
+    <select id="findModelName" resultType="string">
+        select name from admin_permission_module where id = #{0}
+    </select>
+    <!--查询子菜单名字-->
+    <select id="findChildModelName" resultType="Map">
+        select apn.id,apn.model_name,apn.model_url ,apin.method_value from admin_permission_new apn
+        left join admin_permission_item_new apin on  apin.permission_id = apn.id
+        where apn.id =  #{children}
+        and apin.role_id=#{role_id}
+    </select>
+    <!--修改审核状态-->
+    <update id="updateStatus" parameterType="map">
+        update member_review set erview_status = #{is_erview} where member_account =#{memeberName} and agent_account =#{agentName} and erview_status=0
+    </update>
+    <!--添加关联-->
+    <update id="addMemberToAgent" parameterType="map">
+        update member set SOURCE_ID = (select m.id from(select id from member where ACCOUNT=#{agentName}) m ) where ACCOUNT=#{memeberName}
+    </update>
+    <update id="memberMoveAudit" parameterType="map">
+        update member set SOURCE_ID = (select m.id from(select id from member where ACCOUNT=#{moveAgent}) m) where ACCOUNT=#{memeberName} and SOURCE_ID=(select m.id from (select id from member where ACCOUNT=#{agentName}) m)
+    </update>
+    <!--修改用户资料-->
+    <update id="updateUserInfo" parameterType="map">
+        update admin_user set NAME=#{name},STATUS=#{status},ROLE_ID=#{role_id}
+        <if test="password!=null and password !=''">
+            ,PASSWORD=#{password}
+        </if>
+        where ACCOUNT=#{account}
+    </update>
+    <update id="updateChildModelInfo" parameterType="map">
+        update  admin_permission_new set model_url=#{model_url},desciption=#{desciption},model_name=#{model_name},model_parent=#{model_parent} where id =#{id}
+
+    </update>
+
+    <select id="findChildModelByParent" parameterType="int" resultType="map">
+        select * from admin_permission_new where  model_parent =#{0};
+</select>
+    <select id="selectByPlanNo" resultMap="BaseResultMap">
+        SELECT
+            M.*
+        FROM
+            member M
+        LEFT JOIN lottery_plan L ON M.ACCOUNT = L.ACCOUNT
+        WHERE
+            L.PLAN_NO = #{planNo,jdbcType=INTEGER}
+
+    </select>
+
+    <delete id="" parameterType="int">
+    delete from admin_user where id = #{0}
+    </delete>
+    <!--将会员变为渠道-->
+    <insert id="updateMemberToQD">
+        insert into  member_agent(MEMBER_ID, ACCOUNT, NAME,  CREATE_DATE_TIME, STATUS, AGENT_TYPE, IS_SET_RATE,ACTIVE_CODE,pay_pass)
+        values (#{0},#{1},#{1},#{2},1,#{3},0,#{4},'e10adc3949ba59abbe56e057f20f883e')
+    </insert>
+    <select id="findAllAgentAndQD" resultType="map">
+        SELECT
+        ma.member_id,
+        ma.ACCOUNT,
+        ma.AGENT_TYPE,
+        ifnull(m.username, "") username,
+        m.MOBILE,
+        m. NAME,
+        ifnull(ma.grouping,0) grouping,
+        ma.CREATE_DATE_TIME,
+        ifnull((SELECT username from member where id = m.SOURCE_ID),'') upName
+        FROM
+        member_agent ma
+        LEFT JOIN member m ON ma.ACCOUNT = m.ACCOUNT
+        WHERE
+        ma. STATUS = 1
+        <if test="account!=null and account != ''">
+            and ma.ACCOUNT=#{account}
+        </if>
+        ORDER BY
+        ma.CREATE_DATE_TIME DESC
+    </select>
+    <update id="addAgentToQD">
+        update member set
+        PROVIDER='QD',
+       SOURCE_ID=#{qd_id}
+    where id = #{agent_id}
+    </update>
+    <!--查询今日抽奖次数-->
+    <select id="findDrawsNums" resultType="int">
+      select draws_num from  member where  ACCOUNT = #{0}
+    </select>
+    <!--修改抽奖次数-->
+    <update id="updateDrawsNum">
+          update  member set draws_num=#{0} where  ACCOUNT = #{1}
+    </update>
+    <!--添加彩金卡-->
+    <insert id="addGoldCard" parameterType="com.qiyun.common.GoldCard2">
+      insert into member_gold_card(account, card_name, full_amount, money, create_time, deadline_time,status,require_type,send_name)
+    values (#{account},#{card_name},#{full_amount},#{money},#{create_time},#{deadline_time},#{status},#{require_type},#{send_name})
+    </insert>
+    <!--查找所有彩金卡-->
+    <select id="findGoldCard" resultType="com.qiyun.common.GoldCard2">
+        select * from member_gold_card where 1=1
+        <if test="account!= null and account!='' ">
+            and account=#{account}
+        </if>
+        <if test="startTime!='' and endTime !=''">
+            AND create_time BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and create_time &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and create_time &lt;#{endTime}
+        </if>
+        order by deadline_time
+    </select>
+    <!--添加活动-->
+    <insert id="addActivity" parameterType="map">
+        insert into member_activity(activity_name, start_time, end_time, description, content,is_switch)
+        values (#{activity_name},#{start_time},#{end_time},#{description},#{content},#{is_switch})
+    </insert>
+    <!--查找所有活动-->
+    <select id="findAllActivity" resultType="map">
+        select * from member_activity
+    </select>
+    <!--修改活动-->
+    <update id="updateActivity" parameterType="map">
+        update member_activity set activity_name=#{activity_name},start_time=#{start_time},end_time=#{end_time},description=#{description},content=#{content},is_switch=#{is_switch}
+        where id=#{activity_id}
+        </update>
+    <!--重置抽奖次数-->
+    <update id="resetDrawsNum">
+        update member set draws_num = 1
+    </update>
+    <!--彩金卡是否过期修改-->
+    <update id="updateGoldCard" parameterType="com.qiyun.common.GoldCard2">
+        update member_gold_card set status=2 where id=#{id} and status=0
+    </update>
+    <!--增加抽奖机会-->
+    <update id="incrementDrawsNum">
+        update member set draws_num=#{0} where ACCOUNT=#{1}
+    </update>
+    <!--查询人员流水-->
+    <select id="findMemberWalletLineByAccount" resultType="map">
+
+        select ifnull(mwl.PLAN_NO,0) PLAN_NO,
+        mwl.LOTTERY_TYPE,mwl.TRANS_TYPE,mwl.CREATE_DATE_TIME,mwl.ACCOUNT,
+        ifnull(m.username,"") username,ifnull(mwl.ABLE_BALANCE,0.00)
+        ABLE_BALANCE,ifnull(mwl.HEAP_BALANCE,0.00) HEAP_BALANCE,mwl.wallet_Line_No,mwl.REMARK from member_wallet_line
+        mwl left join member m on mwl.ACCOUNT = m .ACCOUNT where 1=1
+
+        <if test="allInfo.account != null ">
+            and mwl.ACCOUNT in
+            <foreach collection="allInfo.account" index="index" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="allInfo.username!=null and allInfo.username!=''">
+            and m.username = #{allInfo.username}
+        </if>
+        and mwl.TRANS_TYPE in
+        <foreach collection="listParam" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="allInfo.startTime!='' and allInfo.endTime !=''">
+            AND mwl.CREATE_DATE_TIME BETWEEN #{allInfo.startTime} and #{allInfo.endTime}
+        </if>
+        <if test="allInfo.startTime!='' and allInfo.endTime ==''">
+            and mwl.CREATE_DATE_TIME &gt;#{allInfo.startTime}
+        </if>
+        <if test="allInfo.startTime=='' and allInfo.endTime !=''">
+            and mwl.CREATE_DATE_TIME &lt;#{allInfo.endTime}
+        </if>
+        <if test="allInfo.startTime =='' and allInfo.endTime ==''">
+            and DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(mwl.CREATE_DATE_TIME)
+        </if>
+        order by mwl.CREATE_DATE_TIME DESC
+    </select>
+    <select id="findAgetInfo" resultType="com.qiyun.model2.MemberAgent2">
+        select * from member_agent where ACCOUNT = #{0} and STATUS=1
+    </select>
+    <update id="upgradeAgentToQD">
+
+        update member_agent set AGENT_TYPE=0 where ACCOUNT=#{0}
+    </update>
+    <!--客户转移修改-->
+    <update id="updateMemberSourceId">
+        update member set SOURCE_ID=#{sourceId},PROVIDER=#{provider} where id=#{memberId}
+    </update>
+    <!--查找机器人数据-->
+    <select id="findRobotConsume" resultType="com.qiyun.model2.MemberWalletLine2">
+        select mem.* from member_wallet_line mem left join member m on mem.ACCOUNT = m.ACCOUNT where m.type=2 order by  mem.CREATE_DATE_TIME
+    </select>
+    <!--查找admin-->
+    <select id="findAdminUser" parameterType="map" resultType="map">
+         select * from admin_user where  ACCOUNT = #{account}
+     </select>
+    <!--后台给登陆账户绑定渠道-->
+    <insert id="insetQDToUser">
+        insert into admin_user_qd(admin_account, member_account) values (#{0},#{1})
+    </insert>
+    <!--后台给登陆账户删除渠道-->
+    <insert id="delQDToUser">
+       delete  from admin_user_qd where  admin_account = #{0} and member_account=#{1}
+    </insert>
+    <!--通过后台账号查找渠道账号-->
+    <select id="findQDByLoginAccount" resultType="string">
+        select  member_account from admin_user_qd where  admin_account = #{0}
+    </select>
+    <update id="memberToWrite">
+        update member set tobe_write_time=#{1},IS_WHITELIST=0 where ACCOUNT=#{0}
+    </update>
+    <update id="memberToNoWrite">
+        update member set tobe_write_time=#{1},IS_WHITELIST=1 where ACCOUNT=#{0}
+    </update>
+
+    <select id="findAllMemberBy" resultType="map">
+        select m.* ,(select account from member where id = m.SOURCE_ID) agentAccount from member m where 1=1
+        <if test="account!= '' and account !=null">
+            and ACCOUNT=#{account}
+        </if>
+        <if test="mobile!= '' and mobile !=null">
+            and MOBILE=#{mobile}
+        </if>
+        <if test="username!= '' and username !=null">
+            and username=#{username}
+        </if>
+        <if test="realName!= '' and realName !=null">
+            and NAME=#{realName}
+        </if>
+        <if test="identifyId!= '' and identifyId !=null">
+            and CERT_NO=#{identifyId}
+        </if>
+        <if test="email!= '' and email !=null">
+            and email=#{email}
+        </if>
+        <if test="startTime!='' and endTime !=''">
+            AND REGISTER_DATE_TIME BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and REGISTER_DATE_TIME &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and REGISTER_DATE_TIME &lt;#{endTime}
+        </if>
+        order by REGISTER_DATE_TIME desc
+    </select>
+    <select id="findMemberByAccount" resultType="string">
+    select  account from member where  SOURCE_ID = (select id from member where ACCOUNT =#{0})
+</select>
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        select *
+         from member where username LIKE CONCAT('%',#{0},'%')
+    </select>
+    <update id="updateMemberInfoBack" parameterType="map">
+
+        update  member set
+        <if test="identifyId!=null and identifyId!=''">
+        NAME =#{realName}
+        </if>
+        <if test="identifyId!=null and identifyId!=''">
+        ,EMAIL=#{email}
+        </if>
+        <if test="identifyId!=null and identifyId!=''">
+            ,MOBILE=#{tel}
+        </if>
+        <if test="identifyId!=null and identifyId!=''">
+            ,CERT_NO=#{identifyId}
+        </if>
+      <if test="upAccount!=null and upAccount!=''">
+        ,SOURCE_ID=(select m1.id from (select id from member where ACCOUNT = #{upAccount}) m1)
+      </if>
+        where ACCOUNT =#{account}
+    </update>
+</mapper>

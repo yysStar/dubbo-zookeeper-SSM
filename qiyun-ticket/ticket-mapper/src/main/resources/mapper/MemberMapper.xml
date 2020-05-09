@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model.Member" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cert_type" property="certType" jdbcType="SMALLINT" />
+    <result column="cert_no" property="certNo" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="register_datetime" property="registerDatetime" jdbcType="TIMESTAMP" />
+    <result column="is_whitelist" property="isWhitelist" jdbcType="BIT" />
+    <result column="last_login_datetime" property="lastLoginDatetime" jdbcType="TIMESTAMP" />
+    <result column="source_id" property="sourceId" jdbcType="INTEGER" />
+    <result column="recommender" property="recommender" jdbcType="INTEGER" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="provider" property="provider" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="rank" property="rank" jdbcType="SMALLINT" />
+    <result column="exprerience" property="exprerience" jdbcType="INTEGER" />
+    <result column="card" property="card" jdbcType="INTEGER" />
+    <result column="is_mobile_authed" property="isMobileAuthed" jdbcType="BIT" />
+    <result column="is_email_authed" property="isEmailAuthed" jdbcType="BIT" />
+    <result column="error_count" property="errorCount" jdbcType="INTEGER" />
+    <result column="error_date" property="errorDate" jdbcType="TIMESTAMP" />
+    <result column="is_charge" property="isCharge" jdbcType="BIT" />
+    <result column="digest" property="digest" jdbcType="VARCHAR" />
+    <result column="pay_ways" property="payWays" jdbcType="VARCHAR" />
+    <result column="zfb_account" property="zfbAccount" jdbcType="VARCHAR" />
+    <result column="wx_account" property="wxAccount" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="PayMemberResultMap" type="com.qiyun.model.PayMember" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="source_id" property="sourceId" jdbcType="INTEGER" />
+    <result column="pay_ways" property="payWays" jdbcType="VARCHAR" />
+    <result column="agent_type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, account, name, cert_type, cert_no, password, email, mobile, status, register_datetime,
+    is_whitelist, last_login_datetime, source_id, recommender, sign, provider, picture,
+    rank, exprerience, card, is_mobile_authed, is_email_authed, error_count, error_date,
+    is_charge, digest, pay_ways, zfb_account, wx_account, username
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model.MemberQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model.MemberQuery" >
+    delete from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model.Member" useGeneratedKeys="true" keyProperty="id">
+    insert into member (id, account, name,
+    cert_type, cert_no, password,
+    email, mobile, status,
+    register_datetime, is_whitelist, last_login_datetime,
+    source_id, recommender, sign,
+    provider, picture, rank,
+    exprerience, card, is_mobile_authed,
+    is_email_authed, error_count, error_date,
+    is_charge, digest, pay_ways,
+    zfb_account, wx_account, username
+    )
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{certType,jdbcType=SMALLINT}, #{certNo,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=BIT},
+    #{registerDatetime,jdbcType=TIMESTAMP}, #{isWhitelist,jdbcType=BIT}, #{lastLoginDatetime,jdbcType=TIMESTAMP},
+    #{sourceId,jdbcType=INTEGER}, #{recommender,jdbcType=INTEGER}, #{sign,jdbcType=VARCHAR},
+    #{provider,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{rank,jdbcType=SMALLINT},
+    #{exprerience,jdbcType=INTEGER}, #{card,jdbcType=INTEGER}, #{isMobileAuthed,jdbcType=BIT},
+    #{isEmailAuthed,jdbcType=BIT}, #{errorCount,jdbcType=INTEGER}, #{errorDate,jdbcType=TIMESTAMP},
+    #{isCharge,jdbcType=BIT}, #{digest,jdbcType=VARCHAR}, #{payWays,jdbcType=VARCHAR},
+    #{zfbAccount,jdbcType=VARCHAR}, #{wxAccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model.Member" useGeneratedKeys="true" keyProperty="id" >
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="certType != null" >
+        cert_type,
+      </if>
+      <if test="certNo != null" >
+        cert_no,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="registerDatetime != null" >
+        register_datetime,
+      </if>
+      <if test="isWhitelist != null" >
+        is_whitelist,
+      </if>
+      <if test="lastLoginDatetime != null" >
+        last_login_datetime,
+      </if>
+      <if test="sourceId != null" >
+        source_id,
+      </if>
+      <if test="recommender != null" >
+        recommender,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="provider != null" >
+        provider,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="exprerience != null" >
+        exprerience,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+      <if test="isMobileAuthed != null" >
+        is_mobile_authed,
+      </if>
+      <if test="isEmailAuthed != null" >
+        is_email_authed,
+      </if>
+      <if test="errorCount != null" >
+        error_count,
+      </if>
+      <if test="errorDate != null" >
+        error_date,
+      </if>
+      <if test="isCharge != null" >
+        is_charge,
+      </if>
+      <if test="digest != null" >
+        digest,
+      </if>
+      <if test="payWays != null" >
+        pay_ways,
+      </if>
+      <if test="zfbAccount != null" >
+        zfb_account,
+      </if>
+      <if test="wxAccount != null" >
+        wx_account,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=SMALLINT},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="registerDatetime != null" >
+        #{registerDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isWhitelist != null" >
+        #{isWhitelist,jdbcType=BIT},
+      </if>
+      <if test="lastLoginDatetime != null" >
+        #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="recommender != null" >
+        #{recommender,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null" >
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=SMALLINT},
+      </if>
+      <if test="exprerience != null" >
+        #{exprerience,jdbcType=INTEGER},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=INTEGER},
+      </if>
+      <if test="isMobileAuthed != null" >
+        #{isMobileAuthed,jdbcType=BIT},
+      </if>
+      <if test="isEmailAuthed != null" >
+        #{isEmailAuthed,jdbcType=BIT},
+      </if>
+      <if test="errorCount != null" >
+        #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="errorDate != null" >
+        #{errorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCharge != null" >
+        #{isCharge,jdbcType=BIT},
+      </if>
+      <if test="digest != null" >
+        #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="payWays != null" >
+        #{payWays,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAccount != null" >
+        #{zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAccount != null" >
+        #{wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model.MemberQuery" resultType="java.lang.Integer" >
+    select count(*) from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null" >
+        cert_type = #{record.certType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.certNo != null" >
+        cert_no = #{record.certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.registerDatetime != null" >
+        register_datetime = #{record.registerDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isWhitelist != null" >
+        is_whitelist = #{record.isWhitelist,jdbcType=BIT},
+      </if>
+      <if test="record.lastLoginDatetime != null" >
+        last_login_datetime = #{record.lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sourceId != null" >
+        source_id = #{record.sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommender != null" >
+        recommender = #{record.recommender,jdbcType=INTEGER},
+      </if>
+      <if test="record.sign != null" >
+        sign = #{record.sign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provider != null" >
+        provider = #{record.provider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null" >
+        rank = #{record.rank,jdbcType=SMALLINT},
+      </if>
+      <if test="record.exprerience != null" >
+        exprerience = #{record.exprerience,jdbcType=INTEGER},
+      </if>
+      <if test="record.card != null" >
+        card = #{record.card,jdbcType=INTEGER},
+      </if>
+      <if test="record.isMobileAuthed != null" >
+        is_mobile_authed = #{record.isMobileAuthed,jdbcType=BIT},
+      </if>
+      <if test="record.isEmailAuthed != null" >
+        is_email_authed = #{record.isEmailAuthed,jdbcType=BIT},
+      </if>
+      <if test="record.errorCount != null" >
+        error_count = #{record.errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorDate != null" >
+        error_date = #{record.errorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isCharge != null" >
+        is_charge = #{record.isCharge,jdbcType=BIT},
+      </if>
+      <if test="record.digest != null" >
+        digest = #{record.digest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payWays != null" >
+        pay_ways = #{record.payWays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zfbAccount != null" >
+        zfb_account = #{record.zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxAccount != null" >
+        wx_account = #{record.wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member
+    set id = #{record.id,jdbcType=INTEGER},
+    account = #{record.account,jdbcType=VARCHAR},
+    name = #{record.name,jdbcType=VARCHAR},
+    cert_type = #{record.certType,jdbcType=SMALLINT},
+    cert_no = #{record.certNo,jdbcType=VARCHAR},
+    password = #{record.password,jdbcType=VARCHAR},
+    email = #{record.email,jdbcType=VARCHAR},
+    mobile = #{record.mobile,jdbcType=VARCHAR},
+    status = #{record.status,jdbcType=BIT},
+    register_datetime = #{record.registerDatetime,jdbcType=TIMESTAMP},
+    is_whitelist = #{record.isWhitelist,jdbcType=BIT},
+    last_login_datetime = #{record.lastLoginDatetime,jdbcType=TIMESTAMP},
+    source_id = #{record.sourceId,jdbcType=INTEGER},
+    recommender = #{record.recommender,jdbcType=INTEGER},
+    sign = #{record.sign,jdbcType=VARCHAR},
+    provider = #{record.provider,jdbcType=VARCHAR},
+    picture = #{record.picture,jdbcType=VARCHAR},
+    rank = #{record.rank,jdbcType=SMALLINT},
+    exprerience = #{record.exprerience,jdbcType=INTEGER},
+    card = #{record.card,jdbcType=INTEGER},
+    is_mobile_authed = #{record.isMobileAuthed,jdbcType=BIT},
+    is_email_authed = #{record.isEmailAuthed,jdbcType=BIT},
+    error_count = #{record.errorCount,jdbcType=INTEGER},
+    error_date = #{record.errorDate,jdbcType=TIMESTAMP},
+    is_charge = #{record.isCharge,jdbcType=BIT},
+    digest = #{record.digest,jdbcType=VARCHAR},
+    pay_ways = #{record.payWays,jdbcType=VARCHAR},
+    zfb_account = #{record.zfbAccount,jdbcType=VARCHAR},
+    wx_account = #{record.wxAccount,jdbcType=VARCHAR},
+    username = #{record.username,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model.Member" >
+    update member
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        cert_type = #{certType,jdbcType=SMALLINT},
+      </if>
+      <if test="certNo != null" >
+        cert_no = #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="registerDatetime != null" >
+        register_datetime = #{registerDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isWhitelist != null" >
+        is_whitelist = #{isWhitelist,jdbcType=BIT},
+      </if>
+      <if test="lastLoginDatetime != null" >
+        last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceId != null" >
+        source_id = #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="recommender != null" >
+        recommender = #{recommender,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null" >
+        provider = #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=SMALLINT},
+      </if>
+      <if test="exprerience != null" >
+        exprerience = #{exprerience,jdbcType=INTEGER},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=INTEGER},
+      </if>
+      <if test="isMobileAuthed != null" >
+        is_mobile_authed = #{isMobileAuthed,jdbcType=BIT},
+      </if>
+      <if test="isEmailAuthed != null" >
+        is_email_authed = #{isEmailAuthed,jdbcType=BIT},
+      </if>
+      <if test="errorCount != null" >
+        error_count = #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="errorDate != null" >
+        error_date = #{errorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCharge != null" >
+        is_charge = #{isCharge,jdbcType=BIT},
+      </if>
+      <if test="digest != null" >
+        digest = #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="payWays != null" >
+        pay_ways = #{payWays,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAccount != null" >
+        zfb_account = #{zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAccount != null" >
+        wx_account = #{wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model.Member" >
+    update member
+    set account = #{account,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    cert_type = #{certType,jdbcType=SMALLINT},
+    cert_no = #{certNo,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+    email = #{email,jdbcType=VARCHAR},
+    mobile = #{mobile,jdbcType=VARCHAR},
+    status = #{status,jdbcType=BIT},
+    register_datetime = #{registerDatetime,jdbcType=TIMESTAMP},
+    is_whitelist = #{isWhitelist,jdbcType=BIT},
+    last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+    source_id = #{sourceId,jdbcType=INTEGER},
+    recommender = #{recommender,jdbcType=INTEGER},
+    sign = #{sign,jdbcType=VARCHAR},
+    provider = #{provider,jdbcType=VARCHAR},
+    picture = #{picture,jdbcType=VARCHAR},
+    rank = #{rank,jdbcType=SMALLINT},
+    exprerience = #{exprerience,jdbcType=INTEGER},
+    card = #{card,jdbcType=INTEGER},
+    is_mobile_authed = #{isMobileAuthed,jdbcType=BIT},
+    is_email_authed = #{isEmailAuthed,jdbcType=BIT},
+    error_count = #{errorCount,jdbcType=INTEGER},
+    error_date = #{errorDate,jdbcType=TIMESTAMP},
+    is_charge = #{isCharge,jdbcType=BIT},
+    digest = #{digest,jdbcType=VARCHAR},
+    pay_ways = #{payWays,jdbcType=VARCHAR},
+    zfb_account = #{zfbAccount,jdbcType=VARCHAR},
+    wx_account = #{wxAccount,jdbcType=VARCHAR},
+    username = #{username,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByMobileOrAccount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where mobile = #{mobile,jdbcType=VARCHAR} or account = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByAccount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getMemberByAccountOrMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where mobile = #{mobile,jdbcType=VARCHAR} or account = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="getPayMember" resultMap="PayMemberResultMap">
+    select
+    m.id,m.pay_ways,m.account,m.name,m.source_id,ma.agent_type
+    from member m,member_agent ma
+    where m.id = ma.member_id and ma.status=1
+  </select>
+</mapper>

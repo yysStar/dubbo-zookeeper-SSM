@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.FootballTeam2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.FootballTeam2" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="STANDARD_NAME" property="standardName" jdbcType="VARCHAR" />
+    <result column="dc" property="dc" jdbcType="VARCHAR" />
+    <result column="jc" property="jc" jdbcType="VARCHAR" />
+    <result column="fb" property="fb" jdbcType="VARCHAR" />
+    <result column="dyj" property="dyj" jdbcType="VARCHAR" />
+    <result column="PM" property="pm" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, STANDARD_NAME, dc, jc, fb, dyj, PM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.FootballTeam2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from football_team
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from football_team
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from football_team
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.FootballTeam2" >
+    insert into football_team (Id, STANDARD_NAME, dc, 
+      jc, fb, dyj, PM
+      )
+    values (#{id,jdbcType=INTEGER}, #{standardName,jdbcType=VARCHAR}, #{dc,jdbcType=VARCHAR}, 
+      #{jc,jdbcType=VARCHAR}, #{fb,jdbcType=VARCHAR}, #{dyj,jdbcType=VARCHAR}, #{pm,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.FootballTeam2" >
+    insert into football_team
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="standardName != null" >
+        STANDARD_NAME,
+      </if>
+      <if test="dc != null" >
+        dc,
+      </if>
+      <if test="jc != null" >
+        jc,
+      </if>
+      <if test="fb != null" >
+        fb,
+      </if>
+      <if test="dyj != null" >
+        dyj,
+      </if>
+      <if test="pm != null" >
+        PM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="standardName != null" >
+        #{standardName,jdbcType=VARCHAR},
+      </if>
+      <if test="dc != null" >
+        #{dc,jdbcType=VARCHAR},
+      </if>
+      <if test="jc != null" >
+        #{jc,jdbcType=VARCHAR},
+      </if>
+      <if test="fb != null" >
+        #{fb,jdbcType=VARCHAR},
+      </if>
+      <if test="dyj != null" >
+        #{dyj,jdbcType=VARCHAR},
+      </if>
+      <if test="pm != null" >
+        #{pm,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.FootballTeam2" >
+    update football_team
+    <set >
+      <if test="standardName != null" >
+        STANDARD_NAME = #{standardName,jdbcType=VARCHAR},
+      </if>
+      <if test="dc != null" >
+        dc = #{dc,jdbcType=VARCHAR},
+      </if>
+      <if test="jc != null" >
+        jc = #{jc,jdbcType=VARCHAR},
+      </if>
+      <if test="fb != null" >
+        fb = #{fb,jdbcType=VARCHAR},
+      </if>
+      <if test="dyj != null" >
+        dyj = #{dyj,jdbcType=VARCHAR},
+      </if>
+      <if test="pm != null" >
+        PM = #{pm,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.FootballTeam2" >
+    update football_team
+    set STANDARD_NAME = #{standardName,jdbcType=VARCHAR},
+      dc = #{dc,jdbcType=VARCHAR},
+      jc = #{jc,jdbcType=VARCHAR},
+      fb = #{fb,jdbcType=VARCHAR},
+      dyj = #{dyj,jdbcType=VARCHAR},
+      PM = #{pm,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="footballTeam" type="com.qiyun.model.FootballTeam" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="STANDARD_NAME" property="standardName" jdbcType="VARCHAR" />
+    <result column="dc" property="dc" jdbcType="VARCHAR" />
+    <result column="jc" property="jc" jdbcType="VARCHAR" />
+    <result column="fb" property="fb" jdbcType="VARCHAR" />
+    <result column="dyj" property="dyj" jdbcType="VARCHAR" />
+    <result column="PM" property="pm" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="findByStandardName" resultMap="footballTeam">
+    select
+      *
+    from football_team
+    where STANDARD_NAME = #{standardName,jdbcType=VARCHAR}
+  </select>
+</mapper>

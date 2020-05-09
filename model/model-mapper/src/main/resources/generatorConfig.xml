@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="D:\Develop\Maven\repository\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar"/>
+            <!--location="C:\Users\qiyun\.m2\repository\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar"/>-->
+
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                        <!--connectionURL="jdbc:mysql://47.96.179.183:3306/qiyun88?characterEncoding=utf-8"-->
+                        <!--userId="root"-->
+                        <!--password="@123456"/>-->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.97.192.124:3306/qiyun2018?characterEncoding=utf-8"
+                        userId="qiyunServer"
+                        password="MCJ[3Xv^OZbQf#qo!"/>
+
+        <!-- !!!! Model Configurations !!!! -->
+        <javaModelGenerator targetPackage="com.qiyun.model2"
+                            targetProject="D:\qiyun88\qiyun88_service\qiyun-information\information-model\src\main\java">
+                            <!--targetProject="D:\备份\qiyun\qiyun-information\information-model\src\main\java">-->
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- !!!! Mapper XML Configurations !!!! -->
+        <sqlMapGenerator targetPackage="mapper2"
+                         targetProject="D:\qiyun88\qiyun88_service\qiyun-information\information-mapper\src\main\resources" >
+                         <!--targetProject="D:\备份\qiyun\qiyun-information\information-mapper\src\main\resources" >-->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- !!!! Mapper Interface Configurations !!!! -->
+        <!-- 使用MyBatis3Simple运行时，type只能为“ANNOTATEDMAPPER”或者“XMLMAPPER” -->
+        <!-- 这里采用注解配置，而非XML配置 -->
+        <javaClientGenerator targetPackage="com.qiyun.mapper2"
+                             targetProject="D:\qiyun88\qiyun88_service\qiyun-information\information-mapper\src\main\java"
+                             type="XMLMAPPER">
+                             <!--targetProject="D:\备份\qiyun\qiyun-information\information-mapper\src\main\java"-->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>-->
+
+        <!--<table tableName="lottery_type" domainObjectName="LotteryType2"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="ticket_business" domainObjectName="TicketBusiness2"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+
+        <!--<table tableName="member_reward_mapping" domainObjectName="MemberRewardMapping"-->
+
+        <!--<table tableName="member_task_begin" domainObjectName="MemberTaskBegin"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+        <table tableName="win_promotion_comment" domainObjectName="WinPromotionComment"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="true"
+               selectByExampleQueryId="false">
+            <!--<columnRenamingRule searchString="^D_"
+                                replaceString=""/>-->
+        </table>
+
+        <!--<table tableName="member_master_mapping" domainObjectName="MemberMasterMapping"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="sporttery_football_match" domainObjectName="SportteryFootballMatch"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="sporttery_football_spfaward" domainObjectName="SportteryFootballSpfaward"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="sporttery_football_rqspfaward" domainObjectName="SportteryFootballRqspfaward"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+    </context>
+</generatorConfiguration>

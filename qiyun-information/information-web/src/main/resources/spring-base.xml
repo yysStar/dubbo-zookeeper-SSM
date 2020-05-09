@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+         http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-4.1.xsd">
+
+    <!-- 开启aspectj自动注解 -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <context:component-scan base-package="com.qiyun" />
+    <context:annotation-config />
+
+    <!-- 配置文件加载 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1" />
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:config/jdbc.properties</value>
+                <!-- 生产者 -->
+                <value>classpath:config/dubbo-producer.properties</value>
+                <!--<value>classpath:config/log4j.properties</value>-->
+            </list>
+        </property>
+    </bean>
+
+    <import resource="classpath:spring-mybatis.xml" />
+    <!-- 提供者 -->
+    <import resource="classpath:dubbo-provider.xml" />
+
+    <!-- 定时任务 -->
+    <!--<task:annotation-driven/>-->
+    <task:annotation-driven scheduler="myScheduler"/>
+    <task:scheduler id="myScheduler" pool-size="400"/>
+</beans>

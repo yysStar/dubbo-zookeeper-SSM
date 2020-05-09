@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SportteryBasketMatch2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.SportteryBasketMatch2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="gameName" property="gamename" jdbcType="VARCHAR" />
+    <result column="gameColor" property="gamecolor" jdbcType="VARCHAR" />
+    <result column="matchTime" property="matchtime" jdbcType="TIMESTAMP" />
+    <result column="intTime" property="inttime" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="showNum" property="shownum" jdbcType="INTEGER" />
+    <result column="homeName" property="homename" jdbcType="VARCHAR" />
+    <result column="HOME_SHORT_NAME" property="homeShortName" jdbcType="VARCHAR" />
+    <result column="guestName" property="guestname" jdbcType="VARCHAR" />
+    <result column="GUEST_SHORT_NAME" property="guestShortName" jdbcType="VARCHAR" />
+    <result column="lineId" property="lineid" jdbcType="INTEGER" />
+    <result column="fristSection" property="fristsection" jdbcType="VARCHAR" />
+    <result column="SecondSection" property="secondsection" jdbcType="VARCHAR" />
+    <result column="thirdSection" property="thirdsection" jdbcType="VARCHAR" />
+    <result column="fourthSection" property="fourthsection" jdbcType="VARCHAR" />
+    <result column="resultOfSF" property="resultofsf" jdbcType="DOUBLE" />
+    <result column="resultOfSFC" property="resultofsfc" jdbcType="DOUBLE" />
+    <result column="resultOfDXF" property="resultofdxf" jdbcType="DOUBLE" />
+    <result column="resultOfRFSF" property="resultofrfsf" jdbcType="DOUBLE" />
+    <result column="handicap" property="handicap" jdbcType="DOUBLE" />
+    <result column="baseBigOrSmall" property="basebigorsmall" jdbcType="DOUBLE" />
+    <result column="single_handicap" property="singleHandicap" jdbcType="DOUBLE" />
+    <result column="single_baseBigOrSmall" property="singleBasebigorsmall" jdbcType="DOUBLE" />
+    <result column="homeScore" property="homescore" jdbcType="INTEGER" />
+    <result column="guestScore" property="guestscore" jdbcType="INTEGER" />
+    <result column="outId" property="outid" jdbcType="VARCHAR" />
+    <result column="DXF_Q2_SCENE" property="dxfQ2Scene" jdbcType="INTEGER" />
+    <result column="ANALYSIS_ID" property="analysisId" jdbcType="VARCHAR" />
+    <result column="has_Delay" property="hasDelay" jdbcType="INTEGER" />
+    <result column="SF_SHOWNUM" property="sfShownum" jdbcType="INTEGER" />
+    <result column="RFSF_SHOWNUM" property="rfsfShownum" jdbcType="INTEGER" />
+    <result column="DXF_SHOWNUM" property="dxfShownum" jdbcType="INTEGER" />
+    <result column="SFC_SHOWNUM" property="sfcShownum" jdbcType="INTEGER" />
+    <result column="GAME_ID" property="gameId" jdbcType="INTEGER" />
+    <result column="GAME_SHORT_NAME" property="gameShortName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, version, gameName, gameColor, matchTime, intTime, status, showNum, homeName, 
+    HOME_SHORT_NAME, guestName, GUEST_SHORT_NAME, lineId, fristSection, SecondSection, 
+    thirdSection, fourthSection, resultOfSF, resultOfSFC, resultOfDXF, resultOfRFSF, 
+    handicap, baseBigOrSmall, single_handicap, single_baseBigOrSmall, homeScore, guestScore, 
+    outId, DXF_Q2_SCENE, ANALYSIS_ID, has_Delay, SF_SHOWNUM, RFSF_SHOWNUM, DXF_SHOWNUM, 
+    SFC_SHOWNUM, GAME_ID, GAME_SHORT_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.SportteryBasketMatch2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sporttery_basket_match
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sporttery_basket_match
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sporttery_basket_match
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.SportteryBasketMatch2Query" >
+    delete from sporttery_basket_match
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.SportteryBasketMatch2" >
+    insert into sporttery_basket_match (id, version, gameName, 
+      gameColor, matchTime, intTime, 
+      status, showNum, homeName, 
+      HOME_SHORT_NAME, guestName, GUEST_SHORT_NAME, 
+      lineId, fristSection, SecondSection, 
+      thirdSection, fourthSection, resultOfSF, 
+      resultOfSFC, resultOfDXF, resultOfRFSF, 
+      handicap, baseBigOrSmall, single_handicap, 
+      single_baseBigOrSmall, homeScore, guestScore, 
+      outId, DXF_Q2_SCENE, ANALYSIS_ID, 
+      has_Delay, SF_SHOWNUM, RFSF_SHOWNUM, 
+      DXF_SHOWNUM, SFC_SHOWNUM, GAME_ID, 
+      GAME_SHORT_NAME)
+    values (#{id,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{gamename,jdbcType=VARCHAR}, 
+      #{gamecolor,jdbcType=VARCHAR}, #{matchtime,jdbcType=TIMESTAMP}, #{inttime,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{shownum,jdbcType=INTEGER}, #{homename,jdbcType=VARCHAR}, 
+      #{homeShortName,jdbcType=VARCHAR}, #{guestname,jdbcType=VARCHAR}, #{guestShortName,jdbcType=VARCHAR}, 
+      #{lineid,jdbcType=INTEGER}, #{fristsection,jdbcType=VARCHAR}, #{secondsection,jdbcType=VARCHAR}, 
+      #{thirdsection,jdbcType=VARCHAR}, #{fourthsection,jdbcType=VARCHAR}, #{resultofsf,jdbcType=DOUBLE}, 
+      #{resultofsfc,jdbcType=DOUBLE}, #{resultofdxf,jdbcType=DOUBLE}, #{resultofrfsf,jdbcType=DOUBLE}, 
+      #{handicap,jdbcType=DOUBLE}, #{basebigorsmall,jdbcType=DOUBLE}, #{singleHandicap,jdbcType=DOUBLE}, 
+      #{singleBasebigorsmall,jdbcType=DOUBLE}, #{homescore,jdbcType=INTEGER}, #{guestscore,jdbcType=INTEGER}, 
+      #{outid,jdbcType=VARCHAR}, #{dxfQ2Scene,jdbcType=INTEGER}, #{analysisId,jdbcType=VARCHAR}, 
+      #{hasDelay,jdbcType=INTEGER}, #{sfShownum,jdbcType=INTEGER}, #{rfsfShownum,jdbcType=INTEGER}, 
+      #{dxfShownum,jdbcType=INTEGER}, #{sfcShownum,jdbcType=INTEGER}, #{gameId,jdbcType=INTEGER}, 
+      #{gameShortName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.SportteryBasketMatch2" >
+    insert into sporttery_basket_match
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="gamename != null" >
+        gameName,
+      </if>
+      <if test="gamecolor != null" >
+        gameColor,
+      </if>
+      <if test="matchtime != null" >
+        matchTime,
+      </if>
+      <if test="inttime != null" >
+        intTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="shownum != null" >
+        showNum,
+      </if>
+      <if test="homename != null" >
+        homeName,
+      </if>
+      <if test="homeShortName != null" >
+        HOME_SHORT_NAME,
+      </if>
+      <if test="guestname != null" >
+        guestName,
+      </if>
+      <if test="guestShortName != null" >
+        GUEST_SHORT_NAME,
+      </if>
+      <if test="lineid != null" >
+        lineId,
+      </if>
+      <if test="fristsection != null" >
+        fristSection,
+      </if>
+      <if test="secondsection != null" >
+        SecondSection,
+      </if>
+      <if test="thirdsection != null" >
+        thirdSection,
+      </if>
+      <if test="fourthsection != null" >
+        fourthSection,
+      </if>
+      <if test="resultofsf != null" >
+        resultOfSF,
+      </if>
+      <if test="resultofsfc != null" >
+        resultOfSFC,
+      </if>
+      <if test="resultofdxf != null" >
+        resultOfDXF,
+      </if>
+      <if test="resultofrfsf != null" >
+        resultOfRFSF,
+      </if>
+      <if test="handicap != null" >
+        handicap,
+      </if>
+      <if test="basebigorsmall != null" >
+        baseBigOrSmall,
+      </if>
+      <if test="singleHandicap != null" >
+        single_handicap,
+      </if>
+      <if test="singleBasebigorsmall != null" >
+        single_baseBigOrSmall,
+      </if>
+      <if test="homescore != null" >
+        homeScore,
+      </if>
+      <if test="guestscore != null" >
+        guestScore,
+      </if>
+      <if test="outid != null" >
+        outId,
+      </if>
+      <if test="dxfQ2Scene != null" >
+        DXF_Q2_SCENE,
+      </if>
+      <if test="analysisId != null" >
+        ANALYSIS_ID,
+      </if>
+      <if test="hasDelay != null" >
+        has_Delay,
+      </if>
+      <if test="sfShownum != null" >
+        SF_SHOWNUM,
+      </if>
+      <if test="rfsfShownum != null" >
+        RFSF_SHOWNUM,
+      </if>
+      <if test="dxfShownum != null" >
+        DXF_SHOWNUM,
+      </if>
+      <if test="sfcShownum != null" >
+        SFC_SHOWNUM,
+      </if>
+      <if test="gameId != null" >
+        GAME_ID,
+      </if>
+      <if test="gameShortName != null" >
+        GAME_SHORT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="gamename != null" >
+        #{gamename,jdbcType=VARCHAR},
+      </if>
+      <if test="gamecolor != null" >
+        #{gamecolor,jdbcType=VARCHAR},
+      </if>
+      <if test="matchtime != null" >
+        #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inttime != null" >
+        #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="shownum != null" >
+        #{shownum,jdbcType=INTEGER},
+      </if>
+      <if test="homename != null" >
+        #{homename,jdbcType=VARCHAR},
+      </if>
+      <if test="homeShortName != null" >
+        #{homeShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="guestname != null" >
+        #{guestname,jdbcType=VARCHAR},
+      </if>
+      <if test="guestShortName != null" >
+        #{guestShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="lineid != null" >
+        #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="fristsection != null" >
+        #{fristsection,jdbcType=VARCHAR},
+      </if>
+      <if test="secondsection != null" >
+        #{secondsection,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdsection != null" >
+        #{thirdsection,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthsection != null" >
+        #{fourthsection,jdbcType=VARCHAR},
+      </if>
+      <if test="resultofsf != null" >
+        #{resultofsf,jdbcType=DOUBLE},
+      </if>
+      <if test="resultofsfc != null" >
+        #{resultofsfc,jdbcType=DOUBLE},
+      </if>
+      <if test="resultofdxf != null" >
+        #{resultofdxf,jdbcType=DOUBLE},
+      </if>
+      <if test="resultofrfsf != null" >
+        #{resultofrfsf,jdbcType=DOUBLE},
+      </if>
+      <if test="handicap != null" >
+        #{handicap,jdbcType=DOUBLE},
+      </if>
+      <if test="basebigorsmall != null" >
+        #{basebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="singleHandicap != null" >
+        #{singleHandicap,jdbcType=DOUBLE},
+      </if>
+      <if test="singleBasebigorsmall != null" >
+        #{singleBasebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="homescore != null" >
+        #{homescore,jdbcType=INTEGER},
+      </if>
+      <if test="guestscore != null" >
+        #{guestscore,jdbcType=INTEGER},
+      </if>
+      <if test="outid != null" >
+        #{outid,jdbcType=VARCHAR},
+      </if>
+      <if test="dxfQ2Scene != null" >
+        #{dxfQ2Scene,jdbcType=INTEGER},
+      </if>
+      <if test="analysisId != null" >
+        #{analysisId,jdbcType=VARCHAR},
+      </if>
+      <if test="hasDelay != null" >
+        #{hasDelay,jdbcType=INTEGER},
+      </if>
+      <if test="sfShownum != null" >
+        #{sfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="rfsfShownum != null" >
+        #{rfsfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="dxfShownum != null" >
+        #{dxfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="sfcShownum != null" >
+        #{sfcShownum,jdbcType=INTEGER},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=INTEGER},
+      </if>
+      <if test="gameShortName != null" >
+        #{gameShortName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.SportteryBasketMatch2Query" resultType="java.lang.Integer" >
+    select count(*) from sporttery_basket_match
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sporttery_basket_match
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.gamename != null" >
+        gameName = #{record.gamename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gamecolor != null" >
+        gameColor = #{record.gamecolor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchtime != null" >
+        matchTime = #{record.matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inttime != null" >
+        intTime = #{record.inttime,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.shownum != null" >
+        showNum = #{record.shownum,jdbcType=INTEGER},
+      </if>
+      <if test="record.homename != null" >
+        homeName = #{record.homename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeShortName != null" >
+        HOME_SHORT_NAME = #{record.homeShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guestname != null" >
+        guestName = #{record.guestname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guestShortName != null" >
+        GUEST_SHORT_NAME = #{record.guestShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineid != null" >
+        lineId = #{record.lineid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fristsection != null" >
+        fristSection = #{record.fristsection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondsection != null" >
+        SecondSection = #{record.secondsection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdsection != null" >
+        thirdSection = #{record.thirdsection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourthsection != null" >
+        fourthSection = #{record.fourthsection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultofsf != null" >
+        resultOfSF = #{record.resultofsf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.resultofsfc != null" >
+        resultOfSFC = #{record.resultofsfc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.resultofdxf != null" >
+        resultOfDXF = #{record.resultofdxf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.resultofrfsf != null" >
+        resultOfRFSF = #{record.resultofrfsf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.handicap != null" >
+        handicap = #{record.handicap,jdbcType=DOUBLE},
+      </if>
+      <if test="record.basebigorsmall != null" >
+        baseBigOrSmall = #{record.basebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.singleHandicap != null" >
+        single_handicap = #{record.singleHandicap,jdbcType=DOUBLE},
+      </if>
+      <if test="record.singleBasebigorsmall != null" >
+        single_baseBigOrSmall = #{record.singleBasebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.homescore != null" >
+        homeScore = #{record.homescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.guestscore != null" >
+        guestScore = #{record.guestscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.outid != null" >
+        outId = #{record.outid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dxfQ2Scene != null" >
+        DXF_Q2_SCENE = #{record.dxfQ2Scene,jdbcType=INTEGER},
+      </if>
+      <if test="record.analysisId != null" >
+        ANALYSIS_ID = #{record.analysisId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasDelay != null" >
+        has_Delay = #{record.hasDelay,jdbcType=INTEGER},
+      </if>
+      <if test="record.sfShownum != null" >
+        SF_SHOWNUM = #{record.sfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="record.rfsfShownum != null" >
+        RFSF_SHOWNUM = #{record.rfsfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dxfShownum != null" >
+        DXF_SHOWNUM = #{record.dxfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="record.sfcShownum != null" >
+        SFC_SHOWNUM = #{record.sfcShownum,jdbcType=INTEGER},
+      </if>
+      <if test="record.gameId != null" >
+        GAME_ID = #{record.gameId,jdbcType=INTEGER},
+      </if>
+      <if test="record.gameShortName != null" >
+        GAME_SHORT_NAME = #{record.gameShortName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sporttery_basket_match
+    set id = #{record.id,jdbcType=INTEGER},
+      version = #{record.version,jdbcType=INTEGER},
+      gameName = #{record.gamename,jdbcType=VARCHAR},
+      gameColor = #{record.gamecolor,jdbcType=VARCHAR},
+      matchTime = #{record.matchtime,jdbcType=TIMESTAMP},
+      intTime = #{record.inttime,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      showNum = #{record.shownum,jdbcType=INTEGER},
+      homeName = #{record.homename,jdbcType=VARCHAR},
+      HOME_SHORT_NAME = #{record.homeShortName,jdbcType=VARCHAR},
+      guestName = #{record.guestname,jdbcType=VARCHAR},
+      GUEST_SHORT_NAME = #{record.guestShortName,jdbcType=VARCHAR},
+      lineId = #{record.lineid,jdbcType=INTEGER},
+      fristSection = #{record.fristsection,jdbcType=VARCHAR},
+      SecondSection = #{record.secondsection,jdbcType=VARCHAR},
+      thirdSection = #{record.thirdsection,jdbcType=VARCHAR},
+      fourthSection = #{record.fourthsection,jdbcType=VARCHAR},
+      resultOfSF = #{record.resultofsf,jdbcType=DOUBLE},
+      resultOfSFC = #{record.resultofsfc,jdbcType=DOUBLE},
+      resultOfDXF = #{record.resultofdxf,jdbcType=DOUBLE},
+      resultOfRFSF = #{record.resultofrfsf,jdbcType=DOUBLE},
+      handicap = #{record.handicap,jdbcType=DOUBLE},
+      baseBigOrSmall = #{record.basebigorsmall,jdbcType=DOUBLE},
+      single_handicap = #{record.singleHandicap,jdbcType=DOUBLE},
+      single_baseBigOrSmall = #{record.singleBasebigorsmall,jdbcType=DOUBLE},
+      homeScore = #{record.homescore,jdbcType=INTEGER},
+      guestScore = #{record.guestscore,jdbcType=INTEGER},
+      outId = #{record.outid,jdbcType=VARCHAR},
+      DXF_Q2_SCENE = #{record.dxfQ2Scene,jdbcType=INTEGER},
+      ANALYSIS_ID = #{record.analysisId,jdbcType=VARCHAR},
+      has_Delay = #{record.hasDelay,jdbcType=INTEGER},
+      SF_SHOWNUM = #{record.sfShownum,jdbcType=INTEGER},
+      RFSF_SHOWNUM = #{record.rfsfShownum,jdbcType=INTEGER},
+      DXF_SHOWNUM = #{record.dxfShownum,jdbcType=INTEGER},
+      SFC_SHOWNUM = #{record.sfcShownum,jdbcType=INTEGER},
+      GAME_ID = #{record.gameId,jdbcType=INTEGER},
+      GAME_SHORT_NAME = #{record.gameShortName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SportteryBasketMatch2" >
+    update sporttery_basket_match
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="gamename != null" >
+        gameName = #{gamename,jdbcType=VARCHAR},
+      </if>
+      <if test="gamecolor != null" >
+        gameColor = #{gamecolor,jdbcType=VARCHAR},
+      </if>
+      <if test="matchtime != null" >
+        matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inttime != null" >
+        intTime = #{inttime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="shownum != null" >
+        showNum = #{shownum,jdbcType=INTEGER},
+      </if>
+      <if test="homename != null" >
+        homeName = #{homename,jdbcType=VARCHAR},
+      </if>
+      <if test="homeShortName != null" >
+        HOME_SHORT_NAME = #{homeShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="guestname != null" >
+        guestName = #{guestname,jdbcType=VARCHAR},
+      </if>
+      <if test="guestShortName != null" >
+        GUEST_SHORT_NAME = #{guestShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="lineid != null" >
+        lineId = #{lineid,jdbcType=INTEGER},
+      </if>
+      <if test="fristsection != null" >
+        fristSection = #{fristsection,jdbcType=VARCHAR},
+      </if>
+      <if test="secondsection != null" >
+        SecondSection = #{secondsection,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdsection != null" >
+        thirdSection = #{thirdsection,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthsection != null" >
+        fourthSection = #{fourthsection,jdbcType=VARCHAR},
+      </if>
+      <if test="resultofsf != null" >
+        resultOfSF = #{resultofsf,jdbcType=DOUBLE},
+      </if>
+      <if test="resultofsfc != null" >
+        resultOfSFC = #{resultofsfc,jdbcType=DOUBLE},
+      </if>
+      <if test="resultofdxf != null" >
+        resultOfDXF = #{resultofdxf,jdbcType=DOUBLE},
+      </if>
+      <if test="resultofrfsf != null" >
+        resultOfRFSF = #{resultofrfsf,jdbcType=DOUBLE},
+      </if>
+      <if test="handicap != null" >
+        handicap = #{handicap,jdbcType=DOUBLE},
+      </if>
+      <if test="basebigorsmall != null" >
+        baseBigOrSmall = #{basebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="singleHandicap != null" >
+        single_handicap = #{singleHandicap,jdbcType=DOUBLE},
+      </if>
+      <if test="singleBasebigorsmall != null" >
+        single_baseBigOrSmall = #{singleBasebigorsmall,jdbcType=DOUBLE},
+      </if>
+      <if test="homescore != null" >
+        homeScore = #{homescore,jdbcType=INTEGER},
+      </if>
+      <if test="guestscore != null" >
+        guestScore = #{guestscore,jdbcType=INTEGER},
+      </if>
+      <if test="outid != null" >
+        outId = #{outid,jdbcType=VARCHAR},
+      </if>
+      <if test="dxfQ2Scene != null" >
+        DXF_Q2_SCENE = #{dxfQ2Scene,jdbcType=INTEGER},
+      </if>
+      <if test="analysisId != null" >
+        ANALYSIS_ID = #{analysisId,jdbcType=VARCHAR},
+      </if>
+      <if test="hasDelay != null" >
+        has_Delay = #{hasDelay,jdbcType=INTEGER},
+      </if>
+      <if test="sfShownum != null" >
+        SF_SHOWNUM = #{sfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="rfsfShownum != null" >
+        RFSF_SHOWNUM = #{rfsfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="dxfShownum != null" >
+        DXF_SHOWNUM = #{dxfShownum,jdbcType=INTEGER},
+      </if>
+      <if test="sfcShownum != null" >
+        SFC_SHOWNUM = #{sfcShownum,jdbcType=INTEGER},
+      </if>
+      <if test="gameId != null" >
+        GAME_ID = #{gameId,jdbcType=INTEGER},
+      </if>
+      <if test="gameShortName != null" >
+        GAME_SHORT_NAME = #{gameShortName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SportteryBasketMatch2" >
+    update sporttery_basket_match
+    set version = #{version,jdbcType=INTEGER},
+      gameName = #{gamename,jdbcType=VARCHAR},
+      gameColor = #{gamecolor,jdbcType=VARCHAR},
+      matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      intTime = #{inttime,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      showNum = #{shownum,jdbcType=INTEGER},
+      homeName = #{homename,jdbcType=VARCHAR},
+      HOME_SHORT_NAME = #{homeShortName,jdbcType=VARCHAR},
+      guestName = #{guestname,jdbcType=VARCHAR},
+      GUEST_SHORT_NAME = #{guestShortName,jdbcType=VARCHAR},
+      lineId = #{lineid,jdbcType=INTEGER},
+      fristSection = #{fristsection,jdbcType=VARCHAR},
+      SecondSection = #{secondsection,jdbcType=VARCHAR},
+      thirdSection = #{thirdsection,jdbcType=VARCHAR},
+      fourthSection = #{fourthsection,jdbcType=VARCHAR},
+      resultOfSF = #{resultofsf,jdbcType=DOUBLE},
+      resultOfSFC = #{resultofsfc,jdbcType=DOUBLE},
+      resultOfDXF = #{resultofdxf,jdbcType=DOUBLE},
+      resultOfRFSF = #{resultofrfsf,jdbcType=DOUBLE},
+      handicap = #{handicap,jdbcType=DOUBLE},
+      baseBigOrSmall = #{basebigorsmall,jdbcType=DOUBLE},
+      single_handicap = #{singleHandicap,jdbcType=DOUBLE},
+      single_baseBigOrSmall = #{singleBasebigorsmall,jdbcType=DOUBLE},
+      homeScore = #{homescore,jdbcType=INTEGER},
+      guestScore = #{guestscore,jdbcType=INTEGER},
+      outId = #{outid,jdbcType=VARCHAR},
+      DXF_Q2_SCENE = #{dxfQ2Scene,jdbcType=INTEGER},
+      ANALYSIS_ID = #{analysisId,jdbcType=VARCHAR},
+      has_Delay = #{hasDelay,jdbcType=INTEGER},
+      SF_SHOWNUM = #{sfShownum,jdbcType=INTEGER},
+      RFSF_SHOWNUM = #{rfsfShownum,jdbcType=INTEGER},
+      DXF_SHOWNUM = #{dxfShownum,jdbcType=INTEGER},
+      SFC_SHOWNUM = #{sfcShownum,jdbcType=INTEGER},
+      GAME_ID = #{gameId,jdbcType=INTEGER},
+      GAME_SHORT_NAME = #{gameShortName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getSporttery" resultType="com.qiyun.model2.SportteryBasketMatch2">
+   SELECT  *  from sporttery_basket_match sbm where sbm.lineId = {0} and sbm.intTime = {1};
+</select>
+</mapper>

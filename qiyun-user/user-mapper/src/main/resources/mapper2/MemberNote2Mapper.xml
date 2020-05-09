@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.MemberNote2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.MemberNote2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="memeber_tel" property="memeberTel" jdbcType="VARCHAR" />
+    <result column="member_zxb" property="memberZxb" jdbcType="VARCHAR" />
+    <result column="member_wx" property="memberWx" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="is_key" property="isKey" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, member_id, memeber_tel, member_zxb, member_wx, note, is_key
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.MemberNote2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_note
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_note
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.MemberNote2Query" >
+    delete from member_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.MemberNote2" >
+    insert into member_note (id, member_id, memeber_tel, 
+      member_zxb, member_wx, note, 
+      is_key)
+    values (#{id,jdbcType=INTEGER}, #{memberId,jdbcType=VARCHAR}, #{memeberTel,jdbcType=VARCHAR}, 
+      #{memberZxb,jdbcType=VARCHAR}, #{memberWx,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{isKey,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.MemberNote2" >
+    insert into member_note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="memeberTel != null" >
+        memeber_tel,
+      </if>
+      <if test="memberZxb != null" >
+        member_zxb,
+      </if>
+      <if test="memberWx != null" >
+        member_wx,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="isKey != null" >
+        is_key,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memeberTel != null" >
+        #{memeberTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memberZxb != null" >
+        #{memberZxb,jdbcType=VARCHAR},
+      </if>
+      <if test="memberWx != null" >
+        #{memberWx,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="isKey != null" >
+        #{isKey,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.MemberNote2Query" resultType="java.lang.Integer" >
+    select count(*) from member_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member_note
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberId != null" >
+        member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memeberTel != null" >
+        memeber_tel = #{record.memeberTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberZxb != null" >
+        member_zxb = #{record.memberZxb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberWx != null" >
+        member_wx = #{record.memberWx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isKey != null" >
+        is_key = #{record.isKey,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member_note
+    set id = #{record.id,jdbcType=INTEGER},
+      member_id = #{record.memberId,jdbcType=VARCHAR},
+      memeber_tel = #{record.memeberTel,jdbcType=VARCHAR},
+      member_zxb = #{record.memberZxb,jdbcType=VARCHAR},
+      member_wx = #{record.memberWx,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      is_key = #{record.isKey,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MemberNote2" >
+    update member_note
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memeberTel != null" >
+        memeber_tel = #{memeberTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memberZxb != null" >
+        member_zxb = #{memberZxb,jdbcType=VARCHAR},
+      </if>
+      <if test="memberWx != null" >
+        member_wx = #{memberWx,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="isKey != null" >
+        is_key = #{isKey,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MemberNote2" >
+    update member_note
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      memeber_tel = #{memeberTel,jdbcType=VARCHAR},
+      member_zxb = #{memberZxb,jdbcType=VARCHAR},
+      member_wx = #{memberWx,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      is_key = #{isKey,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

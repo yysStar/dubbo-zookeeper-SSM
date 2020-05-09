@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.ScoreliveFootballNowdayMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.ScoreliveFootballNowday" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="league_id" property="leagueId" jdbcType="VARCHAR" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="league" property="league" jdbcType="VARCHAR" />
+    <result column="sub_league" property="subLeague" jdbcType="VARCHAR" />
+    <result column="sub_league_id" property="subLeagueId" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="time2" property="time2" jdbcType="VARCHAR" />
+    <result column="home" property="home" jdbcType="VARCHAR" />
+    <result column="away" property="away" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="home_score" property="homeScore" jdbcType="VARCHAR" />
+    <result column="away_score" property="awayScore" jdbcType="VARCHAR" />
+    <result column="bc1" property="bc1" jdbcType="VARCHAR" />
+    <result column="bc2" property="bc2" jdbcType="VARCHAR" />
+    <result column="red1" property="red1" jdbcType="VARCHAR" />
+    <result column="red2" property="red2" jdbcType="VARCHAR" />
+    <result column="yellow1" property="yellow1" jdbcType="VARCHAR" />
+    <result column="yellow2" property="yellow2" jdbcType="VARCHAR" />
+    <result column="order1" property="order1" jdbcType="VARCHAR" />
+    <result column="order2" property="order2" jdbcType="VARCHAR" />
+    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="zl" property="zl" jdbcType="VARCHAR" />
+    <result column="tv" property="tv" jdbcType="VARCHAR" />
+    <result column="lineup" property="lineup" jdbcType="VARCHAR" />
+    <result column="explain2" property="explain2" jdbcType="VARCHAR" />
+    <result column="corner1" property="corner1" jdbcType="VARCHAR" />
+    <result column="corner2" property="corner2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, color, league_id, kind, level, league, sub_league, sub_league_id, time, time2, 
+    home, away, state, home_score, away_score, bc1, bc2, red1, red2, yellow1, yellow2, 
+    order1, order2, `explain`, zl, tv, lineup, explain2, corner1, corner2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.ScoreliveFootballNowdayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from scorelive_football_nowday
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from scorelive_football_nowday
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from scorelive_football_nowday
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.ScoreliveFootballNowday" >
+    insert into scorelive_football_nowday (id, color, league_id, 
+      kind, level, league, 
+      sub_league, sub_league_id, time, 
+      time2, home, away, 
+      state, home_score, away_score, 
+      bc1, bc2, red1, red2, 
+      yellow1, yellow2, order1, 
+      order2, `explain`, zl,
+      tv, lineup, explain2, 
+      corner1, corner2)
+    values (#{id,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, #{leagueId,jdbcType=VARCHAR}, 
+      #{kind,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{league,jdbcType=VARCHAR}, 
+      #{subLeague,jdbcType=VARCHAR}, #{subLeagueId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{time2,jdbcType=VARCHAR}, #{home,jdbcType=VARCHAR}, #{away,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{homeScore,jdbcType=VARCHAR}, #{awayScore,jdbcType=VARCHAR}, 
+      #{bc1,jdbcType=VARCHAR}, #{bc2,jdbcType=VARCHAR}, #{red1,jdbcType=VARCHAR}, #{red2,jdbcType=VARCHAR}, 
+      #{yellow1,jdbcType=VARCHAR}, #{yellow2,jdbcType=VARCHAR}, #{order1,jdbcType=VARCHAR}, 
+      #{order2,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR}, #{zl,jdbcType=VARCHAR}, 
+      #{tv,jdbcType=VARCHAR}, #{lineup,jdbcType=VARCHAR}, #{explain2,jdbcType=VARCHAR}, 
+      #{corner1,jdbcType=VARCHAR}, #{corner2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.ScoreliveFootballNowday" >
+    insert into scorelive_football_nowday
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="leagueId != null" >
+        league_id,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="league != null" >
+        league,
+      </if>
+      <if test="subLeague != null" >
+        sub_league,
+      </if>
+      <if test="subLeagueId != null" >
+        sub_league_id,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="home != null" >
+        home,
+      </if>
+      <if test="away != null" >
+        away,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="homeScore != null" >
+        home_score,
+      </if>
+      <if test="awayScore != null" >
+        away_score,
+      </if>
+      <if test="bc1 != null" >
+        bc1,
+      </if>
+      <if test="bc2 != null" >
+        bc2,
+      </if>
+      <if test="red1 != null" >
+        red1,
+      </if>
+      <if test="red2 != null" >
+        red2,
+      </if>
+      <if test="yellow1 != null" >
+        yellow1,
+      </if>
+      <if test="yellow2 != null" >
+        yellow2,
+      </if>
+      <if test="order1 != null" >
+        order1,
+      </if>
+      <if test="order2 != null" >
+        order2,
+      </if>
+      <if test="explain != null" >
+        `explain`,
+      </if>
+      <if test="zl != null" >
+        zl,
+      </if>
+      <if test="tv != null" >
+        tv,
+      </if>
+      <if test="lineup != null" >
+        lineup,
+      </if>
+      <if test="explain2 != null" >
+        explain2,
+      </if>
+      <if test="corner1 != null" >
+        corner1,
+      </if>
+      <if test="corner2 != null" >
+        corner2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="leagueId != null" >
+        #{leagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeague != null" >
+        #{subLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeagueId != null" >
+        #{subLeagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="bc1 != null" >
+        #{bc1,jdbcType=VARCHAR},
+      </if>
+      <if test="bc2 != null" >
+        #{bc2,jdbcType=VARCHAR},
+      </if>
+      <if test="red1 != null" >
+        #{red1,jdbcType=VARCHAR},
+      </if>
+      <if test="red2 != null" >
+        #{red2,jdbcType=VARCHAR},
+      </if>
+      <if test="yellow1 != null" >
+        #{yellow1,jdbcType=VARCHAR},
+      </if>
+      <if test="yellow2 != null" >
+        #{yellow2,jdbcType=VARCHAR},
+      </if>
+      <if test="order1 != null" >
+        #{order1,jdbcType=VARCHAR},
+      </if>
+      <if test="order2 != null" >
+        #{order2,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="zl != null" >
+        #{zl,jdbcType=VARCHAR},
+      </if>
+      <if test="tv != null" >
+        #{tv,jdbcType=VARCHAR},
+      </if>
+      <if test="lineup != null" >
+        #{lineup,jdbcType=VARCHAR},
+      </if>
+      <if test="explain2 != null" >
+        #{explain2,jdbcType=VARCHAR},
+      </if>
+      <if test="corner1 != null" >
+        #{corner1,jdbcType=VARCHAR},
+      </if>
+      <if test="corner2 != null" >
+        #{corner2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.ScoreliveFootballNowday" >
+    update scorelive_football_nowday
+    <set >
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="leagueId != null" >
+        league_id = #{leagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        league = #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeague != null" >
+        sub_league = #{subLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="subLeagueId != null" >
+        sub_league_id = #{subLeagueId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        time2 = #{time2,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null" >
+        home = #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="away != null" >
+        away = #{away,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="homeScore != null" >
+        home_score = #{homeScore,jdbcType=VARCHAR},
+      </if>
+      <if test="awayScore != null" >
+        away_score = #{awayScore,jdbcType=VARCHAR},
+      </if>
+      <if test="bc1 != null" >
+        bc1 = #{bc1,jdbcType=VARCHAR},
+      </if>
+      <if test="bc2 != null" >
+        bc2 = #{bc2,jdbcType=VARCHAR},
+      </if>
+      <if test="red1 != null" >
+        red1 = #{red1,jdbcType=VARCHAR},
+      </if>
+      <if test="red2 != null" >
+        red2 = #{red2,jdbcType=VARCHAR},
+      </if>
+      <if test="yellow1 != null" >
+        yellow1 = #{yellow1,jdbcType=VARCHAR},
+      </if>
+      <if test="yellow2 != null" >
+        yellow2 = #{yellow2,jdbcType=VARCHAR},
+      </if>
+      <if test="order1 != null" >
+        order1 = #{order1,jdbcType=VARCHAR},
+      </if>
+      <if test="order2 != null" >
+        order2 = #{order2,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        `explain` = #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="zl != null" >
+        zl = #{zl,jdbcType=VARCHAR},
+      </if>
+      <if test="tv != null" >
+        tv = #{tv,jdbcType=VARCHAR},
+      </if>
+      <if test="lineup != null" >
+        lineup = #{lineup,jdbcType=VARCHAR},
+      </if>
+      <if test="explain2 != null" >
+        explain2 = #{explain2,jdbcType=VARCHAR},
+      </if>
+      <if test="corner1 != null" >
+        corner1 = #{corner1,jdbcType=VARCHAR},
+      </if>
+      <if test="corner2 != null" >
+        corner2 = #{corner2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.ScoreliveFootballNowday" >
+    update scorelive_football_nowday
+    set color = #{color,jdbcType=VARCHAR},
+      league_id = #{leagueId,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      league = #{league,jdbcType=VARCHAR},
+      sub_league = #{subLeague,jdbcType=VARCHAR},
+      sub_league_id = #{subLeagueId,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      time2 = #{time2,jdbcType=VARCHAR},
+      home = #{home,jdbcType=VARCHAR},
+      away = #{away,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      home_score = #{homeScore,jdbcType=VARCHAR},
+      away_score = #{awayScore,jdbcType=VARCHAR},
+      bc1 = #{bc1,jdbcType=VARCHAR},
+      bc2 = #{bc2,jdbcType=VARCHAR},
+      red1 = #{red1,jdbcType=VARCHAR},
+      red2 = #{red2,jdbcType=VARCHAR},
+      yellow1 = #{yellow1,jdbcType=VARCHAR},
+      yellow2 = #{yellow2,jdbcType=VARCHAR},
+      order1 = #{order1,jdbcType=VARCHAR},
+      order2 = #{order2,jdbcType=VARCHAR},
+      `explain` = #{explain,jdbcType=VARCHAR},
+      zl = #{zl,jdbcType=VARCHAR},
+      tv = #{tv,jdbcType=VARCHAR},
+      lineup = #{lineup,jdbcType=VARCHAR},
+      explain2 = #{explain2,jdbcType=VARCHAR},
+      corner1 = #{corner1,jdbcType=VARCHAR},
+      corner2 = #{corner2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

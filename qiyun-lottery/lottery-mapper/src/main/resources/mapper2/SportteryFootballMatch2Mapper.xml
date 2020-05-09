@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.SportteryFootballMatch2Mapper">
+    <resultMap id="BaseResultMap" type="com.qiyun.model2.SportteryFootballMatch2">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="homeTeam" property="hometeam" jdbcType="VARCHAR"/>
+        <result column="gameColor" property="gamecolor" jdbcType="VARCHAR"/>
+        <result column="guestTeam" property="guestteam" jdbcType="VARCHAR"/>
+        <result column="matchTime" property="matchtime" jdbcType="TIMESTAMP"/>
+        <result column="intTime" property="inttime" jdbcType="INTEGER"/>
+        <result column="lineId" property="lineid" jdbcType="INTEGER"/>
+        <result column="gameName" property="gamename" jdbcType="VARCHAR"/>
+        <result column="GAME_SHORT_NAME" property="gameShortName" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="homeScore" property="homescore" jdbcType="INTEGER"/>
+        <result column="guestScore" property="guestscore" jdbcType="INTEGER"/>
+        <result column="concede" property="concede" jdbcType="INTEGER"/>
+        <result column="halfHomeScore" property="halfhomescore" jdbcType="INTEGER"/>
+        <result column="halfGuestScore" property="halfguestscore" jdbcType="INTEGER"/>
+        <result column="resultAwardOfTotoPass" property="resultawardoftotopass" jdbcType="DOUBLE"/>
+        <result column="resultRQAwardOfTotoPass" property="resultrqawardoftotopass" jdbcType="DOUBLE"/>
+        <result column="resultAwardOfScorePass" property="resultawardofscorepass" jdbcType="DOUBLE"/>
+        <result column="resultAwardOfSingleScore" property="resultawardofsinglescore" jdbcType="DOUBLE"/>
+        <result column="resultAwardOfHfTotoPass" property="resultawardofhftotopass" jdbcType="DOUBLE"/>
+        <result column="outId" property="outid" jdbcType="INTEGER"/>
+        <result column="GAME_ID" property="gameId" jdbcType="INTEGER"/>
+        <result column="result_of_rule" property="resultOfRule" jdbcType="INTEGER"/>
+        <result column="PRIZE_TYPE" property="prizeType" jdbcType="INTEGER"/>
+        <result column="showNum" property="shownum" jdbcType="INTEGER"/>
+        <result column="SPF_SHOWNUM" property="spfShownum" jdbcType="INTEGER"/>
+        <result column="RQSPF_SHOWNUM" property="rqspfShownum" jdbcType="INTEGER"/>
+        <result column="BF_SHOWNUM" property="bfShownum" jdbcType="INTEGER"/>
+        <result column="JQS_SHOWNUM" property="jqsShownum" jdbcType="INTEGER"/>
+        <result column="BQC_SHOWNUM" property="bqcShownum" jdbcType="INTEGER"/>
+        <result column="has_Delay" property="hasDelay" jdbcType="INTEGER"/>
+        <result column="WORLDSCENE" property="worldscene" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, version, homeTeam, gameColor, guestTeam, matchTime, intTime, lineId, gameName, 
+    GAME_SHORT_NAME, status, homeScore, guestScore, concede, halfHomeScore, halfGuestScore, 
+    resultAwardOfTotoPass, resultRQAwardOfTotoPass, resultAwardOfScorePass, resultAwardOfSingleScore, 
+    resultAwardOfHfTotoPass, outId, GAME_ID, result_of_rule, PRIZE_TYPE, showNum, SPF_SHOWNUM, 
+    RQSPF_SHOWNUM, BF_SHOWNUM, JQS_SHOWNUM, BQC_SHOWNUM, has_Delay, WORLDSCENE
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.qiyun.model2.SportteryFootballMatch2Query">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sporttery_football_match
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sporttery_football_match
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sporttery_football_match
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.qiyun.model2.SportteryFootballMatch2Query">
+        delete from sporttery_football_match
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.qiyun.model2.SportteryFootballMatch2">
+    insert into sporttery_football_match (id, version, homeTeam, 
+      gameColor, guestTeam, matchTime, 
+      intTime, lineId, gameName, 
+      GAME_SHORT_NAME, status, homeScore, 
+      guestScore, concede, halfHomeScore, 
+      halfGuestScore, resultAwardOfTotoPass, resultRQAwardOfTotoPass, 
+      resultAwardOfScorePass, resultAwardOfSingleScore, 
+      resultAwardOfHfTotoPass, outId, GAME_ID, 
+      result_of_rule, PRIZE_TYPE, showNum, 
+      SPF_SHOWNUM, RQSPF_SHOWNUM, BF_SHOWNUM, 
+      JQS_SHOWNUM, BQC_SHOWNUM, has_Delay, 
+      WORLDSCENE)
+    values (#{id,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{hometeam,jdbcType=VARCHAR}, 
+      #{gamecolor,jdbcType=VARCHAR}, #{guestteam,jdbcType=VARCHAR}, #{matchtime,jdbcType=TIMESTAMP}, 
+      #{inttime,jdbcType=INTEGER}, #{lineid,jdbcType=INTEGER}, #{gamename,jdbcType=VARCHAR}, 
+      #{gameShortName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{homescore,jdbcType=INTEGER}, 
+      #{guestscore,jdbcType=INTEGER}, #{concede,jdbcType=INTEGER}, #{halfhomescore,jdbcType=INTEGER}, 
+      #{halfguestscore,jdbcType=INTEGER}, #{resultawardoftotopass,jdbcType=DOUBLE}, #{resultrqawardoftotopass,jdbcType=DOUBLE}, 
+      #{resultawardofscorepass,jdbcType=DOUBLE}, #{resultawardofsinglescore,jdbcType=DOUBLE}, 
+      #{resultawardofhftotopass,jdbcType=DOUBLE}, #{outid,jdbcType=INTEGER}, #{gameId,jdbcType=INTEGER}, 
+      #{resultOfRule,jdbcType=INTEGER}, #{prizeType,jdbcType=INTEGER}, #{shownum,jdbcType=INTEGER}, 
+      #{spfShownum,jdbcType=INTEGER}, #{rqspfShownum,jdbcType=INTEGER}, #{bfShownum,jdbcType=INTEGER}, 
+      #{jqsShownum,jdbcType=INTEGER}, #{bqcShownum,jdbcType=INTEGER}, #{hasDelay,jdbcType=INTEGER}, 
+      #{worldscene,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.qiyun.model2.SportteryFootballMatch2">
+        insert into sporttery_football_match
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="hometeam != null">
+                homeTeam,
+            </if>
+            <if test="gamecolor != null">
+                gameColor,
+            </if>
+            <if test="guestteam != null">
+                guestTeam,
+            </if>
+            <if test="matchtime != null">
+                matchTime,
+            </if>
+            <if test="inttime != null">
+                intTime,
+            </if>
+            <if test="lineid != null">
+                lineId,
+            </if>
+            <if test="gamename != null">
+                gameName,
+            </if>
+            <if test="gameShortName != null">
+                GAME_SHORT_NAME,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="homescore != null">
+                homeScore,
+            </if>
+            <if test="guestscore != null">
+                guestScore,
+            </if>
+            <if test="concede != null">
+                concede,
+            </if>
+            <if test="halfhomescore != null">
+                halfHomeScore,
+            </if>
+            <if test="halfguestscore != null">
+                halfGuestScore,
+            </if>
+            <if test="resultawardoftotopass != null">
+                resultAwardOfTotoPass,
+            </if>
+            <if test="resultrqawardoftotopass != null">
+                resultRQAwardOfTotoPass,
+            </if>
+            <if test="resultawardofscorepass != null">
+                resultAwardOfScorePass,
+            </if>
+            <if test="resultawardofsinglescore != null">
+                resultAwardOfSingleScore,
+            </if>
+            <if test="resultawardofhftotopass != null">
+                resultAwardOfHfTotoPass,
+            </if>
+            <if test="outid != null">
+                outId,
+            </if>
+            <if test="gameId != null">
+                GAME_ID,
+            </if>
+            <if test="resultOfRule != null">
+                result_of_rule,
+            </if>
+            <if test="prizeType != null">
+                PRIZE_TYPE,
+            </if>
+            <if test="shownum != null">
+                showNum,
+            </if>
+            <if test="spfShownum != null">
+                SPF_SHOWNUM,
+            </if>
+            <if test="rqspfShownum != null">
+                RQSPF_SHOWNUM,
+            </if>
+            <if test="bfShownum != null">
+                BF_SHOWNUM,
+            </if>
+            <if test="jqsShownum != null">
+                JQS_SHOWNUM,
+            </if>
+            <if test="bqcShownum != null">
+                BQC_SHOWNUM,
+            </if>
+            <if test="hasDelay != null">
+                has_Delay,
+            </if>
+            <if test="worldscene != null">
+                WORLDSCENE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="hometeam != null">
+                #{hometeam,jdbcType=VARCHAR},
+            </if>
+            <if test="gamecolor != null">
+                #{gamecolor,jdbcType=VARCHAR},
+            </if>
+            <if test="guestteam != null">
+                #{guestteam,jdbcType=VARCHAR},
+            </if>
+            <if test="matchtime != null">
+                #{matchtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inttime != null">
+                #{inttime,jdbcType=INTEGER},
+            </if>
+            <if test="lineid != null">
+                #{lineid,jdbcType=INTEGER},
+            </if>
+            <if test="gamename != null">
+                #{gamename,jdbcType=VARCHAR},
+            </if>
+            <if test="gameShortName != null">
+                #{gameShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="homescore != null">
+                #{homescore,jdbcType=INTEGER},
+            </if>
+            <if test="guestscore != null">
+                #{guestscore,jdbcType=INTEGER},
+            </if>
+            <if test="concede != null">
+                #{concede,jdbcType=INTEGER},
+            </if>
+            <if test="halfhomescore != null">
+                #{halfhomescore,jdbcType=INTEGER},
+            </if>
+            <if test="halfguestscore != null">
+                #{halfguestscore,jdbcType=INTEGER},
+            </if>
+            <if test="resultawardoftotopass != null">
+                #{resultawardoftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="resultrqawardoftotopass != null">
+                #{resultrqawardoftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="resultawardofscorepass != null">
+                #{resultawardofscorepass,jdbcType=DOUBLE},
+            </if>
+            <if test="resultawardofsinglescore != null">
+                #{resultawardofsinglescore,jdbcType=DOUBLE},
+            </if>
+            <if test="resultawardofhftotopass != null">
+                #{resultawardofhftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="outid != null">
+                #{outid,jdbcType=INTEGER},
+            </if>
+            <if test="gameId != null">
+                #{gameId,jdbcType=INTEGER},
+            </if>
+            <if test="resultOfRule != null">
+                #{resultOfRule,jdbcType=INTEGER},
+            </if>
+            <if test="prizeType != null">
+                #{prizeType,jdbcType=INTEGER},
+            </if>
+            <if test="shownum != null">
+                #{shownum,jdbcType=INTEGER},
+            </if>
+            <if test="spfShownum != null">
+                #{spfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="rqspfShownum != null">
+                #{rqspfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="bfShownum != null">
+                #{bfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="jqsShownum != null">
+                #{jqsShownum,jdbcType=INTEGER},
+            </if>
+            <if test="bqcShownum != null">
+                #{bqcShownum,jdbcType=INTEGER},
+            </if>
+            <if test="hasDelay != null">
+                #{hasDelay,jdbcType=INTEGER},
+            </if>
+            <if test="worldscene != null">
+                #{worldscene,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.qiyun.model2.SportteryFootballMatch2Query"
+            resultType="java.lang.Integer">
+        select count(*) from sporttery_football_match
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sporttery_football_match
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.hometeam != null">
+                homeTeam = #{record.hometeam,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gamecolor != null">
+                gameColor = #{record.gamecolor,jdbcType=VARCHAR},
+            </if>
+            <if test="record.guestteam != null">
+                guestTeam = #{record.guestteam,jdbcType=VARCHAR},
+            </if>
+            <if test="record.matchtime != null">
+                matchTime = #{record.matchtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.inttime != null">
+                intTime = #{record.inttime,jdbcType=INTEGER},
+            </if>
+            <if test="record.lineid != null">
+                lineId = #{record.lineid,jdbcType=INTEGER},
+            </if>
+            <if test="record.gamename != null">
+                gameName = #{record.gamename,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gameShortName != null">
+                GAME_SHORT_NAME = #{record.gameShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.homescore != null">
+                homeScore = #{record.homescore,jdbcType=INTEGER},
+            </if>
+            <if test="record.guestscore != null">
+                guestScore = #{record.guestscore,jdbcType=INTEGER},
+            </if>
+            <if test="record.concede != null">
+                concede = #{record.concede,jdbcType=INTEGER},
+            </if>
+            <if test="record.halfhomescore != null">
+                halfHomeScore = #{record.halfhomescore,jdbcType=INTEGER},
+            </if>
+            <if test="record.halfguestscore != null">
+                halfGuestScore = #{record.halfguestscore,jdbcType=INTEGER},
+            </if>
+            <if test="record.resultawardoftotopass != null">
+                resultAwardOfTotoPass = #{record.resultawardoftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="record.resultrqawardoftotopass != null">
+                resultRQAwardOfTotoPass = #{record.resultrqawardoftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="record.resultawardofscorepass != null">
+                resultAwardOfScorePass = #{record.resultawardofscorepass,jdbcType=DOUBLE},
+            </if>
+            <if test="record.resultawardofsinglescore != null">
+                resultAwardOfSingleScore = #{record.resultawardofsinglescore,jdbcType=DOUBLE},
+            </if>
+            <if test="record.resultawardofhftotopass != null">
+                resultAwardOfHfTotoPass = #{record.resultawardofhftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="record.outid != null">
+                outId = #{record.outid,jdbcType=INTEGER},
+            </if>
+            <if test="record.gameId != null">
+                GAME_ID = #{record.gameId,jdbcType=INTEGER},
+            </if>
+            <if test="record.resultOfRule != null">
+                result_of_rule = #{record.resultOfRule,jdbcType=INTEGER},
+            </if>
+            <if test="record.prizeType != null">
+                PRIZE_TYPE = #{record.prizeType,jdbcType=INTEGER},
+            </if>
+            <if test="record.shownum != null">
+                showNum = #{record.shownum,jdbcType=INTEGER},
+            </if>
+            <if test="record.spfShownum != null">
+                SPF_SHOWNUM = #{record.spfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="record.rqspfShownum != null">
+                RQSPF_SHOWNUM = #{record.rqspfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="record.bfShownum != null">
+                BF_SHOWNUM = #{record.bfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="record.jqsShownum != null">
+                JQS_SHOWNUM = #{record.jqsShownum,jdbcType=INTEGER},
+            </if>
+            <if test="record.bqcShownum != null">
+                BQC_SHOWNUM = #{record.bqcShownum,jdbcType=INTEGER},
+            </if>
+            <if test="record.hasDelay != null">
+                has_Delay = #{record.hasDelay,jdbcType=INTEGER},
+            </if>
+            <if test="record.worldscene != null">
+                WORLDSCENE = #{record.worldscene,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sporttery_football_match
+        set id = #{record.id,jdbcType=INTEGER},
+        version = #{record.version,jdbcType=INTEGER},
+        homeTeam = #{record.hometeam,jdbcType=VARCHAR},
+        gameColor = #{record.gamecolor,jdbcType=VARCHAR},
+        guestTeam = #{record.guestteam,jdbcType=VARCHAR},
+        matchTime = #{record.matchtime,jdbcType=TIMESTAMP},
+        intTime = #{record.inttime,jdbcType=INTEGER},
+        lineId = #{record.lineid,jdbcType=INTEGER},
+        gameName = #{record.gamename,jdbcType=VARCHAR},
+        GAME_SHORT_NAME = #{record.gameShortName,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=INTEGER},
+        homeScore = #{record.homescore,jdbcType=INTEGER},
+        guestScore = #{record.guestscore,jdbcType=INTEGER},
+        concede = #{record.concede,jdbcType=INTEGER},
+        halfHomeScore = #{record.halfhomescore,jdbcType=INTEGER},
+        halfGuestScore = #{record.halfguestscore,jdbcType=INTEGER},
+        resultAwardOfTotoPass = #{record.resultawardoftotopass,jdbcType=DOUBLE},
+        resultRQAwardOfTotoPass = #{record.resultrqawardoftotopass,jdbcType=DOUBLE},
+        resultAwardOfScorePass = #{record.resultawardofscorepass,jdbcType=DOUBLE},
+        resultAwardOfSingleScore = #{record.resultawardofsinglescore,jdbcType=DOUBLE},
+        resultAwardOfHfTotoPass = #{record.resultawardofhftotopass,jdbcType=DOUBLE},
+        outId = #{record.outid,jdbcType=INTEGER},
+        GAME_ID = #{record.gameId,jdbcType=INTEGER},
+        result_of_rule = #{record.resultOfRule,jdbcType=INTEGER},
+        PRIZE_TYPE = #{record.prizeType,jdbcType=INTEGER},
+        showNum = #{record.shownum,jdbcType=INTEGER},
+        SPF_SHOWNUM = #{record.spfShownum,jdbcType=INTEGER},
+        RQSPF_SHOWNUM = #{record.rqspfShownum,jdbcType=INTEGER},
+        BF_SHOWNUM = #{record.bfShownum,jdbcType=INTEGER},
+        JQS_SHOWNUM = #{record.jqsShownum,jdbcType=INTEGER},
+        BQC_SHOWNUM = #{record.bqcShownum,jdbcType=INTEGER},
+        has_Delay = #{record.hasDelay,jdbcType=INTEGER},
+        WORLDSCENE = #{record.worldscene,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.SportteryFootballMatch2">
+        update sporttery_football_match
+        <set>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="hometeam != null">
+                homeTeam = #{hometeam,jdbcType=VARCHAR},
+            </if>
+            <if test="gamecolor != null">
+                gameColor = #{gamecolor,jdbcType=VARCHAR},
+            </if>
+            <if test="guestteam != null">
+                guestTeam = #{guestteam,jdbcType=VARCHAR},
+            </if>
+            <if test="matchtime != null">
+                matchTime = #{matchtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inttime != null">
+                intTime = #{inttime,jdbcType=INTEGER},
+            </if>
+            <if test="lineid != null">
+                lineId = #{lineid,jdbcType=INTEGER},
+            </if>
+            <if test="gamename != null">
+                gameName = #{gamename,jdbcType=VARCHAR},
+            </if>
+            <if test="gameShortName != null">
+                GAME_SHORT_NAME = #{gameShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="homescore != null">
+                homeScore = #{homescore,jdbcType=INTEGER},
+            </if>
+            <if test="guestscore != null">
+                guestScore = #{guestscore,jdbcType=INTEGER},
+            </if>
+            <if test="concede != null">
+                concede = #{concede,jdbcType=INTEGER},
+            </if>
+            <if test="halfhomescore != null">
+                halfHomeScore = #{halfhomescore,jdbcType=INTEGER},
+            </if>
+            <if test="halfguestscore != null">
+                halfGuestScore = #{halfguestscore,jdbcType=INTEGER},
+            </if>
+            <if test="resultawardoftotopass != null">
+                resultAwardOfTotoPass = #{resultawardoftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="resultrqawardoftotopass != null">
+                resultRQAwardOfTotoPass = #{resultrqawardoftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="resultawardofscorepass != null">
+                resultAwardOfScorePass = #{resultawardofscorepass,jdbcType=DOUBLE},
+            </if>
+            <if test="resultawardofsinglescore != null">
+                resultAwardOfSingleScore = #{resultawardofsinglescore,jdbcType=DOUBLE},
+            </if>
+            <if test="resultawardofhftotopass != null">
+                resultAwardOfHfTotoPass = #{resultawardofhftotopass,jdbcType=DOUBLE},
+            </if>
+            <if test="outid != null">
+                outId = #{outid,jdbcType=INTEGER},
+            </if>
+            <if test="gameId != null">
+                GAME_ID = #{gameId,jdbcType=INTEGER},
+            </if>
+            <if test="resultOfRule != null">
+                result_of_rule = #{resultOfRule,jdbcType=INTEGER},
+            </if>
+            <if test="prizeType != null">
+                PRIZE_TYPE = #{prizeType,jdbcType=INTEGER},
+            </if>
+            <if test="shownum != null">
+                showNum = #{shownum,jdbcType=INTEGER},
+            </if>
+            <if test="spfShownum != null">
+                SPF_SHOWNUM = #{spfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="rqspfShownum != null">
+                RQSPF_SHOWNUM = #{rqspfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="bfShownum != null">
+                BF_SHOWNUM = #{bfShownum,jdbcType=INTEGER},
+            </if>
+            <if test="jqsShownum != null">
+                JQS_SHOWNUM = #{jqsShownum,jdbcType=INTEGER},
+            </if>
+            <if test="bqcShownum != null">
+                BQC_SHOWNUM = #{bqcShownum,jdbcType=INTEGER},
+            </if>
+            <if test="hasDelay != null">
+                has_Delay = #{hasDelay,jdbcType=INTEGER},
+            </if>
+            <if test="worldscene != null">
+                WORLDSCENE = #{worldscene,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.SportteryFootballMatch2">
+    update sporttery_football_match
+    set version = #{version,jdbcType=INTEGER},
+      homeTeam = #{hometeam,jdbcType=VARCHAR},
+      gameColor = #{gamecolor,jdbcType=VARCHAR},
+      guestTeam = #{guestteam,jdbcType=VARCHAR},
+      matchTime = #{matchtime,jdbcType=TIMESTAMP},
+      intTime = #{inttime,jdbcType=INTEGER},
+      lineId = #{lineid,jdbcType=INTEGER},
+      gameName = #{gamename,jdbcType=VARCHAR},
+      GAME_SHORT_NAME = #{gameShortName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      homeScore = #{homescore,jdbcType=INTEGER},
+      guestScore = #{guestscore,jdbcType=INTEGER},
+      concede = #{concede,jdbcType=INTEGER},
+      halfHomeScore = #{halfhomescore,jdbcType=INTEGER},
+      halfGuestScore = #{halfguestscore,jdbcType=INTEGER},
+      resultAwardOfTotoPass = #{resultawardoftotopass,jdbcType=DOUBLE},
+      resultRQAwardOfTotoPass = #{resultrqawardoftotopass,jdbcType=DOUBLE},
+      resultAwardOfScorePass = #{resultawardofscorepass,jdbcType=DOUBLE},
+      resultAwardOfSingleScore = #{resultawardofsinglescore,jdbcType=DOUBLE},
+      resultAwardOfHfTotoPass = #{resultawardofhftotopass,jdbcType=DOUBLE},
+      outId = #{outid,jdbcType=INTEGER},
+      GAME_ID = #{gameId,jdbcType=INTEGER},
+      result_of_rule = #{resultOfRule,jdbcType=INTEGER},
+      PRIZE_TYPE = #{prizeType,jdbcType=INTEGER},
+      showNum = #{shownum,jdbcType=INTEGER},
+      SPF_SHOWNUM = #{spfShownum,jdbcType=INTEGER},
+      RQSPF_SHOWNUM = #{rqspfShownum,jdbcType=INTEGER},
+      BF_SHOWNUM = #{bfShownum,jdbcType=INTEGER},
+      JQS_SHOWNUM = #{jqsShownum,jdbcType=INTEGER},
+      BQC_SHOWNUM = #{bqcShownum,jdbcType=INTEGER},
+      has_Delay = #{hasDelay,jdbcType=INTEGER},
+      WORLDSCENE = #{worldscene,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--查询当日比赛信息-->
+    <select id="findFootballMixureInfo" resultType="map">
+        SELECT sfm.id matchId,sfm.matchTime, sfm.homeTeam,sfm.guestTeam,sfm.GAME_SHORT_NAME ,sfm.intTime,sfm.lineid,sfm.concede,sfm.showNum from
+        sporttery_football_match sfm
+        WHERE sfm.intTime >= #{0}
+        and sfm.status=0
+        ORDER BY intTime ,lineId
+    </select>
+    <!--查询当日焦点比赛信息-->
+    <select id="findFootballMixureInfoByFocus" resultType="map">
+        SELECT sfm.id matchId,sfm.matchTime, sfm.homeTeam,sfm.guestTeam,sfm.GAME_SHORT_NAME ,sfm.intTime,sfm.lineid,sfm.concede,sfm.showNum from
+        sporttery_football_match sfm,focus_match_fb fmb
+        WHERE sfm.id = fmb.match_id and fmb.status = 1
+        and sfm.intTime >= #{0}
+        and sfm.status=0
+        ORDER BY intTime ,lineId
+    </select>
+    <!--查找让球胜平负数据-->
+    <select id="findRqspfSp" resultType="map" parameterType="map">
+        SELECT DISTINCT
+            lastUpdateTime rqlastUpdateTime,
+            homeWinAward rq_homeWinAward,
+            guestWinAward rq_guestWinAward,
+            drawAward rq_drawAward,
+            matchId
+        FROM
+            sporttery_football_rqspfaward
+        WHERE
+            intTime = #{intTime} and lineId = #{lineid}
+        ORDER BY rqlastUpdateTime desc
+  </select>
+    <!--查找不让球-->
+    <select id="findSpfSp" resultType="map" parameterType="map">
+        SELECT DISTINCT
+            lastUpdateTime,
+            homeWinAward,
+            guestWinAward,
+            drawAward,
+            matchId
+        FROM
+            sporttery_football_spfaward
+        WHERE
+            intTime = #{intTime}
+        AND lineId = #{lineid}
+        ORDER BY
+            lastUpdateTime DESC
+  </select>
+    <!--查找比分-->
+    <select id="findbfInfo" resultType="map">
+    SELECT
+        <include refid="Base_Column_List"/>
+    FROM sporttery_football_bfaward
+        WHERE matchId = #{0} ORDER BY lastUpdateTime desc
+  </select>
+    <!--查找进球-->
+    <select id="findjqInfo" resultType="map">
+        SELECT
+            ifnull(s0_award, 0) s0_award,
+            ifnull(s1_award, 0) s1_award,
+            ifnull(s2_award, 0) s2_award,
+            ifnull(s3_award, 0) s3_award,
+            ifnull(s4_award, 0) s4_award,
+            ifnull(s5_award, 0) s5_award,
+            ifnull(s6_award, 0) s6_award,
+            ifnull(s7_award, 0) s7_award
+        FROM
+            sporttery_footlball_jqsaward
+        WHERE
+            matchId = #{0}
+        ORDER BY lastUpdateTime desc
+  </select>
+    <!--查找半场-->
+    <select id="findbcInfo" resultType="map">
+        SELECT
+            ifnull(win_draw_award, 0) win_draw_award,
+            ifnull(win_lose_award, 0) win_lose_award,
+            ifnull(win_win_award, 0) win_win_award,
+            ifnull(draw_draw_award, 0) draw_draw_award,
+            ifnull(draw_lose_award, 0) draw_lose_award,
+            ifnull(draw_win_award, 0) draw_win_award,
+            ifnull(lose_draw_award, 0) lose_draw_award,
+            ifnull(lose_lose_award, 0) lose_lose_award,
+            ifnull(lose_win_award, 0) lose_win_award
+        FROM
+            sporttery_football_bqcaward
+        WHERE
+            matchId = #{0}
+        ORDER BY
+	lastUpdateTime DESC
+    </select>
+
+    <select id="getSpfAward" resultType="map">
+        SELECT
+            homeWinAward,
+            drawAward,
+            guestWinAward,
+            lastUpdateTime
+        FROM
+            sporttery_football_spfaward
+        WHERE
+            intTime = #{0}
+        AND lineId = #{1}
+        ORDER BY lastUpdateTime desc
+    </select>
+    <select id="getRqspfAward" resultType="map">
+        SELECT
+            homeWinAward,
+            drawAward,
+            guestWinAward,
+            lastUpdateTime
+        FROM
+          sporttery_football_rqspfaward
+        WHERE
+            intTime = #{0}
+        AND lineId = #{1}
+        ORDER BY lastUpdateTime desc
+    </select>
+    <select id="getBqcAward" resultType="map">
+        SELECT
+            win_win_award,
+            win_draw_award,
+            win_lose_award,
+            draw_win_award,
+            draw_draw_award,
+            draw_lose_award,
+            lose_win_award,
+            lose_draw_award,
+            lose_lose_award,
+            lastUpdateTime
+        FROM
+          sporttery_football_bqcaward
+        WHERE
+          intTime = #{0}
+        AND lineId = #{1}
+        ORDER BY lastUpdateTime desc
+    </select>
+    <select id="getBfAward" resultType="map">
+        SELECT
+        	s10award,
+            s20award,
+            s21award,
+            s30award,
+            s31award,
+            s32award,
+            s40award,
+            s41award,
+            s42award,
+            s50award,
+            s51award,
+            s52award,
+            s_win_award,
+            s00award,
+            s11award,
+            s22award,
+            s33award,
+            s_draw_award,
+            s01award,
+            s02award,
+            s12award,
+            s03award,
+            s13award,
+            s23award,
+            s04award,
+            s14award,
+            s24award,
+            s05award,
+            s15award,
+            s25award,
+            s_lose_award,
+            lastUpdateTime
+        FROM
+        sporttery_football_bfaward
+        WHERE
+        intTime = #{0}
+        AND lineId = #{1}
+        ORDER BY lastUpdateTime desc
+    </select>
+    <select id="getJqsAward" resultType="map">
+        SELECT
+            s0_award,
+            s1_award,
+            s2_award,
+            s3_award,
+            s4_award,
+            s5_award,
+            s6_award,
+            s7_award,
+            lastUpdateTime
+        FROM
+          sporttery_footlball_jqsaward
+        WHERE
+          intTime = #{0}
+        AND lineId = #{1}
+        ORDER BY lastUpdateTime desc
+    </select>
+    <select id="findMatchByStatus" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List"/>
+      from sporttery_football_match
+      where status = #{status,jdbcType=INTEGER}
+      ORDER BY intTime,lineId
+    </select>
+    <resultMap id="FootBallMatch" type="com.qiyun.model.football.FootBallMatch">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="homeTeam" property="homeTeam" jdbcType="VARCHAR"/>
+        <result column="gameColor" property="gameColor" jdbcType="VARCHAR"/>
+        <result column="guestTeam" property="guestTeam" jdbcType="VARCHAR"/>
+        <result column="matchTime" property="matchTime" jdbcType="TIMESTAMP"/>
+        <result column="intTime" property="intTime" jdbcType="INTEGER"/>
+        <result column="lineId" property="lineId" jdbcType="INTEGER"/>
+        <result column="gameName" property="gameName" jdbcType="VARCHAR"/>
+        <result column="GAME_SHORT_NAME" property="gameShortName" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="homeScore" property="homeScore" jdbcType="INTEGER"/>
+        <result column="guestScore" property="guestScore" jdbcType="INTEGER"/>
+        <result column="concede" property="concede" jdbcType="INTEGER"/>
+        <result column="halfHomeScore" property="halfHomeScore" jdbcType="INTEGER"/>
+        <result column="halfGuestScore" property="halfGuestScore" jdbcType="INTEGER"/>
+        <result column="resultAwardOfTotoPass" property="resultAwardOfTotoPass" jdbcType="DOUBLE"/>
+        <result column="resultRQAwardOfTotoPass" property="resultRQAwardOfTotoPass" jdbcType="DOUBLE"/>
+        <result column="resultAwardOfScorePass" property="resultAwardOfScorePass" jdbcType="DOUBLE"/>
+        <result column="resultAwardOfSingleScore" property="resultAwardOfSingleScore" jdbcType="DOUBLE"/>
+        <result column="resultAwardOfHfTotoPass" property="resultAwardOfHfTotoPass" jdbcType="DOUBLE"/>
+        <result column="outId" property="outId" jdbcType="INTEGER"/>
+        <result column="GAME_ID" property="gameId" jdbcType="INTEGER"/>
+        <result column="result_of_rule" property="resultOfRule" jdbcType="INTEGER"/>
+        <!--<result column="PRIZE_TYPE" property="prizeType" jdbcType="INTEGER"/>-->
+        <result column="showNum" property="showNum" jdbcType="INTEGER"/>
+        <result column="SPF_SHOWNUM" property="spfShowNum" jdbcType="INTEGER"/>
+        <result column="RQSPF_SHOWNUM" property="rqspfShowNum" jdbcType="INTEGER"/>
+        <result column="BF_SHOWNUM" property="bfShowNum" jdbcType="INTEGER"/>
+        <result column="JQS_SHOWNUM" property="jqsShowNum" jdbcType="INTEGER"/>
+        <result column="BQC_SHOWNUM" property="bqcShowNum" jdbcType="INTEGER"/>
+        <result column="has_Delay" property="hasDelay" jdbcType="INTEGER"/>
+        <result column="WORLDSCENE" property="worldScene" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectMatchListByIntTime" resultMap="FootBallMatch">
+        SELECT
+          *
+        FROM
+          sporttery_football_match
+        WHERE
+          intTime IN
+            <foreach collection="intTimes" item="intTime" index="index"
+                     open="(" close=")" separator=",">
+                #{intTime}
+            </foreach>
+    </select>
+    <select id="getByIntTimeAndLineId" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from sporttery_football_match
+        where  intTime = #{0} and lineId = #{1}
+    </select>
+</mapper>

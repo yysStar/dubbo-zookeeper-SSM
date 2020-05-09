@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.PayOrder2Mapper">
+    <resultMap id="BaseResultMap" type="com.qiyun.model2.PayOrder2">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="member_id" property="memberId" jdbcType="INTEGER"/>
+        <result column="amount" property="amount" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="pay_id" property="payId" jdbcType="VARCHAR"/>
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="provider" property="provider" jdbcType="VARCHAR"/>
+        <result column="rate" property="rate" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, member_id, amount, status, pay_id, pay_time, type, provider, rate
+
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.PayOrder2Query">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from pay_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from pay_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from pay_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.qiyun.model2.PayOrder2Query">
+        delete from pay_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.qiyun.model2.PayOrder2">
+    insert into pay_order (id, member_id, amount, 
+      status, pay_id, pay_time, 
+      type, provider, rate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{payId,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=INTEGER}, #{provider,jdbcType=VARCHAR}, #{rate,jdbcType=DOUBLE}
+      )
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.qiyun.model2.PayOrder2">
+        insert into pay_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="payId != null">
+                pay_id,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="provider != null">
+                provider,
+            </if>
+            <if test="rate != null">
+                rate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                #{payId,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="provider != null">
+                #{provider,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null">
+                #{rate,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.qiyun.model2.PayOrder2Query" resultType="java.lang.Integer">
+        select count(*) from pay_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update pay_order
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memberId != null">
+
+                member_id = #{record.memberId,jdbcType=INTEGER},
+                amount = #{record.amount,jdbcType=INTEGER},
+                status = #{record.status,jdbcType=VARCHAR},
+                pay_id = #{record.payId,jdbcType=VARCHAR},
+
+            </if>
+            <if test="record.payTime != null">
+                pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.provider != null">
+                provider = #{record.provider,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rate != null">
+                rate = #{record.rate,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update pay_order
+        set id = #{record.id,jdbcType=VARCHAR},
+        member_id = #{record.memberId,jdbcType=INTEGER},
+        amount = #{record.amount,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=VARCHAR},
+        pay_id = #{record.payId,jdbcType=VARCHAR},
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+        type = #{record.type,jdbcType=INTEGER},
+        provider = #{record.provider,jdbcType=VARCHAR},
+        rate = #{record.rate,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.PayOrder2">
+        update pay_order
+        <set>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                pay_id = #{payId,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="provider != null">
+                provider = #{provider,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null">
+                rate = #{rate,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.PayOrder2">
+
+    update pay_order
+    set member_id = #{memberId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      pay_id = #{payId,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      provider = #{provider,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="memberDrawingMap" type="com.qiyun.dto.MemberDrawing">
+        <id column="id" property="id"></id>
+        <result column="bank" property="bank"></result>
+        <result column="part_bank" property="partBank"></result>
+        <result column="bank_card" property="bankCard"></result>
+        <result column="amount" property="amount"></result>
+        <result column="account" property="account"></result>
+        <result column="STATUS" property="status"></result>
+        <result column="create_Date_Time" property="createDateTime"></result>
+        <result column="deal_date_time" property="dealDateTime"></result>
+        <result column="FINANCE_DEAL_DATE_TIME" property="financeDealDateTime"></result>
+        <result column="send_date_time" property="sendDateTime"></result>
+        <result column="remark" property="remark"></result>
+        <result column="failed_date_time" property="failedDateTime"></result>
+        <result column="drawing_Fee" property="drawingFee"></result>
+        <result column="privilege_drawing_Fee" property="privilegeDrawingFee"></result>
+        <result column="show_drawing_Fee" property="showDrawingFee"></result>
+        <result column="fee_payer_belong" property="feePayerBelong"></result>
+        <result column="confirm_date_time" property="confirmDateTime"></result>
+        <result column="transfer_batch_no" property="transferBatchNo"></result>
+        <result column="ALIPAY_NO" property="alipayNo"></result>
+        <result column="DRAWING_TYPE" property="drawingType"></result>
+        <result column="PLAN_NO" property="planNo"></result>
+        <result column="RETURN_REMARK" property="returnRemark"></result>
+        <result column="PLATFORM" property="platform"></result>
+    </resultMap>
+    <!--查找当日订单-->
+    <select id="findMemberDrawingByAccount" resultMap="memberDrawingMap">
+    select * from member_drawing WHERE TO_DAYS(create_Date_Time) = TO_DAYS(NOW()) and account=#{0}
+  </select>
+    <!--保存请求信息-->
+    <insert id="addMemberOperTrack" parameterType="com.qiyun.dto.MemberOperTrack" useGeneratedKeys="true"
+            keyProperty="OPER_LINE_NO">
+        insert into member_oper_line(TERMINAL_ID, ACCOUNT, oper_type, CREATE_DATE_TIME,
+         IP, STATUS, SOURCE_ID, REFERER, URL) values (0,#{account},#{operType},#{createDateTime},#{ip},0,(select SOURCE_ID from member where ACCOUNT=#{account}),#{referer},#{url})
+    </insert>
+    <!--生成财务审核订单信息-->
+    <insert id="addWithdrawalOrder" parameterType="com.qiyun.dto.MemberDrawing">
+        insert  into member_drawing(id,bank, part_bank, bank_card, amount, drawing_Fee, account, STATUS,
+         create_Date_Time,show_drawing_Fee, privilege_drawing_Fee, fee_payer_belong,
+           DRAWING_TYPE, PLATFORM)
+           values (#{id},#{bank},#{partBank},#{bankCard},#{amount},#{drawingFee},
+           #{account},#{status},#{createDateTime},#{showDrawingFee},#{privilegeDrawingFee},#{feePayerBelong},#{drawingType},#{platform})
+    </insert>
+    <!--修改钱包信息-->
+    <update id="updateWalltInfo" parameterType="com.qiyun.dto.MemberWallet2DTO">
+          update member_wallet set ABLE_BALANCE=#{ableBalance},FREEZE_BALANCE=#{freezeBalance},take_cash_quota=#{takeCashQuota} ,VERIFY_MD5=#{verifyMd5} where ACCOUNT=#{account}
+    </update>
+    <insert id="addwalltLineInfo" parameterType="com.qiyun.model2.MemberWalletLine2">
+
+         insert into member_wallet_line (wallet_Line_No, PLAN_NO, ORDER_NO,
+      OPER_LINE_NO, ACCOUNT, MEMBER_ID,
+      TRANS_TYPE, WALLET_TYPE, AMOUNT,
+      LOTTERY_TYPE, CREATE_DATE_TIME, STATUS,
+      VERIFY_MD5, SOURCE_ID, ABLE_BALANCE,
+      FREEZE_BALANCE, HEAP_BALANCE, PRIZE_BALANCE,
+      PLATFORM, REMARK)
+    values (#{walletLineNo,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{orderNo,jdbcType=INTEGER},
+      #{operLineNo,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER},
+      #{transType,jdbcType=INTEGER}, #{walletType,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE},
+      #{lotteryType,jdbcType=INTEGER}, #{createDateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER},
+      #{verifyMd5,jdbcType=VARCHAR}, #{sourceId,jdbcType=INTEGER}, #{ableBalance,jdbcType=DOUBLE},
+      #{freezeBalance,jdbcType=DOUBLE}, #{heapBalance,jdbcType=DOUBLE}, #{prizeBalance,jdbcType=DOUBLE},
+      #{platform,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR})
+    </insert>
+    <!--获取所有的未支付成功信息-->
+    <select id="getAllFailPayOrder" resultType="map" parameterType="map">
+        select po.id,po.member_id,po.amount,po.pay_time ,m.account,ifnull(m.username,'') username from pay_order po left
+        join member m on m.id=po.member_id where po.status=00
+        <if test="account !=null and account!=''">
+            and m.ACCOUNT=#{account}
+        </if>
+        <if test="startTime!='' and endTime !=''">
+            AND po.pay_time BETWEEN #{startTime} and #{endTime}
+        </if>
+        <if test="startTime!='' and endTime ==''">
+            and po.pay_time &gt;#{startTime}
+        </if>
+        <if test="startTime=='' and endTime !=''">
+            and po.pay_time &lt;#{endTime}
+        </if>
+        order by po.pay_time desc
+    </select>
+    <select id="findMemberDrawingList" resultType="map">
+        SELECT md.id,md.bank, md.part_bank, md.bank_card, md.amount, md.drawing_Fee, md.account, md.STATUS,
+        md.create_Date_Time,md.show_drawing_Fee, md.privilege_drawing_Fee,
+        md.fee_payer_belong,ifnull(md.FINANCE_DEAL_DATE_TIME,"- -") FINANCE_DEAL_DATE_TIME ,ifnull(md.send_date_time,"- -")
+        send_date_time,ifnull(md.confirm_date_time,"- -") confirm_date_time,md.drawing_Fee,m.name,
+        md.DRAWING_TYPE, md.PLATFORM,ifnull(md.deal_date_time,"- -") deal_date_time FROM
+        member_drawing md left join member m  on md.account = m.account WHERE 1=1
+        <if test="account != '' and account !=null">
+            and md.account =#{account}
+        </if>
+        <if test="flow_num!=null and flow_num != ''">
+            and md.id =#{flow_num}
+        </if>
+        <if test="is_drawing_time=='0'">
+            <if test="startTime!='' and endTime !=''">
+                AND md.create_Date_Time BETWEEN #{startTime} and #{endTime}
+            </if>
+            <if test="startTime!='' and endTime ==''">
+                and md.create_Date_Time &gt;#{startTime}
+            </if>
+            <if test="startTime=='' and endTime !=''">
+                and md.create_Date_Time &lt;#{endTime}
+            </if>
+        </if>
+        <if test="is_drawing_time=='1'">
+            <if test="startTime!='' and endTime !=''">
+                AND md.send_date_time BETWEEN #{startTime} and #{endTime}
+            </if>
+            <if test="startTime!='' and endTime ==''">
+                and md.send_date_time &gt;#{startTime}
+            </if>
+            <if test="startTime=='' and endTime !=''">
+                and md.send_date_time &lt;#{endTime}
+            </if>
+        </if>
+        <if test="status!= 0 and status!=''">
+            and STATUS =#{status}
+        </if>
+        order by create_Date_Time desc
+    </select>
+    <select id="findDrawingById" resultMap="memberDrawingMap">
+      select * from member_drawing where id = #{0};
+    </select>
+    <select id="updateDrawingStatus" parameterType="com.qiyun.dto.MemberDrawing">
+        update member_drawing set STATUS=#{status},FINANCE_DEAL_DATE_TIME=#{financeDealDateTime},confirm_date_time=#{confirmDateTime} where id =#{id} and account=#{account}
+    </select>
+</mapper>

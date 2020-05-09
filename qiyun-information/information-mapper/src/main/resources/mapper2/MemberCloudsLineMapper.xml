@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyun.mapper2.MemberCloudsLineMapper">
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.MemberCloudsLine">
+    <id column="wallet_Line_No" jdbcType="INTEGER" property="walletLineNo" />
+    <result column="PLAN_NO" jdbcType="INTEGER" property="planNo" />
+    <result column="ORDER_NO" jdbcType="INTEGER" property="orderNo" />
+    <result column="OPER_LINE_NO" jdbcType="INTEGER" property="operLineNo" />
+    <result column="trans_type" jdbcType="INTEGER" property="transType" />
+    <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
+    <result column="MEMBER_ID" jdbcType="INTEGER" property="memberId" />
+    <result column="clouds" jdbcType="INTEGER" property="clouds" />
+    <result column="CREATE_DATE_TIME" jdbcType="TIMESTAMP" property="createDateTime" />
+    <result column="ABLE_BALANCE" jdbcType="INTEGER" property="ableBalance" />
+    <result column="FREEZE_BALANCE" jdbcType="INTEGER" property="freezeBalance" />
+    <result column="HEAP_BALANCE" jdbcType="INTEGER" property="heapBalance" />
+    <result column="REMARK" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.qiyun.model2.MemberCloudsLine">
+    <result column="REMARK" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    wallet_Line_No, PLAN_NO, ORDER_NO, OPER_LINE_NO, trans_type, ACCOUNT, MEMBER_ID, 
+    clouds, CREATE_DATE_TIME, ABLE_BALANCE, FREEZE_BALANCE, HEAP_BALANCE
+  </sql>
+  <sql id="Blob_Column_List">
+    REMARK
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.qiyun.model2.MemberCloudsLineExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_clouds_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.qiyun.model2.MemberCloudsLineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from member_clouds_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_clouds_line
+    where wallet_Line_No = #{walletLineNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member_clouds_line
+    where wallet_Line_No = #{walletLineNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.MemberCloudsLine">
+    insert into member_clouds_line (wallet_Line_No, PLAN_NO, ORDER_NO, 
+      OPER_LINE_NO, trans_type, ACCOUNT, 
+      MEMBER_ID, clouds, CREATE_DATE_TIME, 
+      ABLE_BALANCE, FREEZE_BALANCE, HEAP_BALANCE, 
+      REMARK)
+    values (#{walletLineNo,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{orderNo,jdbcType=INTEGER}, 
+      #{operLineNo,jdbcType=INTEGER}, #{transType,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=INTEGER}, #{clouds,jdbcType=INTEGER}, #{createDateTime,jdbcType=TIMESTAMP}, 
+      #{ableBalance,jdbcType=INTEGER}, #{freezeBalance,jdbcType=INTEGER}, #{heapBalance,jdbcType=INTEGER}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.MemberCloudsLine">
+    insert into member_clouds_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="walletLineNo != null">
+        wallet_Line_No,
+      </if>
+      <if test="planNo != null">
+        PLAN_NO,
+      </if>
+      <if test="orderNo != null">
+        ORDER_NO,
+      </if>
+      <if test="operLineNo != null">
+        OPER_LINE_NO,
+      </if>
+      <if test="transType != null">
+        trans_type,
+      </if>
+      <if test="account != null">
+        ACCOUNT,
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID,
+      </if>
+      <if test="clouds != null">
+        clouds,
+      </if>
+      <if test="createDateTime != null">
+        CREATE_DATE_TIME,
+      </if>
+      <if test="ableBalance != null">
+        ABLE_BALANCE,
+      </if>
+      <if test="freezeBalance != null">
+        FREEZE_BALANCE,
+      </if>
+      <if test="heapBalance != null">
+        HEAP_BALANCE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="walletLineNo != null">
+        #{walletLineNo,jdbcType=INTEGER},
+      </if>
+      <if test="planNo != null">
+        #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="operLineNo != null">
+        #{operLineNo,jdbcType=INTEGER},
+      </if>
+      <if test="transType != null">
+        #{transType,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="clouds != null">
+        #{clouds,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null">
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ableBalance != null">
+        #{ableBalance,jdbcType=INTEGER},
+      </if>
+      <if test="freezeBalance != null">
+        #{freezeBalance,jdbcType=INTEGER},
+      </if>
+      <if test="heapBalance != null">
+        #{heapBalance,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.MemberCloudsLine">
+    update member_clouds_line
+    <set>
+      <if test="planNo != null">
+        PLAN_NO = #{planNo,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        ORDER_NO = #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="operLineNo != null">
+        OPER_LINE_NO = #{operLineNo,jdbcType=INTEGER},
+      </if>
+      <if test="transType != null">
+        trans_type = #{transType,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="clouds != null">
+        clouds = #{clouds,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null">
+        CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ableBalance != null">
+        ABLE_BALANCE = #{ableBalance,jdbcType=INTEGER},
+      </if>
+      <if test="freezeBalance != null">
+        FREEZE_BALANCE = #{freezeBalance,jdbcType=INTEGER},
+      </if>
+      <if test="heapBalance != null">
+        HEAP_BALANCE = #{heapBalance,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where wallet_Line_No = #{walletLineNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.MemberCloudsLine">
+    update member_clouds_line
+    set PLAN_NO = #{planNo,jdbcType=INTEGER},
+      ORDER_NO = #{orderNo,jdbcType=INTEGER},
+      OPER_LINE_NO = #{operLineNo,jdbcType=INTEGER},
+      trans_type = #{transType,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      clouds = #{clouds,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      ABLE_BALANCE = #{ableBalance,jdbcType=INTEGER},
+      FREEZE_BALANCE = #{freezeBalance,jdbcType=INTEGER},
+      HEAP_BALANCE = #{heapBalance,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=LONGVARCHAR}
+    where wallet_Line_No = #{walletLineNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.MemberCloudsLine">
+    update member_clouds_line
+    set PLAN_NO = #{planNo,jdbcType=INTEGER},
+      ORDER_NO = #{orderNo,jdbcType=INTEGER},
+      OPER_LINE_NO = #{operLineNo,jdbcType=INTEGER},
+      trans_type = #{transType,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      clouds = #{clouds,jdbcType=INTEGER},
+      CREATE_DATE_TIME = #{createDateTime,jdbcType=TIMESTAMP},
+      ABLE_BALANCE = #{ableBalance,jdbcType=INTEGER},
+      FREEZE_BALANCE = #{freezeBalance,jdbcType=INTEGER},
+      HEAP_BALANCE = #{heapBalance,jdbcType=INTEGER}
+    where wallet_Line_No = #{walletLineNo,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectCloudList" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    SELECT *
+    FROM `member_clouds_line`
+    where ACCOUNT=#{account}
+    ORDER BY CREATE_DATE_TIME DESC
+  </select>
+
+  <select id="selectShouCloudList" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    SELECT *
+    FROM `member_clouds_line`
+    where ACCOUNT=#{account}
+      AND trans_type IN(2067,2070,2071,403,52,402)
+    ORDER BY CREATE_DATE_TIME DESC
+  </select>
+
+  <select id="selectZhiCloudList" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    SELECT *
+    FROM `member_clouds_line`
+    where ACCOUNT=#{account}
+      AND trans_type IN(401,404,51)
+    ORDER BY CREATE_DATE_TIME DESC
+  </select>
+
+  <select id="getWithdrawList"  resultMap="BaseResultMap">
+    SELECT *
+    FROM `member_clouds_line`
+    where ACCOUNT=#{account}
+    AND  trans_type = #{num}
+    ORDER BY CREATE_DATE_TIME DESC
+  </select>
+  <select id="getIdByAccount" resultType="java.lang.Integer">
+    SELECT id
+    FROM member
+    WHERE ACCOUNT=#{account}
+  </select>
+</mapper>

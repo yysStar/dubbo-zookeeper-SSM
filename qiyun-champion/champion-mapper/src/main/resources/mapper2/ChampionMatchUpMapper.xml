@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.ChampionMatchUpMapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.ChampionMatchUp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="team_name" property="teamName" jdbcType="VARCHAR" />
+    <result column="sp" property="sp" jdbcType="DECIMAL" />
+    <result column="support_rate" property="supportRate" jdbcType="VARCHAR" />
+    <result column="team_id" property="teamId" jdbcType="INTEGER" />
+    <result column="national_flag" property="nationalFlag" jdbcType="VARCHAR" />
+    <result column="sell_status" property="sellStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, team_name, sp, support_rate, team_id, national_flag, sell_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.ChampionMatchUpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from champion_match_up
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_match_up
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from champion_match_up
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.ChampionMatchUp" >
+    insert into champion_match_up (id, team_name, sp, 
+      support_rate, team_id, national_flag, 
+      sell_status)
+    values (#{id,jdbcType=INTEGER}, #{teamName,jdbcType=VARCHAR}, #{sp,jdbcType=DECIMAL}, 
+      #{supportRate,jdbcType=VARCHAR}, #{teamId,jdbcType=INTEGER}, #{nationalFlag,jdbcType=VARCHAR}, 
+      #{sellStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.ChampionMatchUp" >
+    insert into champion_match_up
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="teamName != null" >
+        team_name,
+      </if>
+      <if test="sp != null" >
+        sp,
+      </if>
+      <if test="supportRate != null" >
+        support_rate,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="nationalFlag != null" >
+        national_flag,
+      </if>
+      <if test="sellStatus != null" >
+        sell_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teamName != null" >
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="sp != null" >
+        #{sp,jdbcType=DECIMAL},
+      </if>
+      <if test="supportRate != null" >
+        #{supportRate,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="nationalFlag != null" >
+        #{nationalFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sellStatus != null" >
+        #{sellStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.ChampionMatchUp" >
+    update champion_match_up
+    <set >
+      <if test="teamName != null" >
+        team_name = #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="sp != null" >
+        sp = #{sp,jdbcType=DECIMAL},
+      </if>
+      <if test="supportRate != null" >
+        support_rate = #{supportRate,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="nationalFlag != null" >
+        national_flag = #{nationalFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sellStatus != null" >
+        sell_status = #{sellStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.ChampionMatchUp" >
+    update champion_match_up
+    set team_name = #{teamName,jdbcType=VARCHAR},
+      sp = #{sp,jdbcType=DECIMAL},
+      support_rate = #{supportRate,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=INTEGER},
+      national_flag = #{nationalFlag,jdbcType=VARCHAR},
+      sell_status = #{sellStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from champion_match_up
+    where 1 = 1
+  </select>
+</mapper>

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.DayOneDan2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.DayOneDan2" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="match_id" property="matchId" jdbcType="VARCHAR" />
+    <result column="home_team" property="homeTeam" jdbcType="VARCHAR" />
+    <result column="guest_team" property="guestTeam" jdbcType="VARCHAR" />
+    <result column="sp" property="sp" jdbcType="DOUBLE" />
+    <result column="recommend" property="recommend" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="play_type" property="playType" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiyun.model2.DayOneDan2" extends="BaseResultMap" >
+    <result column="analyze" property="analyze" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, match_id, home_team, guest_team, sp, recommend, create_date, result, author, 
+    number, status, play_type
+  </sql>
+  <sql id="Blob_Column_List" >
+    `analyze`
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qiyun.model2.DayOneDan2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from day_one_dan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.DayOneDan2Query" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from day_one_dan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from day_one_dan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from day_one_dan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiyun.model2.DayOneDan2Query" >
+    delete from day_one_dan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.DayOneDan2" >
+    insert into day_one_dan (id, match_id, home_team, 
+      guest_team, sp, recommend, 
+      create_date, result, author, 
+      number, `status`, play_type,
+      `analyze`)
+    values (#{id,jdbcType=INTEGER}, #{matchId,jdbcType=VARCHAR}, #{homeTeam,jdbcType=VARCHAR}, 
+      #{guestTeam,jdbcType=VARCHAR}, #{sp,jdbcType=DOUBLE}, #{recommend,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{result,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{playType,jdbcType=VARCHAR}, 
+      #{analyze,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.DayOneDan2" >
+    insert into day_one_dan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="matchId != null" >
+        match_id,
+      </if>
+      <if test="homeTeam != null" >
+        home_team,
+      </if>
+      <if test="guestTeam != null" >
+        guest_team,
+      </if>
+      <if test="sp != null" >
+        sp,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="analyze != null" >
+        analyze,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchId != null" >
+        #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTeam != null" >
+        #{homeTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeam != null" >
+        #{guestTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="sp != null" >
+        #{sp,jdbcType=DOUBLE},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="analyze != null" >
+        #{analyze,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiyun.model2.DayOneDan2Query" resultType="java.lang.Integer" >
+    select count(*) from day_one_dan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update day_one_dan
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.matchId != null" >
+        match_id = #{record.matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeTeam != null" >
+        home_team = #{record.homeTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guestTeam != null" >
+        guest_team = #{record.guestTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sp != null" >
+        sp = #{record.sp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.recommend != null" >
+        recommend = #{record.recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=INTEGER},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.playType != null" >
+        play_type = #{record.playType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analyze != null" >
+        analyze = #{record.analyze,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update day_one_dan
+    set id = #{record.id,jdbcType=INTEGER},
+      match_id = #{record.matchId,jdbcType=VARCHAR},
+      home_team = #{record.homeTeam,jdbcType=VARCHAR},
+      guest_team = #{record.guestTeam,jdbcType=VARCHAR},
+      sp = #{record.sp,jdbcType=DOUBLE},
+      recommend = #{record.recommend,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      result = #{record.result,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      play_type = #{record.playType,jdbcType=VARCHAR},
+      analyze = #{record.analyze,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update day_one_dan
+    set id = #{record.id,jdbcType=INTEGER},
+      match_id = #{record.matchId,jdbcType=VARCHAR},
+      home_team = #{record.homeTeam,jdbcType=VARCHAR},
+      guest_team = #{record.guestTeam,jdbcType=VARCHAR},
+      sp = #{record.sp,jdbcType=DOUBLE},
+      recommend = #{record.recommend,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      result = #{record.result,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      play_type = #{record.playType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.DayOneDan2" >
+    update day_one_dan
+    <set >
+      <if test="matchId != null" >
+        match_id = #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTeam != null" >
+        home_team = #{homeTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeam != null" >
+        guest_team = #{guestTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="sp != null" >
+        sp = #{sp,jdbcType=DOUBLE},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="analyze != null" >
+        analyze = #{analyze,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiyun.model2.DayOneDan2" >
+    update day_one_dan
+    set match_id = #{matchId,jdbcType=VARCHAR},
+      home_team = #{homeTeam,jdbcType=VARCHAR},
+      guest_team = #{guestTeam,jdbcType=VARCHAR},
+      sp = #{sp,jdbcType=DOUBLE},
+      recommend = #{recommend,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      play_type = #{playType,jdbcType=VARCHAR},
+      analyze = #{analyze,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.DayOneDan2" >
+    update day_one_dan
+    set match_id = #{matchId,jdbcType=VARCHAR},
+      home_team = #{homeTeam,jdbcType=VARCHAR},
+      guest_team = #{guestTeam,jdbcType=VARCHAR},
+      sp = #{sp,jdbcType=DOUBLE},
+      recommend = #{recommend,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      play_type = #{playType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOne" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from day_one_dan
+    where number = 1
+    ORDER BY create_date DESC
+    LIMIT 1
+  </select>
+
+  <select id="selectTwo" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from day_one_dan
+    where number = 2
+    ORDER BY create_date DESC
+    LIMIT 1
+  </select>
+
+</mapper>

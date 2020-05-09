@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="C:\Users\qiyun\.m2\repository\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+        <!--connectionURL="jdbc:mysql://47.96.179.183:3306/qiyun88?characterEncoding=utf-8"-->
+        <!--userId="root"-->
+        <!--password="Ukl0Zan)n$"/>-->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.96.179.183:3306/qiyun2018?characterEncoding=utf-8"
+                        userId="root"
+                        password="Ukl0Zan)n$"/>
+
+        <!-- !!!! Model Configurations !!!! -->
+        <javaModelGenerator targetPackage="com.qiyun.model2"
+                            targetProject="${generator.project.root}\user-model\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- !!!! Mapper XML Configurations !!!! -->
+        <sqlMapGenerator targetPackage="mapper2"
+                         targetProject="${generator.project.root}\user-mapper\src\main\resources" >
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- !!!! Mapper Interface Configurations !!!! -->
+        <!-- 使用MyBatis3Simple运行时，type只能为“ANNOTATEDMAPPER”或者“XMLMAPPER” -->
+        <!-- 这里采用注解配置，而非XML配置 -->
+        <javaClientGenerator targetPackage="com.qiyun.mapper2"
+                             targetProject="${generator.project.root}\user-mapper\src\main\java"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>-->
+
+        <!--<table tableName="lottery_type" domainObjectName="LotteryType2"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+        <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="ticket_notify_sp" domainObjectName="TicketNotifySp"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--&lt;!&ndash;<columnRenamingRule searchString="^D_"-->
+        <!--replaceString=""/>&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<columnRenamingRule searchString="^D_"
+                            replaceString=""/>-->
+        <!--</table>-->
+
+        <table tableName="lottery_plan_order" domainObjectName="LotteryPlanOrder"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="true"
+               selectByExampleQueryId="false">
+            <!--<columnRenamingRule searchString="^D_"
+                                replaceString=""/>-->
+        </table>
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,16 @@
+id	int4	32	0	0					0	-1
+uuid	varchar	32	0	0			pg_catalog	default	0	0
+name	varchar	50	0	-1	NULL::character varying	通知名称	pg_catalog	default	0	0
+keywords	varchar	500	0	-1		关键词	pg_catalog	default	0	0
+example	varchar	500	0	-1		示例	pg_catalog	default	0	0
+type	varchar	60	0	-1		通知类型	pg_catalog	default	0	0
+wx_templateid	varchar	60	0	-1		微信通知模板id	pg_catalog	default	0	0
+page	varchar	255	0	-1		通知跳转页	pg_catalog	default	0	0
+url_uuid	varchar	32	0	-1		hp_notice_url_info的uuid	pg_catalog	default	0	0
+template_name	varchar	50	0	-1		模板名称	pg_catalog	default	0	0
+
+
+    //阿里云API的密钥Access Key ID
+    public static final String ACCESS_KEY_ID = "LTAI6ZMZLpttdIH7";
+    //阿里云API的密钥Access Key Secret
+    public static final String ACCESS_KEY_SECRET = "H8q5wtGpIIoqhNaOFRaXXnBM8l3AwG";

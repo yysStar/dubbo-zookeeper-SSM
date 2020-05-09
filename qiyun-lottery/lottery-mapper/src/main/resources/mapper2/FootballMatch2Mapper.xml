@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiyun.mapper2.FootballMatch2Mapper" >
+  <resultMap id="BaseResultMap" type="com.qiyun.model2.FootballMatch2" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="match_name" property="matchName" jdbcType="VARCHAR" />
+    <result column="GAME_ID" property="gameId" jdbcType="INTEGER" />
+    <result column="home" property="home" jdbcType="VARCHAR" />
+    <result column="home_id" property="homeId" jdbcType="INTEGER" />
+    <result column="guest" property="guest" jdbcType="VARCHAR" />
+    <result column="guest_id" property="guestId" jdbcType="INTEGER" />
+    <result column="match_time" property="matchTime" jdbcType="TIMESTAMP" />
+    <result column="match_date_str" property="matchDateStr" jdbcType="VARCHAR" />
+    <result column="bf_half" property="bfHalf" jdbcType="VARCHAR" />
+    <result column="bf_whole" property="bfWhole" jdbcType="VARCHAR" />
+    <result column="analysis_id" property="analysisId" jdbcType="VARCHAR" />
+    <result column="odd_id" property="oddId" jdbcType="VARCHAR" />
+    <result column="HOME_PM" property="homePm" jdbcType="VARCHAR" />
+    <result column="GUEST_PM" property="guestPm" jdbcType="VARCHAR" />
+    <result column="BF_LEVEL" property="bfLevel" jdbcType="VARCHAR" />
+    <result column="OUT_ANALYSIS_ID" property="outAnalysisId" jdbcType="VARCHAR" />
+    <result column="result_of_match" property="resultOfMatch" jdbcType="INTEGER" />
+    <result column="final_home_score" property="finalHomeScore" jdbcType="INTEGER" />
+    <result column="final_guest_score" property="finalGuestScore" jdbcType="INTEGER" />
+    <result column="XYY_HOME_ID" property="xyyHomeId" jdbcType="INTEGER" />
+    <result column="XYY_GUEST_ID" property="xyyGuestId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, match_name, GAME_ID, home, home_id, guest, guest_id, match_time, match_date_str, 
+    bf_half, bf_whole, analysis_id, odd_id, HOME_PM, GUEST_PM, BF_LEVEL, OUT_ANALYSIS_ID, 
+    result_of_match, final_home_score, final_guest_score, XYY_HOME_ID, XYY_GUEST_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qiyun.model2.FootballMatch2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from football_match
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from football_match
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from football_match
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiyun.model2.FootballMatch2"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into football_match (ID, match_name, GAME_ID, 
+      home, home_id, guest, 
+      guest_id, match_time, match_date_str, 
+      bf_half, bf_whole, analysis_id, 
+      odd_id, HOME_PM, GUEST_PM, 
+      BF_LEVEL, OUT_ANALYSIS_ID, result_of_match, 
+      final_home_score, final_guest_score, XYY_HOME_ID, 
+      XYY_GUEST_ID)
+    values (#{id,jdbcType=INTEGER}, #{matchName,jdbcType=VARCHAR}, #{gameId,jdbcType=INTEGER}, 
+      #{home,jdbcType=VARCHAR}, #{homeId,jdbcType=INTEGER}, #{guest,jdbcType=VARCHAR}, 
+      #{guestId,jdbcType=INTEGER}, #{matchTime,jdbcType=TIMESTAMP}, #{matchDateStr,jdbcType=VARCHAR}, 
+      #{bfHalf,jdbcType=VARCHAR}, #{bfWhole,jdbcType=VARCHAR}, #{analysisId,jdbcType=VARCHAR}, 
+      #{oddId,jdbcType=VARCHAR}, #{homePm,jdbcType=VARCHAR}, #{guestPm,jdbcType=VARCHAR}, 
+      #{bfLevel,jdbcType=VARCHAR}, #{outAnalysisId,jdbcType=VARCHAR}, #{resultOfMatch,jdbcType=INTEGER}, 
+      #{finalHomeScore,jdbcType=INTEGER}, #{finalGuestScore,jdbcType=INTEGER}, #{xyyHomeId,jdbcType=INTEGER}, 
+      #{xyyGuestId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiyun.model2.FootballMatch2"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into football_match
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="matchName != null" >
+        match_name,
+      </if>
+      <if test="gameId != null" >
+        GAME_ID,
+      </if>
+      <if test="home != null" >
+        home,
+      </if>
+      <if test="homeId != null" >
+        home_id,
+      </if>
+      <if test="guest != null" >
+        guest,
+      </if>
+      <if test="guestId != null" >
+        guest_id,
+      </if>
+      <if test="matchTime != null" >
+        match_time,
+      </if>
+      <if test="matchDateStr != null" >
+        match_date_str,
+      </if>
+      <if test="bfHalf != null" >
+        bf_half,
+      </if>
+      <if test="bfWhole != null" >
+        bf_whole,
+      </if>
+      <if test="analysisId != null" >
+        analysis_id,
+      </if>
+      <if test="oddId != null" >
+        odd_id,
+      </if>
+      <if test="homePm != null" >
+        HOME_PM,
+      </if>
+      <if test="guestPm != null" >
+        GUEST_PM,
+      </if>
+      <if test="bfLevel != null" >
+        BF_LEVEL,
+      </if>
+      <if test="outAnalysisId != null" >
+        OUT_ANALYSIS_ID,
+      </if>
+      <if test="resultOfMatch != null" >
+        result_of_match,
+      </if>
+      <if test="finalHomeScore != null" >
+        final_home_score,
+      </if>
+      <if test="finalGuestScore != null" >
+        final_guest_score,
+      </if>
+      <if test="xyyHomeId != null" >
+        XYY_HOME_ID,
+      </if>
+      <if test="xyyGuestId != null" >
+        XYY_GUEST_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="matchName != null" >
+        #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=INTEGER},
+      </if>
+      <if test="home != null" >
+        #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="homeId != null" >
+        #{homeId,jdbcType=INTEGER},
+      </if>
+      <if test="guest != null" >
+        #{guest,jdbcType=VARCHAR},
+      </if>
+      <if test="guestId != null" >
+        #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="matchTime != null" >
+        #{matchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchDateStr != null" >
+        #{matchDateStr,jdbcType=VARCHAR},
+      </if>
+      <if test="bfHalf != null" >
+        #{bfHalf,jdbcType=VARCHAR},
+      </if>
+      <if test="bfWhole != null" >
+        #{bfWhole,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisId != null" >
+        #{analysisId,jdbcType=VARCHAR},
+      </if>
+      <if test="oddId != null" >
+        #{oddId,jdbcType=VARCHAR},
+      </if>
+      <if test="homePm != null" >
+        #{homePm,jdbcType=VARCHAR},
+      </if>
+      <if test="guestPm != null" >
+        #{guestPm,jdbcType=VARCHAR},
+      </if>
+      <if test="bfLevel != null" >
+        #{bfLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="outAnalysisId != null" >
+        #{outAnalysisId,jdbcType=VARCHAR},
+      </if>
+      <if test="resultOfMatch != null" >
+        #{resultOfMatch,jdbcType=INTEGER},
+      </if>
+      <if test="finalHomeScore != null" >
+        #{finalHomeScore,jdbcType=INTEGER},
+      </if>
+      <if test="finalGuestScore != null" >
+        #{finalGuestScore,jdbcType=INTEGER},
+      </if>
+      <if test="xyyHomeId != null" >
+        #{xyyHomeId,jdbcType=INTEGER},
+      </if>
+      <if test="xyyGuestId != null" >
+        #{xyyGuestId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiyun.model2.FootballMatch2" >
+    update football_match
+    <set >
+      <if test="matchName != null" >
+        match_name = #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="gameId != null" >
+        GAME_ID = #{gameId,jdbcType=INTEGER},
+      </if>
+      <if test="home != null" >
+        home = #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="homeId != null" >
+        home_id = #{homeId,jdbcType=INTEGER},
+      </if>
+      <if test="guest != null" >
+        guest = #{guest,jdbcType=VARCHAR},
+      </if>
+      <if test="guestId != null" >
+        guest_id = #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="matchTime != null" >
+        match_time = #{matchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchDateStr != null" >
+        match_date_str = #{matchDateStr,jdbcType=VARCHAR},
+      </if>
+      <if test="bfHalf != null" >
+        bf_half = #{bfHalf,jdbcType=VARCHAR},
+      </if>
+      <if test="bfWhole != null" >
+        bf_whole = #{bfWhole,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisId != null" >
+        analysis_id = #{analysisId,jdbcType=VARCHAR},
+      </if>
+      <if test="oddId != null" >
+        odd_id = #{oddId,jdbcType=VARCHAR},
+      </if>
+      <if test="homePm != null" >
+        HOME_PM = #{homePm,jdbcType=VARCHAR},
+      </if>
+      <if test="guestPm != null" >
+        GUEST_PM = #{guestPm,jdbcType=VARCHAR},
+      </if>
+      <if test="bfLevel != null" >
+        BF_LEVEL = #{bfLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="outAnalysisId != null" >
+        OUT_ANALYSIS_ID = #{outAnalysisId,jdbcType=VARCHAR},
+      </if>
+      <if test="resultOfMatch != null" >
+        result_of_match = #{resultOfMatch,jdbcType=INTEGER},
+      </if>
+      <if test="finalHomeScore != null" >
+        final_home_score = #{finalHomeScore,jdbcType=INTEGER},
+      </if>
+      <if test="finalGuestScore != null" >
+        final_guest_score = #{finalGuestScore,jdbcType=INTEGER},
+      </if>
+      <if test="xyyHomeId != null" >
+        XYY_HOME_ID = #{xyyHomeId,jdbcType=INTEGER},
+      </if>
+      <if test="xyyGuestId != null" >
+        XYY_GUEST_ID = #{xyyGuestId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiyun.model2.FootballMatch2" >
+    update football_match
+    set match_name = #{matchName,jdbcType=VARCHAR},
+      GAME_ID = #{gameId,jdbcType=INTEGER},
+      home = #{home,jdbcType=VARCHAR},
+      home_id = #{homeId,jdbcType=INTEGER},
+      guest = #{guest,jdbcType=VARCHAR},
+      guest_id = #{guestId,jdbcType=INTEGER},
+      match_time = #{matchTime,jdbcType=TIMESTAMP},
+      match_date_str = #{matchDateStr,jdbcType=VARCHAR},
+      bf_half = #{bfHalf,jdbcType=VARCHAR},
+      bf_whole = #{bfWhole,jdbcType=VARCHAR},
+      analysis_id = #{analysisId,jdbcType=VARCHAR},
+      odd_id = #{oddId,jdbcType=VARCHAR},
+      HOME_PM = #{homePm,jdbcType=VARCHAR},
+      GUEST_PM = #{guestPm,jdbcType=VARCHAR},
+      BF_LEVEL = #{bfLevel,jdbcType=VARCHAR},
+      OUT_ANALYSIS_ID = #{outAnalysisId,jdbcType=VARCHAR},
+      result_of_match = #{resultOfMatch,jdbcType=INTEGER},
+      final_home_score = #{finalHomeScore,jdbcType=INTEGER},
+      final_guest_score = #{finalGuestScore,jdbcType=INTEGER},
+      XYY_HOME_ID = #{xyyHomeId,jdbcType=INTEGER},
+      XYY_GUEST_ID = #{xyyGuestId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="FootballMatch" type="com.qiyun.model.FootballMatch">
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="match_name" property="matchName" jdbcType="VARCHAR" />
+    <result column="GAME_ID" property="gameId" jdbcType="INTEGER" />
+    <result column="home" property="home" jdbcType="VARCHAR" />
+    <result column="home_id" property="homeId" jdbcType="INTEGER" />
+    <result column="guest" property="guest" jdbcType="VARCHAR" />
+    <result column="guest_id" property="guestId" jdbcType="INTEGER" />
+    <result column="match_time" property="matchTime" jdbcType="TIMESTAMP" />
+    <result column="match_date_str" property="matchDateStr" jdbcType="VARCHAR" />
+    <result column="bf_half" property="bfHalf" jdbcType="VARCHAR" />
+    <result column="bf_whole" property="bfWhole" jdbcType="VARCHAR" />
+    <result column="analysis_id" property="analysisId" jdbcType="VARCHAR" />
+    <result column="odd_id" property="oddId" jdbcType="VARCHAR" />
+    <result column="HOME_PM" property="homePm" jdbcType="VARCHAR" />
+    <result column="GUEST_PM" property="guestPm" jdbcType="VARCHAR" />
+    <result column="BF_LEVEL" property="bfLevel" jdbcType="VARCHAR" />
+    <result column="OUT_ANALYSIS_ID" property="outAnalysisId" jdbcType="VARCHAR" />
+    <result column="result_of_match" property="resultOfMatch" jdbcType="INTEGER" />
+    <result column="final_home_score" property="finalHomeScore" jdbcType="INTEGER" />
+    <result column="final_guest_score" property="finalGuestScore" jdbcType="INTEGER" />
+    <result column="XYY_HOME_ID" property="xyyHomeId" jdbcType="INTEGER" />
+    <result column="XYY_GUEST_ID" property="xyyGuestId" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="findByOddId" resultMap="FootballMatch">
+    select
+    <include refid="Base_Column_List" />
+    from football_match
+    where odd_id = #{oddId,jdbcType=VARCHAR}
+  </select>
+  <select id="findFootballMatchIdByIntTimes" resultMap="FootballMatch">
+    Select fm.* From sporttery_football_match sfm left Join Football_Match fm On fm.id = sfm.OutId
+     Where sfm.Inttime In
+  </select>
+  <select id="selectByIntTimeAndLineId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from football_match
+    where odd_id = #{oddId,jdbcType=VARCHAR}
+  </select>
+</mapper>
