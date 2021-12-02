@@ -33,7 +33,7 @@
         <fastjson.version>1.2.41</fastjson.version>
         <httpclient.version>4.5.5</httpclient.version>
         <httpcore.version>4.4.9</httpcore.version>
-        <struts2.version>2.2.3</struts2.version>
+        <struts2.version>2.5.22</struts2.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
