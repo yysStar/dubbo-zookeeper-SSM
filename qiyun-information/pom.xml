@@ -15,7 +15,7 @@
 
   <properties>
     <spring-framework.version>4.3.5.RELEASE</spring-framework.version>
-    <dubbo.version>2.5.3</dubbo.version>
+    <dubbo.version>2.6.9</dubbo.version>
     <zkclient.version>0.10</zkclient.version>
     <zookeeper.version>3.4.11</zookeeper.version>
     <c3p0.version>0.9.1.2</c3p0.version>
