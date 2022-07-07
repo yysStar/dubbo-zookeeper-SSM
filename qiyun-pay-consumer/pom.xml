@@ -8,7 +8,7 @@
   <name>qiyun-pay-consumer Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <spring-framework.version>4.3.5.RELEASE</spring-framework.version>
+    <spring-framework.version>5.2.21.RELEASE</spring-framework.version>
     <dubbo.version>2.5.3</dubbo.version>
     <zkclient.version>0.10</zkclient.version>
     <zookeeper.version>3.4.11</zookeeper.version>
